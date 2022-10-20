@@ -12,7 +12,6 @@ jobs:
         fetch-depth: 0
     - uses: BobAnkh/auto-generate-changelog@v1
       with:
-        REPO_NAME: 'artaio/arta-node'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: 'CHANGELOG.md'
         COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'

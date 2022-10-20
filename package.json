@@ -6,11 +6,14 @@
     "build": "tsc",
     "test": "jest --coverage",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "postinstall": "husky install"
   },
   "keywords": [],
   "author": "",
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@types/jest": "^29.1.2",
     "@types/node": "^18.8.2",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
@@ -19,6 +22,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.3.0",
     "eslint-plugin-promise": "^6.0.1",
+    "husky": "^8.0.1",
     "jest": "^29.2.0",
     "prettier": "2.7.1",
     "ts-jest": "^29.0.3",

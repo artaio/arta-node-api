@@ -1,0 +1,1 @@
+export { Arta } from './arta';

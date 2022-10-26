@@ -3,15 +3,14 @@ import {
   HttpMethod,
   HttpRequestParameters,
 } from './net/HttpClient';
+import { RestClient } from './net/RestClient';
 
 export type ArtaID = number | string;
-
 interface ArtaClientConfig {
   apiKey: string;
   host: string;
 }
-
-export class ArtaClient {
+export class ArtaClient implements RestClient {
   constructor(
     private readonly httpClient: HttpClient,
     private readonly config: ArtaClientConfig
@@ -57,21 +56,8 @@ export class ArtaClient {
     return `ARTA_APIKey ${apiKey}`;
   }
 
-  public async get(
-    path: string,
-    auth?: string,
-    page = 1,
-    pageSize = 20
-  ): Promise<any> {
-    const paginatedPath = `${path}?page=${page}&page_size=${pageSize}`;
-    const reqParams = this.makeReqParams(paginatedPath, 'get', auth);
-    const res = await this.request(reqParams);
-    return res.json();
-  }
-
-  public async getOne(path: string, id?: ArtaID, auth?: string): Promise<any> {
-    const pathWithId = id ? `${path}/${id}` : path;
-    const reqParams = this.makeReqParams(pathWithId, 'get', auth);
+  public async get(path: string, auth?: string): Promise<any> {
+    const reqParams = this.makeReqParams(path, 'get', auth);
     const res = await this.request(reqParams);
     return res.json();
   }
@@ -87,14 +73,9 @@ export class ArtaClient {
     return res.json();
   }
 
-  public async patch(
-    path: string,
-    id: ArtaID,
-    payload: any,
-    auth?: string
-  ): Promise<any> {
+  public async patch(path: string, payload: any, auth?: string): Promise<any> {
     const reqParams = this.makeReqParams(
-      `${path}/${id}`,
+      path,
       'patch',
       auth,
       JSON.stringify(payload)
@@ -103,8 +84,8 @@ export class ArtaClient {
     return res.json();
   }
 
-  public async delete(path: string, id: ArtaID, auth?: string): Promise<void> {
-    await this.request(this.makeReqParams(`${path}/${id}`, 'delete', auth));
+  public async delete(path: string, auth?: string): Promise<void> {
+    await this.request(this.makeReqParams(path, 'delete', auth));
     return Promise.resolve();
   }
 }

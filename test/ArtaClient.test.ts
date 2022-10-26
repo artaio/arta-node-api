@@ -32,30 +32,12 @@ describe('tests ArtaClient', () => {
   });
 
   it('should use default api key and domain', async () => {
-    const res = await artaClient.get('/a_path');
+    const res = await artaClient.get('/a_path?page=1&page_size=20');
     expect(res).toEqual({ testResponse: 'ok' });
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },
       method: 'get',
       path: '/a_path?page=1&page_size=20',
-    });
-  });
-
-  it('should overwrite default api key', async () => {
-    await artaClient.getOne('/a_path', 'an-id', 'another-key');
-    expectRequestCalledWith(ARTA_DOMAIN, {
-      headers: { Authorization: 'ARTA_APIKey another-key' },
-      method: 'get',
-      path: '/a_path/an-id',
-    });
-  });
-
-  it('should not add id in single get one', async () => {
-    await artaClient.getOne('/a_path');
-    expectRequestCalledWith(ARTA_DOMAIN, {
-      headers: { Authorization: 'ARTA_APIKey test' },
-      method: 'get',
-      path: '/a_path',
     });
   });
 
@@ -70,7 +52,7 @@ describe('tests ArtaClient', () => {
   });
 
   it('should forward body on patch with proper path', async () => {
-    await artaClient.patch('/a/longer/path', 'a-id', { req: 'payload' });
+    await artaClient.patch('/a/longer/path/a-id', { req: 'payload' });
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },
       method: 'patch',
@@ -80,7 +62,7 @@ describe('tests ArtaClient', () => {
   });
 
   it('should return empty promise on delete', async () => {
-    const res = await artaClient.delete('/a/longer/path', 'a-id');
+    const res = await artaClient.delete('/a/longer/path/a-id');
     expect(res).toBeUndefined();
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },

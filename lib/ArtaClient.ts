@@ -1,3 +1,4 @@
+import { ArtaAPIError, ArtaSDKError } from './error';
 import {
   HttpClient,
   HttpMethod,
@@ -25,7 +26,14 @@ export class ArtaClient implements RestClient {
       params.headers.Authorization = authValue;
     }
 
-    return await this.httpClient.request(this.config.host, params);
+    const req = await this.httpClient.request(this.config.host, params);
+    if (req.statusCode && req.statusCode > 400) {
+      throw new ArtaSDKError(
+        (await req.json()) as ArtaAPIError,
+        req.statusCode
+      );
+    }
+    return req;
   }
 
   private makeReqParams(

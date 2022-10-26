@@ -59,7 +59,6 @@ describe('tests default Arta endpoint', () => {
     expect(org).toEqual(mockOrg);
   });
 
-
   it('should forward auth request on patch', async () => {
     artaClientMock.patch = jest.fn().mockReturnValueOnce(mockOrg);
 
@@ -72,6 +71,5 @@ describe('tests default Arta endpoint', () => {
       'other-auth'
     );
     expect(org).toEqual(mockOrg);
-
   });
 });

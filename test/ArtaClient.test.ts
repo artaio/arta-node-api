@@ -70,4 +70,18 @@ describe('tests ArtaClient', () => {
       path: '/a/longer/path/a-id',
     });
   });
+
+  it('should throw error if API respond with error status code', async () => {
+    request.mockReset();
+    request.mockReturnValueOnce({
+      statusCode: 401,
+      json: jest
+        .fn()
+        .mockReturnValueOnce({ errors: { detail: 'Unauthorized' } }),
+    });
+
+    await expect(artaClient.get('/a_path')).rejects.toThrowError(
+      'API communication error: Unauthorized, HTTP status: 401'
+    );
+  });
 });

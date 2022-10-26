@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/artaio/arta-node/compare/v0.4.0...v0.5.0) (2022-10-26)
+
+
+### Features
+
+* add the integration to arta organization ([ed6174c](https://github.com/artaio/arta-node/commit/ed6174c601bff482576013ea879d9bf44348ab0b))
+
+
+
 # [0.4.0](https://github.com/artaio/arta-node/compare/v0.3.0...v0.4.0) (2022-10-25)
 
 

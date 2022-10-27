@@ -1,3 +1,12 @@
+# [0.7.0](https://github.com/artaio/arta-node/compare/v0.6.0...v0.7.0) (2022-10-27)
+
+
+### Features
+
+* add default endpoint with generic functions ([5f39422](https://github.com/artaio/arta-node/commit/5f39422121f06a277f4e7776bad8cf84a5a0e584))
+
+
+
 # [0.6.0](https://github.com/artaio/arta-node/compare/v0.5.0...v0.6.0) (2022-10-27)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds node HttpClient wrapper ([aa5015a](https://github.com/artaio/arta-node/commit/aa5015a21445ab9a839399f1a64e33f3b75319d6))
-
-
-
-# [0.2.0](https://github.com/artaio/arta-node/compare/648605ff8456af0cdf31b118783fc1516795a073...v0.2.0) (2022-10-20)
-
-
-### Features
-
-* project setup ([648605f](https://github.com/artaio/arta-node/commit/648605ff8456af0cdf31b118783fc1516795a073))
 
 
 

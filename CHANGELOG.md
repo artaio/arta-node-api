@@ -1,3 +1,12 @@
+# [0.6.0](https://github.com/artaio/arta-node/compare/v0.5.0...v0.6.0) (2022-10-27)
+
+
+### Features
+
+* add error handling ([272814c](https://github.com/artaio/arta-node/commit/272814c98149df25c99cfaa66fd7a28c376a3d5c))
+
+
+
 # [0.5.0](https://github.com/artaio/arta-node/compare/v0.4.0...v0.5.0) (2022-10-26)
 
 

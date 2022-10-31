@@ -61,6 +61,31 @@ describe('tests default Arta endpoint', () => {
     );
   });
 
+  it('should be able to iterate over paginated source', async () => {
+    artaClientMock.get = jest
+      .fn()
+      .mockResolvedValueOnce({
+        items: [mockEndpoint, mockEndpoint, mockEndpoint],
+        metadata: { page: 1, total_count: 8 },
+      })
+      .mockResolvedValueOnce({
+        items: [mockEndpoint, mockEndpoint, mockEndpoint],
+        metadata: { page: 2, total_count: 8 },
+      })
+      .mockResolvedValue({
+        items: [mockEndpoint, mockEndpoint],
+        metadata: { page: 3, total_count: 8 },
+      });
+
+    const endpoint = new DefaultEndpoint<T1, T2>('/test', artaClientMock);
+    let totalEndpoints = 0;
+    for await (const test of endpoint.listAll()) {
+      expect(test).toEqual(mockEndpoint);
+      totalEndpoints++;
+    }
+    expect(totalEndpoints).toBe(8);
+  });
+
   it('should be able to create a new resource', async () => {
     artaClientMock.post = jest.fn().mockReturnValueOnce(mockEndpoint);
     const createPayload = { t2: 'test', t3: 'test2' };

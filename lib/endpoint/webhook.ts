@@ -2,6 +2,7 @@ import { ArtaID } from '../ArtaClient';
 import { RestClient } from '../net/RestClient';
 import { DatedInterface } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
+import { PageMetada } from '../pagination';
 
 export interface Webhook extends DatedInterface {
   id: ArtaID;
@@ -47,9 +48,20 @@ export class WebhookEndpoint {
     page = 1,
     pageSize = 20,
     auth?: string
-  ): Promise<Webhook[]> {
-    const baseHooks = await this.defaultEndpoint.list(page, pageSize, auth);
-    return baseHooks.map(this.withFunctionCalls);
+  ): Promise<{ items: Webhook[]; metadata: PageMetada }> {
+    const { items, metadata } = await this.defaultEndpoint.list(
+      page,
+      pageSize,
+      auth
+    );
+    return { items: items.map(this.withFunctionCalls), metadata };
+  }
+
+  public listAll(auth?: string): AsyncGenerator<Webhook> {
+    return this.defaultEndpoint.listAll(
+      auth,
+      this.withFunctionCalls.bind(this)
+    );
   }
 
   public async create(

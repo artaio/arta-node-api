@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "test": "npm run lint && jest --coverage --detectOpenHandles",
+    "test": "npm run lint && jest --coverage --detectOpenHandles --verbose",
     "lint": "eslint .",
     "lint:fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "postinstall": "husky install",

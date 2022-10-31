@@ -16,7 +16,12 @@
     "sourceType": "module",
     "project": ["./tsconfig.json"]
   },
-  "ignorePatterns": ["**/dist/**", "**/coverage/**", "jest.config.js"],
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/coverage/**",
+    "jest.config.js",
+    "**/example/**"
+  ],
   "rules": {
     "semi": "off",
     "@typescript-eslint/semi": ["error", "always"],

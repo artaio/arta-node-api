@@ -22,7 +22,7 @@ export class OrganizationEndpoint {
    * @param [auth] An optional API key.
    * @returns The Organization
    * @throws ArtaSDKError thrown if some problem happened while communicating with the API.
-  */
+   */
   async get(auth?: string): Promise<Organization> {
     const artaResponse = await this.artaClient.get(this.path, auth);
     return convertDatesToUtc(artaResponse) as Organization;
@@ -32,7 +32,7 @@ export class OrganizationEndpoint {
    * @param [auth] An optional API key.
    * @returns The Organization
    * @throws ArtaSDKError thrown if some problem happened while communicating with the API.
-  */
+   */
   async update(
     organization: Partial<Organization>,
     auth?: string

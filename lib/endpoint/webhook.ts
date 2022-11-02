@@ -2,7 +2,7 @@ import { ArtaID } from '../ArtaClient';
 import { RestClient } from '../net/RestClient';
 import { DatedInterface } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
-import { PageMetada } from '../pagination';
+import { Page } from '../pagination';
 
 export interface Webhook extends DatedInterface {
   id: ArtaID;
@@ -48,7 +48,7 @@ export class WebhookEndpoint {
     page = 1,
     pageSize = 20,
     auth?: string
-  ): Promise<{ items: Webhook[]; metadata: PageMetada }> {
+  ): Promise<Page<Webhook>> {
     const { items, metadata } = await this.defaultEndpoint.list(
       page,
       pageSize,

@@ -1,14 +1,10 @@
 import { ArtaID } from '../ArtaClient';
 import { RestClient } from '../net/RestClient';
 import { convertDatesToUtc, DatedInterface } from '../utils';
-import { PageMetada } from '../pagination';
+import { Page } from '../pagination';
 
 export interface Endpoint<T, U> {
-  list: (
-    page?: number,
-    pageSize?: number,
-    auth?: string
-  ) => Promise<{ items: T[]; metadata: PageMetada }>;
+  list: (page?: number, pageSize?: number, auth?: string) => Promise<Page<T>>;
   listAll: (auth?: string, onReturn?: (params: any) => T) => AsyncGenerator<T>;
   getById: (id: ArtaID, auth?: string) => Promise<T>;
   create: (payload: U, auth?: string) => Promise<T>;
@@ -33,11 +29,7 @@ export class DefaultEndpoint<T extends DatedInterface, U>
     return convertDatesToUtc(req) as T;
   }
 
-  public async list(
-    page = 1,
-    pageSize = 20,
-    auth?: string
-  ): Promise<{ items: T[]; metadata: PageMetada }> {
+  public async list(page = 1, pageSize = 20, auth?: string): Promise<Page<T>> {
     const body = await this.artaClient.get(
       `${this.path}?page=${page}&page_size=${pageSize}`,
       auth

@@ -126,14 +126,11 @@ describe('tests default Arta endpoint', () => {
     expect(totalEndpoints).toBe(5);
   });
 
-
   it('should not throw listing empty resources', async () => {
-    artaClientMock.get = jest
-      .fn()
-      .mockResolvedValueOnce({
-        items: [],
-        metadata: { page: 1, total_count: 0 },
-      });
+    artaClientMock.get = jest.fn().mockResolvedValueOnce({
+      items: [],
+      metadata: { page: 1, total_count: 0 },
+    });
 
     let totalEndpoints = 0;
     for await (const test of webhookEndpoint.listAll()) {

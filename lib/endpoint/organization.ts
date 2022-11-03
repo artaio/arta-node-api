@@ -1,22 +1,18 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { convertDatesToUtc, DatedInterface, NullableString } from '../utils';
+import {
+  Organization as GeneratedOrganization,
+  OrganizationApi,
+  OrganizationPatchRequestOrganization,
+} from '../generated';
+import { convertDatesToUtc, Dated } from '../utils';
+import { Endpoint } from './endpoints';
 
-export interface Organization extends DatedInterface {
-  api_version: string;
-  id: ArtaID;
-  name: string;
-  billing_terms?: NullableString;
-  company_name?: NullableString;
-  display_name?: NullableString;
-  shortcode?: NullableString;
-  status?: NullableString;
-  stripe_customer_id?: NullableString;
-}
-
-export class OrganizationEndpoint {
-  private readonly path = '/organization';
-  constructor(private readonly artaClient: RestClient) {}
+export type Organization = Dated<GeneratedOrganization>;
+export class OrganizationEndpoint extends Endpoint {
+  private readonly organizationApi: OrganizationApi;
+  constructor(apiKey: string) {
+    super(apiKey);
+    this.organizationApi = new OrganizationApi();
+  }
 
   /** Retrieves the Organization associated with the API Key
    * @param [auth] An optional API key.
@@ -24,8 +20,10 @@ export class OrganizationEndpoint {
    * @throws ArtaSDKError thrown if some problem happened while communicating with the API.
    */
   async get(auth?: string): Promise<Organization> {
-    const artaResponse = await this.artaClient.get(this.path, auth);
-    return convertDatesToUtc(artaResponse) as Organization;
+    const response = await this.organizationApi.organizationGet(
+      this.getAuthHeader(auth)
+    );
+    return convertDatesToUtc(response.data);
   }
 
   /** Updates the Organization associated with the API Key
@@ -34,14 +32,13 @@ export class OrganizationEndpoint {
    * @throws ArtaSDKError thrown if some problem happened while communicating with the API.
    */
   async update(
-    organization: Partial<Organization>,
+    organization: OrganizationPatchRequestOrganization,
     auth?: string
   ): Promise<Organization> {
-    const artaResponse = await this.artaClient.patch(
-      this.path,
-      { organization },
-      auth
+    const response = await this.organizationApi.organizationPatch(
+      this.getAuthHeader(auth),
+      { organization }
     );
-    return convertDatesToUtc(artaResponse) as Organization;
+    return convertDatesToUtc(response.data);
   }
 }

@@ -3,7 +3,8 @@
   "version": "0.9.0",
   "description": "",
   "scripts": {
-    "build": "tsc -p tsconfig-build.json",
+    "generate": "openapi-generator-cli generate -i arta-openapi-source.yaml -g typescript-axios -o lib/generated",
+    "build": "npm run generate && tsc -p tsconfig-build.json",
     "test": "npm run lint && jest --coverage --detectOpenHandles --verbose",
     "lint": "eslint .",
     "lint:fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@openapitools/openapi-generator-cli": "^2.5.2",
     "@types/jest": "^29.1.2",
     "@types/nock": "^11.1.0",
     "@types/node": "^18.8.2",

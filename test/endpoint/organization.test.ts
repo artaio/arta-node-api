@@ -1,9 +1,9 @@
-import { RestClient } from '../../lib/net/RestClient';
+import { OrganizationApi } from '../../lib/generated';
 import { OrganizationEndpoint } from '../../lib/endpoint/organization';
+jest.mock('../../lib/generated');
 
-describe('tests default Arta endpoint', () => {
-  let artaClientMock: RestClient;
-  const mockOrgResponse = {
+const mockOrgResponse = {
+  data: {
     api_version: '2021-01-01',
     billing_terms: 'prepaid',
     company_name: 'otavio org',
@@ -15,32 +15,37 @@ describe('tests default Arta endpoint', () => {
     status: 'active',
     stripe_customer_id: 'test',
     updated_at: '2020-10-22T21:12:48.839165',
-  };
+  },
+};
+
+const OrganizationApiMocked =
+  jest.mocked<typeof OrganizationApi>(OrganizationApi);
+
+describe('tests default Arta endpoint', () => {
+  let get: jest.Mock, patch: jest.Mock;
 
   beforeAll(() => {
-    artaClientMock = {
-      get: jest.fn(),
-      post: jest.fn(),
-      patch: jest.fn(),
-      delete: jest.fn(),
-    };
     jest.resetAllMocks();
+    get = jest.fn().mockResolvedValue(mockOrgResponse);
+    patch = jest.fn().mockResolvedValue(mockOrgResponse);
+    OrganizationApiMocked.mockImplementation(() => {
+      return {
+        organizationGet: get,
+        organizationPatch: patch,
+      } as unknown as OrganizationApi;
+    });
   });
 
   it('should be able to get a single org', async () => {
-    artaClientMock.get = jest.fn().mockReturnValueOnce(mockOrgResponse);
-
-    const orgnizationsEndpoint = new OrganizationEndpoint(artaClientMock);
+    const orgnizationsEndpoint = new OrganizationEndpoint('test');
     const org = await orgnizationsEndpoint.get();
 
-    expect(artaClientMock.get).toBeCalledWith('/organization', undefined);
-    expect(org).toEqual(mockOrgResponse);
+    expect(get).toBeCalledWith('ARTA_APIKey test');
+    expect(org).toEqual(mockOrgResponse.data);
   });
 
   it('should be able to patch own org', async () => {
-    artaClientMock.patch = jest.fn().mockReturnValueOnce(mockOrgResponse);
-
-    const orgnizationsEndpoint = new OrganizationEndpoint(artaClientMock);
+    const orgnizationsEndpoint = new OrganizationEndpoint('test');
     const updateMock = {
       ...mockOrgResponse,
       name: 'other_test',
@@ -48,27 +53,21 @@ describe('tests default Arta endpoint', () => {
       created_at: new Date(),
     };
     const org = await orgnizationsEndpoint.update(updateMock);
-    expect(artaClientMock.patch).toBeCalledWith(
-      '/organization',
-      { organization: updateMock },
-      undefined
-    );
-    expect(org).toEqual(mockOrgResponse);
+    expect(patch).toBeCalledWith('ARTA_APIKey test', {
+      organization: updateMock,
+    });
+    expect(org).toEqual(mockOrgResponse.data);
   });
 
   it('should forward auth request on get', async () => {
-    artaClientMock.get = jest.fn().mockReturnValueOnce(mockOrgResponse);
-
-    const orgnizationsEndpoint = new OrganizationEndpoint(artaClientMock);
+    const orgnizationsEndpoint = new OrganizationEndpoint('test');
     const org = await orgnizationsEndpoint.get('other-auth');
-    expect(artaClientMock.get).toBeCalledWith('/organization', 'other-auth');
-    expect(org).toEqual(mockOrgResponse);
+    expect(get).toBeCalledWith('ARTA_APIKey other-auth');
+    expect(org).toEqual(mockOrgResponse.data);
   });
 
   it('should forward auth request on patch', async () => {
-    artaClientMock.patch = jest.fn().mockReturnValueOnce(mockOrgResponse);
-
-    const orgnizationsEndpoint = new OrganizationEndpoint(artaClientMock);
+    const orgnizationsEndpoint = new OrganizationEndpoint('test');
     const updateMock = {
       ...mockOrgResponse,
       name: 'other_test',
@@ -76,11 +75,9 @@ describe('tests default Arta endpoint', () => {
       created_at: new Date(),
     };
     const org = await orgnizationsEndpoint.update(updateMock, 'other-auth');
-    expect(artaClientMock.patch).toBeCalledWith(
-      '/organization',
-      { organization: updateMock },
-      'other-auth'
-    );
-    expect(org).toEqual(mockOrgResponse);
+    expect(patch).toBeCalledWith('ARTA_APIKey other-auth', {
+      organization: updateMock,
+    });
+    expect(org).toEqual(mockOrgResponse.data);
   });
 });

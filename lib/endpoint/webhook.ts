@@ -1,47 +1,46 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { DatedInterface } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
+import { convertDatesToUtc, Dated, listAsync } from '../utils';
 import { Page } from '../pagination';
+import {
+  WebhooksApi,
+  WebhooksCreateRequestWebhook,
+  WebhooksPatchRequestWebhook,
+} from '../generated';
+import { Webhook as GeneratedWebhook } from '../generated';
+import { Endpoint } from './endpoints';
 
-export interface Webhook extends DatedInterface {
-  id: ArtaID;
-  name: string;
-  url: string;
+export interface Webhook extends Dated<GeneratedWebhook> {
   ping: (auth?: string) => Promise<void>;
-  getSecret: (auth?: string) => Promise<string>;
-  resetSecret: (auth?: string) => Promise<string>;
+  getSecret: (auth?: string) => Promise<string | undefined>;
+  resetSecret: (auth?: string) => Promise<string | undefined>;
 }
 
-export interface WebhookCreateBody {
-  name: string;
-  url: string;
-}
+export class WebhookEndpoint extends Endpoint {
+  private readonly webhooksApi: WebhooksApi;
+  constructor(apiKey: string) {
+    super(apiKey);
+    this.webhooksApi = new WebhooksApi();
+  }
 
-export interface WebhookCreate {
-  webhook: WebhookCreateBody;
-}
+  private withFunctionCalls(webhook: Dated<GeneratedWebhook>): Webhook {
+    const newWebhook = webhook as Webhook;
+    newWebhook.ping = (auth?: string) => this.ping(newWebhook.id, auth);
+    newWebhook.getSecret = (auth?: string) =>
+      this.getSecret(newWebhook.id, auth);
+    newWebhook.resetSecret = (auth?: string) =>
+      this.resetSecret(newWebhook.id, auth);
+    return newWebhook;
+  }
 
-export class WebhookEndpoint {
-  private readonly defaultEndpoint: Endpoint<Webhook, WebhookCreate>;
-  private readonly path = '/webhooks';
-  constructor(private readonly artaClient: RestClient) {
-    this.defaultEndpoint = new DefaultEndpoint<Webhook, WebhookCreate>(
-      this.path,
-      this.artaClient
+  private withDateAndCalls(webhook: GeneratedWebhook): Webhook {
+    return this.withFunctionCalls(convertDatesToUtc<GeneratedWebhook>(webhook));
+  }
+
+  public async getById(id: number, auth?: string): Promise<Webhook> {
+    const request = await this.webhooksApi.webhooksGet(
+      this.getAuthHeader(auth),
+      id
     );
-  }
-
-  private withFunctionCalls(webhook: Webhook): Webhook {
-    webhook.ping = (auth?: string) => this.ping(webhook.id, auth);
-    webhook.getSecret = (auth?: string) => this.getSecret(webhook.id, auth);
-    webhook.resetSecret = (auth?: string) => this.resetSecret(webhook.id, auth);
-    return webhook;
-  }
-
-  public async getById(id: ArtaID, auth?: string): Promise<Webhook> {
-    const baseHook = await this.defaultEndpoint.getById(id, auth);
-    return this.withFunctionCalls(baseHook);
+    return this.withDateAndCalls(request.data);
   }
 
   public async list(
@@ -49,64 +48,71 @@ export class WebhookEndpoint {
     pageSize = 20,
     auth?: string
   ): Promise<Page<Webhook>> {
-    const { items, metadata } = await this.defaultEndpoint.list(
-      page,
+    const listPage = await this.webhooksApi.webhooksList(
+      this.getAuthHeader(auth),
       pageSize,
-      auth
+      page
     );
-    return { items: items.map(this.withFunctionCalls), metadata };
+
+    const items = listPage.data.items.map((hook) =>
+      this.withDateAndCalls(hook)
+    );
+
+    return { items, metadata: listPage.data.metadata };
   }
 
   public listAll(auth?: string): AsyncGenerator<Webhook> {
-    return this.defaultEndpoint.listAll(
-      auth,
-      this.withFunctionCalls.bind(this)
-    );
+    return listAsync<Webhook>(this.list.bind(this), auth);
   }
 
   public async create(
-    payload: WebhookCreateBody,
+    payload: WebhooksCreateRequestWebhook,
     auth?: string
   ): Promise<Webhook> {
-    const baseHook = await this.defaultEndpoint.create(
-      { webhook: payload },
-      auth
+    const createdHook = await this.webhooksApi.webhooksCreate(
+      this.getAuthHeader(auth),
+      { webhook: payload }
     );
-    return this.withFunctionCalls(baseHook);
+
+    return this.withDateAndCalls(createdHook.data);
   }
 
   public async update(
-    id: ArtaID,
-    payload: Partial<WebhookCreateBody> | Partial<Webhook>,
+    id: number,
+    payload: WebhooksPatchRequestWebhook,
     auth?: string
   ): Promise<Webhook> {
-    const webhookUpdate = { webhook: payload } as Partial<WebhookCreate>;
-    const baseHook = await this.defaultEndpoint.update(id, webhookUpdate, auth);
-    return this.withFunctionCalls(baseHook);
+    const updatedHook = await this.webhooksApi.webhooksPatch(
+      this.getAuthHeader(auth),
+      id,
+      { webhook: payload }
+    );
+
+    return this.withDateAndCalls(updatedHook.data);
   }
 
-  public remove(id: ArtaID, auth?: string): Promise<void> {
-    return this.defaultEndpoint.remove(id, auth);
+  public async remove(id: number, auth?: string): Promise<void> {
+    await this.webhooksApi.webhooksDelete(this.getAuthHeader(auth), id);
   }
 
-  public async ping(id: ArtaID, auth?: string): Promise<void> {
-    await this.artaClient.get(`${this.path}/${id}/ping`, auth);
+  public async ping(id: number, auth?: string): Promise<void> {
+    await this.webhooksApi.webhooksPing(this.getAuthHeader(auth), id);
     return;
   }
 
-  public async getSecret(id: ArtaID, auth?: string): Promise<string> {
-    const secret = await this.artaClient.get(
-      `${this.path}/${id}/secret_token`,
-      auth
+  public async getSecret(id: number, auth?: string): Promise<string> {
+    const secret = await this.webhooksApi.webhooksSecretTokenGet(
+      this.getAuthHeader(auth),
+      id
     );
-    return secret.secret_token;
+    return secret.data.secret_token as string;
   }
 
-  public async resetSecret(id: ArtaID, auth?: string): Promise<string> {
-    const newSecret = await this.artaClient.patch(
-      `${this.path}/${id}/secret_token/reset`,
-      auth
+  public async resetSecret(id: number, auth?: string): Promise<string> {
+    const secret = await this.webhooksApi.webhooksSecretTokenResetPatch(
+      this.getAuthHeader(auth),
+      id
     );
-    return newSecret.secret_token;
+    return secret.data.secret_token as string;
   }
 }

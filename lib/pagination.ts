@@ -1,10 +1,6 @@
-export interface PageMetada {
-  page: number;
-  page_size: number;
-  total_count: number;
-}
+import { PaginationMetadata } from './generated';
 
 export interface Page<T> {
   items: T[];
-  metadata: PageMetada;
+  metadata: PaginationMetadata;
 }

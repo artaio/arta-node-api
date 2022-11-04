@@ -5,6 +5,8 @@ import {
   HttpRequestParameters,
 } from './net/HttpClient';
 import { RestClient } from './net/RestClient';
+import { version } from '../package.json';
+import { getLogger, Logger } from './logging';
 
 export type ArtaID = number | string;
 interface ArtaClientConfig {
@@ -12,27 +14,34 @@ interface ArtaClientConfig {
   host: string;
 }
 export class ArtaClient implements RestClient {
+  private readonly logger: Logger;
   constructor(
     private readonly httpClient: HttpClient,
     private readonly config: ArtaClientConfig
-  ) {}
+  ) {
+    this.logger = getLogger();
+  }
 
   private async request(params: Partial<HttpRequestParameters>): Promise<any> {
     const authValue = this.makeArtaAuthHeader(this.config.apiKey);
 
-    if (params.headers == null) {
-      params.headers = { Authorization: authValue };
-    } else if (params.headers.Authorization == null) {
+    if (params.headers.Authorization == null) {
       params.headers.Authorization = authValue;
     }
 
     const req = await this.httpClient.request(this.config.host, params);
+    const message = `[${req.statusCode}] ${params.method} ${params.path}`;
     if (req.statusCode && req.statusCode > 400) {
+      this.logger.error(message);
+
       throw new ArtaSDKError(
         (await req.json()) as ArtaAPIError,
         req.statusCode
       );
     }
+
+    this.logger.info(message);
+
     return req;
   }
 
@@ -45,12 +54,13 @@ export class ArtaClient implements RestClient {
     const reqParams: Partial<HttpRequestParameters> = {
       path,
       method,
+      headers: {
+        'User-Agent': `ARTA/v1 arta-node/${version}`,
+      },
     };
 
     if (auth) {
-      reqParams.headers = {
-        Authorization: this.makeArtaAuthHeader(auth),
-      };
+      reqParams.headers.Authorization = this.makeArtaAuthHeader(auth);
     }
 
     if (body) {

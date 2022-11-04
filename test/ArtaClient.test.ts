@@ -1,11 +1,15 @@
 import { ArtaClient } from '../lib/ArtaClient';
+import { initLogger } from '../lib/logging';
 import { HttpClient, HttpRequestParameters } from '../lib/net/HttpClient';
+import { version } from '../package.json';
 
 const ARTA_DOMAIN = 'domain.test';
 
 describe('tests ArtaClient', () => {
   const request = jest.fn();
   const mockHttpClient: HttpClient = { request };
+
+  initLogger(console, 'NONE');
 
   const artaClient = new ArtaClient(mockHttpClient, {
     apiKey: 'test',
@@ -17,6 +21,10 @@ describe('tests ArtaClient', () => {
     params: Partial<HttpRequestParameters>
   ) => {
     expect(request).toBeCalledTimes(1);
+    params.headers = {
+      ...params.headers,
+      'User-Agent': `ARTA/v1 arta-node/${version}`,
+    };
     expect(request).toBeCalledWith(domain, params);
   };
 

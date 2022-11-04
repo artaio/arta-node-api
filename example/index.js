@@ -1,11 +1,7 @@
-const { Arta } = require('../dist');
+const { Arta } = require('../dist/lib');
 
 const ping = (webhook) => {
-  return webhook
-    .ping()
-    .catch(() =>
-      console.warn(`Endpoint ${webhook.id}/${webhook.name} is offline`)
-    );
+  return webhook.ping().catch(() => {});
 };
 
 const main = async () => {

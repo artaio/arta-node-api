@@ -1,3 +1,12 @@
+# [0.10.0](https://github.com/artaio/arta-node/compare/v0.9.0...v0.10.0) (2022-11-07)
+
+
+### Features
+
+* add basic logging and tracking to client ([59e145a](https://github.com/artaio/arta-node/commit/59e145ac158d3cba212841f8a4aa447f749cd315))
+
+
+
 # [0.9.0](https://github.com/artaio/arta-node/compare/v0.8.0...v0.9.0) (2022-10-31)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add error handling ([272814c](https://github.com/artaio/arta-node/commit/272814c98149df25c99cfaa66fd7a28c376a3d5c))
-
-
-
-# [0.5.0](https://github.com/artaio/arta-node/compare/v0.4.0...v0.5.0) (2022-10-26)
-
-
-### Features
-
-* add the integration to arta organization ([ed6174c](https://github.com/artaio/arta-node/commit/ed6174c601bff482576013ea879d9bf44348ab0b))
 
 
 

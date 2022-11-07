@@ -1,5 +1,6 @@
 import * as http from 'http';
 import * as https from 'https';
+import { getLogger, Logger } from '../logging';
 import {
   HttpClient,
   HttpClientResponse,
@@ -63,7 +64,10 @@ function initParams(
 }
 
 export class NodeHttpClient implements HttpClient {
-  constructor(private readonly agent?: http.Agent | https.Agent) {}
+  private readonly logger: Logger;
+  constructor(private readonly agent?: http.Agent | https.Agent) {
+    this.logger = getLogger();
+  }
   async request(
     host: string,
     params?: Partial<HttpRequestParameters>
@@ -76,6 +80,9 @@ export class NodeHttpClient implements HttpClient {
     if (agent == null) {
       agent = isInsecureConnection ? defaultHttpAgent : defaultHttpsAgent;
     }
+
+    this.logger.debug(`[${method}] ${protocol}://${host}:${port}${path}`);
+
     const requestPromise: Promise<HttpClientResponse> = new Promise(
       (resolve, reject) => {
         const req = (isInsecureConnection ? http : https).request({

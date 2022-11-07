@@ -1,8 +1,8 @@
 import { ArtaClient } from './ArtaClient';
 import { NodeHttpClient } from './net/NodeHttpClient';
 import { RestClient } from './net/RestClient';
-import { OrganizationEndpoint } from './endpoint/organization';
-import { WebhookEndpoint } from './endpoint/webhook';
+import { OrganizationsEndpoint } from './endpoint/organization';
+import { WebhooksEndpoint } from './endpoint/webhook';
 import { initLogger, Logger, LoggerVerbosity } from './logging';
 
 export interface ArtaConfig {
@@ -21,8 +21,8 @@ export class Arta {
   private readonly artaClient: RestClient;
   private readonly config: ArtaConfig;
 
-  public organization: OrganizationEndpoint;
-  public webhook: WebhookEndpoint;
+  public organizations: OrganizationsEndpoint;
+  public webhooks: WebhooksEndpoint;
 
   constructor(apiKey: string, config?: Partial<ArtaConfig>) {
     this.config = Object.assign(defaultConfig, config);
@@ -34,7 +34,7 @@ export class Arta {
       host: this.config.host,
     });
 
-    this.organization = new OrganizationEndpoint(this.artaClient);
-    this.webhook = new WebhookEndpoint(this.artaClient);
+    this.organizations = new OrganizationsEndpoint(this.artaClient);
+    this.webhooks = new WebhooksEndpoint(this.artaClient);
   }
 }

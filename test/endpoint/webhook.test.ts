@@ -1,9 +1,9 @@
 import { RestClient } from '../../lib/net/RestClient';
-import { WebhookEndpoint } from '../../lib/endpoint/webhook';
+import { WebhooksEndpoint } from '../../lib/endpoint/webhook';
 
-describe('tests default Arta endpoint', () => {
+describe('tests webhook Arta endpoint', () => {
   let artaClientMock: RestClient;
-  let webhookEndpoint: WebhookEndpoint;
+  let webhookEndpoint: WebhooksEndpoint;
   const webhookMock = {
     id: 4,
     created_at: '2020-10-22T21:12:48.839165',
@@ -20,15 +20,12 @@ describe('tests default Arta endpoint', () => {
       patch: jest.fn().mockReturnValue(webhookMock),
       delete: jest.fn(),
     };
-    webhookEndpoint = new WebhookEndpoint(artaClientMock);
+    webhookEndpoint = new WebhooksEndpoint(artaClientMock);
   });
 
   it('should have all CRUD endpoints', async () => {
-    await webhookEndpoint.getById('test');
-    expect(artaClientMock.get).toHaveBeenCalledWith(
-      '/webhooks/test',
-      undefined
-    );
+    await webhookEndpoint.getById(4);
+    expect(artaClientMock.get).toHaveBeenCalledWith('/webhooks/4', undefined);
 
     await webhookEndpoint.create(
       { url: 'test', name: 'my-hook' },
@@ -40,17 +37,17 @@ describe('tests default Arta endpoint', () => {
       'other-auth'
     );
 
-    await webhookEndpoint.update('test', { name: 'other-hook' });
+    await webhookEndpoint.update(4, { name: 'other-hook' });
 
     expect(artaClientMock.patch).toHaveBeenCalledWith(
-      '/webhooks/test',
+      '/webhooks/4',
       { webhook: { name: 'other-hook' } },
       undefined
     );
 
-    expect(await webhookEndpoint.remove('test')).toBeUndefined();
+    expect(await webhookEndpoint.remove(4)).toBeUndefined();
     expect(artaClientMock.delete).toHaveBeenCalledWith(
-      '/webhooks/test',
+      '/webhooks/4',
       undefined
     );
   });
@@ -69,19 +66,19 @@ describe('tests default Arta endpoint', () => {
   });
 
   it('should be able to call actions from client', async () => {
-    await webhookEndpoint.ping('test');
+    await webhookEndpoint.ping(4);
     expect(artaClientMock.get).toHaveBeenCalledWith(
-      '/webhooks/test/ping',
+      '/webhooks/4/ping',
       undefined
     );
-    await webhookEndpoint.getSecret('test');
+    await webhookEndpoint.getSecret(4);
     expect(artaClientMock.get).toHaveBeenCalledWith(
-      '/webhooks/test/secret_token',
+      '/webhooks/4/secret_token',
       undefined
     );
-    await webhookEndpoint.resetSecret('test', 'another-auth');
+    await webhookEndpoint.resetSecret(4, 'another-auth');
     expect(artaClientMock.patch).toHaveBeenCalledWith(
-      '/webhooks/test/secret_token/reset',
+      '/webhooks/4/secret_token/reset',
       'another-auth'
     );
   });
@@ -90,7 +87,7 @@ describe('tests default Arta endpoint', () => {
     const ping = jest.spyOn(webhookEndpoint, 'ping');
     const getSecret = jest.spyOn(webhookEndpoint, 'getSecret');
     const resetSecret = jest.spyOn(webhookEndpoint, 'resetSecret');
-    const webhook = await webhookEndpoint.getById('test');
+    const webhook = await webhookEndpoint.getById(4);
 
     await webhook.ping();
     expect(ping).toHaveBeenCalledWith(webhook.id, undefined);

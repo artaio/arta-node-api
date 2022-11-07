@@ -14,7 +14,7 @@ export interface Organization extends DatedInterface {
   stripe_customer_id?: NullableString;
 }
 
-export class OrganizationEndpoint {
+export class OrganizationsEndpoint {
   private readonly path = '/organization';
   constructor(private readonly artaClient: RestClient) {}
 

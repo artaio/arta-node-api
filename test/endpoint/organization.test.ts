@@ -1,7 +1,7 @@
 import { RestClient } from '../../lib/net/RestClient';
-import { OrganizationEndpoint } from '../../lib/endpoint/organization';
+import { OrganizationsEndpoint } from '../../lib/endpoint/organization';
 
-describe('tests default Arta endpoint', () => {
+describe('tests organization Arta endpoint', () => {
   let artaClientMock: RestClient;
   const mockOrgResponse = {
     api_version: '2021-01-01',
@@ -30,7 +30,7 @@ describe('tests default Arta endpoint', () => {
   it('should be able to get a single org', async () => {
     artaClientMock.get = jest.fn().mockReturnValueOnce(mockOrgResponse);
 
-    const orgnizationsEndpoint = new OrganizationEndpoint(artaClientMock);
+    const orgnizationsEndpoint = new OrganizationsEndpoint(artaClientMock);
     const org = await orgnizationsEndpoint.get();
 
     expect(artaClientMock.get).toBeCalledWith('/organization', undefined);
@@ -40,7 +40,7 @@ describe('tests default Arta endpoint', () => {
   it('should be able to patch own org', async () => {
     artaClientMock.patch = jest.fn().mockReturnValueOnce(mockOrgResponse);
 
-    const orgnizationsEndpoint = new OrganizationEndpoint(artaClientMock);
+    const orgnizationsEndpoint = new OrganizationsEndpoint(artaClientMock);
     const updateMock = {
       ...mockOrgResponse,
       name: 'other_test',
@@ -59,7 +59,7 @@ describe('tests default Arta endpoint', () => {
   it('should forward auth request on get', async () => {
     artaClientMock.get = jest.fn().mockReturnValueOnce(mockOrgResponse);
 
-    const orgnizationsEndpoint = new OrganizationEndpoint(artaClientMock);
+    const orgnizationsEndpoint = new OrganizationsEndpoint(artaClientMock);
     const org = await orgnizationsEndpoint.get('other-auth');
     expect(artaClientMock.get).toBeCalledWith('/organization', 'other-auth');
     expect(org).toEqual(mockOrgResponse);
@@ -68,7 +68,7 @@ describe('tests default Arta endpoint', () => {
   it('should forward auth request on patch', async () => {
     artaClientMock.patch = jest.fn().mockReturnValueOnce(mockOrgResponse);
 
-    const orgnizationsEndpoint = new OrganizationEndpoint(artaClientMock);
+    const orgnizationsEndpoint = new OrganizationsEndpoint(artaClientMock);
     const updateMock = {
       ...mockOrgResponse,
       name: 'other_test',

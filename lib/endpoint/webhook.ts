@@ -17,12 +17,11 @@ export interface WebhookCreateBody {
   name: string;
   url: string;
 }
-
 export interface WebhookCreate {
   webhook: WebhookCreateBody;
 }
 
-export class WebhookEndpoint {
+export class WebhooksEndpoint {
   private readonly defaultEndpoint: Endpoint<Webhook, WebhookCreate>;
   private readonly path = '/webhooks';
   constructor(private readonly artaClient: RestClient) {

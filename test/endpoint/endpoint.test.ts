@@ -13,7 +13,7 @@ interface T2 {
 
 describe('tests default Arta endpoint', () => {
   let artaClientMock: RestClient;
-  const mockEndpoint = {
+  const mockResponse = {
     created_at: new Date(),
     t1: 'a-test',
     updated_at: new Date(),
@@ -29,18 +29,18 @@ describe('tests default Arta endpoint', () => {
   });
 
   it('should be able to get element by ID', async () => {
-    artaClientMock.get = jest.fn().mockReturnValueOnce(mockEndpoint);
+    artaClientMock.get = jest.fn().mockReturnValueOnce(mockResponse);
     const endpoint = new DefaultEndpoint<T1, T2>('test', artaClientMock);
     const myElement = await endpoint.getById('an-id');
     expect(artaClientMock.get).toHaveBeenCalledTimes(1);
     expect(artaClientMock.get).toHaveBeenCalledWith('/test/an-id', undefined);
-    expect(myElement).toEqual(mockEndpoint);
+    expect(myElement).toEqual(mockResponse);
   });
 
   it('should be able to list a page', async () => {
     artaClientMock.get = jest
       .fn()
-      .mockReturnValueOnce({ items: [mockEndpoint] });
+      .mockReturnValueOnce({ items: [mockResponse] });
     const endpoint = new DefaultEndpoint<T1, T2>('/test', artaClientMock);
     await endpoint.list(2, 10);
     expect(artaClientMock.get).toHaveBeenCalledWith(
@@ -52,7 +52,7 @@ describe('tests default Arta endpoint', () => {
   it('should be able to list the default page if none selected', async () => {
     artaClientMock.get = jest
       .fn()
-      .mockReturnValueOnce({ items: [mockEndpoint] });
+      .mockReturnValueOnce({ items: [mockResponse] });
     const endpoint = new DefaultEndpoint<T1, T2>('/test', artaClientMock);
     await endpoint.list();
     expect(artaClientMock.get).toHaveBeenCalledWith(
@@ -65,29 +65,29 @@ describe('tests default Arta endpoint', () => {
     artaClientMock.get = jest
       .fn()
       .mockResolvedValueOnce({
-        items: [mockEndpoint, mockEndpoint, mockEndpoint],
+        items: [mockResponse, mockResponse, mockResponse],
         metadata: { page: 1, total_count: 8 },
       })
       .mockResolvedValueOnce({
-        items: [mockEndpoint, mockEndpoint, mockEndpoint],
+        items: [mockResponse, mockResponse, mockResponse],
         metadata: { page: 2, total_count: 8 },
       })
       .mockResolvedValue({
-        items: [mockEndpoint, mockEndpoint],
+        items: [mockResponse, mockResponse],
         metadata: { page: 3, total_count: 8 },
       });
 
     const endpoint = new DefaultEndpoint<T1, T2>('/test', artaClientMock);
     let totalEndpoints = 0;
     for await (const test of endpoint.listAll()) {
-      expect(test).toEqual(mockEndpoint);
+      expect(test).toEqual(mockResponse);
       totalEndpoints++;
     }
     expect(totalEndpoints).toBe(8);
   });
 
   it('should be able to create a new resource', async () => {
-    artaClientMock.post = jest.fn().mockReturnValueOnce(mockEndpoint);
+    artaClientMock.post = jest.fn().mockReturnValueOnce(mockResponse);
     const createPayload = { t2: 'test', t3: 'test2' };
     const endpoint = new DefaultEndpoint<T1, T2>('/test', artaClientMock);
     await endpoint.create(createPayload);
@@ -99,7 +99,7 @@ describe('tests default Arta endpoint', () => {
   });
 
   it('should be able to update an existing resource with custom auth', async () => {
-    artaClientMock.patch = jest.fn().mockReturnValueOnce(mockEndpoint);
+    artaClientMock.patch = jest.fn().mockReturnValueOnce(mockResponse);
     const updatePayload = { t2: 'test' };
     const endpoint = new DefaultEndpoint<T1, T2>('/test', artaClientMock);
     await endpoint.update('an-id', updatePayload, 'custom-auth');

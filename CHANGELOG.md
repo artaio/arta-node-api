@@ -1,3 +1,12 @@
+# [0.11.0](https://github.com/artaio/arta-node/compare/v0.10.0...v0.11.0) (2022-11-08)
+
+
+### Features
+
+* add keys andpoint ([cf8bbbd](https://github.com/artaio/arta-node/commit/cf8bbbd50d6d71874dcdbb96c3ddc296953bec74))
+
+
+
 # [0.10.0](https://github.com/artaio/arta-node/compare/v0.9.0...v0.10.0) (2022-11-07)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add default endpoint with generic functions ([5f39422](https://github.com/artaio/arta-node/commit/5f39422121f06a277f4e7776bad8cf84a5a0e584))
-
-
-
-# [0.6.0](https://github.com/artaio/arta-node/compare/v0.5.0...v0.6.0) (2022-10-27)
-
-
-### Features
-
-* add error handling ([272814c](https://github.com/artaio/arta-node/commit/272814c98149df25c99cfaa66fd7a28c376a3d5c))
 
 
 

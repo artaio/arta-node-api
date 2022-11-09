@@ -111,9 +111,9 @@ describe('tests ArtaClient', () => {
     request.mockReset();
     request.mockReturnValueOnce({
       statusCode: 4222,
-      json: jest
-        .fn()
-        .mockReturnValueOnce({ errors: { property: 'is not in correct format' } }),
+      json: jest.fn().mockReturnValueOnce({
+        errors: { property: 'is not in correct format' },
+      }),
     });
 
     await expect(artaClient.get('/a_path')).rejects.toThrowError(

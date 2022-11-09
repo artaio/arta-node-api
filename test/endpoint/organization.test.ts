@@ -1,86 +1,40 @@
 import { RestClient } from '../../lib/net/RestClient';
 import { OrganizationsEndpoint } from '../../lib/endpoint/organization';
+import * as helper from './helper';
 
 describe('tests organization Arta endpoint', () => {
-  let artaClientMock: RestClient;
-  const mockOrgResponse = {
+  const responseMock = {
+    id: 867,
+    created_at: '2020-10-22T21:12:48.839165',
+    updated_at: '2020-10-22T21:12:48.839165',
     api_version: '2021-01-01',
     billing_terms: 'prepaid',
     company_name: 'otavio org',
-    created_at: '2020-10-22T21:12:48.839165',
     display_name: null,
-    id: 867,
     name: 'test org',
     shortcode: 'test',
     status: 'active',
     stripe_customer_id: 'test',
-    updated_at: '2020-10-22T21:12:48.839165',
   };
+  const path = 'organization';
+  let clientMock: RestClient;
+  let endpoint: OrganizationsEndpoint;
 
   beforeAll(() => {
-    artaClientMock = {
-      get: jest.fn(),
-      post: jest.fn(),
-      patch: jest.fn(),
-      delete: jest.fn(),
-    };
     jest.resetAllMocks();
+    clientMock = helper.getRestMock(responseMock);
+    endpoint = new OrganizationsEndpoint(clientMock);
   });
 
-  it('should be able to get a single org', async () => {
-    artaClientMock.get = jest.fn().mockReturnValueOnce(mockOrgResponse);
-
-    const orgnizationsEndpoint = new OrganizationsEndpoint(artaClientMock);
-    const org = await orgnizationsEndpoint.get();
-
-    expect(artaClientMock.get).toBeCalledWith('/organization', undefined);
-    expect(org).toEqual(mockOrgResponse);
-  });
-
-  it('should be able to patch own org', async () => {
-    artaClientMock.patch = jest.fn().mockReturnValueOnce(mockOrgResponse);
-
-    const orgnizationsEndpoint = new OrganizationsEndpoint(artaClientMock);
+  it('should be able to get and update a single org', async () => {
+    const requestConfig = { path, clientMock, endpoint };
     const updateMock = {
-      ...mockOrgResponse,
+      ...responseMock,
       name: 'other_test',
       updated_at: new Date(),
       created_at: new Date(),
     };
-    const org = await orgnizationsEndpoint.update(updateMock);
-    expect(artaClientMock.patch).toBeCalledWith(
-      '/organization',
-      { organization: updateMock },
-      undefined
-    );
-    expect(org).toEqual(mockOrgResponse);
-  });
-
-  it('should forward auth request on get', async () => {
-    artaClientMock.get = jest.fn().mockReturnValueOnce(mockOrgResponse);
-
-    const orgnizationsEndpoint = new OrganizationsEndpoint(artaClientMock);
-    const org = await orgnizationsEndpoint.get('other-auth');
-    expect(artaClientMock.get).toBeCalledWith('/organization', 'other-auth');
-    expect(org).toEqual(mockOrgResponse);
-  });
-
-  it('should forward auth request on patch', async () => {
-    artaClientMock.patch = jest.fn().mockReturnValueOnce(mockOrgResponse);
-
-    const orgnizationsEndpoint = new OrganizationsEndpoint(artaClientMock);
-    const updateMock = {
-      ...mockOrgResponse,
-      name: 'other_test',
-      updated_at: new Date(),
-      created_at: new Date(),
-    };
-    const org = await orgnizationsEndpoint.update(updateMock, 'other-auth');
-    expect(artaClientMock.patch).toBeCalledWith(
-      '/organization',
-      { organization: updateMock },
-      'other-auth'
-    );
-    expect(org).toEqual(mockOrgResponse);
+    await helper.testGetSingle(responseMock, requestConfig);
+    await helper.testUpdate(updateMock, 'organization', requestConfig);
   });
 });

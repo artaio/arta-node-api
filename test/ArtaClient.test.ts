@@ -89,7 +89,47 @@ describe('tests ArtaClient', () => {
     });
 
     await expect(artaClient.get('/a_path')).rejects.toThrowError(
-      'API communication error: Unauthorized, HTTP status: 401'
+      'Unauthorized, HTTP status: 401'
+    );
+  });
+
+  it('should throw error if API respond with # tag in error', async () => {
+    request.mockReset();
+    request.mockReturnValueOnce({
+      statusCode: 400,
+      json: jest
+        .fn()
+        .mockReturnValueOnce({ errors: { '#': ['a error', 'another error'] } }),
+    });
+
+    await expect(artaClient.get('/a_path')).rejects.toThrowError(
+      '# a error, # another error, HTTP status: 400'
+    );
+  });
+
+  it('should throw error if API respond with single error', async () => {
+    request.mockReset();
+    request.mockReturnValueOnce({
+      statusCode: 4222,
+      json: jest
+        .fn()
+        .mockReturnValueOnce({ errors: { property: 'is not in correct format' } }),
+    });
+
+    await expect(artaClient.get('/a_path')).rejects.toThrowError(
+      'property is not in correct format, HTTP status: 422'
+    );
+  });
+
+  it('should throw error if API respond with uknown error', async () => {
+    request.mockReset();
+    request.mockReturnValueOnce({
+      statusCode: 503,
+      json: jest.fn().mockReturnValueOnce({ errors: {} }),
+    });
+
+    await expect(artaClient.get('/a_path')).rejects.toThrowError(
+      'Unknwon API error, HTTP status: 503'
     );
   });
 });

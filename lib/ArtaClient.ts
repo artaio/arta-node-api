@@ -31,13 +31,11 @@ export class ArtaClient implements RestClient {
 
     const req = await this.httpClient.request(this.config.host, params);
     const message = `[${req.statusCode}] ${params.method} ${params.path}`;
-    if (req.statusCode && req.statusCode > 400) {
+    if (req.statusCode && req.statusCode >= 400) {
+      const errorResponse = await req.json();
       this.logger.error(message);
-
-      throw new ArtaSDKError(
-        (await req.json()) as ArtaAPIError,
-        req.statusCode
-      );
+      this.logger.debug('Error body', errorResponse);
+      throw new ArtaSDKError(errorResponse as ArtaAPIError, req.statusCode);
     }
 
     this.logger.info(message);

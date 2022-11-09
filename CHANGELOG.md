@@ -1,3 +1,12 @@
+## [0.11.1](https://github.com/artaio/arta-node/compare/v0.11.0...v0.11.1) (2022-11-09)
+
+
+### Bug Fixes
+
+* throw error with 400 http code ([e235a32](https://github.com/artaio/arta-node/commit/e235a32ab9d51e330f93c839a8d8ff05304727bd))
+
+
+
 # [0.11.0](https://github.com/artaio/arta-node/compare/v0.10.0...v0.11.0) (2022-11-08)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add default endpoint and webhook endpoint ([678db56](https://github.com/artaio/arta-node/commit/678db568a8a24aedc50d33d2eaff3fb67af9357b))
-
-
-
-# [0.7.0](https://github.com/artaio/arta-node/compare/v0.6.0...v0.7.0) (2022-10-27)
-
-
-### Features
-
-* add default endpoint with generic functions ([5f39422](https://github.com/artaio/arta-node/commit/5f39422121f06a277f4e7776bad8cf84a5a0e584))
 
 
 

@@ -1,3 +1,12 @@
+# [0.12.0](https://github.com/artaio/arta-node/compare/v0.11.1...v0.12.0) (2022-11-10)
+
+
+### Features
+
+* add attachment endpoint ([4b51756](https://github.com/artaio/arta-node/commit/4b5175605b35881038b132845d3327794b6908dc))
+
+
+
 ## [0.11.1](https://github.com/artaio/arta-node/compare/v0.11.0...v0.11.1) (2022-11-09)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds paginated query to webhooks ([5041b46](https://github.com/artaio/arta-node/commit/5041b4681bb25b4c5e5711b005cc506e5b843cd4))
-
-
-
-# [0.8.0](https://github.com/artaio/arta-node/compare/v0.7.0...v0.8.0) (2022-10-31)
-
-
-### Features
-
-* add default endpoint and webhook endpoint ([678db56](https://github.com/artaio/arta-node/commit/678db568a8a24aedc50d33d2eaff3fb67af9357b))
 
 
 

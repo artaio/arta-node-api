@@ -1,7 +1,7 @@
 {
   "name": "arta-node",
   "version": "0.11.1",
-  "description": "",
+  "description": "The Arta Node library provides a seamless integration to Arta API for applications running on Node.js using both Typescript or Javascript.",
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "test": "npm run lint && jest --coverage --detectOpenHandles --verbose",
@@ -15,7 +15,10 @@
     "dist/"
   ],
   "keywords": [],
-  "author": "",
+  "author": "ARTA <hello@arta.io> (https://arta.io/)",
+  "contributors": [
+    "Otavio Jacobi <otaviojacobi@gmail.com>"
+  ],
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",

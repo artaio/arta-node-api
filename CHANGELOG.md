@@ -1,3 +1,12 @@
+# [0.13.0](https://github.com/artaio/arta-node/compare/v0.12.0...v0.13.0) (2022-11-10)
+
+
+### Features
+
+* add webhook deliveries endpoint  ([77e3ed9](https://github.com/artaio/arta-node/commit/77e3ed95d89e1ea98ae15a8680af8a9ed19a52ee))
+
+
+
 # [0.12.0](https://github.com/artaio/arta-node/compare/v0.11.1...v0.12.0) (2022-11-10)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add basic logging and tracking to client ([59e145a](https://github.com/artaio/arta-node/commit/59e145ac158d3cba212841f8a4aa447f749cd315))
-
-
-
-# [0.9.0](https://github.com/artaio/arta-node/compare/v0.8.0...v0.9.0) (2022-10-31)
-
-
-### Features
-
-* adds paginated query to webhooks ([5041b46](https://github.com/artaio/arta-node/commit/5041b4681bb25b4c5e5711b005cc506e5b843cd4))
 
 
 

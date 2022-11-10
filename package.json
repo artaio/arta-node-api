@@ -17,7 +17,8 @@
   "keywords": [],
   "author": "ARTA <hello@arta.io> (https://arta.io/)",
   "contributors": [
-    "Otavio Jacobi <otaviojacobi@gmail.com>"
+    "Otavio Jacobi <otaviojacobi@gmail.com>",
+    "Marina Boaventura <marina@arta.io>"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",

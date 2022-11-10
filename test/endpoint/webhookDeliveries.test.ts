@@ -12,7 +12,7 @@ describe('tests webhook deliveries Arta endpoint', () => {
     status: 'delivered',
     type: 'ping',
     webhook_id: 123,
-    webhook_url: 'https://google.com',
+    webhook_url: 'https://webhookdeliveries.io/',
   };
 
   const path = 'webhook_deliveries';
@@ -25,10 +25,9 @@ describe('tests webhook deliveries Arta endpoint', () => {
     endpoint = new WebhookDeliveriesEndpoint(clientMock);
   });
 
-  it('should have create, get, delete, list and list all methods', async () => {
+  it('should have get and list methods', async () => {
     const requestConfig = { path, clientMock, endpoint };
     await helper.testGet(requestConfig);
     await helper.testList(responseMock, requestConfig);
-    await helper.testListAll(responseMock, requestConfig);
   });
 });

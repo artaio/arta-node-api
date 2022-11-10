@@ -36,8 +36,4 @@ export class WebhookDeliveriesEndpoint {
   ): Promise<Page<WebhookDeliveries>> {
     return this.defaultEndpoint.list(page, pageSize, auth);
   }
-
-  public listAll(auth?: string): AsyncGenerator<WebhookDeliveries> {
-    return this.defaultEndpoint.listAll(auth);
-  }
 }

@@ -1,3 +1,12 @@
+# [0.14.0](https://github.com/artaio/arta-node/compare/v0.13.0...v0.14.0) (2022-11-11)
+
+
+### Features
+
+* add upload endpoint ([044368b](https://github.com/artaio/arta-node/commit/044368b8bda5e03d053e2f3a5896f5f12423454c))
+
+
+
 # [0.13.0](https://github.com/artaio/arta-node/compare/v0.12.0...v0.13.0) (2022-11-10)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add keys andpoint ([cf8bbbd](https://github.com/artaio/arta-node/commit/cf8bbbd50d6d71874dcdbb96c3ddc296953bec74))
-
-
-
-# [0.10.0](https://github.com/artaio/arta-node/compare/v0.9.0...v0.10.0) (2022-11-07)
-
-
-### Features
-
-* add basic logging and tracking to client ([59e145a](https://github.com/artaio/arta-node/commit/59e145ac158d3cba212841f8a4aa447f749cd315))
 
 
 

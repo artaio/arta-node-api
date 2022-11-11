@@ -1,3 +1,12 @@
+# [0.16.0](https://github.com/artaio/arta-node/compare/v0.15.1...v0.16.0) (2022-11-11)
+
+
+### Features
+
+* add email subscriptions endpoint ([#26](https://github.com/artaio/arta-node/issues/26)) ([bc2eedb](https://github.com/artaio/arta-node/commit/bc2eedbf79335be3c1ab2429010982c51c98704e))
+
+
+
 ## [0.15.1](https://github.com/artaio/arta-node/compare/v0.15.0...v0.15.1) (2022-11-11)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add webhook deliveries endpoint  ([77e3ed9](https://github.com/artaio/arta-node/commit/77e3ed95d89e1ea98ae15a8680af8a9ed19a52ee))
-
-
-
-# [0.12.0](https://github.com/artaio/arta-node/compare/v0.11.1...v0.12.0) (2022-11-10)
-
-
-### Features
-
-* add attachment endpoint ([4b51756](https://github.com/artaio/arta-node/commit/4b5175605b35881038b132845d3327794b6908dc))
 
 
 

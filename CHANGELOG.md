@@ -1,3 +1,12 @@
+# [0.15.0](https://github.com/artaio/arta-node/compare/v0.14.0...v0.15.0) (2022-11-11)
+
+
+### Features
+
+* add email rules endpoint ([17c1999](https://github.com/artaio/arta-node/commit/17c1999991486bbcd1139e51fff35bb4fa8dbbaa))
+
+
+
 # [0.14.0](https://github.com/artaio/arta-node/compare/v0.13.0...v0.14.0) (2022-11-11)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * throw error with 400 http code ([e235a32](https://github.com/artaio/arta-node/commit/e235a32ab9d51e330f93c839a8d8ff05304727bd))
-
-
-
-# [0.11.0](https://github.com/artaio/arta-node/compare/v0.10.0...v0.11.0) (2022-11-08)
-
-
-### Features
-
-* add keys andpoint ([cf8bbbd](https://github.com/artaio/arta-node/commit/cf8bbbd50d6d71874dcdbb96c3ddc296953bec74))
 
 
 

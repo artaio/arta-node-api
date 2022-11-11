@@ -1,93 +1,56 @@
 import { RestClient } from '../../lib/net/RestClient';
 import { WebhooksEndpoint } from '../../lib/endpoint/webhook';
+import * as helper from './helper';
 
 describe('tests webhook Arta endpoint', () => {
-  let artaClientMock: RestClient;
-  let webhookEndpoint: WebhooksEndpoint;
-  const webhookMock = {
+  const responseMock = {
     id: 4,
     created_at: '2020-10-22T21:12:48.839165',
     name: 'Notifications Endpoint',
     updated_at: '2020-10-22T21:12:48.839165',
     url: 'https://notifications.example.com/hooks/',
   };
+  const path = 'webhooks';
+  let clientMock: RestClient;
+  let endpoint: WebhooksEndpoint;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    artaClientMock = {
-      get: jest.fn().mockReturnValue(webhookMock),
-      post: jest.fn().mockReturnValue(webhookMock),
-      patch: jest.fn().mockReturnValue(webhookMock),
-      delete: jest.fn(),
-    };
-    webhookEndpoint = new WebhooksEndpoint(artaClientMock);
+    clientMock = helper.getRestMock(responseMock);
+    endpoint = new WebhooksEndpoint(clientMock);
   });
 
-  it('should have all CRUD endpoints', async () => {
-    await webhookEndpoint.getById(4);
-    expect(artaClientMock.get).toHaveBeenCalledWith('/webhooks/4', undefined);
-
-    await webhookEndpoint.create(
-      { url: 'test', name: 'my-hook' },
-      'other-auth'
-    );
-    expect(artaClientMock.post).toHaveBeenCalledWith(
-      '/webhooks',
-      { webhook: { url: 'test', name: 'my-hook' } },
-      'other-auth'
-    );
-
-    await webhookEndpoint.update(4, { name: 'other-hook' });
-
-    expect(artaClientMock.patch).toHaveBeenCalledWith(
-      '/webhooks/4',
-      { webhook: { name: 'other-hook' } },
-      undefined
-    );
-
-    expect(await webhookEndpoint.remove(4)).toBeUndefined();
-    expect(artaClientMock.delete).toHaveBeenCalledWith(
-      '/webhooks/4',
-      undefined
-    );
-  });
-
-  it('should return metadata when calling list', async () => {
-    const apiResponse = {
-      items: [webhookMock],
-      metadata: { page: 1, page_size: 5, total_size: 6 },
-    };
-    artaClientMock.get = jest.fn().mockReturnValueOnce(apiResponse);
-    expect(await webhookEndpoint.list()).toEqual(apiResponse);
-    expect(artaClientMock.get).toHaveBeenCalledWith(
-      '/webhooks?page=1&page_size=20',
-      undefined
-    );
+  it('should have get, create, delete, list, list all and update methods', async () => {
+    const requestConfig = { path, clientMock, endpoint };
+    const createPayload = { url: 'test', name: 'my-hook' };
+    await helper.testGet(requestConfig);
+    await helper.testCreate(createPayload, 'webhook', requestConfig);
+    await helper.testDelete(requestConfig);
+    await helper.testList(responseMock, requestConfig);
+    await helper.testListAll(responseMock, requestConfig);
+    await helper.testUpdate({ url: 'another-url' }, 'webhook', requestConfig);
   });
 
   it('should be able to call actions from client', async () => {
-    await webhookEndpoint.ping(4);
-    expect(artaClientMock.get).toHaveBeenCalledWith(
-      '/webhooks/4/ping',
-      undefined
-    );
-    await webhookEndpoint.getSecret(4);
-    expect(artaClientMock.get).toHaveBeenCalledWith(
+    await endpoint.ping(4);
+    expect(clientMock.get).toHaveBeenCalledWith('/webhooks/4/ping', undefined);
+    await endpoint.getSecret(4);
+    expect(clientMock.get).toHaveBeenCalledWith(
       '/webhooks/4/secret_token',
       undefined
     );
-    await webhookEndpoint.resetSecret(4, 'another-auth');
-    expect(artaClientMock.patch).toHaveBeenCalledWith(
+    await endpoint.resetSecret(4, 'another-auth');
+    expect(clientMock.patch).toHaveBeenCalledWith(
       '/webhooks/4/secret_token/reset',
       'another-auth'
     );
   });
 
   it('should be able to call actions from fetched hook', async () => {
-    const ping = jest.spyOn(webhookEndpoint, 'ping');
-    const getSecret = jest.spyOn(webhookEndpoint, 'getSecret');
-    const resetSecret = jest.spyOn(webhookEndpoint, 'resetSecret');
-    const webhook = await webhookEndpoint.getById(4);
+    const ping = jest.spyOn(endpoint, 'ping');
+    const getSecret = jest.spyOn(endpoint, 'getSecret');
+    const resetSecret = jest.spyOn(endpoint, 'resetSecret');
+    const webhook = await endpoint.getById(4);
 
     await webhook.ping();
     expect(ping).toHaveBeenCalledWith(webhook.id, undefined);
@@ -97,43 +60,5 @@ describe('tests webhook Arta endpoint', () => {
 
     await webhook.resetSecret();
     expect(resetSecret).toHaveBeenCalledWith(webhook.id, undefined);
-  });
-
-  it('should be able to list all endpoints', async () => {
-    artaClientMock.get = jest
-      .fn()
-      .mockResolvedValueOnce({
-        items: [webhookEndpoint, webhookEndpoint],
-        metadata: { page: 1, total_count: 5 },
-      })
-      .mockResolvedValueOnce({
-        items: [webhookEndpoint, webhookEndpoint],
-        metadata: { page: 2, total_count: 5 },
-      })
-      .mockResolvedValue({
-        items: [webhookEndpoint],
-        metadata: { page: 3, total_count: 5 },
-      });
-
-    let totalEndpoints = 0;
-    for await (const test of webhookEndpoint.listAll()) {
-      expect(test).toEqual(webhookEndpoint);
-      totalEndpoints++;
-    }
-    expect(totalEndpoints).toBe(5);
-  });
-
-  it('should not throw listing empty resources', async () => {
-    artaClientMock.get = jest.fn().mockResolvedValueOnce({
-      items: [],
-      metadata: { page: 1, total_count: 0 },
-    });
-
-    let totalEndpoints = 0;
-    for await (const test of webhookEndpoint.listAll()) {
-      expect(test).toEqual(webhookEndpoint);
-      totalEndpoints++;
-    }
-    expect(totalEndpoints).toBe(0);
   });
 });

@@ -26,7 +26,7 @@ describe('tests attachments Arta endpoint', () => {
     endpoint = new UploadsEndpoint(clientMock);
   });
 
-  it('should have create, get, delete, list and list all methods', async () => {
+  it('should have create, get, delete and list methods', async () => {
     const requestConfig = { path, clientMock, endpoint };
     const createPayload = {
       document_type: 'bill_of_lading',

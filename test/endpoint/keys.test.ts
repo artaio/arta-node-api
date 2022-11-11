@@ -20,7 +20,7 @@ describe('tests keys Arta endpoint', () => {
     endpoint = new KeysEndpoint(clientMock);
   });
 
-  it('should have create, get, delete, list and list all methods', async () => {
+  it('should have get, create, delete, list and list all methods', async () => {
     const requestConfig = { path, clientMock, endpoint };
     const createPayload = { is_testing: true, name: 'my-key' };
     await helper.testGet(requestConfig);

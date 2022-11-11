@@ -11,7 +11,6 @@ export type EmailNotificationId =
   | 'collection'
   | 'complete'
   | 'custom_quoted_dashboard'
-  | 'digest'
   | 'in_transit'
   | 'invoice'
   | 'self_ship_label'

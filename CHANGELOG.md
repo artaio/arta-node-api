@@ -1,3 +1,12 @@
+## [0.15.1](https://github.com/artaio/arta-node/compare/v0.15.0...v0.15.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* remove digest notification id ([b5770c1](https://github.com/artaio/arta-node/commit/b5770c18a8c79afba3a6e82a45fcf346f2db66f8))
+
+
+
 # [0.15.0](https://github.com/artaio/arta-node/compare/v0.14.0...v0.15.0) (2022-11-11)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add attachment endpoint ([4b51756](https://github.com/artaio/arta-node/commit/4b5175605b35881038b132845d3327794b6908dc))
-
-
-
-## [0.11.1](https://github.com/artaio/arta-node/compare/v0.11.0...v0.11.1) (2022-11-09)
-
-
-### Bug Fixes
-
-* throw error with 400 http code ([e235a32](https://github.com/artaio/arta-node/commit/e235a32ab9d51e330f93c839a8d8ff05304727bd))
 
 
 

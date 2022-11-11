@@ -7,6 +7,7 @@ import { initLogger, Logger, LoggerVerbosity } from './logging';
 import { KeysEndpoint } from './endpoint/keys';
 import { AttachmentsEndpoint } from './endpoint/attachment';
 import { WebhookDeliveriesEndpoint } from './endpoint/webhookDeliveries';
+import { UploadsEndpoint } from './endpoint/uploads';
 
 export interface ArtaConfig {
   host: string;
@@ -29,6 +30,7 @@ export class Arta {
   public keys: KeysEndpoint;
   public attachments: AttachmentsEndpoint;
   public webhook_deliveries: WebhookDeliveriesEndpoint;
+  public uploads: UploadsEndpoint;
 
   constructor(apiKey: string, config?: Partial<ArtaConfig>) {
     this.config = Object.assign(defaultConfig, config);
@@ -45,5 +47,6 @@ export class Arta {
     this.keys = new KeysEndpoint(this.artaClient);
     this.attachments = new AttachmentsEndpoint(this.artaClient);
     this.webhook_deliveries = new WebhookDeliveriesEndpoint(this.artaClient);
+    this.uploads = new UploadsEndpoint(this.artaClient);
   }
 }

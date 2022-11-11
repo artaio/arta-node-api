@@ -63,10 +63,10 @@ export class EmailRulesEndpoint {
     payload: { recipients: Recipients[] },
     auth?: string
   ): Promise<EmailRule> {
-    const uploadPayload = {
+    const emailRulesPayload = {
       email_rule: payload,
     } as Partial<EmailRuleCreateBody>;
-    return this.defaultEndpoint.update(id, uploadPayload, auth);
+    return this.defaultEndpoint.update(id, emailRulesPayload, auth);
   }
 
   public create(

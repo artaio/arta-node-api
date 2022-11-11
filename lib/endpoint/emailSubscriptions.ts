@@ -3,21 +3,7 @@ import { RestClient } from '../net/RestClient';
 import { DatedInterface } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
 import { Page } from '../pagination';
-
-export type EmailNotificationId =
-  | 'booking'
-  | 'cancelled'
-  | 'collected'
-  | 'collection'
-  | 'complete'
-  | 'custom_quoted_dashboard'
-  | 'digest'
-  | 'in_transit'
-  | 'invoice'
-  | 'self_ship_label'
-  | 'payment'
-  | 'scheduling'
-  | 'eei';
+import { EmailNotificationId } from './emailRules';
 
 export interface EmailSubscription extends DatedInterface {
   id: ArtaID;

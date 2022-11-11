@@ -8,6 +8,7 @@ import { KeysEndpoint } from './endpoint/keys';
 import { AttachmentsEndpoint } from './endpoint/attachment';
 import { WebhookDeliveriesEndpoint } from './endpoint/webhookDeliveries';
 import { UploadsEndpoint } from './endpoint/uploads';
+import { EmailRulesEndpoint } from './endpoint/emailRules';
 
 export interface ArtaConfig {
   host: string;
@@ -31,6 +32,7 @@ export class Arta {
   public attachments: AttachmentsEndpoint;
   public webhook_deliveries: WebhookDeliveriesEndpoint;
   public uploads: UploadsEndpoint;
+  public email_rules: EmailRulesEndpoint;
 
   constructor(apiKey: string, config?: Partial<ArtaConfig>) {
     this.config = Object.assign(defaultConfig, config);
@@ -48,5 +50,6 @@ export class Arta {
     this.attachments = new AttachmentsEndpoint(this.artaClient);
     this.webhook_deliveries = new WebhookDeliveriesEndpoint(this.artaClient);
     this.uploads = new UploadsEndpoint(this.artaClient);
+    this.email_rules = new EmailRulesEndpoint(this.artaClient);
   }
 }

@@ -20,7 +20,7 @@ describe('tests attachments Arta endpoint', () => {
     endpoint = new AttachmentsEndpoint(clientMock);
   });
 
-  it('should have create, get, delete, list and list all methods', async () => {
+  it('should have get, create, delete and list methods', async () => {
     const requestConfig = { path, clientMock, endpoint };
     const createPayload = { upload_id: 1234, shipment_id: 'an-uuid' };
     await helper.testGet(requestConfig);

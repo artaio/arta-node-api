@@ -35,6 +35,6 @@ describe('tests organization Arta endpoint', () => {
       created_at: new Date(),
     };
     await helper.testGetSingle(responseMock, requestConfig);
-    await helper.testUpdate(updateMock, 'organization', requestConfig);
+    await helper.testUpdateSingle(updateMock, 'organization', requestConfig);
   });
 });

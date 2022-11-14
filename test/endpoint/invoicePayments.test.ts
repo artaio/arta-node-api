@@ -12,8 +12,8 @@ describe('tests payments Arta endpoint', () => {
     id: invoicePaymentId,
     amount: amountStr,
     amount_currency: 'USD',
-    credit_id:  'an-uuid',
-    invoice_id:  'an-uuid',
+    credit_id: 'an-uuid',
+    invoice_id: 'an-uuid',
     payment_id: paymentId,
     shipment_id: 'an-uuid',
     created_at: '2020-10-22T21:12:48.839165',
@@ -38,12 +38,12 @@ describe('tests payments Arta endpoint', () => {
       await helper.testGet(requestConfig);
     });
     it('should parse amount and paid_on fields', async () => {
-        const requestConfig = { path, clientMock, endpoint };
-        const result = await requestConfig.endpoint.getById(invoicePaymentId);
-  
-        expect(result.amount).toEqual(Number(amountStr));
-        expect(result.paid_on).toEqual(new Date(paidOnStr));
-      });
+      const requestConfig = { path, clientMock, endpoint };
+      const result = await requestConfig.endpoint.getById(invoicePaymentId);
+
+      expect(result.amount).toEqual(Number(amountStr));
+      expect(result.paid_on).toEqual(new Date(paidOnStr));
+    });
   });
 
   describe('list', () => {
@@ -59,13 +59,13 @@ describe('tests payments Arta endpoint', () => {
     });
 
     it('should parse amount and paid_on fields', async () => {
-        const requestConfig = { path, clientMock, endpoint };
-        const {
-          items: [result],
-        } = await requestConfig.endpoint.list();
-  
-        expect(result.amount).toEqual(Number(amountStr));
-        expect(result.paid_on).toEqual(new Date(paidOnStr));
-      });
+      const requestConfig = { path, clientMock, endpoint };
+      const {
+        items: [result],
+      } = await requestConfig.endpoint.list();
+
+      expect(result.amount).toEqual(Number(amountStr));
+      expect(result.paid_on).toEqual(new Date(paidOnStr));
+    });
   });
 });

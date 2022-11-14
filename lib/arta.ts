@@ -6,6 +6,7 @@ import { RestClient } from './net/RestClient';
 import { AttachmentsEndpoint } from './endpoint/attachment';
 import { EmailRulesEndpoint } from './endpoint/emailRules';
 import { EmailSubscriptionsEndpoint } from './endpoint/emailSubscriptions';
+import { HostedSessionsEndpoint } from './endpoint/hostedSessions';
 import { InvoicePaymentsEndpoint } from './endpoint/invoicePayments';
 import { KeysEndpoint } from './endpoint/keys';
 import { OrganizationsEndpoint } from './endpoint/organization';
@@ -30,10 +31,10 @@ export class Arta {
   private readonly artaClient: RestClient;
   private readonly config: ArtaConfig;
 
-
   public attachments: AttachmentsEndpoint;
   public email_rules: EmailRulesEndpoint;
   public email_subscriptions: EmailSubscriptionsEndpoint;
+  public hosted_sessions: HostedSessionsEndpoint;
   public invoice_payments: InvoicePaymentsEndpoint;
   public keys: KeysEndpoint;
   public organizations: OrganizationsEndpoint;
@@ -41,7 +42,6 @@ export class Arta {
   public uploads: UploadsEndpoint;
   public webhook_deliveries: WebhookDeliveriesEndpoint;
   public webhooks: WebhooksEndpoint;
-  
 
   constructor(apiKey: string, config?: Partial<ArtaConfig>) {
     this.config = Object.assign(defaultConfig, config);
@@ -56,6 +56,7 @@ export class Arta {
     this.attachments = new AttachmentsEndpoint(this.artaClient);
     this.email_rules = new EmailRulesEndpoint(this.artaClient);
     this.email_subscriptions = new EmailSubscriptionsEndpoint(this.artaClient);
+    this.hosted_sessions = new HostedSessionsEndpoint(this.artaClient);
     this.invoice_payments = new InvoicePaymentsEndpoint(this.artaClient);
     this.keys = new KeysEndpoint(this.artaClient);
     this.organizations = new OrganizationsEndpoint(this.artaClient);

@@ -11,12 +11,18 @@ export interface Attachment extends DatedInterface {
   shipment_id?: NullableString;
 }
 
-export interface AttachmentCreateBody {
+export interface AttachmentCreateBodyRequest {
   upload_id: number;
-  request_id?: NullableString;
-  shipment_id?: NullableString;
+  request_id: string;
+}
+export interface AttachmentCreateBodyShipment {
+  upload_id: number;
+  shipment_id: string;
 }
 
+export type AttachmentCreateBody =
+  | AttachmentCreateBodyRequest
+  | AttachmentCreateBodyShipment;
 export interface AttachmentCreate {
   attachment: AttachmentCreateBody;
 }

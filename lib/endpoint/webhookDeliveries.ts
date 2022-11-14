@@ -1,31 +1,39 @@
 import { ArtaID } from '../ArtaClient';
+import {
+  WebhookDeliveryStatus,
+  WebhookDeliveryType,
+  WebhookResourceType,
+} from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
-import { DatedInterface } from '../utils';
+import { DatedInterface, NullableString } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
 
-export interface WebhookDeliveries extends DatedInterface {
+export interface WebhookDelivery extends DatedInterface {
   id: ArtaID;
   resource_id: number;
-  resource_type: string;
+  resource_type: WebhookResourceType;
   response_status_code: number;
-  status: string;
-  type: string;
+  status: WebhookDeliveryStatus;
+  type: WebhookDeliveryType;
   webhook_id: number;
   webhook_url: string;
+  next_retry?: NullableString;
+  request_body?: NullableString;
+  response_body?: NullableString;
 }
 
 export class WebhookDeliveriesEndpoint {
-  private readonly defaultEndpoint: Endpoint<WebhookDeliveries, never>;
+  private readonly defaultEndpoint: Endpoint<WebhookDelivery, never>;
   private readonly path = '/webhook_deliveries';
   constructor(private readonly artaClient: RestClient) {
-    this.defaultEndpoint = new DefaultEndpoint<WebhookDeliveries, never>(
+    this.defaultEndpoint = new DefaultEndpoint<WebhookDelivery, never>(
       this.path,
       this.artaClient
     );
   }
 
-  public getById(id: ArtaID, auth?: string): Promise<WebhookDeliveries> {
+  public getById(id: ArtaID, auth?: string): Promise<WebhookDelivery> {
     return this.defaultEndpoint.getById(id, auth);
   }
 
@@ -33,7 +41,7 @@ export class WebhookDeliveriesEndpoint {
     page = 1,
     pageSize = 20,
     auth?: string
-  ): Promise<Page<WebhookDeliveries>> {
+  ): Promise<Page<WebhookDelivery>> {
     return this.defaultEndpoint.list(page, pageSize, auth);
   }
 }

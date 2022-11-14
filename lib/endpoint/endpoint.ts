@@ -19,14 +19,12 @@ export interface Endpoint<T, U> {
 export class DefaultEndpoint<T extends DatedInterface, U>
   implements Endpoint<T, U>
 {
-  private readonly onReturn?: (params: any) => T;
   private readonly path: string;
   constructor(
     path: string,
     private readonly artaClient: RestClient,
-    onReturn?: (params: any) => T
+    private readonly onReturn?: (params: any) => T
   ) {
-    this.onReturn = onReturn;
     this.path = path.startsWith('/') ? path : `/${path}`;
   }
 
@@ -40,9 +38,7 @@ export class DefaultEndpoint<T extends DatedInterface, U>
       `${this.path}?page=${page}&page_size=${pageSize}`,
       auth
     );
-    const items: T[] = body.items.map((item: T) => {
-      return this.processBody(item);
-    });
+    const items: T[] = body.items.map(this.processBody.bind(this));
 
     return { items, metadata: body.metadata };
   }

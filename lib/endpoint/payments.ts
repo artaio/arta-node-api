@@ -1,10 +1,9 @@
 import { ArtaID } from '../ArtaClient';
+import { PaymentContext } from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
 import { DatedInterface } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
-
-export type PaymentContext = 'hosted_checkout' | 'invoiced';
 
 export interface Payment extends DatedInterface {
   id: ArtaID;

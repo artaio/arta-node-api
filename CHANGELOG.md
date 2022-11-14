@@ -1,3 +1,12 @@
+## [0.16.1](https://github.com/artaio/arta-node/compare/v0.16.0...v0.16.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* export base types ([#27](https://github.com/artaio/arta-node/issues/27)) ([4578d69](https://github.com/artaio/arta-node/commit/4578d69e9950963b3f766465c45056057c0b026c))
+
+
+
 # [0.16.0](https://github.com/artaio/arta-node/compare/v0.15.1...v0.16.0) (2022-11-11)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add upload endpoint ([044368b](https://github.com/artaio/arta-node/commit/044368b8bda5e03d053e2f3a5896f5f12423454c))
-
-
-
-# [0.13.0](https://github.com/artaio/arta-node/compare/v0.12.0...v0.13.0) (2022-11-10)
-
-
-### Features
-
-* add webhook deliveries endpoint  ([77e3ed9](https://github.com/artaio/arta-node/commit/77e3ed95d89e1ea98ae15a8680af8a9ed19a52ee))
 
 
 

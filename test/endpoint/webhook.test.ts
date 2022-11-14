@@ -1,5 +1,5 @@
 import { RestClient } from '../../lib/net/RestClient';
-import { WebhooksEndpoint } from '../../lib/endpoint/webhook';
+import { WebhooksEndpoint } from '../../lib/endpoint/webhooks';
 import * as helper from './helper';
 
 describe('tests webhook Arta endpoint', () => {

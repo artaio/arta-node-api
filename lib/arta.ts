@@ -2,7 +2,7 @@ import { ArtaClient } from './ArtaClient';
 import { NodeHttpClient } from './net/NodeHttpClient';
 import { RestClient } from './net/RestClient';
 import { OrganizationsEndpoint } from './endpoint/organization';
-import { WebhooksEndpoint } from './endpoint/webhook';
+import { WebhooksEndpoint } from './endpoint/webhooks';
 import { initLogger, Logger, LoggerVerbosity } from './logging';
 import { KeysEndpoint } from './endpoint/keys';
 import { AttachmentsEndpoint } from './endpoint/attachment';

@@ -1,3 +1,12 @@
+# [0.17.0](https://github.com/artaio/arta-node/compare/v0.16.1...v0.17.0) (2022-11-15)
+
+
+### Features
+
+* adds list and getById actions for Payments resource ([#28](https://github.com/artaio/arta-node/issues/28)) ([09c75e3](https://github.com/artaio/arta-node/commit/09c75e31cbd78849d375d26330a2a07f1caa32f3))
+
+
+
 ## [0.16.1](https://github.com/artaio/arta-node/compare/v0.16.0...v0.16.1) (2022-11-14)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add email rules endpoint ([17c1999](https://github.com/artaio/arta-node/commit/17c1999991486bbcd1139e51fff35bb4fa8dbbaa))
-
-
-
-# [0.14.0](https://github.com/artaio/arta-node/compare/v0.13.0...v0.14.0) (2022-11-11)
-
-
-### Features
-
-* add upload endpoint ([044368b](https://github.com/artaio/arta-node/commit/044368b8bda5e03d053e2f3a5896f5f12423454c))
 
 
 

@@ -3,6 +3,7 @@ import { NodeHttpClient } from './net/NodeHttpClient';
 import { InvoicePaymentsEndpoint } from './endpoint/invoicePayments';
 import { RestClient } from './net/RestClient';
 import { OrganizationsEndpoint } from './endpoint/organization';
+import { PaymentsEndpoint } from './endpoint/payments';
 import { WebhooksEndpoint } from './endpoint/webhooks';
 import { initLogger, Logger, LoggerVerbosity } from './logging';
 import { KeysEndpoint } from './endpoint/keys';
@@ -29,6 +30,7 @@ export class Arta {
   private readonly config: ArtaConfig;
 
   public organizations: OrganizationsEndpoint;
+  public payments: PaymentsEndpoint;
   public webhooks: WebhooksEndpoint;
   public keys: KeysEndpoint;
   public attachments: AttachmentsEndpoint;
@@ -50,6 +52,7 @@ export class Arta {
     });
 
     this.organizations = new OrganizationsEndpoint(this.artaClient);
+    this.payments = new PaymentsEndpoint(this.artaClient);
     this.webhooks = new WebhooksEndpoint(this.artaClient);
     this.keys = new KeysEndpoint(this.artaClient);
     this.attachments = new AttachmentsEndpoint(this.artaClient);

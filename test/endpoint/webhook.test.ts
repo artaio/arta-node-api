@@ -33,7 +33,7 @@ describe('tests webhook Arta endpoint', () => {
 
   it('should be able to call actions from client', async () => {
     await endpoint.ping(4);
-    expect(clientMock.get).toHaveBeenCalledWith('/webhooks/4/ping', undefined);
+    expect(clientMock.post).toHaveBeenCalledWith('/webhooks/4/ping', undefined);
     await endpoint.getSecret(4);
     expect(clientMock.get).toHaveBeenCalledWith(
       '/webhooks/4/secret_token',

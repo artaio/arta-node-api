@@ -18,7 +18,8 @@
   "author": "ARTA <hello@arta.io> (https://arta.io/)",
   "contributors": [
     "Otavio Jacobi <otaviojacobi@gmail.com>",
-    "Marina Boaventura <marina@arta.io>"
+    "Marina Boaventura <marina@arta.io>",
+    "Dylan Fareed <email@dylanfareed.com>"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",

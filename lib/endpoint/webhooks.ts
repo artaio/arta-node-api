@@ -27,7 +27,8 @@ export class WebhooksEndpoint {
   constructor(private readonly artaClient: RestClient) {
     this.defaultEndpoint = new DefaultEndpoint<Webhook, WebhookCreate>(
       this.path,
-      this.artaClient
+      this.artaClient,
+      this.withFunctionCalls.bind(this)
     );
   }
 
@@ -39,39 +40,19 @@ export class WebhooksEndpoint {
   }
 
   public async getById(id: ArtaID, auth?: string): Promise<Webhook> {
-    const baseHook = await this.defaultEndpoint.getById(id, auth);
-    return this.withFunctionCalls(baseHook);
+    return this.defaultEndpoint.getById(id, auth);
   }
 
-  public async list(
-    page = 1,
-    pageSize = 20,
-    auth?: string
-  ): Promise<Page<Webhook>> {
-    const { items, metadata } = await this.defaultEndpoint.list(
-      page,
-      pageSize,
-      auth
-    );
-    return { items: items.map(this.withFunctionCalls), metadata };
+  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Webhook>> {
+    return this.defaultEndpoint.list(page, pageSize, auth);
   }
 
   public listAll(auth?: string): AsyncGenerator<Webhook> {
-    return this.defaultEndpoint.listAll(
-      auth,
-      this.withFunctionCalls.bind(this)
-    );
+    return this.defaultEndpoint.listAll(auth);
   }
 
-  public async create(
-    payload: WebhookCreateBody,
-    auth?: string
-  ): Promise<Webhook> {
-    const baseHook = await this.defaultEndpoint.create(
-      { webhook: payload },
-      auth
-    );
-    return this.withFunctionCalls(baseHook);
+  public create(payload: WebhookCreateBody, auth?: string): Promise<Webhook> {
+    return this.defaultEndpoint.create({ webhook: payload }, auth);
   }
 
   public async update(
@@ -80,8 +61,7 @@ export class WebhooksEndpoint {
     auth?: string
   ): Promise<Webhook> {
     const webhookUpdate = { webhook: payload } as Partial<WebhookCreate>;
-    const baseHook = await this.defaultEndpoint.update(id, webhookUpdate, auth);
-    return this.withFunctionCalls(baseHook);
+    return this.defaultEndpoint.update(id, webhookUpdate, auth);
   }
 
   public remove(id: ArtaID, auth?: string): Promise<void> {
@@ -89,7 +69,7 @@ export class WebhooksEndpoint {
   }
 
   public async ping(id: ArtaID, auth?: string): Promise<void> {
-    await this.artaClient.get(`${this.path}/${id}/ping`, auth);
+    await this.artaClient.post(`${this.path}/${id}/ping`, auth);
     return;
   }
 

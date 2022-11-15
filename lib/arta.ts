@@ -1,17 +1,18 @@
 import { ArtaClient } from './ArtaClient';
-import { NodeHttpClient } from './net/NodeHttpClient';
-import { InvoicePaymentsEndpoint } from './endpoint/invoicePayments';
-import { RestClient } from './net/RestClient';
-import { OrganizationsEndpoint } from './endpoint/organization';
-import { PaymentsEndpoint } from './endpoint/payments';
-import { WebhooksEndpoint } from './endpoint/webhooks';
 import { initLogger, Logger, LoggerVerbosity } from './logging';
-import { KeysEndpoint } from './endpoint/keys';
+import { NodeHttpClient } from './net/NodeHttpClient';
+import { RestClient } from './net/RestClient';
+
 import { AttachmentsEndpoint } from './endpoint/attachment';
-import { WebhookDeliveriesEndpoint } from './endpoint/webhookDeliveries';
-import { UploadsEndpoint } from './endpoint/uploads';
 import { EmailRulesEndpoint } from './endpoint/emailRules';
 import { EmailSubscriptionsEndpoint } from './endpoint/emailSubscriptions';
+import { InvoicePaymentsEndpoint } from './endpoint/invoicePayments';
+import { KeysEndpoint } from './endpoint/keys';
+import { OrganizationsEndpoint } from './endpoint/organization';
+import { PaymentsEndpoint } from './endpoint/payments';
+import { UploadsEndpoint } from './endpoint/uploads';
+import { WebhookDeliveriesEndpoint } from './endpoint/webhookDeliveries';
+import { WebhooksEndpoint } from './endpoint/webhooks';
 
 export interface ArtaConfig {
   host: string;
@@ -29,16 +30,17 @@ export class Arta {
   private readonly artaClient: RestClient;
   private readonly config: ArtaConfig;
 
-  public organizations: OrganizationsEndpoint;
-  public payments: PaymentsEndpoint;
-  public webhooks: WebhooksEndpoint;
-  public keys: KeysEndpoint;
+
   public attachments: AttachmentsEndpoint;
-  public invoice_payments: InvoicePaymentsEndpoint;
-  public webhook_deliveries: WebhookDeliveriesEndpoint;
-  public uploads: UploadsEndpoint;
   public email_rules: EmailRulesEndpoint;
   public email_subscriptions: EmailSubscriptionsEndpoint;
+  public invoice_payments: InvoicePaymentsEndpoint;
+  public keys: KeysEndpoint;
+  public organizations: OrganizationsEndpoint;
+  public payments: PaymentsEndpoint;
+  public uploads: UploadsEndpoint;
+  public webhook_deliveries: WebhookDeliveriesEndpoint;
+  public webhooks: WebhooksEndpoint;
   
 
   constructor(apiKey: string, config?: Partial<ArtaConfig>) {

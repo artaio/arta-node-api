@@ -2,14 +2,18 @@ import { RestClient } from '../../lib/net/RestClient';
 import { PaymentsEndpoint } from '../../lib/endpoint/payments';
 import * as helper from './helper';
 
-describe('tests webhook deliveries Arta endpoint', () => {
+describe('tests payments Arta endpoint', () => {
+  const paymentId = 123;
+  const paidOnStr = '2022-04-05';
+  const amountStr = '3.45';
+
   const responseMock = {
-    id: 123,
-    amount: '3.45',
+    id: paymentId,
+    amount: amountStr,
     amount_currency: 'USD',
     context: 'hosted_checkout',
     created_at: '2020-10-22T21:12:48.839165',
-    paid_on: '2022-04-05',
+    paid_on: paidOnStr,
     updated_at: '2020-10-22T21:12:48.839165',
   };
 
@@ -27,5 +31,13 @@ describe('tests webhook deliveries Arta endpoint', () => {
     const requestConfig = { path, clientMock, endpoint };
     await helper.testGet(requestConfig);
     await helper.testList(responseMock, requestConfig);
+  });
+
+  it('should parse amount and paid_on fields', async () => {
+    const requestConfig = { path, clientMock, endpoint };
+    const result = await requestConfig.endpoint.getById(paymentId);
+
+    expect(result.amount).toEqual(Number(amountStr));
+    expect(result.paid_on).toEqual(new Date(paidOnStr));
   });
 });

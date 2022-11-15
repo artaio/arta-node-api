@@ -6,7 +6,11 @@ import { Page } from '../pagination';
 export interface Endpoint<T, U> {
   list: (page?: number, pageSize?: number, auth?: string) => Promise<Page<T>>;
   listAll: (auth?: string, onReturn?: (params: any) => T) => AsyncGenerator<T>;
-  getById: (id: ArtaID, auth?: string) => Promise<T>;
+  getById: (
+    id: ArtaID,
+    auth?: string,
+    callbackFn?: DefaultEndpointCallback
+  ) => Promise<T>;
   create: (payload: U, auth?: string) => Promise<T>;
   update: (
     id: ArtaID,
@@ -14,6 +18,10 @@ export interface Endpoint<T, U> {
     auth?: string
   ) => Promise<T>;
   remove: (id: ArtaID, auth?: string) => Promise<void>;
+}
+
+interface DefaultEndpointCallback {
+  (result: any): DatedInterface;
 }
 
 export class DefaultEndpoint<T extends DatedInterface, U>
@@ -24,9 +32,17 @@ export class DefaultEndpoint<T extends DatedInterface, U>
     this.path = path.startsWith('/') ? path : `/${path}`;
   }
 
-  public async getById(id: ArtaID, auth?: string): Promise<T> {
+  public async getById(
+    id: ArtaID,
+    auth?: string,
+    callbackFn?: DefaultEndpointCallback
+  ): Promise<T> {
     const req = await this.artaClient.get(`${this.path}/${id}`, auth);
-    return convertDatesToUtc(req) as T;
+    let resource = convertDatesToUtc(req);
+    if (callbackFn) {
+      resource = callbackFn(resource);
+    }
+    return resource as T;
   }
 
   public async list(page = 1, pageSize = 20, auth?: string): Promise<Page<T>> {

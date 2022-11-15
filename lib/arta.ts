@@ -1,5 +1,6 @@
 import { ArtaClient } from './ArtaClient';
 import { NodeHttpClient } from './net/NodeHttpClient';
+import { InvoicePaymentsEndpoint } from './endpoint/invoicePayments';
 import { RestClient } from './net/RestClient';
 import { OrganizationsEndpoint } from './endpoint/organization';
 import { WebhooksEndpoint } from './endpoint/webhooks';
@@ -31,10 +32,12 @@ export class Arta {
   public webhooks: WebhooksEndpoint;
   public keys: KeysEndpoint;
   public attachments: AttachmentsEndpoint;
+  public invoice_payments: InvoicePaymentsEndpoint;
   public webhook_deliveries: WebhookDeliveriesEndpoint;
   public uploads: UploadsEndpoint;
   public email_rules: EmailRulesEndpoint;
   public email_subscriptions: EmailSubscriptionsEndpoint;
+  
 
   constructor(apiKey: string, config?: Partial<ArtaConfig>) {
     this.config = Object.assign(defaultConfig, config);
@@ -50,6 +53,7 @@ export class Arta {
     this.webhooks = new WebhooksEndpoint(this.artaClient);
     this.keys = new KeysEndpoint(this.artaClient);
     this.attachments = new AttachmentsEndpoint(this.artaClient);
+    this.invoice_payments = new InvoicePaymentsEndpoint(this.artaClient);
     this.webhook_deliveries = new WebhookDeliveriesEndpoint(this.artaClient);
     this.uploads = new UploadsEndpoint(this.artaClient);
     this.email_rules = new EmailRulesEndpoint(this.artaClient);

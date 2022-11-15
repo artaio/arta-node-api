@@ -30,7 +30,7 @@ export class PaymentsEndpoint {
   }
 
   public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Payments>> {
-    return this.defaultEndpoint.list(page, pageSize, auth);
+    return this.defaultEndpoint.list(page, pageSize, auth, this.enrichFields);
   }
 
   private enrichFields(resource: Payments): Payments {

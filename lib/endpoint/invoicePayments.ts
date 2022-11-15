@@ -9,6 +9,7 @@ export interface InvoicePayments extends DatedInterface {
   id: ArtaID;
   amount: number;
   amount_currency: string;
+  credit_id:NullableString,
   invoice_id: NullableString;
   paid_on: Date;
   payment_id?: NullableString;
@@ -22,7 +23,8 @@ export class InvoicePaymentsEndpoint {
   constructor(private readonly artaClient: RestClient) {
     this.defaultEndpoint = new DefaultEndpoint<InvoicePayments, never>(
       this.path,
-      this.artaClient
+      this.artaClient,
+      this.enrichFields,
     );
   }
 
@@ -32,6 +34,11 @@ export class InvoicePaymentsEndpoint {
 
   public list(page = 1, pageSize = 20, auth?: string): Promise<Page<InvoicePayments>> {
     return this.defaultEndpoint.list(page, pageSize, auth);
+  }
+  private enrichFields(resource: InvoicePayments): InvoicePayments {
+    resource.amount = Number(resource.amount);
+    resource.paid_on = new Date(resource.paid_on);
+    return resource;
   }
 
 }

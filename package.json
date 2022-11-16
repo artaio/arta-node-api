@@ -19,7 +19,8 @@
   "contributors": [
     "Otavio Jacobi <otaviojacobi@gmail.com>",
     "Marina Boaventura <marina@arta.io>",
-    "Dylan Fareed <email@dylanfareed.com>"
+    "Dylan Fareed <email@dylanfareed.com>",
+    "Selman Uysal <selman@arta.io>"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",

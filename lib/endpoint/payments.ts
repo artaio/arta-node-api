@@ -1,5 +1,5 @@
 import { ArtaID } from '../ArtaClient';
-import { PaymentContext } from '../MetadataTypes';
+import { PaymentContext, SupportedCurrency } from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
 import { DatedInterface } from '../utils';
@@ -8,7 +8,7 @@ import { DefaultEndpoint, Endpoint } from './endpoint';
 export interface Payment extends DatedInterface {
   id: ArtaID;
   amount: number;
-  amount_currency: string;
+  amount_currency: SupportedCurrency;
   context: PaymentContext;
   paid_on: Date;
 }

@@ -266,6 +266,13 @@ export type WebhookDeliveryStatus = 'delivered' | 'failed';
 
 export type PaymentContext = 'hosted_checkout' | 'invoiced';
 
+export type SupportedCurrency = 
+  | 'CAD'
+  | 'EUR'
+  | 'GBP'
+  | 'HKD'
+  | 'USD';
+
 export interface Contact {
   name: string;
   email_address?: NullableString;
@@ -309,5 +316,5 @@ export interface ArtaObject {
   subtype: ObjectType;
   unit_of_measurement?: NullableString;
   weight_unit?: NullableString;
-  value_currency: NullableString;
+  value_currency: Nullable<SupportedCurrency>;
 }

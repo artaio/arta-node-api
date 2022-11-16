@@ -8,11 +8,12 @@ interface RequestTestConfig {
 }
 
 export async function testGet(testConfig: RequestTestConfig) {
-  await testConfig.endpoint.getById(123, testConfig.forwadedAuth);
+  const result = await testConfig.endpoint.getById(123, testConfig.forwadedAuth);
   expect(testConfig.clientMock.get).toHaveBeenCalledWith(
     `/${testConfig.path}/123`,
     testConfig.forwadedAuth
   );
+  return result;
 }
 
 export async function testCreate(
@@ -20,12 +21,13 @@ export async function testCreate(
   insertKey: string,
   testConfig: RequestTestConfig
 ) {
-  await testConfig.endpoint.create(payload, testConfig.forwadedAuth);
+  const result = await testConfig.endpoint.create(payload, testConfig.forwadedAuth);
   expect(testConfig.clientMock.post).toHaveBeenCalledWith(
     `/${testConfig.path}`,
     { [insertKey]: payload },
     testConfig.forwadedAuth
   );
+  return result;
 }
 
 export async function testUpdateSingle(
@@ -33,12 +35,13 @@ export async function testUpdateSingle(
   insertKey: string,
   testConfig: RequestTestConfig
 ) {
-  await testConfig.endpoint.update(payload);
+  const result = await testConfig.endpoint.update(payload);
   expect(testConfig.clientMock.patch).toBeCalledWith(
     `/${testConfig.path}`,
     { [insertKey]: payload },
     testConfig.forwadedAuth
   );
+  return result;
 }
 
 export async function testUpdate(
@@ -46,12 +49,13 @@ export async function testUpdate(
   insertKey: string,
   testConfig: RequestTestConfig
 ) {
-  await testConfig.endpoint.update(123, payload, testConfig.forwadedAuth);
+  const result = await testConfig.endpoint.update(123, payload, testConfig.forwadedAuth);
   expect(testConfig.clientMock.patch).toBeCalledWith(
     `/${testConfig.path}/123`,
     { [insertKey]: payload },
     testConfig.forwadedAuth
   );
+  return result;
 }
 
 export async function testDelete(testConfig: RequestTestConfig) {

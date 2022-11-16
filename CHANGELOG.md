@@ -1,3 +1,12 @@
+# [0.20.0](https://github.com/artaio/arta-node/compare/v0.19.0...v0.20.0) (2022-11-16)
+
+
+### Features
+
+* add hosted sessions endpoint ([#29](https://github.com/artaio/arta-node/issues/29)) ([ec2da15](https://github.com/artaio/arta-node/commit/ec2da158d4b812c15cd46ab70000850764b9aea9))
+
+
+
 # [0.19.0](https://github.com/artaio/arta-node/compare/v0.18.0...v0.19.0) (2022-11-16)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * export base types ([#27](https://github.com/artaio/arta-node/issues/27)) ([4578d69](https://github.com/artaio/arta-node/commit/4578d69e9950963b3f766465c45056057c0b026c))
-
-
-
-# [0.16.0](https://github.com/artaio/arta-node/compare/v0.15.1...v0.16.0) (2022-11-11)
-
-
-### Features
-
-* add email subscriptions endpoint ([#26](https://github.com/artaio/arta-node/issues/26)) ([bc2eedb](https://github.com/artaio/arta-node/commit/bc2eedbf79335be3c1ab2429010982c51c98704e))
 
 
 

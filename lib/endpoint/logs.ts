@@ -5,20 +5,20 @@ import { DatedInterface, NullableString, createDateAsUTC } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
 
 export interface Log extends DatedInterface {
-  api_key_id: number,
-  arta_version: string,
-  end_at: Date,
-  id: ArtaID,
-  created_at: Date,
-  method: string,
-  path: string,
-  query_params: string,
-  request_body?: NullableString,
-  request_id: string,
-  response_body?: NullableString,
-  start_at: Date,
-  status: number,
-  updated_at: Date
+  api_key_id: number;
+  arta_version: string;
+  end_at: Date;
+  id: ArtaID;
+  created_at: Date;
+  method: string;
+  path: string;
+  query_params: string;
+  request_body?: NullableString;
+  request_id: string;
+  response_body?: NullableString;
+  start_at: Date;
+  status: number;
+  updated_at: Date;
 }
 
 export class LogsEndpoint {

@@ -8,7 +8,10 @@ interface RequestTestConfig {
 }
 
 export async function testGet(testConfig: RequestTestConfig) {
-  const result = await testConfig.endpoint.getById(123, testConfig.forwadedAuth);
+  const result = await testConfig.endpoint.getById(
+    123,
+    testConfig.forwadedAuth
+  );
   expect(testConfig.clientMock.get).toHaveBeenCalledWith(
     `/${testConfig.path}/123`,
     testConfig.forwadedAuth
@@ -21,7 +24,10 @@ export async function testCreate(
   insertKey: string,
   testConfig: RequestTestConfig
 ) {
-  const result = await testConfig.endpoint.create(payload, testConfig.forwadedAuth);
+  const result = await testConfig.endpoint.create(
+    payload,
+    testConfig.forwadedAuth
+  );
   expect(testConfig.clientMock.post).toHaveBeenCalledWith(
     `/${testConfig.path}`,
     { [insertKey]: payload },
@@ -49,7 +55,11 @@ export async function testUpdate(
   insertKey: string,
   testConfig: RequestTestConfig
 ) {
-  const result = await testConfig.endpoint.update(123, payload, testConfig.forwadedAuth);
+  const result = await testConfig.endpoint.update(
+    123,
+    payload,
+    testConfig.forwadedAuth
+  );
   expect(testConfig.clientMock.patch).toBeCalledWith(
     `/${testConfig.path}/123`,
     { [insertKey]: payload },

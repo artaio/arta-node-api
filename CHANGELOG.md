@@ -1,3 +1,12 @@
+# [0.19.0](https://github.com/artaio/arta-node/compare/v0.18.0...v0.19.0) (2022-11-16)
+
+
+### Features
+
+* adds list and getById actions for InvoicePayments resource ([#31](https://github.com/artaio/arta-node/issues/31)) ([3e39dd5](https://github.com/artaio/arta-node/commit/3e39dd5792ad477965f0052c3b5ad606b86d645c))
+
+
+
 # [0.18.0](https://github.com/artaio/arta-node/compare/v0.17.0...v0.18.0) (2022-11-16)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add email subscriptions endpoint ([#26](https://github.com/artaio/arta-node/issues/26)) ([bc2eedb](https://github.com/artaio/arta-node/commit/bc2eedbf79335be3c1ab2429010982c51c98704e))
-
-
-
-## [0.15.1](https://github.com/artaio/arta-node/compare/v0.15.0...v0.15.1) (2022-11-11)
-
-
-### Bug Fixes
-
-* remove digest notification id ([b5770c1](https://github.com/artaio/arta-node/commit/b5770c18a8c79afba3a6e82a45fcf346f2db66f8))
 
 
 

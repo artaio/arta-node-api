@@ -1,4 +1,5 @@
 import { ArtaID } from '../ArtaClient';
+import { SupportedCurrency } from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
 import { DatedInterface, NullableString } from '../utils';
@@ -7,7 +8,7 @@ import { DefaultEndpoint, Endpoint } from './endpoint';
 export interface InvoicePayment extends DatedInterface {
   id: ArtaID;
   amount: number;
-  amount_currency: string;
+  amount_currency: SupportedCurrency;
   credit_id: NullableString;
   invoice_id: NullableString;
   paid_on: Date;

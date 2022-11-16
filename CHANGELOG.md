@@ -1,3 +1,12 @@
+# [0.18.0](https://github.com/artaio/arta-node/compare/v0.17.0...v0.18.0) (2022-11-16)
+
+
+### Features
+
+* singularlize Payment type; export Payment and Upload ([#32](https://github.com/artaio/arta-node/issues/32)) ([72f8fff](https://github.com/artaio/arta-node/commit/72f8fff99ff94e7d2bd3c96db3d4885146c29e1a))
+
+
+
 # [0.17.0](https://github.com/artaio/arta-node/compare/v0.16.1...v0.17.0) (2022-11-15)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * remove digest notification id ([b5770c1](https://github.com/artaio/arta-node/commit/b5770c18a8c79afba3a6e82a45fcf346f2db66f8))
-
-
-
-# [0.15.0](https://github.com/artaio/arta-node/compare/v0.14.0...v0.15.0) (2022-11-11)
-
-
-### Features
-
-* add email rules endpoint ([17c1999](https://github.com/artaio/arta-node/commit/17c1999991486bbcd1139e51fff35bb4fa8dbbaa))
 
 
 

@@ -1,3 +1,12 @@
+# [0.21.0](https://github.com/artaio/arta-node/compare/v0.20.0...v0.21.0) (2022-11-16)
+
+
+### Features
+
+* adds logs endpoint ([#33](https://github.com/artaio/arta-node/issues/33)) ([bb5e23e](https://github.com/artaio/arta-node/commit/bb5e23edb72cfcc5c1e42e84765bb8b1d444e2ba))
+
+
+
 # [0.20.0](https://github.com/artaio/arta-node/compare/v0.19.0...v0.20.0) (2022-11-16)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds list and getById actions for Payments resource ([#28](https://github.com/artaio/arta-node/issues/28)) ([09c75e3](https://github.com/artaio/arta-node/commit/09c75e31cbd78849d375d26330a2a07f1caa32f3))
-
-
-
-## [0.16.1](https://github.com/artaio/arta-node/compare/v0.16.0...v0.16.1) (2022-11-14)
-
-
-### Bug Fixes
-
-* export base types ([#27](https://github.com/artaio/arta-node/issues/27)) ([4578d69](https://github.com/artaio/arta-node/commit/4578d69e9950963b3f766465c45056057c0b026c))
 
 
 

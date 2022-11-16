@@ -6,7 +6,7 @@ import { DefaultEndpoint, Endpoint } from './endpoint';
 
 export type PaymentContext = 'hosted_checkout' | 'invoiced';
 
-export interface Payments extends DatedInterface {
+export interface Payment extends DatedInterface {
   id: ArtaID;
   amount: number;
   amount_currency: string;
@@ -15,25 +15,25 @@ export interface Payments extends DatedInterface {
 }
 
 export class PaymentsEndpoint {
-  private readonly defaultEndpoint: Endpoint<Payments, never>;
+  private readonly defaultEndpoint: Endpoint<Payment, never>;
   private readonly path = '/payments';
   constructor(private readonly artaClient: RestClient) {
-    this.defaultEndpoint = new DefaultEndpoint<Payments, never>(
+    this.defaultEndpoint = new DefaultEndpoint<Payment, never>(
       this.path,
       this.artaClient,
       this.enrichFields
     );
   }
 
-  public getById(id: ArtaID, auth?: string): Promise<Payments> {
+  public getById(id: ArtaID, auth?: string): Promise<Payment> {
     return this.defaultEndpoint.getById(id, auth);
   }
 
-  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Payments>> {
+  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Payment>> {
     return this.defaultEndpoint.list(page, pageSize, auth);
   }
 
-  private enrichFields(resource: Payments): Payments {
+  private enrichFields(resource: Payment): Payment {
     resource.amount = Number(resource.amount);
     resource.paid_on = new Date(resource.paid_on);
     return resource;

@@ -53,15 +53,15 @@ export class Arta {
       host: this.config.host,
     });
 
-    this.organizations = new OrganizationsEndpoint(this.artaClient);
-    this.payments = new PaymentsEndpoint(this.artaClient);
-    this.webhooks = new WebhooksEndpoint(this.artaClient);
-    this.keys = new KeysEndpoint(this.artaClient);
     this.attachments = new AttachmentsEndpoint(this.artaClient);
-    this.invoice_payments = new InvoicePaymentsEndpoint(this.artaClient);
-    this.webhook_deliveries = new WebhookDeliveriesEndpoint(this.artaClient);
-    this.uploads = new UploadsEndpoint(this.artaClient);
     this.email_rules = new EmailRulesEndpoint(this.artaClient);
     this.email_subscriptions = new EmailSubscriptionsEndpoint(this.artaClient);
+    this.invoice_payments = new InvoicePaymentsEndpoint(this.artaClient);
+    this.keys = new KeysEndpoint(this.artaClient);
+    this.organizations = new OrganizationsEndpoint(this.artaClient);
+    this.payments = new PaymentsEndpoint(this.artaClient);
+    this.uploads = new UploadsEndpoint(this.artaClient);
+    this.webhook_deliveries = new WebhookDeliveriesEndpoint(this.artaClient);
+    this.webhooks = new WebhooksEndpoint(this.artaClient);
   }
 }

@@ -7,13 +7,13 @@ import { Page } from '../pagination';
 export interface Key extends DatedInterface {
   id: ArtaID;
   is_testing: boolean;
-  name: NullableString;
+  name?: NullableString;
   token: string;
 }
 
 export interface KeyCreateBody {
   is_testing: boolean;
-  name?: string;
+  name?: NullableString;
 }
 
 export interface KeyCreate {

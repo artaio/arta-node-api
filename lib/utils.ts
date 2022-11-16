@@ -17,7 +17,7 @@ export function createDateAsUTC(dateStr: string) {
   return new Date(timestamp);
 }
 
-export function convertDatesToUtc(artaResponse: any): DatedInterface {
+export function convertDatesToUtc(artaResponse: any): any {
   if (artaResponse.updated_at) {
     artaResponse.updated_at = createDateAsUTC(artaResponse.updated_at);
   }

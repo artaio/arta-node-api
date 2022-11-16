@@ -4,12 +4,11 @@ import { Page } from '../pagination';
 import { DatedInterface, NullableString } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
 
-
 export interface InvoicePayment extends DatedInterface {
   id: ArtaID;
   amount: number;
   amount_currency: string;
-  credit_id:NullableString,
+  credit_id: NullableString;
   invoice_id: NullableString;
   paid_on: Date;
   payment_id?: NullableString;
@@ -24,7 +23,7 @@ export class InvoicePaymentsEndpoint {
     this.defaultEndpoint = new DefaultEndpoint<InvoicePayment, never>(
       this.path,
       this.artaClient,
-      this.enrichFields,
+      this.enrichFields
     );
   }
 
@@ -32,7 +31,11 @@ export class InvoicePaymentsEndpoint {
     return this.defaultEndpoint.getById(id, auth);
   }
 
-  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<InvoicePayment>> {
+  public list(
+    page = 1,
+    pageSize = 20,
+    auth?: string
+  ): Promise<Page<InvoicePayment>> {
     return this.defaultEndpoint.list(page, pageSize, auth);
   }
   private enrichFields(resource: InvoicePayment): InvoicePayment {
@@ -40,5 +43,4 @@ export class InvoicePaymentsEndpoint {
     resource.paid_on = new Date(resource.paid_on);
     return resource;
   }
-
 }

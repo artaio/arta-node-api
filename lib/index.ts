@@ -10,4 +10,4 @@ export { Organization } from './endpoint/organization';
 export { Payment } from './endpoint/payments';
 export { Upload } from './endpoint/uploads';
 export { Webhook } from './endpoint/webhooks';
-export { WebhookDeliveries } from './endpoint/webhookDeliveries';
+export { WebhookDelivery } from './endpoint/webhookDeliveries';

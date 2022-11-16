@@ -43,3 +43,6 @@ myEndpoint.ping().then(console.log);
 ## Contributing
 
 Please be aware of our zero-dependency policy and ensure that there are no packages under "dependencies" in the `package.json`. Dev dependencies are fine, as these will not be contained in the final published package.
+
+### Development
+To develop a new function on the SDK, run `npm install` to install all the dependencies (only dev dependencies) and then run `npm run build` and the compiled JS code will be stored in the `dist/` folder which is the folder with the content published to NPM.

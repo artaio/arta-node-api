@@ -1,3 +1,12 @@
+# [0.23.0](https://github.com/artaio/arta-node/compare/v0.22.0...v0.23.0) (2022-11-17)
+
+
+### Features
+
+* adds trackings endpoint ([#35](https://github.com/artaio/arta-node/issues/35)) ([3298089](https://github.com/artaio/arta-node/commit/3298089ed9437b56b121aaa2925b22aab8689611))
+
+
+
 # [0.22.0](https://github.com/artaio/arta-node/compare/v0.21.0...v0.22.0) (2022-11-17)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds list and getById actions for InvoicePayments resource ([#31](https://github.com/artaio/arta-node/issues/31)) ([3e39dd5](https://github.com/artaio/arta-node/commit/3e39dd5792ad477965f0052c3b5ad606b86d645c))
-
-
-
-# [0.18.0](https://github.com/artaio/arta-node/compare/v0.17.0...v0.18.0) (2022-11-16)
-
-
-### Features
-
-* singularlize Payment type; export Payment and Upload ([#32](https://github.com/artaio/arta-node/issues/32)) ([72f8fff](https://github.com/artaio/arta-node/commit/72f8fff99ff94e7d2bd3c96db3d4885146c29e1a))
 
 
 

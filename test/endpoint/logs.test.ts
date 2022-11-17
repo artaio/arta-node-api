@@ -17,7 +17,7 @@ describe('tests logs Arta endpoint', () => {
     response_body: '',
     start_at: '2020-10-23T20:34:16.928374',
     status: 200,
-    updated_at: '2020-10-23T20:34:29.066599'
+    updated_at: '2020-10-23T20:34:29.066599',
   };
   const path = 'logs';
   let clientMock: RestClient;
@@ -31,7 +31,7 @@ describe('tests logs Arta endpoint', () => {
 
   it('should have get and list methods', async () => {
     const requestConfig = { path, clientMock, endpoint };
-    const listMock: any = {...responseMock};
+    const listMock: any = { ...responseMock };
     delete listMock['request_body'];
     delete listMock['response_body'];
     const getResult = await helper.testGet(requestConfig);

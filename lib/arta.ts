@@ -8,6 +8,7 @@ import { EmailRulesEndpoint } from './endpoint/emailRules';
 import { EmailSubscriptionsEndpoint } from './endpoint/emailSubscriptions';
 import { HostedSessionsEndpoint } from './endpoint/hostedSessions';
 import { InvoicePaymentsEndpoint } from './endpoint/invoicePayments';
+import { InvoicesEndpoint } from './endpoint/invoices';
 import { KeysEndpoint } from './endpoint/keys';
 import { LogsEndpoint } from './endpoint/logs';
 import { OrganizationsEndpoint } from './endpoint/organization';
@@ -37,6 +38,7 @@ export class Arta {
   public email_subscriptions: EmailSubscriptionsEndpoint;
   public hosted_sessions: HostedSessionsEndpoint;
   public invoice_payments: InvoicePaymentsEndpoint;
+  public invoices: InvoicesEndpoint;
   public keys: KeysEndpoint;
   public logs: LogsEndpoint;
   public organizations: OrganizationsEndpoint;
@@ -60,6 +62,7 @@ export class Arta {
     this.email_subscriptions = new EmailSubscriptionsEndpoint(this.artaClient);
     this.hosted_sessions = new HostedSessionsEndpoint(this.artaClient);
     this.invoice_payments = new InvoicePaymentsEndpoint(this.artaClient);
+    this.invoices = new InvoicesEndpoint(this.artaClient);
     this.keys = new KeysEndpoint(this.artaClient);
     this.logs = new LogsEndpoint(this.artaClient);
     this.organizations = new OrganizationsEndpoint(this.artaClient);

@@ -1,3 +1,12 @@
+# [0.22.0](https://github.com/artaio/arta-node/compare/v0.21.0...v0.22.0) (2022-11-17)
+
+
+### Features
+
+* adds invoices endpoint ([#34](https://github.com/artaio/arta-node/issues/34)) ([5a218c0](https://github.com/artaio/arta-node/commit/5a218c087234e5a02cc9a8e2eb5d37c038baf7e1))
+
+
+
 # [0.21.0](https://github.com/artaio/arta-node/compare/v0.20.0...v0.21.0) (2022-11-16)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * singularlize Payment type; export Payment and Upload ([#32](https://github.com/artaio/arta-node/issues/32)) ([72f8fff](https://github.com/artaio/arta-node/commit/72f8fff99ff94e7d2bd3c96db3d4885146c29e1a))
-
-
-
-# [0.17.0](https://github.com/artaio/arta-node/compare/v0.16.1...v0.17.0) (2022-11-15)
-
-
-### Features
-
-* adds list and getById actions for Payments resource ([#28](https://github.com/artaio/arta-node/issues/28)) ([09c75e3](https://github.com/artaio/arta-node/commit/09c75e31cbd78849d375d26330a2a07f1caa32f3))
 
 
 

@@ -30,7 +30,7 @@ export type AccessRestriction =
 
 export type Insurance = 'arta_transit_insurance' | 'no_arta_insurance';
 export type PaymentProcessType = 'checkout' | 'checkout_direct' | 'invoicing';
-export type Quote = 'parcel' | 'premium' | 'select' | 'self_ship';
+export type QuoteType = 'parcel' | 'premium' | 'select' | 'self_ship';
 export type QuoteRequestStatus =
   | 'cancelled'
   | 'closed'
@@ -260,6 +260,42 @@ export type WebhookDeliveryType =
   | 'shipment.tracking.updated'
   | 'ping';
 
+export type ObjectMaterial =
+  | 'stone_marble'
+  | 'precious_stones'
+  | 'fiber_synthetic'
+  | 'fabric_natural'
+  | 'taxidermy'
+  | 'carbon_fiber'
+  | 'live_animal'
+  | 'paper'
+  | 'glass'
+  | 'presious_metals'
+  | 'particleboard'
+  | 'styrofoam'
+  | 'wood'
+  | 'photo_film'
+  | 'sand'
+  | 'metal'
+  | 'plexiglass'
+  | 'aquatic_life'
+  | 'canvas'
+  | 'drywall'
+  | 'hard_plastic'
+  | 'vinyl'
+  | 'soft_plastic'
+  | 'leather'
+  | 'rubber'
+  | 'concreate'
+  | 'paint'
+  | 'electronics'
+  | 'fiber_natural'
+  | 'gas'
+  | 'fabric_synthetic'
+  | 'CITES'
+  | 'liquids'
+  | 'salts';
+
 export type WebhookResourceType = 'ping' | 'request' | 'shipment';
 
 export type WebhookDeliveryStatus = 'delivered' | 'failed';
@@ -288,7 +324,7 @@ export interface ArtaLocation {
 }
 
 export type Details = {
-  materials?: Nullable<string[]>;
+  materials?: Nullable<ObjectMaterial[]>;
   creation_date?: NullableString;
   creator?: NullableString;
   notes?: NullableString;
@@ -298,7 +334,7 @@ export type Details = {
 };
 
 export interface ArtaObject {
-  internal_reference?: Nullable<string>;
+  internal_reference?: NullableString;
   current_packing?: Nullable<PackingType[]>;
   details?: Nullable<Details>;
   height: number | string;
@@ -311,5 +347,11 @@ export interface ArtaObject {
   subtype: ObjectType;
   unit_of_measurement?: NullableString;
   weight_unit?: NullableString;
-  value_currency: Nullable<SupportedCurrency>;
+  value_currency: SupportedCurrency;
+}
+
+export interface Disqualification {
+  quote_types: QuoteType[];
+  reason?: NullableString;
+  reason_code: string;
 }

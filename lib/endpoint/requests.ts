@@ -3,6 +3,10 @@ import {
   AdditionalService,
   ArtaLocation,
   ArtaObject,
+  ArtaTrackingServiceSubSubType,
+  ArtaTrackingServiceSubType,
+  ArtaTrackingServiceType,
+  Contact,
   Disqualification,
   Insurance,
   PaymentProcessType,
@@ -30,9 +34,9 @@ export interface ArtaService {
   is_requested: boolean;
   is_required: boolean;
   name: string;
-  sub_subtype: string;
-  subtype: string;
-  type: string;
+  sub_subtype: ArtaTrackingServiceSubSubType;
+  subtype: ArtaTrackingServiceSubType;
+  type: ArtaTrackingServiceType;
 }
 
 export interface Quote {
@@ -71,6 +75,15 @@ export interface QuoteRequest extends DatedInterface {
   shortcode: string;
   quotes: Quote[];
   status: QuoteRequestStatus;
+  updateContacts: (
+    contacts: UpdateRequestsContactsBody,
+    auth?: string
+  ) => Promise<QuoteRequest>;
+  requireCustomQuotes: (
+    customQuote: CustomQuotePayload,
+    auth?: string
+  ) => Promise<QuoteRequest>;
+  cancel: (auth?: string) => Promise<QuoteRequest>;
 }
 
 export interface QuoteRequestCreateBody {
@@ -90,6 +103,15 @@ export interface QuoteRequestCreate {
   request: QuoteRequestCreateBody;
 }
 
+export interface UpdateRequestsContactsBody {
+  origin?: Nullable<Contact[]>;
+  destination?: Nullable<Contact[]>;
+}
+
+export interface CustomQuotePayload {
+  note: string;
+}
+
 export class QuoteRequestsEndpoint {
   private readonly defaultEndpoint: Endpoint<QuoteRequest, QuoteRequestCreate>;
   private readonly path = '/requests';
@@ -101,21 +123,32 @@ export class QuoteRequestsEndpoint {
   }
 
   private enrichFields(resource: any): QuoteRequest {
-
     const parseService = (s: any) => {
       s.amount = Number(s.amount);
-      if(s.included_services) {
+      if (s.included_services) {
         s.included_services.forEach(parseService);
       }
     };
 
-    resource.quotes && resource.quotes.forEach(
-      (q: any) => {
+    resource.quotes &&
+      resource.quotes.forEach((q: any) => {
         q.total = Number(q.total);
         q.included_services.forEach(parseService);
         q.optional_services.forEach(parseService);
-      }
-    );
+      });
+
+    resource.updateContacts = (
+      contacts: UpdateRequestsContactsBody,
+      auth?: string
+    ) => this.updateContacts(resource.id, contacts, auth);
+
+    resource.requireCustomQuotes = (
+      customQuote: CustomQuotePayload,
+      auth?: string
+    ) => this.requireCustomQuotes(resource.id, customQuote, auth);
+
+    resource.cancel = (auth?: string) => this.cancel(resource.id, auth);
+
     return resource;
   }
 
@@ -136,5 +169,40 @@ export class QuoteRequestsEndpoint {
     auth?: string
   ): Promise<QuoteRequest> {
     return this.defaultEndpoint.create({ request: payload }, auth);
+  }
+
+  public async updateContacts(
+    id: ArtaID,
+    contacts: UpdateRequestsContactsBody,
+    auth?: string
+  ): Promise<QuoteRequest> {
+    const rawReq = await this.artaClient.patch(
+      `${this.path}/${id}/contacts`,
+      contacts,
+      auth
+    );
+    return this.enrichFields(rawReq);
+  }
+
+  public async requireCustomQuotes(
+    id: ArtaID,
+    customQuote: CustomQuotePayload,
+    auth?: string
+  ): Promise<QuoteRequest> {
+    const rawReq = await this.artaClient.patch(
+      `${this.path}/${id}/custom`,
+      customQuote,
+      auth
+    );
+    return this.enrichFields(rawReq);
+  }
+
+  public async cancel(id: ArtaID, auth?: string): Promise<QuoteRequest> {
+    const rawReq = await this.artaClient.patch(
+      `${this.path}/${id}/cancel`,
+      undefined,
+      auth
+    );
+    return this.enrichFields(rawReq);
   }
 }

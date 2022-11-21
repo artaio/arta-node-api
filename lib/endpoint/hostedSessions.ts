@@ -7,7 +7,7 @@ import {
   ArtaObject,
   Insurance,
   PaymentProcessType,
-  Quote,
+  QuoteType,
   QuoteRequestStatus,
 } from '../MetadataTypes';
 import {
@@ -27,7 +27,7 @@ export interface HostedSession extends DatedInterface {
   internal_reference?: NullableString;
   objects: ArtaObject[];
   origin: ArtaLocation;
-  preferred_quote_types?: Nullable<Quote[]>;
+  preferred_quote_types?: Nullable<QuoteType[]>;
   public_reference?: NullableString;
   shipping_notes?: NullableString;
   success_url?: NullableString;
@@ -47,7 +47,7 @@ export interface HostedSessionCreateBody {
   internal_reference?: NullableString;
   objects: ArtaObject[];
   origin: ArtaLocation;
-  preferred_quote_types?: Nullable<Quote[]>;
+  preferred_quote_types?: Nullable<QuoteType[]>;
   public_reference?: NullableString;
   shipping_notes?: NullableString;
   success_url?: NullableString;

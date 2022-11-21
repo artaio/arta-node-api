@@ -14,7 +14,7 @@ describe('tests logs Arta endpoint', () => {
     issued_on: '2021-03-10',
     shipment_id: '53d6bdec-1eae-46e2-97c2-3e56b1a1095d',
     status: 'closed',
-    updated_at: '2021-03-10T20:16:10.202836'
+    updated_at: '2021-03-10T20:16:10.202836',
   };
   const path = 'invoices';
   let clientMock: RestClient;
@@ -34,6 +34,5 @@ describe('tests logs Arta endpoint', () => {
     expect(getResult.amount_owed).toBe(276.91);
     expect(getResult.amount_paid).toBe(276.91);
     expect(getResult.issued_on.toISOString()).toBe('2021-03-10T00:00:00.000Z');
-
   });
 });

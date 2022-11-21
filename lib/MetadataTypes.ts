@@ -30,7 +30,7 @@ export type AccessRestriction =
 
 export type Insurance = 'arta_transit_insurance' | 'no_arta_insurance';
 export type PaymentProcessType = 'checkout' | 'checkout_direct' | 'invoicing';
-export type Quote = 'parcel' | 'premium' | 'select' | 'self_ship';
+export type QuoteType = 'parcel' | 'premium' | 'select' | 'self_ship';
 export type QuoteRequestStatus =
   | 'cancelled'
   | 'closed'
@@ -260,6 +260,243 @@ export type WebhookDeliveryType =
   | 'shipment.tracking.updated'
   | 'ping';
 
+export type ObjectMaterial =
+  | 'stone_marble'
+  | 'precious_stones'
+  | 'fiber_synthetic'
+  | 'fabric_natural'
+  | 'taxidermy'
+  | 'carbon_fiber'
+  | 'live_animal'
+  | 'paper'
+  | 'glass'
+  | 'presious_metals'
+  | 'particleboard'
+  | 'styrofoam'
+  | 'wood'
+  | 'photo_film'
+  | 'sand'
+  | 'metal'
+  | 'plexiglass'
+  | 'aquatic_life'
+  | 'canvas'
+  | 'drywall'
+  | 'hard_plastic'
+  | 'vinyl'
+  | 'soft_plastic'
+  | 'leather'
+  | 'rubber'
+  | 'concreate'
+  | 'paint'
+  | 'electronics'
+  | 'fiber_natural'
+  | 'gas'
+  | 'fabric_synthetic'
+  | 'CITES'
+  | 'liquids'
+  | 'salts';
+
+export type ArtaTrackingServiceType =
+  | 'transport'
+  | 'location'
+  | 'handling'
+  | 'packing'
+  | 'storage'
+  | 'administration'
+  | 'taxes_duties_fees'
+  | 'security'
+  | 'equipment';
+
+export type ArtaTrackingServiceSubType =
+  | 'specialized'
+  | 'consolidated'
+  | 'freight'
+  | 'parcel'
+  | 'collection'
+  | 'delivery'
+  | 'location'
+  | 'unpacking'
+  | 'condition'
+  | 'installation'
+  | 'deinstallation'
+  | 'debris_disposal'
+  | 'site_visit'
+  | 'handling'
+  | 'packing'
+  | 'packing_materials'
+  | 'receive_release'
+  | 'warehouse'
+  | 'customs'
+  | 'coi'
+  | 'administration'
+  | 'taxes_duties'
+  | 'fees'
+  | 'security'
+  | 'equipment';
+
+export type ArtaTrackingServiceSubSubType =
+  | 'armored_transport'
+  | 'dedicated_transport'
+  | 'specialized_shuttle'
+  | 'road_groupage'
+  | 'sea_groupage'
+  | 'sea_freight'
+  | 'ltl_freight'
+  | 'ftl_freight'
+  | 'air_freight'
+  | 'cargo_air_freight'
+  | 'parcel'
+  | 'priority_freight'
+  | 'economy_freight'
+  | 'collection'
+  | 'art_fair_collection'
+  | 'residential_collection'
+  | 'airport_collection'
+  | 'port_collection'
+  | 'dock_collection'
+  | 'consolidated_collection'
+  | 'failed_collection'
+  | 'recollection'
+  | 'delivery'
+  | 'inside_delivery'
+  | 'art_fair_delivery'
+  | 'room_of_choice_delivery'
+  | 'curbside_delivery'
+  | 'residential_delivery'
+  | 'signature_delivery'
+  | 'saturday_delivery'
+  | 'sunday_delivery'
+  | 'scheduled_delivery'
+  | 'after_hours_delivery'
+  | 'airport_delivery'
+  | 'port_delivery'
+  | 'dock_delivery'
+  | 'failed_delivery'
+  | 'redelivery'
+  | 'origin_additional_stops'
+  | 'destination_additional_stops'
+  | 'origin_off_route'
+  | 'destination_off_route'
+  | 'must_fly'
+  | 'origin_unpacking_soft'
+  | 'destination_unpacking_soft'
+  | 'origin_unpacking_wood'
+  | 'destination_unpacking_wood'
+  | 'origin_unpacking'
+  | 'destination_unpacking'
+  | 'origin_full_condition_report'
+  | 'destination_full_condition_report'
+  | 'origin_condition_check'
+  | 'destination_condition_check'
+  | 'installation'
+  | 'placement'
+  | 'assembly'
+  | 'deinstallation'
+  | 'disassembly'
+  | 'debris_disposal'
+  | 'crate_disposal'
+  | 'soft_packed_disposal'
+  | 'origin_site_visit'
+  | 'destination_site_visit'
+  | 'origin_additional_labor'
+  | 'destination_additional_labor'
+  | 'airport_handling'
+  | 'origin_oversized_handling'
+  | 'destination_oversized_handling'
+  | 'origin_additional_stairs'
+  | 'destination_additional_stairs'
+  | 'packing_labor'
+  | 'crate_fabrication'
+  | 't_frame_fabrication'
+  | 'fabrication'
+  | 'retrofitting'
+  | 'additional_packing'
+  | 'pack_into'
+  | 'poly'
+  | 'dartek'
+  | 'bubble'
+  | 'cling_wrap'
+  | 'cbin_communal'
+  | 'blanket'
+  | 'portfolio'
+  | 'poly_cardboard'
+  | 'bubble_cardboard'
+  | 'rug_rolled'
+  | 'cbin_closed'
+  | 'cbin_open'
+  | 'garment_bag'
+  | 'wardrobe_box'
+  | 'cardboard_box'
+  | 'chandelier_box'
+  | 'chair_box'
+  | 'slipcase'
+  | 'glass_tape'
+  | 'stabilizing_box'
+  | 'shadow_box'
+  | 'foam_lined_box'
+  | 'cavity_box'
+  | 'strongbox'
+  | 'double_box'
+  | 'shipping_tube_small'
+  | 'shipping_tube_large'
+  | 'sonotube'
+  | 'alcohol_case'
+  | 'lay_flat_wine_box'
+  | 'lockbox'
+  | 'travel_frame'
+  | 'travel_frame_art'
+  | 'travel_frame_other'
+  | 'a_frame'
+  | 'slat_crate'
+  | 'tri_wall_crate'
+  | 'ply_box'
+  | 'fine_art_econo_crate'
+  | 'fine_art_international_crate'
+  | 'econo_crate'
+  | 'international_econo_crate'
+  | 'furniture_crate'
+  | 'international_furniture_crate'
+  | 'parcel_crate'
+  | 'museum_crate'
+  | 'international_museum_crate'
+  | 'pallet'
+  | 'international_pallet'
+  | 'warehouse_handling'
+  | 'receive_in_fee'
+  | 'release_fee'
+  | 'storage'
+  | 'temp_storage'
+  | 'viewing_room'
+  | 'staging'
+  | 'import_customs_formalities'
+  | 'export_customs_formalities'
+  | 'origin_building_coi'
+  | 'destination_building_coi'
+  | 'double_blind_bols'
+  | 'power_of_attorney'
+  | 'administrative'
+  | 'mpf'
+  | 'bond'
+  | 'duties'
+  | 'taxes'
+  | 'disbursement'
+  | 'temporary_customs_entry'
+  | 'fuel_surcharge'
+  | 'tarmac_supervision'
+  | 'courier_onboard'
+  | 'fork_lift'
+  | 'gantry'
+  | 'pallet_jack'
+  | 'scaffolding'
+  | 'rigging'
+  | 'lift_gate'
+  | 'ramp'
+  | 'floor_protection';
+
+export type DisqualificationReasonCode =
+  | 'external_service_unavailable'
+  | 'client_timeout_reached';
+
 export type WebhookResourceType = 'ping' | 'request' | 'shipment';
 
 export type WebhookDeliveryStatus = 'delivered' | 'failed';
@@ -288,7 +525,7 @@ export interface ArtaLocation {
 }
 
 export type Details = {
-  materials?: Nullable<string[]>;
+  materials?: Nullable<ObjectMaterial[]>;
   creation_date?: NullableString;
   creator?: NullableString;
   notes?: NullableString;
@@ -298,7 +535,7 @@ export type Details = {
 };
 
 export interface ArtaObject {
-  internal_reference?: Nullable<string>;
+  internal_reference?: NullableString;
   current_packing?: Nullable<PackingType[]>;
   details?: Nullable<Details>;
   height: number | string;
@@ -311,5 +548,11 @@ export interface ArtaObject {
   subtype: ObjectType;
   unit_of_measurement?: NullableString;
   weight_unit?: NullableString;
-  value_currency: Nullable<SupportedCurrency>;
+  value_currency: SupportedCurrency;
+}
+
+export interface Disqualification {
+  quote_types: QuoteType[];
+  reason?: NullableString;
+  reason_code: DisqualificationReasonCode;
 }

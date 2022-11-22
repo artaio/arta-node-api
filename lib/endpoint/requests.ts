@@ -3,12 +3,11 @@ import {
   AdditionalService,
   ArtaLocation,
   ArtaObject,
-  ArtaTrackingServiceSubSubType,
-  ArtaTrackingServiceSubType,
-  ArtaTrackingServiceType,
+  ArtaService,
   Contact,
   Disqualification,
   Insurance,
+  InsurancePolicy,
   PaymentProcessType,
   QuoteRequestStatus,
   QuoteType,
@@ -16,33 +15,18 @@ import {
 } from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
-import { DatedInterface, Nullable, NullableString } from '../utils';
+import {
+  DatedInterface,
+  Nullable,
+  NullableString,
+  parseService,
+} from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
-
-export interface IncludedInsurancePolicy {
-  amount: number;
-  amount_currency: SupportedCurrency;
-  id: string;
-  insured_value: number;
-  insured_value_currency: SupportedCurrency;
-}
-
-export interface ArtaService {
-  amount: number;
-  amount_currency: SupportedCurrency;
-  included_services: ArtaService[];
-  is_requested: boolean;
-  is_required: boolean;
-  name: string;
-  sub_subtype: ArtaTrackingServiceSubSubType;
-  subtype: ArtaTrackingServiceSubType;
-  type: ArtaTrackingServiceType;
-}
 
 export interface Quote {
   id: number;
   included_services: ArtaService[];
-  included_insurance_policy?: Nullable<IncludedInsurancePolicy>;
+  included_insurance_policy?: Nullable<InsurancePolicy>;
   optional_services: ArtaService[];
   quote_type: QuoteType;
   status: string;
@@ -123,13 +107,6 @@ export class QuoteRequestsEndpoint {
   }
 
   private enrichFields(resource: any): QuoteRequest {
-    const parseService = (s: any) => {
-      s.amount = Number(s.amount);
-      if (s.included_services) {
-        s.included_services.forEach(parseService);
-      }
-    };
-
     resource.quotes &&
       resource.quotes.forEach((q: any) => {
         q.total = Number(q.total);

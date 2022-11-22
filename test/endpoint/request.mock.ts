@@ -1,23 +1,21 @@
 export const createPayload = {
-  request: {
-    destination: {
-      postal_code: '90024',
-      country: 'US',
+  destination: {
+    postal_code: '90024',
+    country: 'US',
+  },
+  objects: [
+    {
+      subtype: 'painting_unframed',
+      width: 36,
+      height: 24,
+      weight: 1,
+      value: 100,
+      value_currency: 'USD',
     },
-    objects: [
-      {
-        subtype: 'painting_unframed',
-        width: 36,
-        height: 24,
-        weight: 1,
-        value: 100,
-        value_currency: 'USD',
-      },
-    ],
-    origin: {
-      country: 'US',
-      postal_code: '11249',
-    },
+  ],
+  origin: {
+    country: 'US',
+    postal_code: '11249',
   },
 };
 

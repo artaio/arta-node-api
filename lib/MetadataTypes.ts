@@ -497,6 +497,31 @@ export type DisqualificationReasonCode =
   | 'external_service_unavailable'
   | 'client_timeout_reached';
 
+export type PackageStatus =
+  | 'pending'
+  | 'transit'
+  | 'out_for_delivery'
+  | 'delivered'
+  | 'unknown'
+  | 'notfound'
+  | 'undelivered'
+  | 'exception'
+  | 'expired';
+
+export type EEIFormStatus =
+  | 'pending'
+  | 'cleared'
+  | 'approved'
+  | 'rejected'
+  | 'submitted';
+
+export type ShipmentStatus =
+  | 'pending'
+  | 'confirmed'
+  | 'collected'
+  | 'in_transit'
+  | 'completed';
+
 export type WebhookResourceType = 'ping' | 'request' | 'shipment';
 
 export type WebhookDeliveryStatus = 'delivered' | 'failed';
@@ -555,4 +580,24 @@ export interface Disqualification {
   quote_types: QuoteType[];
   reason?: NullableString;
   reason_code: DisqualificationReasonCode;
+}
+
+export interface InsurancePolicy {
+  amount: number;
+  amount_currency: SupportedCurrency;
+  id: string;
+  insured_value: number;
+  insured_value_currency: SupportedCurrency;
+}
+
+export interface ArtaService {
+  amount: number;
+  amount_currency: SupportedCurrency;
+  included_services: ArtaService[];
+  is_requested: boolean;
+  is_required: boolean;
+  name: string;
+  sub_subtype: ArtaTrackingServiceSubSubType;
+  subtype: ArtaTrackingServiceSubType;
+  type: ArtaTrackingServiceType;
 }

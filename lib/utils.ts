@@ -27,3 +27,10 @@ export function convertDatesToUtc(artaResponse: any): any {
 
 export type Nullable<T> = T | null;
 export type NullableString = Nullable<string>;
+
+export const parseService = (s: any): void => {
+  s.amount = Number(s.amount);
+  if (s.included_services) {
+    s.included_services.forEach(parseService);
+  }
+};

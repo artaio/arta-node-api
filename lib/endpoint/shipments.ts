@@ -6,7 +6,7 @@ import {
   EEIFormStatus,
   InsurancePolicy,
   PackageStatus,
-  PackingType,
+  PackingSubType,
   PaymentProcessType,
   QuoteType,
   ShipmentStatus,
@@ -30,7 +30,7 @@ export interface Package {
   id: number;
   is_sufficiently_packed: boolean;
   objects: ArtaObject[];
-  packing_materials: PackingType[];
+  packing_materials: PackingSubType[];
   status: Nullable<PackageStatus>;
   unit_of_measurement?: NullableString;
   weight: number;

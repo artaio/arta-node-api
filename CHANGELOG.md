@@ -1,3 +1,12 @@
+# [0.24.0](https://github.com/artaio/arta-node/compare/v0.23.0...v0.24.0) (2022-11-22)
+
+
+### Features
+
+* adds shipments endpoint ([#37](https://github.com/artaio/arta-node/issues/37)) ([cab8322](https://github.com/artaio/arta-node/commit/cab8322a601c527f214cb10b4487398c71b33edc))
+
+
+
 # [0.23.0](https://github.com/artaio/arta-node/compare/v0.22.0...v0.23.0) (2022-11-17)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add hosted sessions endpoint ([#29](https://github.com/artaio/arta-node/issues/29)) ([ec2da15](https://github.com/artaio/arta-node/commit/ec2da158d4b812c15cd46ab70000850764b9aea9))
-
-
-
-# [0.19.0](https://github.com/artaio/arta-node/compare/v0.18.0...v0.19.0) (2022-11-16)
-
-
-### Features
-
-* adds list and getById actions for InvoicePayments resource ([#31](https://github.com/artaio/arta-node/issues/31)) ([3e39dd5](https://github.com/artaio/arta-node/commit/3e39dd5792ad477965f0052c3b5ad606b86d645c))
 
 
 

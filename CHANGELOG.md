@@ -1,3 +1,12 @@
+# [0.25.0](https://github.com/artaio/arta-node/compare/v0.24.0...v0.25.0) (2022-11-23)
+
+
+### Features
+
+* metadata endpoint ([#38](https://github.com/artaio/arta-node/issues/38)) ([7ec1b30](https://github.com/artaio/arta-node/commit/7ec1b30ceb7d7dae328c0b7039e64cbacf53aa12))
+
+
+
 # [0.24.0](https://github.com/artaio/arta-node/compare/v0.23.0...v0.24.0) (2022-11-22)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds logs endpoint ([#33](https://github.com/artaio/arta-node/issues/33)) ([bb5e23e](https://github.com/artaio/arta-node/commit/bb5e23edb72cfcc5c1e42e84765bb8b1d444e2ba))
-
-
-
-# [0.20.0](https://github.com/artaio/arta-node/compare/v0.19.0...v0.20.0) (2022-11-16)
-
-
-### Features
-
-* add hosted sessions endpoint ([#29](https://github.com/artaio/arta-node/issues/29)) ([ec2da15](https://github.com/artaio/arta-node/commit/ec2da158d4b812c15cd46ab70000850764b9aea9))
 
 
 

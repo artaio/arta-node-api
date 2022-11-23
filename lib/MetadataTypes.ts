@@ -87,6 +87,28 @@ export type DocumentType =
 
 export type PackingType =
   | 'alcohol_case'
+  | 'blanket'
+  | 'box'
+  | 'cbin_closed'
+  | 'cbin_open'
+  | 'crate'
+  | 'foam_lined_box'
+  | 'frame'
+  | 'lockbox'
+  | 'no_packing'
+  | 'pallet'
+  | 'portfolio'
+  | 'rug_roll'
+  | 'shadow_box'
+  | 'slipcase'
+  | 'soft_packing'
+  | 'soft_wrap'
+  | 'sonotube'
+  | 'stabilizing_box'
+  | 'tube';
+
+export type PackingSubType =
+  | 'alcohol_case'
   | 'lay_flat_wine_box'
   | 'blanket'
   | 'wardrobe_box'
@@ -138,6 +160,17 @@ export type PackingType =
   | 'shipping_tube_large';
 
 export type ObjectType =
+  | 'art'
+  | 'furniture'
+  | 'jewelry'
+  | 'decorative_arts'
+  | 'collectibles'
+  | 'alcohol'
+  | 'automotive'
+  | 'fashion'
+  | 'other';
+
+export type ObjectSubType =
   | 'painting_unframed'
   | 'painting_framed'
   | 'painting_framed_plexi'
@@ -249,6 +282,16 @@ export type ObjectType =
   | 'hunting_fishing'
   | 'medical_equipment'
   | 'other';
+
+export type ParcelTransportServices =
+  | 'economy'
+  | 'economy_freight'
+  | 'ground'
+  | 'next_day_air'
+  | 'priority'
+  | 'priority_freight'
+  | 'second_day_air'
+  | 'standard';
 
 export type WebhookDeliveryType =
   | 'request.created'
@@ -530,6 +573,10 @@ export type PaymentContext = 'hosted_checkout' | 'invoiced';
 
 export type SupportedCurrency = 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
 
+export type AuthTypes = 'api_key';
+
+export type APIStatus = 'active' | 'beta' | 'deprecated';
+
 export interface Contact {
   name: string;
   email_address?: NullableString;
@@ -561,7 +608,7 @@ export type Details = {
 
 export interface ArtaObject {
   internal_reference?: NullableString;
-  current_packing?: Nullable<PackingType[]>;
+  current_packing?: Nullable<PackingSubType[]>;
   details?: Nullable<Details>;
   height: number | string;
   width: number | string;
@@ -570,7 +617,7 @@ export interface ArtaObject {
   depth?: Nullable<number | string>;
   images?: Nullable<string[]>;
   public_reference?: string;
-  subtype: ObjectType;
+  subtype: ObjectSubType;
   unit_of_measurement?: NullableString;
   weight_unit?: NullableString;
   value_currency: SupportedCurrency;

@@ -14,11 +14,12 @@ describe('tests hosted session Arta endpoint', () => {
     endpoint = new HostedSessionsEndpoint(clientMock);
   });
 
-  it('should have get, create, and list methods', async () => {
+  it('should have get, create, list and list with search methods ', async () => {
     const requestConfig = { path, clientMock, endpoint };
     await helper.testGet(requestConfig);
     await helper.testCreate(createPayload, 'hosted_session', requestConfig);
     await helper.testList(responseMock, requestConfig);
+    await helper.testListWithSearch(responseMock, requestConfig);
   });
 
   it('should have a cancel method', async () => {

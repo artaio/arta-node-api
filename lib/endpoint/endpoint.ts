@@ -2,9 +2,14 @@ import { ArtaID } from '../ArtaClient';
 import { RestClient } from '../net/RestClient';
 import { convertDatesToUtc, DatedInterface } from '../utils';
 import { Page } from '../pagination';
+import {
+  defaultQueryParams,
+  parseQueryParams,
+  QueryParameters,
+} from '../queryParams';
 
 export interface Endpoint<T, U> {
-  list: (page?: number, pageSize?: number, auth?: string) => Promise<Page<T>>;
+  list: (queryParam?: QueryParameters, auth?: string) => Promise<Page<T>>;
   listAll: (auth?: string, onReturn?: (params: any) => T) => AsyncGenerator<T>;
   getById: (id: ArtaID, auth?: string) => Promise<T>;
   create: (payload: U, auth?: string) => Promise<T>;
@@ -33,11 +38,13 @@ export class DefaultEndpoint<T extends DatedInterface, U>
     return this.processBody(req);
   }
 
-  public async list(page = 1, pageSize = 20, auth?: string): Promise<Page<T>> {
-    const body = await this.artaClient.get(
-      `${this.path}?page=${page}&page_size=${pageSize}`,
-      auth
-    );
+  public async list(
+    queryParam?: QueryParameters,
+    auth?: string
+  ): Promise<Page<T>> {
+    const toUseQueryParam = queryParam ?? defaultQueryParams;
+    const queryParams = parseQueryParams(toUseQueryParam);
+    const body = await this.artaClient.get(`${this.path}${queryParams}`, auth);
     const items: T[] = body.items.map(this.processBody.bind(this));
 
     return { items, metadata: body.metadata };

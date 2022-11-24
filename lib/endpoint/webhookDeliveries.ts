@@ -42,6 +42,6 @@ export class WebhookDeliveriesEndpoint {
     pageSize = 20,
     auth?: string
   ): Promise<Page<WebhookDelivery>> {
-    return this.defaultEndpoint.list(page, pageSize, auth);
+    return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
 }

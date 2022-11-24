@@ -15,11 +15,12 @@ describe('tests quote requests Arta endpoint', () => {
     endpoint = new ShipmentsEndpoint(clientMock);
   });
 
-  it('should have get, create, and list methods', async () => {
+  it('should have get, create, list and list with search methods', async () => {
     const requestConfig = { path, clientMock, endpoint };
     const result = await helper.testGet(requestConfig);
     await helper.testCreate(createPayload, 'shipment', requestConfig);
     await helper.testList(responseMock, requestConfig);
+    await helper.testListWithSearch(responseMock, requestConfig);
 
     expect(result.packages[0].depth).toBe(6);
     expect(result.packages[0].height).toBe(14.5);

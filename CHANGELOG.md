@@ -1,3 +1,12 @@
+# [0.26.0](https://github.com/artaio/arta-node/compare/v0.25.0...v0.26.0) (2022-11-24)
+
+
+### Features
+
+* adds search to shipments, hostedSessions and requests ([#39](https://github.com/artaio/arta-node/issues/39)) ([be74530](https://github.com/artaio/arta-node/commit/be745302eae352238b9db0943809afcdfd37874a))
+
+
+
 # [0.25.0](https://github.com/artaio/arta-node/compare/v0.24.0...v0.25.0) (2022-11-23)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds invoices endpoint ([#34](https://github.com/artaio/arta-node/issues/34)) ([5a218c0](https://github.com/artaio/arta-node/commit/5a218c087234e5a02cc9a8e2eb5d37c038baf7e1))
-
-
-
-# [0.21.0](https://github.com/artaio/arta-node/compare/v0.20.0...v0.21.0) (2022-11-16)
-
-
-### Features
-
-* adds logs endpoint ([#33](https://github.com/artaio/arta-node/issues/33)) ([bb5e23e](https://github.com/artaio/arta-node/commit/bb5e23edb72cfcc5c1e42e84765bb8b1d444e2ba))
 
 
 

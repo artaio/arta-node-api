@@ -1,6 +1,6 @@
 {
   "name": "arta-node",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "description": "The Arta Node library provides a seamless integration to Arta API for applications running on Node.js using both Typescript or Javascript.",
   "scripts": {
     "build": "tsc -p tsconfig-build.json",

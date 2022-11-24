@@ -35,7 +35,7 @@ export class InvoicesEndpoint {
   }
 
   public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Invoice>> {
-    return this.defaultEndpoint.list(page, pageSize, auth);
+    return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
 
   private enrichFields(resource: Invoice): Invoice {

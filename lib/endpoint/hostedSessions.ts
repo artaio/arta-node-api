@@ -17,6 +17,7 @@ import {
   NullableString,
 } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
+import { HostedSessionsSearch } from '../search';
 
 export interface HostedSession extends DatedInterface {
   id: ArtaID;
@@ -81,11 +82,15 @@ export class HostedSessionsEndpoint {
   }
 
   public list(
+    search?: HostedSessionsSearch,
     page = 1,
     pageSize = 20,
     auth?: string
   ): Promise<Page<HostedSession>> {
-    return this.defaultEndpoint.list(page, pageSize, auth);
+    return this.defaultEndpoint.list(
+      { page, page_size: pageSize, search },
+      auth
+    );
   }
 
   public create(

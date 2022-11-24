@@ -93,6 +93,24 @@ export async function testList(payload: any, testConfig: RequestTestConfig) {
   );
 }
 
+export async function testListWithSearch(
+  payload: any,
+  testConfig: RequestTestConfig
+) {
+  const apiResponse = {
+    items: [payload],
+    metadata: { page: 1, page_size: 5, total_size: 6 },
+  };
+  testConfig.clientMock.get = jest.fn().mockReturnValueOnce(apiResponse);
+  expect(await testConfig.endpoint.list('my-search')).toEqual(apiResponse);
+  expect(testConfig.clientMock.get).toHaveBeenCalledWith(
+    `/${testConfig.path}?page=1&page_size=20&search=my-search`,
+    undefined
+  );
+}
+
+testListWithSearch;
+
 export async function testListAll(payload: any, testConfig: RequestTestConfig) {
   testConfig.clientMock.get = jest
     .fn()

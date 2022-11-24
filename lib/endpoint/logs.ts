@@ -37,7 +37,7 @@ export class LogsEndpoint {
   }
 
   public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Log>> {
-    return this.defaultEndpoint.list(page, pageSize, auth);
+    return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
 
   private enrichFields(resource: any): Log {

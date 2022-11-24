@@ -42,7 +42,7 @@ describe('tests default Arta endpoint', () => {
       .fn()
       .mockReturnValueOnce({ items: [mockResponse] });
     const endpoint = new DefaultEndpoint<T1, T2>('/test', artaClientMock);
-    await endpoint.list(2, 10);
+    await endpoint.list({ page: 2, page_size: 10 });
     expect(artaClientMock.get).toHaveBeenCalledWith(
       `/test?page=2&page_size=10`,
       undefined

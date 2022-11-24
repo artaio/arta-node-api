@@ -46,7 +46,7 @@ export class AttachmentsEndpoint {
     pageSize = 20,
     auth?: string
   ): Promise<Page<Attachment>> {
-    return this.defaultEndpoint.list(page, pageSize, auth);
+    return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
 
   public create(

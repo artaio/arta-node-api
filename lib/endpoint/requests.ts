@@ -15,6 +15,7 @@ import {
 } from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
+import { RequestsSearch } from '../search';
 import {
   DatedInterface,
   Nullable,
@@ -134,11 +135,15 @@ export class QuoteRequestsEndpoint {
   }
 
   public list(
+    search?: RequestsSearch,
     page = 1,
     pageSize = 20,
     auth?: string
   ): Promise<Page<QuoteRequest>> {
-    return this.defaultEndpoint.list(page, pageSize, auth);
+    return this.defaultEndpoint.list(
+      { page, page_size: pageSize, search },
+      auth
+    );
   }
 
   public create(

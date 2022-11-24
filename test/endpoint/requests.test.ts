@@ -19,6 +19,7 @@ describe('tests quote requests Arta endpoint', () => {
     const result = await helper.testGet(requestConfig);
     await helper.testCreate(createPayload, 'request', requestConfig);
     await helper.testList(responseMock, requestConfig);
+    await helper.testListWithSearch(responseMock, requestConfig);
 
     expect(result.quotes[0].optional_services[0].amount).toBe(1.0);
     expect(

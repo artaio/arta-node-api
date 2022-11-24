@@ -14,6 +14,7 @@ import {
 } from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
+import { ShipmentsSearch } from '../search';
 import {
   DatedInterface,
   Nullable,
@@ -128,8 +129,16 @@ export class ShipmentsEndpoint {
     return this.defaultEndpoint.getById(id, auth);
   }
 
-  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Shipment>> {
-    return this.defaultEndpoint.list(page, pageSize, auth);
+  public list(
+    search?: ShipmentsSearch,
+    page = 1,
+    pageSize = 20,
+    auth?: string
+  ): Promise<Page<Shipment>> {
+    return this.defaultEndpoint.list(
+      { page, page_size: pageSize, search },
+      auth
+    );
   }
 
   public create(payload: ShipmentCreateBody, auth?: string): Promise<Shipment> {

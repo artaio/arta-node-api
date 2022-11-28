@@ -11,6 +11,9 @@
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   },
+  "types": "dist/lib/index.d.ts",
+  "module": "dist/lib/index.js",
+  "main": "dist/lib/index.js",
   "files": [
     "dist/"
   ],

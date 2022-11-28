@@ -11,6 +11,7 @@ import { InvoicePaymentsEndpoint } from './endpoint/invoicePayments';
 import { InvoicesEndpoint } from './endpoint/invoices';
 import { KeysEndpoint } from './endpoint/keys';
 import { LogsEndpoint } from './endpoint/logs';
+import { MetadataEndpoint } from './endpoint/metadata';
 import { OrganizationsEndpoint } from './endpoint/organization';
 import { PaymentsEndpoint } from './endpoint/payments';
 import { UploadsEndpoint } from './endpoint/uploads';
@@ -19,7 +20,6 @@ import { WebhooksEndpoint } from './endpoint/webhooks';
 import { TrackingsEndpoint } from './endpoint/trackings';
 import { QuoteRequestsEndpoint } from './endpoint/requests';
 import { ShipmentsEndpoint } from './endpoint/shipments';
-import { MetadataEndpoint } from './endpoint/metadata';
 
 export interface ArtaConfig {
   host: string;

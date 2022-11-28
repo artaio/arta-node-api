@@ -1,3 +1,12 @@
+## [0.26.1](https://github.com/artaio/arta-node/compare/v0.26.0...v0.26.1) (2022-11-28)
+
+
+### Bug Fixes
+
+* adds missing metadata call ([#40](https://github.com/artaio/arta-node/issues/40)) ([b0f8a2e](https://github.com/artaio/arta-node/commit/b0f8a2ec5bde6d81c9ff52c52621dabebb354a42))
+
+
+
 # [0.26.0](https://github.com/artaio/arta-node/compare/v0.25.0...v0.26.0) (2022-11-24)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds trackings endpoint ([#35](https://github.com/artaio/arta-node/issues/35)) ([3298089](https://github.com/artaio/arta-node/commit/3298089ed9437b56b121aaa2925b22aab8689611))
-
-
-
-# [0.22.0](https://github.com/artaio/arta-node/compare/v0.21.0...v0.22.0) (2022-11-17)
-
-
-### Features
-
-* adds invoices endpoint ([#34](https://github.com/artaio/arta-node/issues/34)) ([5a218c0](https://github.com/artaio/arta-node/commit/5a218c087234e5a02cc9a8e2eb5d37c038baf7e1))
 
 
 

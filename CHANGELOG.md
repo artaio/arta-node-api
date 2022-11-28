@@ -1,3 +1,12 @@
+# [0.27.0](https://github.com/artaio/arta-node/compare/v0.26.1...v0.27.0) (2022-11-28)
+
+
+### Features
+
+* improves exposed types and npm bundling ([#41](https://github.com/artaio/arta-node/issues/41)) ([3f1c1f4](https://github.com/artaio/arta-node/commit/3f1c1f433c88b5d7e3c6545fb07d0cf9e2d96f8d))
+
+
+
 ## [0.26.1](https://github.com/artaio/arta-node/compare/v0.26.0...v0.26.1) (2022-11-28)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds shipments endpoint ([#37](https://github.com/artaio/arta-node/issues/37)) ([cab8322](https://github.com/artaio/arta-node/commit/cab8322a601c527f214cb10b4487398c71b33edc))
-
-
-
-# [0.23.0](https://github.com/artaio/arta-node/compare/v0.22.0...v0.23.0) (2022-11-17)
-
-
-### Features
-
-* adds trackings endpoint ([#35](https://github.com/artaio/arta-node/issues/35)) ([3298089](https://github.com/artaio/arta-node/commit/3298089ed9437b56b121aaa2925b22aab8689611))
 
 
 

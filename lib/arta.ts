@@ -19,6 +19,7 @@ import { WebhooksEndpoint } from './endpoint/webhooks';
 import { TrackingsEndpoint } from './endpoint/trackings';
 import { QuoteRequestsEndpoint } from './endpoint/requests';
 import { ShipmentsEndpoint } from './endpoint/shipments';
+import { MetadataEndpoint } from './endpoint/metadata';
 
 export interface ArtaConfig {
   host: string;
@@ -44,6 +45,7 @@ export class Arta {
   public invoices: InvoicesEndpoint;
   public keys: KeysEndpoint;
   public logs: LogsEndpoint;
+  public metadata: MetadataEndpoint;
   public organizations: OrganizationsEndpoint;
   public payments: PaymentsEndpoint;
   public requests: QuoteRequestsEndpoint;
@@ -71,6 +73,7 @@ export class Arta {
     this.invoices = new InvoicesEndpoint(this.artaClient);
     this.keys = new KeysEndpoint(this.artaClient);
     this.logs = new LogsEndpoint(this.artaClient);
+    this.metadata = new MetadataEndpoint(this.artaClient);
     this.organizations = new OrganizationsEndpoint(this.artaClient);
     this.payments = new PaymentsEndpoint(this.artaClient);
     this.requests = new QuoteRequestsEndpoint(this.artaClient);

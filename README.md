@@ -13,31 +13,29 @@ Please refer to [Arta official documentation](https://api-reference.arta.io/).
 ### 1. Install Arta Node Library
 
 ```
-$ npm install arta-node
+$ npm install @artaio/node-api
 ```
 
 ### 2. Use it to interact with our API in pure JS
 ```js
-const { Arta } = require('arta-node');
+const { Arta } = require('@artaio/node-api');
 const arta = new Arta('<YOUR_API_TOKEN>');
 
-const endpoints = arta.endpoint.list();
+const { items } = arta.webhooks.list();
+const myHook = items[0];
 
-const myEndpoint = endpoint[0];
-
-myEndpoint.ping().then(console.log);
+myHook.ping().then(console.log);
 ```
 
 ### 3. Use it to interact with our API in TS
 ```ts
-import { Arta } from 'arta-node';
+import { Arta, Webhook } from '@artaio/node-api';
 const arta: Arta = new Arta('<YOUR_API_TOKEN>');
 
-const endpoints: ArtaEndpoint[] = arta.endpoint.list();
+const { items } = arta.webhooks.list();
+const myHook: Webhook = items[0];
 
-const myEndpoint: ArtaEndpoint = endpoint[0];
-
-myEndpoint.ping().then(console.log);
+myHook.ping().then(console.log);
 ```
 
 ## Contributing

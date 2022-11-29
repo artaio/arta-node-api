@@ -1,5 +1,5 @@
 {
-  "name": "arta-node",
+  "name": "@artaio/node-api",
   "version": "0.27.0",
   "description": "The Arta Node library provides a seamless integration to Arta API for applications running on Node.js using both Typescript or Javascript.",
   "scripts": {
@@ -17,6 +17,11 @@
   "files": [
     "dist/"
   ],
+  "homepage": "https://github.com/artaio/arta-node-api",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/artaio/arta-node-api.git"
+  },
   "keywords": [],
   "author": "ARTA <hello@arta.io> (https://arta.io/)",
   "contributors": [
@@ -45,5 +50,9 @@
     "prettier": "2.7.1",
     "ts-jest": "^29.0.3",
     "typescript": "^4.8.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/artaio/arta-node-api/issues"
+  },
+  "license": "MIT"
 }

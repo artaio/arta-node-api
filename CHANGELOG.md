@@ -1,3 +1,12 @@
+# [0.29.0](https://github.com/artaio/arta-node-api/compare/v0.28.0...v0.29.0) (2022-11-29)
+
+
+### Features
+
+* improve docs ([#43](https://github.com/artaio/arta-node-api/issues/43)) ([5ccedd6](https://github.com/artaio/arta-node-api/commit/5ccedd6b3adce4479d056987c202f349ac1fa086))
+
+
+
 # [0.28.0](https://github.com/artaio/arta-node-api/compare/v0.27.0...v0.28.0) (2022-11-29)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * adds search to shipments, hostedSessions and requests ([#39](https://github.com/artaio/arta-node-api/issues/39)) ([be74530](https://github.com/artaio/arta-node-api/commit/be745302eae352238b9db0943809afcdfd37874a))
-
-
-
-# [0.25.0](https://github.com/artaio/arta-node-api/compare/v0.24.0...v0.25.0) (2022-11-23)
-
-
-### Features
-
-* metadata endpoint ([#38](https://github.com/artaio/arta-node-api/issues/38)) ([7ec1b30](https://github.com/artaio/arta-node-api/commit/7ec1b30ceb7d7dae328c0b7039e64cbacf53aa12))
 
 
 

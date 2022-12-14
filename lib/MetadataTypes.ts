@@ -594,6 +594,9 @@ export interface ArtaLocation {
   country: string;
   title?: NullableString;
   contacts?: Nullable<Contact[]>;
+  estimated_country?: string;
+  estimated_region?: string;
+  estimated_city?: string;
 }
 
 export type Details = {
@@ -647,4 +650,15 @@ export interface ArtaService {
   sub_subtype: ArtaTrackingServiceSubSubType;
   subtype: ArtaTrackingServiceSubType;
   type: ArtaTrackingServiceType;
+}
+
+export interface Quote {
+  id: number;
+  included_services: ArtaService[];
+  included_insurance_policy?: Nullable<InsurancePolicy>;
+  optional_services: ArtaService[];
+  quote_type: QuoteType;
+  status: string;
+  total: number;
+  total_currency: SupportedCurrency;
 }

@@ -28,7 +28,6 @@ export { WebhookDelivery } from './endpoint/webhookDeliveries';
 export { Webhook, WebhookCreate } from './endpoint/webhooks';
 export { Tracking, TrackingEvent, Carrier } from './endpoint/trackings';
 export {
-  Quote,
   QuoteRequest,
   QuoteRequestCreateBody,
   UpdateRequestsContactsBody,
@@ -41,4 +40,3 @@ export {
   Shipment,
   ShipmentCreateBody,
 } from './endpoint/shipments';
-

@@ -3,12 +3,11 @@ import {
   AdditionalService,
   ArtaLocation,
   ArtaObject,
-  ArtaService,
   Contact,
   Disqualification,
   Insurance,
-  InsurancePolicy,
   PaymentProcessType,
+  Quote,
   QuoteRequestStatus,
   QuoteType,
   SupportedCurrency,
@@ -23,17 +22,6 @@ import {
   parseService,
 } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
-
-export interface Quote {
-  id: number;
-  included_services: ArtaService[];
-  included_insurance_policy?: Nullable<InsurancePolicy>;
-  optional_services: ArtaService[];
-  quote_type: QuoteType;
-  status: string;
-  total: number;
-  total_currency: SupportedCurrency;
-}
 
 export interface QuoteRequest extends DatedInterface {
   id: ArtaID;

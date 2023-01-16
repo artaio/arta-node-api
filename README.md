@@ -1,3 +1,7 @@
+### Pre-release notice
+
+arta-node-api is in a pre-release beta. The package's API is unstable and expected to change prior to public release. Please only make use of the package in coordination with ARTA during this period.
+
 Arta Node.js Library
 ===
 

@@ -10,6 +10,7 @@ import {
   PaymentProcessType,
   QuoteType,
   ShipmentStatus,
+  ShipmentExceptionTypeId,
   SupportedCurrency,
 } from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
@@ -39,6 +40,17 @@ export interface Package {
   width: number;
 }
 
+export type ShipmentExceptionStatus = 'in_progress' | 'new' | 'resolved';
+
+export interface ShipmentException extends DatedInterface {
+  exception_type_label: NullableString;
+  id: ArtaID;
+  package_id: Nullable<number>;
+  resolution: NullableString;
+  status: ShipmentExceptionStatus;
+  type: ShipmentExceptionTypeId;
+}
+
 export interface ShipmentSchedule {
   delivery_end: Nullable<Date>;
   delivery_start: Nullable<Date>;
@@ -60,6 +72,9 @@ export interface Shipment extends DatedInterface {
   id: ArtaID;
   destination: ArtaLocation;
   eei_form_status?: Nullable<EEIFormStatus>;
+  emissions?: Nullable<number>;
+  emissions_unit?: NullableString;
+  exceptions?: Nullable<ShipmentException[]>;
   hosted_session_id?: Nullable<number>;
   insurance_policy?: Nullable<InsurancePolicy>;
   internal_reference?: NullableString;
@@ -106,6 +121,11 @@ export class ShipmentsEndpoint {
 
   private enrichFields(r: any): Shipment {
     r.total = Number(r.total);
+
+    if (r.emissions) {
+      r.emissions = Number(r.emissions);
+    }
+
     if (r.schedule) {
       r.schedule.delivery_end = new Date(r.schedule.delivery_end);
       r.schedule.delivery_start = new Date(r.schedule.delivery_start);

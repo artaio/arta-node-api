@@ -339,6 +339,23 @@ export type ObjectMaterial =
   | 'liquids'
   | 'salts';
 
+export type ShipmentExceptionTypeId =
+  | 'change_of_address_request'
+  | 'customs_information_required'
+  | 'damaged_items'
+  | 'direct_payment_required'
+  | 'held_at_customs'
+  | 'inaccurate_object_details'
+  | 'incorrect_address'
+  | 'lost_in_transit'
+  | 'not_ready_for_delivery'
+  | 'not_ready_for_release'
+  | 'other'
+  | 'prepayment_required'
+  | 'requested_hold_to_collect'
+  | 'requested_hold_to_deliver'
+  | 'wrong_item';
+
 export type ArtaTrackingServiceType =
   | 'transport'
   | 'location'

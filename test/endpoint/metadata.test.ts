@@ -77,6 +77,12 @@ describe('tests logs Arta endpoint', () => {
     await endpoint.services();
     expect(clientMock.get).lastCalledWith(`/${path}/services`, undefined);
 
+    await endpoint.shipmentExceptionTypes();
+    expect(clientMock.get).lastCalledWith(
+      `/${path}/shipment_exception_types`,
+      undefined
+    );
+
     await endpoint.shipmentStatuses();
     expect(clientMock.get).lastCalledWith(
       `/${path}/shipment_statuses`,

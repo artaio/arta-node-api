@@ -1,3 +1,12 @@
+# [0.30.0](https://github.com/artaio/arta-node-api/compare/v0.29.3...v0.30.0) (2023-05-03)
+
+
+### Features
+
+* adds emissions and exceptions to shipment response ([#48](https://github.com/artaio/arta-node-api/issues/48)) ([0e817ee](https://github.com/artaio/arta-node-api/commit/0e817eeebbd97c7a46f903e1c803bf431be3d15a))
+
+
+
 ## [0.29.3](https://github.com/artaio/arta-node-api/compare/v0.29.2...v0.29.3) (2023-01-16)
 
 

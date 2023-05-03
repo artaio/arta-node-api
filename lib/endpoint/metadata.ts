@@ -18,6 +18,7 @@ import {
   QuoteRequestStatus,
   QuoteType,
   Recipients,
+  ShipmentExceptionTypeId,
   ShipmentStatus,
   SupportedCurrency,
 } from '../MetadataTypes';
@@ -40,6 +41,12 @@ export interface EmailNotificationMetadata {
   description: string;
   optional_recipients: Recipients;
   id: EmailNotificationId;
+}
+
+export interface ShipmentExceptionTypeMetadata {
+  id: ShipmentExceptionTypeId;
+  name: string;
+  resolutions: string[];
 }
 
 export interface BaseMetadata<T> {
@@ -154,6 +161,12 @@ export class MetadataEndpoint {
 
   public services(auth?: string): Promise<ServicesMetadata[]> {
     return this.artaClient.get(`${this.path}/services`, auth);
+  }
+
+  public shipmentExceptionTypes(
+    auth?: string
+  ): Promise<ShipmentExceptionTypeMetadata[]> {
+    return this.artaClient.get(`${this.path}/shipment_exception_types`, auth);
   }
 
   public shipmentStatuses(auth?: string): Promise<ShipmentStatusesMetadata[]> {

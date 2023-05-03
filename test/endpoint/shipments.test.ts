@@ -4,7 +4,7 @@ import { RestClient } from '../../lib/net/RestClient';
 import * as helper from './helper';
 import { createPayload, responseMock } from './shipments.mock';
 
-describe('tests quote requests Arta endpoint', () => {
+describe('tests shipments Arta endpoint', () => {
   const path = 'shipments';
   let clientMock: RestClient;
   let endpoint: ShipmentsEndpoint;
@@ -21,6 +21,10 @@ describe('tests quote requests Arta endpoint', () => {
     await helper.testCreate(createPayload, 'shipment', requestConfig);
     await helper.testList(responseMock, requestConfig);
     await helper.testListWithSearch(responseMock, requestConfig);
+
+    expect(result.emissions).toBe(19.35);
+
+    expect(result.exceptions[0].type).toBe('customs_information_required');
 
     expect(result.packages[0].depth).toBe(6);
     expect(result.packages[0].height).toBe(14.5);

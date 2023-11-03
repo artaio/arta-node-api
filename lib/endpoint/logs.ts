@@ -21,6 +21,11 @@ export interface Log extends DatedInterface {
   updated_at: Date;
 }
 
+export interface UnparsedLog extends Omit<Log, 'start_at' | 'end_at'> {
+  start_at: string;
+  end_at: string;
+}
+
 export class LogsEndpoint {
   private readonly defaultEndpoint: Endpoint<Log, never>;
   private readonly path = '/logs';
@@ -28,7 +33,7 @@ export class LogsEndpoint {
     this.defaultEndpoint = new DefaultEndpoint<Log, never>(
       this.path,
       this.artaClient,
-      this.enrichFields
+      this.enrichFields,
     );
   }
 
@@ -40,9 +45,11 @@ export class LogsEndpoint {
     return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
 
-  private enrichFields(resource: any): Log {
-    resource.start_at = createDateAsUTC(resource.start_at);
-    resource.end_at = createDateAsUTC(resource.end_at);
-    return resource;
+  private enrichFields(resource: UnparsedLog): Log {
+    return {
+      ...resource,
+      start_at: createDateAsUTC(resource.start_at),
+      end_at: createDateAsUTC(resource.end_at),
+    };
   }
 }

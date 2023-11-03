@@ -39,7 +39,7 @@ describe('tests email_subscriptions Arta endpoint', () => {
     await helper.testUpdate(
       { email_notification_ids: ['complete'] },
       'email_subscription',
-      requestConfig
+      requestConfig,
     );
   });
 });

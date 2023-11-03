@@ -19,7 +19,7 @@ class LoggerWrapper implements Logger {
   private readonly verbosity: number;
   constructor(
     private readonly logger: Logger,
-    loggerVerbosity: LoggerVerbosity
+    loggerVerbosity: LoggerVerbosity,
   ) {
     this.verbosity = LogLevel[loggerVerbosity];
   }
@@ -52,7 +52,7 @@ class LoggerWrapper implements Logger {
 let _logger: Logger;
 export const initLogger = (
   logger: Logger,
-  loggerVerbosity: LoggerVerbosity
+  loggerVerbosity: LoggerVerbosity,
 ): void => {
   _logger = new LoggerWrapper(logger, loggerVerbosity);
 };

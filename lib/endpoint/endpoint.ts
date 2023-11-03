@@ -1,6 +1,6 @@
 import { ArtaID } from '../ArtaClient';
 import { RestClient } from '../net/RestClient';
-import { convertDatesToUtc, DatedInterface } from '../utils';
+import { convertDatesToUtc, DatedInterface, NotDateParsed } from '../utils';
 import { Page } from '../pagination';
 import {
   defaultQueryParams,
@@ -16,7 +16,7 @@ export interface Endpoint<T, U> {
   update: (
     id: ArtaID,
     payload: Partial<U> | Partial<T>,
-    auth?: string
+    auth?: string,
   ) => Promise<T>;
   remove: (id: ArtaID, auth?: string) => Promise<void>;
 }
@@ -28,23 +28,30 @@ export class DefaultEndpoint<T extends DatedInterface, U>
   constructor(
     path: string,
     private readonly artaClient: RestClient,
-    private readonly onReturn?: (params: any) => T
+    private readonly onReturn?: (params: any) => T,
   ) {
     this.path = path.startsWith('/') ? path : `/${path}`;
   }
 
   public async getById(id: ArtaID, auth?: string): Promise<T> {
-    const req = await this.artaClient.get(`${this.path}/${id}`, auth);
+    const req = await this.artaClient.get<NotDateParsed<T>>(
+      `${this.path}/${id}`,
+      auth,
+    );
     return this.processBody(req);
   }
 
   public async list(
     queryParam?: QueryParameters,
-    auth?: string
+    auth?: string,
   ): Promise<Page<T>> {
     const toUseQueryParam = queryParam ?? defaultQueryParams;
     const queryParams = parseQueryParams(toUseQueryParam);
-    const body = await this.artaClient.get(`${this.path}${queryParams}`, auth);
+    const body = await this.artaClient.get<Page<NotDateParsed<T>>>(
+      `${this.path}${queryParams}`,
+      auth,
+    );
+
     const items: T[] = body.items.map(this.processBody.bind(this));
 
     return { items, metadata: body.metadata };
@@ -55,7 +62,10 @@ export class DefaultEndpoint<T extends DatedInterface, U>
     let returned_elements = 0;
     let body;
     do {
-      body = await this.artaClient.get(`${this.path}?page=${page}`, auth);
+      body = await this.artaClient.get<Page<NotDateParsed<T>>>(
+        `${this.path}?page=${page}`,
+        auth,
+      );
       page = body.metadata.page + 1;
       for (const item of body.items) {
         returned_elements++;
@@ -65,20 +75,23 @@ export class DefaultEndpoint<T extends DatedInterface, U>
   }
 
   public async create(payload: U, auth?: string): Promise<T> {
-    const body = await this.artaClient.post(this.path, payload, auth);
+    const body = await this.artaClient.post<U, NotDateParsed<T>>(
+      this.path,
+      payload,
+      auth,
+    );
     return this.processBody(body);
   }
 
   public async update(
     id: ArtaID,
     payload: Partial<U> | Partial<T>,
-    auth?: string
+    auth?: string,
   ): Promise<T> {
-    const body = await this.artaClient.patch(
-      `${this.path}/${id}`,
-      payload,
-      auth
-    );
+    const body = await this.artaClient.patch<
+      Partial<U> | Partial<T>,
+      NotDateParsed<T>
+    >(`${this.path}/${id}`, payload, auth);
     return this.processBody(body);
   }
 
@@ -86,9 +99,9 @@ export class DefaultEndpoint<T extends DatedInterface, U>
     return await this.artaClient.delete(`${this.path}/${id}`, auth);
   }
 
-  private processBody(payload: Partial<U> | Partial<T>): T {
-    let resource = convertDatesToUtc(payload);
+  private processBody(payload: NotDateParsed<T>): T {
+    let resource = convertDatesToUtc<T>(payload);
     resource = this.onReturn ? this.onReturn(resource) : resource;
-    return resource as T;
+    return resource;
   }
 }

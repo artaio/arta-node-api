@@ -12,9 +12,10 @@ import {
 } from '../MetadataTypes';
 import {
   convertDatesToUtc,
-  DatedInterface,
-  Nullable,
-  NullableString,
+  type DatedInterface,
+  type NotDateParsed,
+  type Nullable,
+  type NullableString,
 } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
 import { HostedSessionsSearch } from '../search';
@@ -85,27 +86,26 @@ export class HostedSessionsEndpoint {
     search?: HostedSessionsSearch,
     page = 1,
     pageSize = 20,
-    auth?: string
+    auth?: string,
   ): Promise<Page<HostedSession>> {
     return this.defaultEndpoint.list(
       { page, page_size: pageSize, search },
-      auth
+      auth,
     );
   }
 
   public create(
     payload: HostedSessionCreateBody,
-    auth?: string
+    auth?: string,
   ): Promise<HostedSession> {
     return this.defaultEndpoint.create({ hosted_session: payload }, auth);
   }
 
   public async cancel(id: ArtaID, auth?: string): Promise<HostedSession> {
-    const rawSession = await this.artaClient.patch(
-      `${this.path}/${id}/cancel`,
+    const rawSession = await this.artaClient.patch<
       undefined,
-      auth
-    );
+      NotDateParsed<HostedSession>
+    >(`${this.path}/${id}/cancel`, undefined, auth);
     return this.withFunctionCalls(convertDatesToUtc(rawSession));
   }
 }

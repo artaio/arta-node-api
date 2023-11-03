@@ -18,7 +18,7 @@ describe('tests ArtaClient', () => {
 
   const expectRequestCalledWith = (
     domain: string,
-    params: Partial<HttpRequestParameters>
+    params: Partial<HttpRequestParameters>,
   ) => {
     expect(request).toBeCalledTimes(1);
     params.headers = {
@@ -89,7 +89,7 @@ describe('tests ArtaClient', () => {
     });
 
     await expect(artaClient.get('/a_path')).rejects.toThrowError(
-      'Unauthorized, HTTP status: 401'
+      'Unauthorized, HTTP status: 401',
     );
   });
 
@@ -103,7 +103,7 @@ describe('tests ArtaClient', () => {
     });
 
     await expect(artaClient.get('/a_path')).rejects.toThrowError(
-      '# a error, # another error, HTTP status: 400'
+      '# a error, # another error, HTTP status: 400',
     );
   });
 
@@ -117,7 +117,7 @@ describe('tests ArtaClient', () => {
     });
 
     await expect(artaClient.get('/a_path')).rejects.toThrowError(
-      'property is not in correct format, HTTP status: 422'
+      'property is not in correct format, HTTP status: 422',
     );
   });
 
@@ -129,7 +129,7 @@ describe('tests ArtaClient', () => {
     });
 
     await expect(artaClient.get('/a_path')).rejects.toThrowError(
-      'Unknwon API error, HTTP status: 503'
+      'Unknwon API error, HTTP status: 503',
     );
   });
 });

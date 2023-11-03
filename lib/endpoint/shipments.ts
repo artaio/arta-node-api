@@ -20,6 +20,7 @@ import {
   DatedInterface,
   Nullable,
   NullableString,
+  createDateAsUTC,
   parseService,
 } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
@@ -115,7 +116,7 @@ export class ShipmentsEndpoint {
     this.defaultEndpoint = new DefaultEndpoint<Shipment, ShipmentCreate>(
       this.path,
       this.artaClient,
-      this.enrichFields.bind(this)
+      this.enrichFields.bind(this),
     );
   }
 
@@ -127,10 +128,10 @@ export class ShipmentsEndpoint {
     }
 
     if (r.schedule) {
-      r.schedule.delivery_end = new Date(r.schedule.delivery_end);
-      r.schedule.delivery_start = new Date(r.schedule.delivery_start);
-      r.schedule.pickup_end = new Date(r.schedule.pickup_end);
-      r.schedule.pickup_start = new Date(r.schedule.pickup_start);
+      r.schedule.delivery_end = createDateAsUTC(r.schedule.delivery_end);
+      r.schedule.delivery_start = createDateAsUTC(r.schedule.delivery_start);
+      r.schedule.pickup_end = createDateAsUTC(r.schedule.pickup_end);
+      r.schedule.pickup_start = createDateAsUTC(r.schedule.pickup_start);
     }
 
     if (r.packages) {
@@ -153,11 +154,11 @@ export class ShipmentsEndpoint {
     search?: ShipmentsSearch,
     page = 1,
     pageSize = 20,
-    auth?: string
+    auth?: string,
   ): Promise<Page<Shipment>> {
     return this.defaultEndpoint.list(
       { page, page_size: pageSize, search },
-      auth
+      auth,
     );
   }
 

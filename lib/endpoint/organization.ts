@@ -1,6 +1,11 @@
 import { ArtaID } from '../ArtaClient';
 import { RestClient } from '../net/RestClient';
-import { convertDatesToUtc, DatedInterface, NullableString } from '../utils';
+import {
+  convertDatesToUtc,
+  DatedInterface,
+  NotDateParsed,
+  NullableString,
+} from '../utils';
 
 export interface Organization extends DatedInterface {
   api_version: string;
@@ -24,8 +29,11 @@ export class OrganizationsEndpoint {
    * @throws ArtaSDKError thrown if some problem happened while communicating with the API.
    */
   async get(auth?: string): Promise<Organization> {
-    const artaResponse = await this.artaClient.get(this.path, auth);
-    return convertDatesToUtc(artaResponse) as Organization;
+    const artaResponse = await this.artaClient.get<NotDateParsed<Organization>>(
+      this.path,
+      auth,
+    );
+    return convertDatesToUtc(artaResponse);
   }
 
   /** Updates the Organization associated with the API Key
@@ -35,13 +43,12 @@ export class OrganizationsEndpoint {
    */
   async update(
     organization: Partial<Organization>,
-    auth?: string
+    auth?: string,
   ): Promise<Organization> {
-    const artaResponse = await this.artaClient.patch(
-      this.path,
-      { organization },
-      auth
-    );
-    return convertDatesToUtc(artaResponse) as Organization;
+    const artaResponse = await this.artaClient.patch<
+      { organization: Partial<Organization> },
+      NotDateParsed<Organization>
+    >(this.path, { organization }, auth);
+    return convertDatesToUtc(artaResponse);
   }
 }

@@ -35,7 +35,7 @@ export class UploadsEndpoint {
   constructor(private readonly artaClient: RestClient) {
     this.defaultEndpoint = new DefaultEndpoint<Upload, UploadCreate>(
       this.path,
-      this.artaClient
+      this.artaClient,
     );
   }
 

@@ -1,6 +1,6 @@
 export interface RestClient {
-  get(path: string, auth?: string): Promise<any>;
-  post(path: string, payload: any, auth?: string): Promise<any>;
-  patch(path: string, payload: any, auth?: string): Promise<any>;
+  get<T>(path: string, auth?: string): Promise<T>;
+  post<U, T>(path: string, payload: U, auth?: string): Promise<T>;
+  patch<U, T>(path: string, payload: U, auth?: string): Promise<T>;
   delete(path: string, auth?: string): Promise<void>;
 }

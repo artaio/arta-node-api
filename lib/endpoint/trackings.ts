@@ -22,15 +22,29 @@ export interface Tracking {
   tracking_number: string;
 }
 
+interface UnparsedTrackingEvent extends Omit<TrackingEvent, 'date'> {
+  date: string;
+}
+
+interface UnparsedTracking extends Omit<Tracking, 'events'> {
+  events: UnparsedTrackingEvent[];
+}
+
 export class TrackingsEndpoint {
   private readonly path = '/trackings';
   constructor(private readonly artaClient: RestClient) {}
 
   public async getById(id: ArtaID, auth?: string): Promise<Tracking> {
-    const tracking = await this.artaClient.get(`${this.path}/${id}`, auth);
-    tracking.events.forEach((e: any) => {
-      e.date = createDateAsUTC(e.date);
-    });
-    return tracking as Tracking;
+    const unparsedTracking = await this.artaClient.get<UnparsedTracking>(
+      `${this.path}/${id}`,
+      auth,
+    );
+
+    const parsedEvents = unparsedTracking.events.map((event) => ({
+      ...event,
+      date: createDateAsUTC(event.date),
+    }));
+
+    return { ...unparsedTracking, events: parsedEvents };
   }
 }

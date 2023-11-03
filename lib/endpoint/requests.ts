@@ -50,11 +50,11 @@ export interface QuoteRequest extends DatedInterface {
   status: QuoteRequestStatus;
   updateContacts: (
     contacts: UpdateRequestsContactsBody,
-    auth?: string
+    auth?: string,
   ) => Promise<QuoteRequest>;
   requireCustomQuotes: (
     customQuote: CustomQuotePayload,
-    auth?: string
+    auth?: string,
   ) => Promise<QuoteRequest>;
   cancel: (auth?: string) => Promise<QuoteRequest>;
 }
@@ -105,12 +105,12 @@ export class QuoteRequestsEndpoint {
 
     resource.updateContacts = (
       contacts: UpdateRequestsContactsBody,
-      auth?: string
+      auth?: string,
     ) => this.updateContacts(resource.id, contacts, auth);
 
     resource.requireCustomQuotes = (
       customQuote: CustomQuotePayload,
-      auth?: string
+      auth?: string,
     ) => this.requireCustomQuotes(resource.id, customQuote, auth);
 
     resource.cancel = (auth?: string) => this.cancel(resource.id, auth);
@@ -126,17 +126,17 @@ export class QuoteRequestsEndpoint {
     search?: RequestsSearch,
     page = 1,
     pageSize = 20,
-    auth?: string
+    auth?: string,
   ): Promise<Page<QuoteRequest>> {
     return this.defaultEndpoint.list(
       { page, page_size: pageSize, search },
-      auth
+      auth,
     );
   }
 
   public create(
     payload: QuoteRequestCreateBody,
-    auth?: string
+    auth?: string,
   ): Promise<QuoteRequest> {
     return this.defaultEndpoint.create({ request: payload }, auth);
   }
@@ -144,12 +144,12 @@ export class QuoteRequestsEndpoint {
   public async updateContacts(
     id: ArtaID,
     contacts: UpdateRequestsContactsBody,
-    auth?: string
+    auth?: string,
   ): Promise<QuoteRequest> {
     const rawReq = await this.artaClient.patch(
       `${this.path}/${id}/contacts`,
       contacts,
-      auth
+      auth,
     );
     return this.enrichFields(rawReq);
   }
@@ -157,12 +157,12 @@ export class QuoteRequestsEndpoint {
   public async requireCustomQuotes(
     id: ArtaID,
     customQuote: CustomQuotePayload,
-    auth?: string
+    auth?: string,
   ): Promise<QuoteRequest> {
     const rawReq = await this.artaClient.patch(
       `${this.path}/${id}/custom`,
       customQuote,
-      auth
+      auth,
     );
     return this.enrichFields(rawReq);
   }
@@ -171,7 +171,7 @@ export class QuoteRequestsEndpoint {
     const rawReq = await this.artaClient.patch(
       `${this.path}/${id}/cancel`,
       undefined,
-      auth
+      auth,
     );
     return this.enrichFields(rawReq);
   }

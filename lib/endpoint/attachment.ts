@@ -33,7 +33,7 @@ export class AttachmentsEndpoint {
   constructor(private readonly artaClient: RestClient) {
     this.defaultEndpoint = new DefaultEndpoint<Attachment, AttachmentCreate>(
       this.path,
-      this.artaClient
+      this.artaClient,
     );
   }
 
@@ -44,14 +44,14 @@ export class AttachmentsEndpoint {
   public list(
     page = 1,
     pageSize = 20,
-    auth?: string
+    auth?: string,
   ): Promise<Page<Attachment>> {
     return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
 
   public create(
     payload: AttachmentCreateBody,
-    auth?: string
+    auth?: string,
   ): Promise<Attachment> {
     return this.defaultEndpoint.create({ attachment: payload }, auth);
   }

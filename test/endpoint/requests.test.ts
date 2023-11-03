@@ -23,11 +23,11 @@ describe('tests quote requests Arta endpoint', () => {
 
     expect(result.quotes[0].optional_services[0].amount).toBe(1.0);
     expect(
-      result.quotes[0].optional_services[0].included_services[0].amount
+      result.quotes[0].optional_services[0].included_services[0].amount,
     ).toBe(11.0);
     expect(
       result.quotes[0].optional_services[0].included_services[0]
-        .included_services[0].amount
+        .included_services[0].amount,
     ).toBe(12.0);
   });
 
@@ -36,21 +36,21 @@ describe('tests quote requests Arta endpoint', () => {
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/cancel`,
       undefined,
-      undefined
+      undefined,
     );
 
     await endpoint.requireCustomQuotes(123, { note: 'test note' });
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/custom`,
       { note: 'test note' },
-      undefined
+      undefined,
     );
 
     await endpoint.updateContacts(123, { origin: [{ name: 'test' }] });
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/contacts`,
       { origin: [{ name: 'test' }] },
-      undefined
+      undefined,
     );
   });
 
@@ -68,14 +68,14 @@ describe('tests quote requests Arta endpoint', () => {
     expect(custom).toHaveBeenCalledWith(
       req.id,
       { note: 'test note' },
-      undefined
+      undefined,
     );
 
     await req.updateContacts({ origin: [{ name: 'test' }] });
     expect(contacts).toHaveBeenCalledWith(
       req.id,
       { origin: [{ name: 'test' }] },
-      undefined
+      undefined,
     );
   });
 });

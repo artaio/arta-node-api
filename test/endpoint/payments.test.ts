@@ -1,6 +1,7 @@
 import { RestClient } from '../../lib/net/RestClient';
 import { PaymentsEndpoint } from '../../lib/endpoint/payments';
 import * as helper from './helper';
+import { createDateAsUTC } from '../../lib/utils';
 
 describe('tests payments Arta endpoint', () => {
   const paymentId = 123;
@@ -39,7 +40,7 @@ describe('tests payments Arta endpoint', () => {
       const result = await requestConfig.endpoint.getById(paymentId);
 
       expect(result.amount).toEqual(Number(amountStr));
-      expect(result.paid_on).toEqual(new Date(paidOnStr));
+      expect(result.paid_on).toEqual(createDateAsUTC(paidOnStr));
     });
   });
 
@@ -62,7 +63,7 @@ describe('tests payments Arta endpoint', () => {
       } = await requestConfig.endpoint.list();
 
       expect(result.amount).toEqual(Number(amountStr));
-      expect(result.paid_on).toEqual(new Date(paidOnStr));
+      expect(result.paid_on).toEqual(createDateAsUTC(paidOnStr));
     });
   });
 });

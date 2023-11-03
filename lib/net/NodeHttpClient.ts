@@ -38,14 +38,14 @@ export class NodeHttpClientResponse implements HttpClientResponse {
     return await bodyPromise;
   }
 
-  async json(): Promise<any> {
+  async json<T>(): Promise<T> {
     const body = await this.body();
     return JSON.parse(body);
   }
 }
 
 function initParams(
-  params?: Partial<HttpRequestParameters>
+  params?: Partial<HttpRequestParameters>,
 ): HttpRequestParameters {
   const defaultParams = {
     protocol: 'https' as const,
@@ -70,7 +70,7 @@ export class NodeHttpClient implements HttpClient {
   }
   async request(
     host: string,
-    params?: Partial<HttpRequestParameters>
+    params?: Partial<HttpRequestParameters>,
   ): Promise<HttpClientResponse> {
     const { protocol, port, path, method, timeout, headers, requestData } =
       initParams(params);
@@ -117,7 +117,7 @@ export class NodeHttpClient implements HttpClient {
                 // Send payload; we're safe:
                 req.write(requestData);
                 req.end();
-              }
+              },
             );
           } else {
             // we're already connected
@@ -125,7 +125,7 @@ export class NodeHttpClient implements HttpClient {
             req.end();
           }
         });
-      }
+      },
     );
 
     return await requestPromise;

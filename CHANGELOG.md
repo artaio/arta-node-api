@@ -1,3 +1,12 @@
+# [0.31.0](https://github.com/artaio/arta-node-api/compare/v0.30.1...v0.31.0) (2023-11-08)
+
+
+### Features
+
+* improving typings ([#50](https://github.com/artaio/arta-node-api/issues/50)) ([3c398fe](https://github.com/artaio/arta-node-api/commit/3c398feebb1d861310a84a8e286081bc6bf2173f))
+
+
+
 ## [0.30.1](https://github.com/artaio/arta-node-api/compare/v0.30.0...v0.30.1) (2023-05-18)
 
 

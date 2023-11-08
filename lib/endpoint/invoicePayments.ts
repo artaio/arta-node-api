@@ -2,7 +2,7 @@ import { ArtaID } from '../ArtaClient';
 import { SupportedCurrency } from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
-import { DatedInterface, NullableString } from '../utils';
+import { DatedInterface, NullableString, createDateAsUTC } from '../utils';
 import { DefaultEndpoint, Endpoint } from './endpoint';
 
 export interface InvoicePayment extends DatedInterface {
@@ -16,6 +16,12 @@ export interface InvoicePayment extends DatedInterface {
   shipment_id?: NullableString;
 }
 
+export interface UnparsedInvoicePayment
+  extends Omit<InvoicePayment, 'paid_on' | 'amount'> {
+  paid_on: string;
+  amount: string;
+}
+
 export class InvoicePaymentsEndpoint {
   private readonly defaultEndpoint: Endpoint<InvoicePayment, never>;
   private readonly path = '/invoice_payments';
@@ -24,7 +30,7 @@ export class InvoicePaymentsEndpoint {
     this.defaultEndpoint = new DefaultEndpoint<InvoicePayment, never>(
       this.path,
       this.artaClient,
-      this.enrichFields
+      this.enrichFields,
     );
   }
 
@@ -35,13 +41,16 @@ export class InvoicePaymentsEndpoint {
   public list(
     page = 1,
     pageSize = 20,
-    auth?: string
+    auth?: string,
   ): Promise<Page<InvoicePayment>> {
     return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
-  private enrichFields(resource: InvoicePayment): InvoicePayment {
-    resource.amount = Number(resource.amount);
-    resource.paid_on = new Date(resource.paid_on);
-    return resource;
+
+  private enrichFields(resource: UnparsedInvoicePayment): InvoicePayment {
+    return {
+      ...resource,
+      amount: Number(resource.amount),
+      paid_on: createDateAsUTC(resource.paid_on),
+    };
   }
 }

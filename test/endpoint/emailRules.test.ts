@@ -38,7 +38,7 @@ describe('tests email_rule Arta endpoint', () => {
     await helper.testUpdate(
       { recipients: ['destination'] },
       'email_rule',
-      requestConfig
+      requestConfig,
     );
   });
 });

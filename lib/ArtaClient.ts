@@ -1,12 +1,13 @@
-import { ArtaAPIError, ArtaSDKError } from './error';
-import {
+import { type ArtaAPIError, ArtaSDKError } from './error';
+import type {
   HttpClient,
+  HttpClientResponse,
   HttpMethod,
   HttpRequestParameters,
 } from './net/HttpClient';
-import { RestClient } from './net/RestClient';
+import type { RestClient } from './net/RestClient';
 import { version } from '../package.json';
-import { getLogger, Logger } from './logging';
+import { getLogger, type Logger } from './logging';
 
 export type ArtaID = number | string;
 interface ArtaClientConfig {
@@ -17,13 +18,19 @@ export class ArtaClient implements RestClient {
   private readonly logger: Logger;
   constructor(
     private readonly httpClient: HttpClient,
-    private readonly config: ArtaClientConfig
+    private readonly config: ArtaClientConfig,
   ) {
     this.logger = getLogger();
   }
 
-  private async request(params: Partial<HttpRequestParameters>): Promise<any> {
+  private async request(
+    params: Partial<HttpRequestParameters>,
+  ): Promise<HttpClientResponse> {
     const authValue = this.makeArtaAuthHeader(this.config.apiKey);
+
+    if (params.headers == null) {
+      params.headers = {};
+    }
 
     if (params.headers.Authorization == null) {
       params.headers.Authorization = authValue;
@@ -47,7 +54,7 @@ export class ArtaClient implements RestClient {
     path: string,
     method: HttpMethod,
     auth?: string,
-    body?: string
+    body?: string,
   ): Partial<HttpRequestParameters> {
     const reqParams: Partial<HttpRequestParameters> = {
       path,
@@ -58,6 +65,9 @@ export class ArtaClient implements RestClient {
     };
 
     if (auth) {
+      if (reqParams.headers == null) {
+        reqParams.headers = {};
+      }
       reqParams.headers.Authorization = this.makeArtaAuthHeader(auth);
     }
 
@@ -72,32 +82,36 @@ export class ArtaClient implements RestClient {
     return `ARTA_APIKey ${apiKey}`;
   }
 
-  public async get(path: string, auth?: string): Promise<any> {
+  public async get<T>(path: string, auth?: string): Promise<T> {
     const reqParams = this.makeReqParams(path, 'get', auth);
     const res = await this.request(reqParams);
-    return res.json();
+    return res.json<T>();
   }
 
-  public async post(path: string, payload: any, auth?: string): Promise<any> {
+  public async post<U, T>(path: string, payload: U, auth?: string): Promise<T> {
     const reqParams = this.makeReqParams(
       path,
       'post',
       auth,
-      JSON.stringify(payload)
+      JSON.stringify(payload),
     );
     const res = await this.request(reqParams);
-    return res.json();
+    return res.json<T>();
   }
 
-  public async patch(path: string, payload: any, auth?: string): Promise<any> {
+  public async patch<U, T>(
+    path: string,
+    payload: U,
+    auth?: string,
+  ): Promise<T> {
     const reqParams = this.makeReqParams(
       path,
       'patch',
       auth,
-      JSON.stringify(payload)
+      JSON.stringify(payload),
     );
     const res = await this.request(reqParams);
-    return res.json();
+    return res.json<T>();
   }
 
   public async delete(path: string, auth?: string): Promise<void> {

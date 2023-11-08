@@ -23,7 +23,7 @@ describe('tests logs Arta endpoint', () => {
     await endpoint.emailNotifications();
     expect(clientMock.get).lastCalledWith(
       `/${path}/email_notifications`,
-      undefined
+      undefined,
     );
 
     await endpoint.insurances();
@@ -32,13 +32,13 @@ describe('tests logs Arta endpoint', () => {
     await endpoint.locationAccessRestrictions();
     expect(clientMock.get).lastCalledWith(
       `/${path}/location_access_restrictions`,
-      undefined
+      undefined,
     );
 
     await endpoint.objectMaterials();
     expect(clientMock.get).lastCalledWith(
       `/${path}/object_materials`,
-      undefined
+      undefined,
     );
 
     await endpoint.objects();
@@ -47,7 +47,7 @@ describe('tests logs Arta endpoint', () => {
     await endpoint.packageStatuses();
     expect(clientMock.get).lastCalledWith(
       `/${path}/package_statuses`,
-      undefined
+      undefined,
     );
 
     await endpoint.packings();
@@ -56,13 +56,13 @@ describe('tests logs Arta endpoint', () => {
     await endpoint.parcelTransportServices();
     expect(clientMock.get).lastCalledWith(
       `/${path}/parcel_transport_services`,
-      undefined
+      undefined,
     );
 
     await endpoint.paymentProcessTypes();
     expect(clientMock.get).lastCalledWith(
       `/${path}/payment_process_types`,
-      undefined
+      undefined,
     );
 
     await endpoint.quotes();
@@ -71,7 +71,7 @@ describe('tests logs Arta endpoint', () => {
     await endpoint.requestStatuses();
     expect(clientMock.get).lastCalledWith(
       `/${path}/request_statuses`,
-      undefined
+      undefined,
     );
 
     await endpoint.services();
@@ -80,13 +80,13 @@ describe('tests logs Arta endpoint', () => {
     await endpoint.shipmentExceptionTypes();
     expect(clientMock.get).lastCalledWith(
       `/${path}/shipment_exception_types`,
-      undefined
+      undefined,
     );
 
     await endpoint.shipmentStatuses();
     expect(clientMock.get).lastCalledWith(
       `/${path}/shipment_statuses`,
-      undefined
+      undefined,
     );
   });
 });

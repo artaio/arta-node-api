@@ -86,7 +86,7 @@ describe('tests NodeHttpClient wrapper', () => {
     const httpClient = new NodeHttpClient();
 
     await expect(httpClient.request('otherdomain.com')).rejects.toEqual(
-      new Error(errMsg)
+      new Error(errMsg),
     );
   });
 
@@ -97,7 +97,7 @@ describe('tests NodeHttpClient wrapper', () => {
     const httpClient = new NodeHttpClient();
 
     await expect(httpClient.request('otherdomain.com')).rejects.toEqual(
-      new Error(errMsg)
+      new Error(errMsg),
     );
   });
 
@@ -108,7 +108,7 @@ describe('tests NodeHttpClient wrapper', () => {
     const req = httpClient.request('otherdomain.com', { timeout: 1000 });
 
     await expect(req).rejects.toEqual(
-      new Error('Request timed out to otherdomain.com:443')
+      new Error('Request timed out to otherdomain.com:443'),
     );
   });
 });

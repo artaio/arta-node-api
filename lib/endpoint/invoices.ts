@@ -26,7 +26,7 @@ export class InvoicesEndpoint {
     this.defaultEndpoint = new DefaultEndpoint<Invoice, never>(
       this.path,
       this.artaClient,
-      this.enrichFields
+      this.enrichFields,
     );
   }
 

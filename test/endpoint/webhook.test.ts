@@ -37,12 +37,12 @@ describe('tests webhook Arta endpoint', () => {
     await endpoint.getSecret(4);
     expect(clientMock.get).toHaveBeenCalledWith(
       '/webhooks/4/secret_token',
-      undefined
+      undefined,
     );
     await endpoint.resetSecret(4, 'another-auth');
     expect(clientMock.patch).toHaveBeenCalledWith(
       '/webhooks/4/secret_token/reset',
-      'another-auth'
+      'another-auth',
     );
   });
 

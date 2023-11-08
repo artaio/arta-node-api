@@ -28,7 +28,7 @@ export class WebhooksEndpoint {
     this.defaultEndpoint = new DefaultEndpoint<Webhook, WebhookCreate>(
       this.path,
       this.artaClient,
-      this.withFunctionCalls.bind(this)
+      this.withFunctionCalls.bind(this),
     );
   }
 
@@ -58,7 +58,7 @@ export class WebhooksEndpoint {
   public async update(
     id: ArtaID,
     payload: Partial<WebhookCreateBody> | Partial<Webhook>,
-    auth?: string
+    auth?: string,
   ): Promise<Webhook> {
     const webhookUpdate = { webhook: payload } as Partial<WebhookCreate>;
     return this.defaultEndpoint.update(id, webhookUpdate, auth);
@@ -74,18 +74,18 @@ export class WebhooksEndpoint {
   }
 
   public async getSecret(id: ArtaID, auth?: string): Promise<string> {
-    const secret = await this.artaClient.get(
+    const secret = await this.artaClient.get<{ secret_token: string }>(
       `${this.path}/${id}/secret_token`,
-      auth
+      auth,
     );
     return secret.secret_token;
   }
 
   public async resetSecret(id: ArtaID, auth?: string): Promise<string> {
-    const newSecret = await this.artaClient.patch(
-      `${this.path}/${id}/secret_token/reset`,
-      auth
-    );
+    const newSecret = await this.artaClient.patch<
+      string | undefined,
+      { secret_token: string }
+    >(`${this.path}/${id}/secret_token/reset`, auth);
     return newSecret.secret_token;
   }
 }

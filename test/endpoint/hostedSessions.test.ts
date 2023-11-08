@@ -27,7 +27,7 @@ describe('tests hosted session Arta endpoint', () => {
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/cancel`,
       undefined,
-      undefined
+      undefined,
     );
   });
 

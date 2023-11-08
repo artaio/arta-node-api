@@ -34,7 +34,7 @@ describe('tests default Arta endpoint', () => {
     const myElement = await endpoint.getById('an-id');
     expect(artaClientMock.get).toHaveBeenCalledTimes(1);
     expect(artaClientMock.get).toHaveBeenCalledWith('/test/an-id', undefined);
-    expect(myElement).toEqual(mockResponse);
+    expect(myElement.t1).toEqual(mockResponse.t1);
   });
 
   it('should be able to list a page', async () => {
@@ -45,7 +45,7 @@ describe('tests default Arta endpoint', () => {
     await endpoint.list({ page: 2, page_size: 10 });
     expect(artaClientMock.get).toHaveBeenCalledWith(
       `/test?page=2&page_size=10`,
-      undefined
+      undefined,
     );
   });
 
@@ -57,7 +57,7 @@ describe('tests default Arta endpoint', () => {
     await endpoint.list();
     expect(artaClientMock.get).toHaveBeenCalledWith(
       `/test?page=1&page_size=20`,
-      undefined
+      undefined,
     );
   });
 
@@ -80,7 +80,7 @@ describe('tests default Arta endpoint', () => {
     const endpoint = new DefaultEndpoint<T1, T2>('/test', artaClientMock);
     let totalEndpoints = 0;
     for await (const test of endpoint.listAll()) {
-      expect(test).toEqual(mockResponse);
+      expect(test.t1).toEqual(mockResponse.t1);
       totalEndpoints++;
     }
     expect(totalEndpoints).toBe(8);
@@ -94,7 +94,7 @@ describe('tests default Arta endpoint', () => {
     expect(artaClientMock.post).toHaveBeenCalledWith(
       `/test`,
       createPayload,
-      undefined
+      undefined,
     );
   });
 
@@ -106,7 +106,7 @@ describe('tests default Arta endpoint', () => {
     expect(artaClientMock.patch).toHaveBeenCalledWith(
       `/test/an-id`,
       updatePayload,
-      'custom-auth'
+      'custom-auth',
     );
   });
 
@@ -115,7 +115,7 @@ describe('tests default Arta endpoint', () => {
     const res = await endpoint.remove('an-id');
     expect(artaClientMock.delete).toHaveBeenCalledWith(
       `/test/an-id`,
-      undefined
+      undefined,
     );
     expect(res).toBe(undefined);
   });

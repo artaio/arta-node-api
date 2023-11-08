@@ -26,7 +26,7 @@ export class EmailRulesEndpoint {
   constructor(private readonly artaClient: RestClient) {
     this.defaultEndpoint = new DefaultEndpoint<EmailRule, EmailRuleCreate>(
       this.path,
-      this.artaClient
+      this.artaClient,
     );
   }
 
@@ -37,7 +37,7 @@ export class EmailRulesEndpoint {
   public list(
     page = 1,
     pageSize = 20,
-    auth?: string
+    auth?: string,
   ): Promise<Page<EmailRule>> {
     return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
@@ -45,7 +45,7 @@ export class EmailRulesEndpoint {
   public update(
     id: ArtaID,
     payload: { recipients: Recipients[] },
-    auth?: string
+    auth?: string,
   ): Promise<EmailRule> {
     const emailRulesPayload = {
       email_rule: payload,
@@ -55,7 +55,7 @@ export class EmailRulesEndpoint {
 
   public create(
     payload: EmailRuleCreateBody,
-    auth?: string
+    auth?: string,
   ): Promise<EmailRule> {
     return this.defaultEndpoint.create({ email_rule: payload }, auth);
   }

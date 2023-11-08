@@ -26,7 +26,7 @@ export class KeysEndpoint {
   constructor(private readonly artaClient: RestClient) {
     this.defaultEndpoint = new DefaultEndpoint<Key, KeyCreate>(
       this.path,
-      this.artaClient
+      this.artaClient,
     );
   }
 

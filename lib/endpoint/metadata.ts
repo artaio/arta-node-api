@@ -105,7 +105,7 @@ export class MetadataEndpoint {
   }
 
   public emailNotifications(
-    auth?: string
+    auth?: string,
   ): Promise<EmailNotificationMetadata[]> {
     return this.artaClient.get(`${this.path}/email_notifications`, auth);
   }
@@ -115,11 +115,11 @@ export class MetadataEndpoint {
   }
 
   public locationAccessRestrictions(
-    auth?: string
+    auth?: string,
   ): Promise<LocationAccessRestrictionMetadata[]> {
     return this.artaClient.get(
       `${this.path}/location_access_restrictions`,
-      auth
+      auth,
     );
   }
 
@@ -140,13 +140,13 @@ export class MetadataEndpoint {
   }
 
   public parcelTransportServices(
-    auth?: string
+    auth?: string,
   ): Promise<ParcelTransportServicesMetadata[]> {
     return this.artaClient.get(`${this.path}/parcel_transport_services`, auth);
   }
 
   public paymentProcessTypes(
-    auth?: string
+    auth?: string,
   ): Promise<PaymentProcessTypeMetadata[]> {
     return this.artaClient.get(`${this.path}/payment_process_types`, auth);
   }
@@ -164,7 +164,7 @@ export class MetadataEndpoint {
   }
 
   public shipmentExceptionTypes(
-    auth?: string
+    auth?: string,
   ): Promise<ShipmentExceptionTypeMetadata[]> {
     return this.artaClient.get(`${this.path}/shipment_exception_types`, auth);
   }

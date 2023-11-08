@@ -42,7 +42,7 @@ export class EmailSubscriptionsEndpoint {
   public list(
     page = 1,
     pageSize = 20,
-    auth?: string
+    auth?: string,
   ): Promise<Page<EmailSubscription>> {
     return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
@@ -50,7 +50,7 @@ export class EmailSubscriptionsEndpoint {
   public update(
     id: ArtaID,
     payload: { email_notification_ids: EmailNotificationId[] },
-    auth?: string
+    auth?: string,
   ): Promise<EmailSubscription> {
     const emailNotificationPayload = {
       email_subscription: payload,
@@ -60,7 +60,7 @@ export class EmailSubscriptionsEndpoint {
 
   public create(
     payload: EmailSubscriptionCreateBody,
-    auth?: string
+    auth?: string,
   ): Promise<EmailSubscription> {
     return this.defaultEndpoint.create({ email_subscription: payload }, auth);
   }

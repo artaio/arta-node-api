@@ -1,10 +1,14 @@
 export type HttpMethod = 'get' | 'post' | 'patch' | 'put' | 'delete';
 
+export interface HttpClientHeaders {
+  [key: string]: string | string[] | undefined;
+}
+
 export interface HttpClientResponse {
   statusCode?: number;
-  headers?: any;
+  headers?: HttpClientHeaders;
   body: () => Promise<string>;
-  json: () => Promise<any>;
+  json: <T>() => Promise<T>;
 }
 
 export interface HttpRequestParameters {
@@ -12,7 +16,7 @@ export interface HttpRequestParameters {
   port: number;
   path: string;
   method: HttpMethod;
-  headers: any;
+  headers: HttpClientHeaders;
   requestData: string;
   timeout: number;
 }
@@ -20,6 +24,6 @@ export interface HttpRequestParameters {
 export interface HttpClient {
   request: (
     host: string,
-    params?: Partial<HttpRequestParameters>
+    params?: Partial<HttpRequestParameters>,
   ) => Promise<HttpClientResponse>;
 }

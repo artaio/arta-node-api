@@ -23,7 +23,7 @@ describe('tests hosted session Arta endpoint', () => {
   });
 
   it('should have a cancel method', async () => {
-    await endpoint.cancel(123);
+    await endpoint.cancel('123');
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/cancel`,
       undefined,

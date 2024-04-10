@@ -1,103 +1,14 @@
 import { ArtaID } from '../ArtaClient';
-import {
-  ArtaLocation,
-  ArtaObject,
-  ArtaService,
-  EEIFormStatus,
-  InsurancePolicy,
-  PackageStatus,
-  PackingSubType,
-  PaymentProcessType,
-  QuoteType,
-  ShipmentStatus,
-  ShipmentExceptionTypeId,
-  SupportedCurrency,
-} from '../MetadataTypes';
 import { RestClient } from '../net/RestClient';
 import { Page } from '../pagination';
 import { ShipmentsSearch } from '../search';
 import {
-  DatedInterface,
-  Nullable,
   NullableString,
   createDateAsUTC,
   parseService,
 } from '../utils';
+import type { Shipment } from '../types';
 import { DefaultEndpoint, Endpoint } from './endpoint';
-
-export interface Package {
-  depth: number;
-  eta: string;
-  handle_with_care: boolean;
-  height: number;
-  id: number;
-  is_sufficiently_packed: boolean;
-  objects: ArtaObject[];
-  packing_materials: PackingSubType[];
-  status: Nullable<PackageStatus>;
-  unit_of_measurement?: NullableString;
-  weight: number;
-  weight_unit: string;
-  width: number;
-}
-
-export type ShipmentExceptionStatus = 'in_progress' | 'new' | 'resolved';
-
-export interface ShipmentException extends DatedInterface {
-  exception_type_label: NullableString;
-  id: ArtaID;
-  package_id: Nullable<number>;
-  resolution: NullableString;
-  status: ShipmentExceptionStatus;
-  type: ShipmentExceptionTypeId;
-}
-
-export interface ShipmentSchedule {
-  delivery_end: Nullable<Date>;
-  delivery_start: Nullable<Date>;
-  delivery_window_modifier: string;
-  pickup_end: Nullable<Date>;
-  pickup_start: Nullable<Date>;
-  pickup_window_modifier: string;
-}
-
-export interface ShipmentTracking {
-  carrier_name: string;
-  label_url?: NullableString;
-  package_id: number;
-  tracking_number: string;
-  url: string;
-}
-
-export interface Shipment extends DatedInterface {
-  id: ArtaID;
-  destination: ArtaLocation;
-  eei_form_status?: Nullable<EEIFormStatus>;
-  emissions?: Nullable<number>;
-  emissions_unit?: NullableString;
-  exceptions?: Nullable<ShipmentException[]>;
-  hosted_session_id?: Nullable<number>;
-  insurance_policy?: Nullable<InsurancePolicy>;
-  internal_reference?: NullableString;
-  log_request_id?: NullableString;
-  object_count: number;
-  origin: ArtaLocation;
-  package_count: number;
-  packages?: Nullable<Package[]>;
-  payment_process?: Nullable<PaymentProcessType>;
-  public_reference?: NullableString;
-  quote_type: QuoteType;
-  schedule?: Nullable<ShipmentSchedule>;
-  services?: Nullable<ArtaService[]>;
-  shipping_notes?: NullableString;
-  shortcode: string;
-  status: ShipmentStatus;
-  total: number;
-  total_currency: SupportedCurrency;
-  url?: NullableString;
-  tracking?: Nullable<ShipmentTracking[]>;
-}
-
 export interface ShipmentCreateBody {
   internal_reference?: NullableString;
   public_reference?: NullableString;
@@ -120,30 +31,37 @@ export class ShipmentsEndpoint {
     );
   }
 
-  private enrichFields(r: any): Shipment {
-    r.total = Number(r.total);
+  private enrichFields(s: any): Shipment {
+    s.total = Number(s.total);
 
-    if (r.emissions) {
-      r.emissions = Number(r.emissions);
+    if (s.emissions) {
+      s.emissions = Number(s.emissions);
     }
 
-    if (r.schedule) {
-      r.schedule.delivery_end = createDateAsUTC(r.schedule.delivery_end);
-      r.schedule.delivery_start = createDateAsUTC(r.schedule.delivery_start);
-      r.schedule.pickup_end = createDateAsUTC(r.schedule.pickup_end);
-      r.schedule.pickup_start = createDateAsUTC(r.schedule.pickup_start);
+    if (s.schedule) {
+      s.schedule.delivery_end = createDateAsUTC(s.schedule.delivery_end);
+      s.schedule.delivery_start = createDateAsUTC(s.schedule.delivery_start);
+      s.schedule.pickup_end = createDateAsUTC(s.schedule.pickup_end);
+      s.schedule.pickup_start = createDateAsUTC(s.schedule.pickup_start);
     }
 
-    if (r.packages) {
-      r.packages.forEach((p: any) => {
+    if (s.packages) {
+      s.packages.forEach((p: any) => {
         p.depth = Number(p.depth);
         p.height = Number(p.height);
         p.weight = Number(p.weight);
         p.width = Number(p.width);
       });
     }
-    r.services && r.services.forEach(parseService);
-    return r;
+    if (s.exceptions) {
+      s.exceptions.forEach((e: any) => {
+        e.created_at = createDateAsUTC(e.created_at);
+        e.updated_at = createDateAsUTC(e.updated_at);
+      });
+    }
+
+    s.services && s.services.forEach(parseService);
+    return s;
   }
 
   public getById(id: ArtaID, auth?: string): Promise<Shipment> {

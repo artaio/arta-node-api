@@ -36,7 +36,7 @@ describe('tests FetchHttpClient wrapper', () => {
 
     const response = await httpClient.request('otherdomain.com', {
       path: '/test',
-      method: 'post',
+      method: 'POST',
       protocol: 'http',
       port: 80,
       requestData: JSON.stringify(mockBody),

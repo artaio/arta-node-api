@@ -1,22 +1,6 @@
+import { QuoteType, SupportedCurrency } from './types';
 import { Nullable, NullableString } from './utils';
-
-export type AdditionalService =
-  | 'assembly'
-  | 'debris_disposal'
-  | 'deinstallation'
-  | 'destination_additional_labor'
-  | 'destination_building_coi'
-  | 'destination_condition_check'
-  | 'destination_full_condition_report'
-  | 'destination_unpacking'
-  | 'double_blind_bols'
-  | 'installation'
-  | 'origin_building_coi'
-  | 'origin_condition_check'
-  | 'origin_full_condition_report'
-  | 'placement'
-  | 'signature_delivery'
-  | 'tarmac_supervision';
+export * from './types';
 
 export type AccessRestriction =
   | 'elevator_only'
@@ -28,9 +12,7 @@ export type AccessRestriction =
   | 'stairs_only'
   | 'steep_gradient';
 
-export type Insurance = 'arta_transit_insurance' | 'no_arta_insurance';
 export type PaymentProcessType = 'checkout' | 'checkout_direct' | 'invoicing';
-export type QuoteType = 'parcel' | 'premium' | 'select' | 'self_ship';
 export type QuoteRequestStatus =
   | 'cancelled'
   | 'closed'
@@ -339,23 +321,6 @@ export type ObjectMaterial =
   | 'liquids'
   | 'salts';
 
-export type ShipmentExceptionTypeId =
-  | 'change_of_address_request'
-  | 'customs_information_required'
-  | 'damaged_items'
-  | 'direct_payment_required'
-  | 'held_at_customs'
-  | 'inaccurate_object_details'
-  | 'incorrect_address'
-  | 'lost_in_transit'
-  | 'not_ready_for_delivery'
-  | 'not_ready_for_release'
-  | 'other'
-  | 'prepayment_required'
-  | 'requested_hold_to_collect'
-  | 'requested_hold_to_deliver'
-  | 'wrong_item';
-
 export type ArtaTrackingServiceType =
   | 'transport'
   | 'location'
@@ -557,17 +522,6 @@ export type DisqualificationReasonCode =
   | 'external_service_unavailable'
   | 'client_timeout_reached';
 
-export type PackageStatus =
-  | 'pending'
-  | 'transit'
-  | 'out_for_delivery'
-  | 'delivered'
-  | 'unknown'
-  | 'notfound'
-  | 'undelivered'
-  | 'exception'
-  | 'expired';
-
 export type EEIFormStatus =
   | 'pending'
   | 'cleared'
@@ -588,33 +542,9 @@ export type WebhookDeliveryStatus = 'delivered' | 'failed';
 
 export type PaymentContext = 'hosted_checkout' | 'invoiced';
 
-export type SupportedCurrency = 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
-
 export type AuthTypes = 'api_key';
 
 export type APIStatus = 'active' | 'beta' | 'deprecated';
-
-export interface Contact {
-  name: string;
-  email_address?: NullableString;
-  phone_number?: NullableString;
-}
-
-export interface ArtaLocation {
-  access_restrictions?: Nullable<AccessRestriction[]>;
-  address_line_1?: NullableString;
-  address_line_2?: NullableString;
-  address_line_3?: NullableString;
-  city?: NullableString;
-  region?: NullableString;
-  postal_code?: NullableString;
-  country: string;
-  title?: NullableString;
-  contacts?: Nullable<Contact[]>;
-  estimated_country?: string;
-  estimated_region?: string;
-  estimated_city?: string;
-}
 
 export type Details = {
   materials?: Nullable<ObjectMaterial[]>;
@@ -625,36 +555,10 @@ export type Details = {
   is_fragile?: Nullable<boolean>;
   is_cites?: Nullable<boolean>;
 };
-
-export interface ArtaObject {
-  internal_reference?: NullableString;
-  current_packing?: Nullable<PackingSubType[]>;
-  details?: Nullable<Details>;
-  height: number | string;
-  width: number | string;
-  weight?: Nullable<number | string>;
-  value: number | string;
-  depth?: Nullable<number | string>;
-  images?: Nullable<string[]>;
-  public_reference?: string;
-  subtype: ObjectSubType;
-  unit_of_measurement?: NullableString;
-  weight_unit?: NullableString;
-  value_currency: SupportedCurrency;
-}
-
 export interface Disqualification {
   quote_types: QuoteType[];
   reason?: NullableString;
   reason_code: DisqualificationReasonCode;
-}
-
-export interface InsurancePolicy {
-  amount: number;
-  amount_currency: SupportedCurrency;
-  id: string;
-  insured_value: number;
-  insured_value_currency: SupportedCurrency;
 }
 
 export interface ArtaService {
@@ -667,15 +571,4 @@ export interface ArtaService {
   sub_subtype: ArtaTrackingServiceSubSubType;
   subtype: ArtaTrackingServiceSubType;
   type: ArtaTrackingServiceType;
-}
-
-export interface Quote {
-  id: number;
-  included_services: ArtaService[];
-  included_insurance_policy?: Nullable<InsurancePolicy>;
-  optional_services: ArtaService[];
-  quote_type: QuoteType;
-  status: string;
-  total: number;
-  total_currency: SupportedCurrency;
 }

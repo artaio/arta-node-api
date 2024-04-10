@@ -38,6 +38,7 @@ export class DefaultEndpoint<T extends DatedInterface, U>
       `${this.path}/${id}`,
       auth,
     );
+
     return this.processBody(req);
   }
 
@@ -75,11 +76,13 @@ export class DefaultEndpoint<T extends DatedInterface, U>
   }
 
   public async create(payload: U, auth?: string): Promise<T> {
+
     const body = await this.artaClient.post<U, NotDateParsed<T>>(
       this.path,
       payload,
       auth,
     );
+
     return this.processBody(body);
   }
 
@@ -102,6 +105,7 @@ export class DefaultEndpoint<T extends DatedInterface, U>
   private processBody(payload: NotDateParsed<T>): T {
     let resource = convertDatesToUtc<T>(payload);
     resource = this.onReturn ? this.onReturn(resource) : resource;
+
     return resource;
   }
 }

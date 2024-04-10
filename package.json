@@ -4,7 +4,9 @@
   "description": "The Arta Node library provides a seamless integration to Arta API for applications running on Node.js using both Typescript or Javascript.",
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "test": "npm run lint && jest --coverage --detectOpenHandles --verbose",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "jest --coverage --detectOpenHandles --verbose ./test/",
+    "test:integration": "jest --coverage --verbose --testTimeout 30000 ./test-integration/",
     "lint": "eslint .",
     "lint:fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "postinstall": "husky install",
@@ -48,7 +50,10 @@
     "pinst": "^3.0.0",
     "prettier": "3.0.3",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.2.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.2.2",
+    "zod": "^3.22.4",
+    "zod-to-ts": "^1.2.0"
   },
   "bugs": {
     "url": "https://github.com/artaio/arta-node-api/issues"

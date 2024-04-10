@@ -1,7 +1,7 @@
-import { NodeHttpClient } from '../../lib/net/NodeHttpClient';
+import { FetchHttpClient } from '../../lib/net/FetchHttpClient';
 import nock from 'nock';
 
-describe('tests NodeHttpClient wrapper', () => {
+describe('tests FetchHttpClient wrapper', () => {
   afterEach(() => {
     nock.cleanAll();
   });
@@ -10,16 +10,14 @@ describe('tests NodeHttpClient wrapper', () => {
     const mockResponse = { ok: 'ok' };
     nock('https://mytestdomain.com').get('/test').reply(200, mockResponse);
 
-    const httpClient = new NodeHttpClient();
+    const httpClient = new FetchHttpClient();
     const response = await httpClient.request('mytestdomain.com', {
       path: '/test',
     });
 
-    const body = await response.body();
     const jsonBody = await response.json();
 
-    expect(body).toStrictEqual(JSON.stringify(mockResponse));
-    expect(jsonBody).toStrictEqual(mockResponse);
+    expect(jsonBody).toEqual(mockResponse);
     expect(response.statusCode).toBe(200);
   });
 
@@ -34,7 +32,7 @@ describe('tests NodeHttpClient wrapper', () => {
 
     nock('http://otherdomain.com').post('/test').reply(201, mockResponse);
 
-    const httpClient = new NodeHttpClient();
+    const httpClient = new FetchHttpClient();
 
     const response = await httpClient.request('otherdomain.com', {
       path: '/test',
@@ -45,11 +43,9 @@ describe('tests NodeHttpClient wrapper', () => {
       headers: { Authorization: 'example', 'Content-Type': 'applcation/json' },
     });
 
-    const body = await response.body();
-    const jsonBody = await response.json();
+    const jsonBody = await response.json<unknown>();
 
-    expect(body).toStrictEqual(JSON.stringify(mockResponse));
-    expect(jsonBody).toStrictEqual(mockResponse);
+    expect(jsonBody).toEqual(mockResponse);
     expect(response.statusCode).toBe(201);
   });
 
@@ -61,19 +57,17 @@ describe('tests NodeHttpClient wrapper', () => {
       .get('/test')
       .reply(404, mockResponse, mockHeaders);
 
-    const httpClient = new NodeHttpClient();
+    const httpClient = new FetchHttpClient();
 
     const response = await httpClient.request('otherdomain.com', {
       path: '/test',
     });
 
-    const body = await response.body();
     const jsonBody = await response.json();
 
-    expect(body).toStrictEqual(JSON.stringify(mockResponse));
-    expect(jsonBody).toStrictEqual(mockResponse);
+    expect(jsonBody).toEqual(mockResponse);
     expect(response.statusCode).toBe(404);
-    expect(response.headers).toStrictEqual({
+    expect(response.headers).toEqual({
       ...mockHeaders,
       'content-type': 'application/json',
     });
@@ -83,7 +77,7 @@ describe('tests NodeHttpClient wrapper', () => {
     const errMsg = 'something awful happened';
     nock('https://otherdomain.com').get('/').replyWithError(errMsg);
 
-    const httpClient = new NodeHttpClient();
+    const httpClient = new FetchHttpClient();
 
     await expect(httpClient.request('otherdomain.com')).rejects.toEqual(
       new Error(errMsg),
@@ -94,7 +88,7 @@ describe('tests NodeHttpClient wrapper', () => {
     const errMsg = 'something awful happened';
     nock('https://otherdomain.com').get('/').replyWithError(errMsg);
 
-    const httpClient = new NodeHttpClient();
+    const httpClient = new FetchHttpClient();
 
     await expect(httpClient.request('otherdomain.com')).rejects.toEqual(
       new Error(errMsg),
@@ -102,11 +96,10 @@ describe('tests NodeHttpClient wrapper', () => {
   });
 
   it('should be able to handle timeouts', async () => {
-    nock('https://otherdomain.com').get('/').delayConnection(1100).reply(200);
+    nock('https://otherdomain.com').get('/').delayConnection(1100).reply(200, { 'ok': 'ok' });
 
-    const httpClient = new NodeHttpClient();
+    const httpClient = new FetchHttpClient();
     const req = httpClient.request('otherdomain.com', { timeout: 1000 });
-
     await expect(req).rejects.toEqual(
       new Error('Request timed out to otherdomain.com:443'),
     );

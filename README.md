@@ -5,7 +5,9 @@ arta-node-api is in a pre-release beta. The package's API is unstable and expect
 Arta Node.js Library
 ===
 
-The Arta Node library provides a seamless integration to Arta API for applications running on Node.js using both Typescript or Javascript.
+The Arta Node library provides a seamless integration to Arta API for applications running on Node.js 18+ or any platform using [Serverless JS](https://www.cloudflare.com/learning/serverless/serverless-javascript/) using both Typescript or Javascript.
+
+It is a very light package with zero runtime dependencies using only the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) Web API.
 
 ## Documentation
 

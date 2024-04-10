@@ -61,6 +61,7 @@ export class ArtaClient implements RestClient {
       method,
       headers: {
         'User-Agent': `ARTA/v1 arta-node/${version}`,
+        'Content-Type': 'application/json'
       },
     };
 

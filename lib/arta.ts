@@ -1,6 +1,6 @@
 import { ArtaClient } from './ArtaClient';
 import { initLogger, Logger, LoggerVerbosity } from './logging';
-import { NodeHttpClient } from './net/NodeHttpClient';
+import { FetchHttpClient } from './net/FetchHttpClient';
 import { RestClient } from './net/RestClient';
 
 import { AttachmentsEndpoint } from './endpoint/attachment';
@@ -60,7 +60,7 @@ export class Arta {
 
     initLogger(this.config.logger, this.config.verbosity);
 
-    this.artaClient = new ArtaClient(new NodeHttpClient(), {
+    this.artaClient = new ArtaClient(new FetchHttpClient(), {
       apiKey,
       host: this.config.host,
     });

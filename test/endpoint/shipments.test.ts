@@ -31,7 +31,7 @@ describe('tests shipments Arta endpoint', () => {
     expect(result.packages[0].weight).toBe(3.5);
     expect(result.packages[0].width).toBe(14);
 
-    expect(result.services.map((s: ArtaService) => s.amount)).toStrictEqual([
+    expect(result.services.map((s: ArtaService) => s.amount)).toEqual([
       1, 1.1, 2.0, 999.99,
     ]);
 

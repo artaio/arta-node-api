@@ -1,5 +1,5 @@
 import { arta } from ".";
-import { Page } from "../lib/pagination";
+import type { Page } from "../lib/pagination";
 import type { QuoteRequest, Shipment } from "../lib/types";
 import { createPaginatedResponseSchema, shipmentSchema } from "../schemas";
 

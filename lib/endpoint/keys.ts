@@ -1,7 +1,8 @@
-import { RestClient } from '../net/RestClient';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-import { Page } from '../pagination';
-import { Key } from '../types';
+import type { RestClient } from '../net/RestClient';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
+import type { Page } from '../pagination';
+import type { Key } from '../types';
 
 export type KeyCreateBody = Pick<Key, 'is_testing' | 'name'>;
 

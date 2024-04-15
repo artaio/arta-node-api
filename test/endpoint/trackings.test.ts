@@ -1,5 +1,6 @@
-import { RestClient } from '../../lib/net/RestClient';
-import { TrackingEvent, TrackingsEndpoint } from '../../lib/endpoint/trackings';
+import type { RestClient } from '../../lib/net/RestClient';
+import type { TrackingEvent} from '../../lib/endpoint/trackings';
+import { TrackingsEndpoint } from '../../lib/endpoint/trackings';
 import * as helper from './helper';
 
 describe('tests trackings Arta endpoint', () => {

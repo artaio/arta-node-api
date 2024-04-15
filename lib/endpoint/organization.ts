@@ -1,10 +1,11 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import {
-  convertDatesToUtc,
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type {
   DatedInterface,
   NotDateParsed,
-  NullableString,
+  NullableString} from '../utils';
+import {
+  convertDatesToUtc
 } from '../utils';
 
 export interface Organization extends DatedInterface {

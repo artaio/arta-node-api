@@ -1,6 +1,6 @@
 import { DefaultEndpoint } from '../../lib/endpoint/endpoint';
-import { RestClient } from '../../lib/net/RestClient';
-import { DatedInterface } from '../../lib/utils';
+import type { RestClient } from '../../lib/net/RestClient';
+import type { DatedInterface } from '../../lib/utils';
 
 interface T1 extends DatedInterface {
   t1: string;

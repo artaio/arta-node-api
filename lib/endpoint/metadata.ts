@@ -1,4 +1,4 @@
-import {
+import type {
   AccessRestriction,
   APIStatus,
   ArtaTrackingServiceSubSubType,
@@ -22,7 +22,7 @@ import {
   ShipmentStatus,
   SupportedCurrency,
 } from '../MetadataTypes';
-import { RestClient } from '../net/RestClient';
+import type { RestClient } from '../net/RestClient';
 
 export interface APIVersionMetadata {
   authentication: AuthTypes[];

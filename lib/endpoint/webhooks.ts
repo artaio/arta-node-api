@@ -1,8 +1,9 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { DatedInterface } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-import { Page } from '../pagination';
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { DatedInterface } from '../utils';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
+import type { Page } from '../pagination';
 
 export interface Webhook extends DatedInterface {
   id: ArtaID;

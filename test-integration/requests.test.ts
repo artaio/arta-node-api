@@ -1,7 +1,7 @@
 import { arta } from ".";
 import { createPaginatedResponseSchema, requestListItemSchema, requestSchema } from "../schemas";
 import type { Page } from "../lib/pagination";
-import { QuoteRequest, QuoteRequestListItem } from "../lib/types";
+import type { QuoteRequest, QuoteRequestListItem } from "../lib/types";
 
 describe('tests requests Arta endpoint', () => {
   it('should be able to CRUD quote requests', async () => {

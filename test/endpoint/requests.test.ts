@@ -1,5 +1,5 @@
 import { QuoteRequestsEndpoint } from '../../lib/endpoint/requests';
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 import * as helper from './helper';
 import { createPayload, responseMock } from './request.mock';
 

@@ -1,11 +1,13 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { convertDatesToUtc, DatedInterface, NotDateParsed } from '../utils';
-import { Page } from '../pagination';
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { DatedInterface, NotDateParsed } from '../utils';
+import { convertDatesToUtc } from '../utils';
+import type { Page } from '../pagination';
+import type {
+  QueryParameters} from '../queryParams';
 import {
   defaultQueryParams,
-  parseQueryParams,
-  QueryParameters,
+  parseQueryParams
 } from '../queryParams';
 
 export interface Endpoint<T, U> {

@@ -579,3 +579,10 @@ export const shipmentSchema = datedSchema.extend({
   tracking: z.array(shipmentTrackingSchema).nullish(),
 });
 
+export const attatchmentSchema = datedSchema.extend({
+  id: numId,
+  upload_id: numId,
+  request_id: z.string().nullish(),
+  shipment_id: z.string().nullish(),
+});
+

@@ -1,4 +1,4 @@
-import {
+import type {
   AdditionalService,
   ArtaLocation,
   ArtaObject,
@@ -7,16 +7,18 @@ import {
   QuoteType,
   SupportedCurrency,
 } from '../types';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import { RequestsSearch } from '../search';
-import { QuoteRequest, QuoteRequestListItem } from '../types';
-import {
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type { RequestsSearch } from '../search';
+import type { QuoteRequest, QuoteRequestListItem } from '../types';
+import type {
   Nullable,
-  NullableString,
+  NullableString} from '../utils';
+import {
   parseService,
 } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
 
 export type EnrichRequest<T> = T & {
   updateContacts: (

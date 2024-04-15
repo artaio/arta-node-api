@@ -1,9 +1,10 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { DatedInterface, NullableString } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-import { Page } from '../pagination';
-import { EmailNotificationId } from '../MetadataTypes';
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { DatedInterface, NullableString } from '../utils';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
+import type { Page } from '../pagination';
+import type { EmailNotificationId } from '../MetadataTypes';
 
 export interface EmailSubscription extends DatedInterface {
   id: ArtaID;

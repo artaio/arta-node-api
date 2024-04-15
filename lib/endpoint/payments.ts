@@ -1,9 +1,10 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import { Payment } from '../types';
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type { Payment } from '../types';
 import { createDateAsUTC } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
 
 export interface UnparsedPayment extends Omit<Payment, 'paid_on' | 'amount'> {
   paid_on: string;

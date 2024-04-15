@@ -1,5 +1,5 @@
-import { QuoteType, SupportedCurrency } from './types';
-import { Nullable, NullableString } from './utils';
+import type { QuoteType, SupportedCurrency } from './types';
+import type { Nullable, NullableString } from './utils';
 export * from './types';
 
 export type AccessRestriction =

@@ -1,5 +1,5 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
 import { createDateAsUTC } from '../utils';
 
 export interface Carrier {

@@ -2,7 +2,6 @@ export { Arta } from './arta';
 export { Logger, LoggerVerbosity } from './logging';
 
 export {
-  Attachment,
   AttachmentCreateBodyRequest,
   AttachmentCreateBodyShipment,
   AttachmentCreateBody,

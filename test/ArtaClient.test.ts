@@ -1,6 +1,6 @@
 import { ArtaClient } from '../lib/ArtaClient';
 import { initLogger } from '../lib/logging';
-import { HttpClient, HttpRequestParameters } from '../lib/net/HttpClient';
+import type { HttpClient, HttpRequestParameters } from '../lib/net/HttpClient';
 import { version } from '../package.json';
 
 const ARTA_DOMAIN = 'domain.test';

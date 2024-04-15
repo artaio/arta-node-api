@@ -1,7 +1,7 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import {
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type {
   AdditionalService,
   ArtaLocation,
   ArtaObject,
@@ -17,8 +17,9 @@ import {
   type Nullable,
   type NullableString,
 } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-import { HostedSessionsSearch } from '../search';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
+import type { HostedSessionsSearch } from '../search';
 
 export interface HostedSession extends DatedInterface {
   id: ArtaID;

@@ -1,4 +1,4 @@
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 import { WebhooksEndpoint } from '../../lib/endpoint/webhooks';
 import * as helper from './helper';
 

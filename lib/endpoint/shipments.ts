@@ -1,14 +1,16 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import { ShipmentsSearch } from '../search';
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type { ShipmentsSearch } from '../search';
+import type {
+  NullableString} from '../utils';
 import {
-  NullableString,
   createDateAsUTC,
   parseService,
 } from '../utils';
 import type { Shipment } from '../types';
-import { DefaultEndpoint, Endpoint } from './endpoint';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
 export interface ShipmentCreateBody {
   internal_reference?: NullableString;
   public_reference?: NullableString;

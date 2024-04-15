@@ -1,4 +1,5 @@
-import { getLogger, Logger } from '../logging';
+import type { Logger } from '../logging';
+import { getLogger } from '../logging';
 import type {
   HttpClient,
   HttpClientHeaders,

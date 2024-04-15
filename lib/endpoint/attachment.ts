@@ -1,15 +1,9 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { DatedInterface, NullableString } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-import { Page } from '../pagination';
-
-export interface Attachment extends DatedInterface {
-  id: ArtaID;
-  upload_id: number;
-  request_id?: NullableString;
-  shipment_id?: NullableString;
-}
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
+import type { Page } from '../pagination';
+import type { Attachment } from '../types';
 
 export interface AttachmentCreateBodyRequest {
   upload_id: number;

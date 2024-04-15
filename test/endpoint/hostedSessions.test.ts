@@ -1,4 +1,4 @@
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 import { HostedSessionsEndpoint } from '../../lib/endpoint/hostedSessions';
 import * as helper from './helper';
 import { createPayload, responseMock } from './hostedSessions.mock';

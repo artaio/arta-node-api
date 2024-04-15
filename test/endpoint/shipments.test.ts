@@ -1,6 +1,6 @@
 import { ShipmentsEndpoint } from '../../lib/endpoint/shipments';
-import { ArtaService } from '../../lib/MetadataTypes';
-import { RestClient } from '../../lib/net/RestClient';
+import type { ArtaService } from '../../lib/MetadataTypes';
+import type { RestClient } from '../../lib/net/RestClient';
 import * as helper from './helper';
 import { createPayload, responseMock } from './shipments.mock';
 

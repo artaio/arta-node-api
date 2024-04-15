@@ -1,6 +1,6 @@
 
 import { createTypeAlias, printNode, zodToTs } from 'zod-to-ts';
-import { additionalServiceSchema, artaLocationSchema, artaObjectSchema, contactSchema, insurancePolicySchema, insuranceSchema, keySchema, packageSchema, packageStatusSechema, paymentSchema, quoteSchema, quoteTypeSchema, requestListItemSchema, requestSchema, shipmentExceptionSchema, shipmentExceptionStatusSchema, shipmentExceptionTypeIdSchema, shipmentScheduleSchema, shipmentSchema, shipmentTrackingSchema, supportedCurrencySchema } from '.';
+import { additionalServiceSchema, artaLocationSchema, artaObjectSchema, attatchmentSchema, contactSchema, insurancePolicySchema, insuranceSchema, keySchema, packageSchema, packageStatusSechema, paymentSchema, quoteSchema, quoteTypeSchema, requestListItemSchema, requestSchema, shipmentExceptionSchema, shipmentExceptionStatusSchema, shipmentExceptionTypeIdSchema, shipmentScheduleSchema, shipmentSchema, shipmentTrackingSchema, supportedCurrencySchema } from '.';
 import type { Schema } from 'zod';
 
 const generate = (schema: Schema, identifier: string) => {
@@ -8,6 +8,11 @@ const generate = (schema: Schema, identifier: string) => {
     const typeAlias = createTypeAlias(node, identifier);
     console.log('export ' + printNode(typeAlias));
 };
+
+generate(attatchmentSchema, 'Attachment');
+generate(keySchema, 'Key');
+generate(shipmentSchema, 'Shipment');
+generate(requestSchema, 'QuoteRequest');
 
 generate(additionalServiceSchema, 'AdditionalService');
 generate(supportedCurrencySchema, 'SupportedCurrency');
@@ -24,15 +29,6 @@ generate(shipmentExceptionTypeIdSchema, 'ShipmentExceptionTypeId');
 generate(shipmentExceptionSchema, 'ShipmentException');
 generate(shipmentScheduleSchema, 'ShipmentSchedule');
 generate(shipmentTrackingSchema, 'ShipmentTracking');
-generate(shipmentSchema, 'Shipment');
 generate(insurancePolicySchema, 'InsurancePolicy');
 generate(quoteSchema, 'Quote');
-generate(keySchema, 'Key');
 generate(requestListItemSchema, 'QuoteRequestListItem');
-generate(requestSchema, 'QuoteRequest');
-
-
-
-
-
-

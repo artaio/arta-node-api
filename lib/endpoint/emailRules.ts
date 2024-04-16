@@ -1,20 +1,13 @@
 import type { ArtaID } from '../ArtaClient';
 import type { RestClient } from '../net/RestClient';
-import type { DatedInterface } from '../utils';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
 import type { Page } from '../pagination';
-import type { EmailNotificationId, Recipients } from '../MetadataTypes';
-
-export interface EmailRule extends DatedInterface {
-  id: ArtaID;
-  email_notification_id: EmailNotificationId;
-  recipients: Recipients[];
-}
+import type { EmailNotificationId, EmailRule, Recipient } from '../types';
 
 export interface EmailRuleCreateBody {
   email_notification_id: EmailNotificationId;
-  recipients: Recipients[];
+  recipients: Recipient[];
 }
 
 export interface EmailRuleCreate {
@@ -45,7 +38,7 @@ export class EmailRulesEndpoint {
 
   public update(
     id: ArtaID,
-    payload: { recipients: Recipients[] },
+    payload: { recipients: Recipient[] },
     auth?: string,
   ): Promise<EmailRule> {
     const emailRulesPayload = {

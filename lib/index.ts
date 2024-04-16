@@ -6,19 +6,14 @@ export {
   AttachmentCreateBodyShipment,
   AttachmentCreateBody,
 } from './endpoint/attachment';
-export { EmailRule, EmailRuleCreateBody } from './endpoint/emailRules';
+export { EmailRuleCreateBody } from './endpoint/emailRules';
 export {
-  EmailSubscription,
   EmailSubscriptionCreateBody,
 } from './endpoint/emailSubscriptions';
 export {
-  HostedSession,
   HostedSessionCreateBody,
 } from './endpoint/hostedSessions';
-export { InvoicePayment } from './endpoint/invoicePayments';
-export { Invoice } from './endpoint/invoices';
 export { KeyCreateBody } from './endpoint/keys';
-export { Log } from './endpoint/logs';
 export * from './MetadataTypes';
 export { Organization } from './endpoint/organization';
 export { Upload, UploadCreateBody } from './endpoint/uploads';

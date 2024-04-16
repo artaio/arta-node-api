@@ -22,22 +22,6 @@ export type QuoteRequestStatus =
   | 'pending'
   | 'quoted';
 
-export type EmailNotificationId =
-  | 'booking'
-  | 'cancelled'
-  | 'collected'
-  | 'collection'
-  | 'complete'
-  | 'custom_quoted_dashboard'
-  | 'in_transit'
-  | 'invoice'
-  | 'self_ship_label'
-  | 'payment'
-  | 'scheduling'
-  | 'eei';
-
-export type Recipients = 'payer' | 'origin' | 'destination';
-
 export type MimeType =
   | 'application/pdf'
   | 'application/vnd.ms-excel'

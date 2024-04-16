@@ -17,7 +17,7 @@ import type {
   PaymentProcessType,
   QuoteRequestStatus,
   QuoteType,
-  Recipients,
+  Recipient,
   ShipmentExceptionTypeId,
   ShipmentStatus,
   SupportedCurrency,
@@ -39,7 +39,7 @@ export interface CurrencyMetadata {
 
 export interface EmailNotificationMetadata {
   description: string;
-  optional_recipients: Recipients;
+  optional_recipients: Recipient[];
   id: EmailNotificationId;
 }
 

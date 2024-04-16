@@ -1,6 +1,6 @@
 
 import { createTypeAlias, printNode, zodToTs } from 'zod-to-ts';
-import { additionalServiceSchema, artaLocationSchema, artaObjectSchema, attatchmentSchema, contactSchema, insurancePolicySchema, insuranceSchema, keySchema, packageSchema, packageStatusSechema, paymentSchema, quoteSchema, quoteTypeSchema, requestListItemSchema, requestSchema, shipmentExceptionSchema, shipmentExceptionStatusSchema, shipmentExceptionTypeIdSchema, shipmentScheduleSchema, shipmentSchema, shipmentTrackingSchema, supportedCurrencySchema } from '.';
+import { additionalServiceSchema, artaLocationSchema, artaObjectSchema, attatchmentSchema, contactSchema, emailNotificationIdSchema, emailRuleSchema, emailSubscriptionSchema, hostedSessionSchema, insurancePolicySchema, insuranceSchema, invoicePaymentSchema, invoiceSchema, keySchema, logSchema, packageSchema, packageStatusSechema, paymentSchema, quoteSchema, quoteTypeSchema, recipientSchema, requestListItemSchema, requestSchema, shipmentExceptionSchema, shipmentExceptionStatusSchema, shipmentExceptionTypeIdSchema, shipmentScheduleSchema, shipmentSchema, shipmentTrackingSchema, supportedCurrencySchema } from '.';
 import type { Schema } from 'zod';
 
 const generate = (schema: Schema, identifier: string) => {
@@ -10,9 +10,16 @@ const generate = (schema: Schema, identifier: string) => {
 };
 
 generate(attatchmentSchema, 'Attachment');
+generate(requestSchema, 'QuoteRequest');
 generate(keySchema, 'Key');
 generate(shipmentSchema, 'Shipment');
-generate(requestSchema, 'QuoteRequest');
+generate(emailRuleSchema, 'EmailRule');
+generate(emailSubscriptionSchema, 'EmailSubscription');
+generate(hostedSessionSchema, 'HostedSession');
+generate(invoicePaymentSchema, 'InvoicePayment');
+generate(invoiceSchema, 'Invoice');
+generate(logSchema, 'Log');
+
 
 generate(additionalServiceSchema, 'AdditionalService');
 generate(supportedCurrencySchema, 'SupportedCurrency');
@@ -32,3 +39,6 @@ generate(shipmentTrackingSchema, 'ShipmentTracking');
 generate(insurancePolicySchema, 'InsurancePolicy');
 generate(quoteSchema, 'Quote');
 generate(requestListItemSchema, 'QuoteRequestListItem');
+generate(emailNotificationIdSchema, 'EmailNotificationId');
+generate(recipientSchema, 'Recipient');
+

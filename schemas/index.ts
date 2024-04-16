@@ -586,3 +586,91 @@ export const attatchmentSchema = datedSchema.extend({
   shipment_id: z.string().nullish(),
 });
 
+export const emailNotificationIdSchema = z.enum([
+  'booking',
+  'cancelled',
+  'collected',
+  'collection',
+  'complete',
+  'custom_quoted_dashboard',
+  'in_transit',
+  'invoice',
+  'self_ship_label',
+  'payment',
+  'scheduling',
+  'eei'
+]);
+
+export const recipientSchema = z.enum(['payer', 'origin', 'destination']);
+
+export const emailRuleSchema = datedSchema.extend({
+  id: numId,
+  email_notification_id: emailNotificationIdSchema,
+  recipients: z.array(recipientSchema),
+});
+
+export const emailSubscriptionSchema = datedSchema.extend({
+  id: numId,
+  email_notification_ids: z.array(emailNotificationIdSchema),
+  email_address: z.string(),
+  name: z.string().nullish(),
+});
+
+export const hostedSessionSchema = datedSchema.extend({
+  id: numId,
+  additional_services: z.array(additionalServiceSchema).nullish(),
+  cancel_url: z.string().nullish(),
+  destination: artaLocationSchema.nullish(),
+  insurance: insuranceSchema.nullish(),
+  internal_reference: z.string().nullish(),
+  objects: z.array(artaObjectSchema),
+  origin: artaLocationSchema,
+  preferred_quote_types: z.array(quoteTypeSchema).nullish(),
+  public_reference: z.string().nullish(),
+  shipping_notes: z.string().nullish(),
+  success_url:  z.string().nullish(),
+  payment_process: paymentProcessSchema,
+  private_token: z.string(),
+  shortcode: z.string(),
+  status: quoteRequestStatusSchema,
+  url: z.string().nullish()
+});
+
+export const invoicePaymentSchema = datedSchema.extend({
+  id: numId,
+  amount: z.number(),
+  amount_currency: supportedCurrencySchema,
+  credit_id: z.string().nullish(),
+  invoice_id: z.string().nullish(),
+  paid_on: z.date(),
+  payment_id: z.string().nullish(),
+  shipment_id: z.string().nullish()
+});
+
+export const invoiceSchema = datedSchema.extend({
+  id: numId,
+  amount_owed: z.number(),
+  amount_owed_currency: supportedCurrencySchema,
+  amount_paid: z.number(),
+  amount_paid_currency: supportedCurrencySchema,
+  issued_on: z.date().nullish(),
+  shipment_id: z.string().nullish(),
+  status: z.string(),
+  updated_at: z.date(),
+  invoice_url: z.string().nullish(),
+});
+
+export const logSchema = datedSchema.extend({
+  id: numId,
+  api_key_id: numId,
+  arta_version: z.string(),
+  end_at: z.date(),
+  method: z.string(),
+  path: z.string(),
+  query_params: z.string(),
+  request_body: z.string().nullish(),
+  request_id: z.string(),
+  response_body: z.string().nullish(),
+  start_at: z.date(),
+  status: z.number(),
+});

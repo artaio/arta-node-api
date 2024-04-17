@@ -1,5 +1,4 @@
 import { ShipmentsEndpoint } from '../../lib/endpoint/shipments';
-import type { ArtaService } from '../../lib/MetadataTypes';
 import type { RestClient } from '../../lib/net/RestClient';
 import * as helper from './helper';
 import { createPayload, responseMock } from './shipments.mock';
@@ -31,7 +30,7 @@ describe('tests shipments Arta endpoint', () => {
     expect(result.packages[0].weight).toBe(3.5);
     expect(result.packages[0].width).toBe(14);
 
-    expect(result.services.map((s: ArtaService) => s.amount)).toEqual([
+    expect(result.services.map((s: any) => s.amount)).toEqual([
       1, 1.1, 2.0, 999.99,
     ]);
 

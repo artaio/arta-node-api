@@ -1,24 +1,9 @@
-import type { ArtaID } from '../ArtaClient';
 import type { RestClient } from '../net/RestClient';
-import type {
-  DatedInterface,
-  NotDateParsed,
-  NullableString} from '../utils';
+import type { Organization } from '../types';
+import type { NotDateParsed } from '../utils';
 import {
   convertDatesToUtc
 } from '../utils';
-
-export interface Organization extends DatedInterface {
-  api_version: string;
-  id: ArtaID;
-  name: string;
-  billing_terms?: NullableString;
-  company_name?: NullableString;
-  display_name?: NullableString;
-  shortcode?: NullableString;
-  status?: NullableString;
-  stripe_customer_id?: NullableString;
-}
 
 export class OrganizationsEndpoint {
   private readonly path = '/organization';

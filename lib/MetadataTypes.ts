@@ -1,5 +1,3 @@
-import type { QuoteType, SupportedCurrency } from './types';
-import type { Nullable, NullableString } from './utils';
 export * from './types';
 
 export type AccessRestriction =
@@ -21,35 +19,6 @@ export type QuoteRequestStatus =
   | 'in_progress'
   | 'pending'
   | 'quoted';
-
-export type MimeType =
-  | 'application/pdf'
-  | 'application/vnd.ms-excel'
-  | 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-  | 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-  | 'image/jpeg'
-  | 'image/png'
-  | 'text/csv'
-  | 'video/mp4'
-  | 'video/quicktime'
-  | 'application/msword';
-
-export type DocumentType =
-  | 'bill_of_lading'
-  | 'certificate_of_insurance'
-  | 'certificate_of_insurance_template'
-  | 'condition_report'
-  | 'condition_check'
-  | 'image'
-  | 'instructions'
-  | 'airway_bill'
-  | 'commercial_invoice'
-  | 'power_of_attorney'
-  | 'proof_of_export'
-  | 'proof_of_delivery'
-  | 'quote'
-  | 'shipping_label'
-  | 'other';
 
 export type PackingType =
   | 'alcohol_case'
@@ -258,16 +227,6 @@ export type ParcelTransportServices =
   | 'priority_freight'
   | 'second_day_air'
   | 'standard';
-
-export type WebhookDeliveryType =
-  | 'request.created'
-  | 'request.status.updated'
-  | 'shipment.created'
-  | 'shipment.eei_form_status.updated'
-  | 'shipment.schedule.updated'
-  | 'shipment.status.updated'
-  | 'shipment.tracking.updated'
-  | 'ping';
 
 export type ObjectMaterial =
   | 'stone_marble'
@@ -502,10 +461,6 @@ export type ArtaTrackingServiceSubSubType =
   | 'ramp'
   | 'floor_protection';
 
-export type DisqualificationReasonCode =
-  | 'external_service_unavailable'
-  | 'client_timeout_reached';
-
 export type EEIFormStatus =
   | 'pending'
   | 'cleared'
@@ -520,39 +475,8 @@ export type ShipmentStatus =
   | 'in_transit'
   | 'completed';
 
-export type WebhookResourceType = 'ping' | 'request' | 'shipment';
-
-export type WebhookDeliveryStatus = 'delivered' | 'failed';
-
 export type PaymentContext = 'hosted_checkout' | 'invoiced';
 
 export type AuthTypes = 'api_key';
 
 export type APIStatus = 'active' | 'beta' | 'deprecated';
-
-export type Details = {
-  materials?: Nullable<ObjectMaterial[]>;
-  creation_date?: NullableString;
-  creator?: NullableString;
-  notes?: NullableString;
-  title?: NullableString;
-  is_fragile?: Nullable<boolean>;
-  is_cites?: Nullable<boolean>;
-};
-export interface Disqualification {
-  quote_types: QuoteType[];
-  reason?: NullableString;
-  reason_code: DisqualificationReasonCode;
-}
-
-export interface ArtaService {
-  amount: number;
-  amount_currency: SupportedCurrency;
-  included_services: ArtaService[];
-  is_requested: boolean;
-  is_required: boolean;
-  name: string;
-  sub_subtype: ArtaTrackingServiceSubSubType;
-  subtype: ArtaTrackingServiceSubType;
-  type: ArtaTrackingServiceType;
-}

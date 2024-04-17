@@ -15,11 +15,8 @@ export {
 } from './endpoint/hostedSessions';
 export { KeyCreateBody } from './endpoint/keys';
 export * from './MetadataTypes';
-export { Organization } from './endpoint/organization';
-export { Upload, UploadCreateBody } from './endpoint/uploads';
-export { WebhookDelivery } from './endpoint/webhookDeliveries';
-export { Webhook, WebhookCreate } from './endpoint/webhooks';
-export { Tracking, TrackingEvent, Carrier } from './endpoint/trackings';
+export { UploadCreateBody } from './endpoint/uploads';
+export { ExtendedWebhook as Webhook, WebhookCreate } from './endpoint/webhooks';
 export {
   QuoteRequestCreateBody,
   UpdateRequestsContactsBody,

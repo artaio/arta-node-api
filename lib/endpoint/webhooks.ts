@@ -1,14 +1,11 @@
 import type { ArtaID } from '../ArtaClient';
 import type { RestClient } from '../net/RestClient';
-import type { DatedInterface } from '../utils';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
 import type { Page } from '../pagination';
+import type { Webhook } from '../types';
 
-export interface Webhook extends DatedInterface {
-  id: ArtaID;
-  name: string;
-  url: string;
+export interface ExtendedWebhook extends Webhook {
   ping: (auth?: string) => Promise<void>;
   getSecret: (auth?: string) => Promise<string>;
   resetSecret: (auth?: string) => Promise<string>;
@@ -23,44 +20,44 @@ export interface WebhookCreate {
 }
 
 export class WebhooksEndpoint {
-  private readonly defaultEndpoint: Endpoint<Webhook, WebhookCreate>;
+  private readonly defaultEndpoint: Endpoint<ExtendedWebhook, WebhookCreate>;
   private readonly path = '/webhooks';
   constructor(private readonly artaClient: RestClient) {
-    this.defaultEndpoint = new DefaultEndpoint<Webhook, WebhookCreate>(
+    this.defaultEndpoint = new DefaultEndpoint<ExtendedWebhook, WebhookCreate>(
       this.path,
       this.artaClient,
       this.withFunctionCalls.bind(this),
     );
   }
 
-  private withFunctionCalls(webhook: Webhook): Webhook {
+  private withFunctionCalls(webhook: ExtendedWebhook): ExtendedWebhook {
     webhook.ping = (auth?: string) => this.ping(webhook.id, auth);
     webhook.getSecret = (auth?: string) => this.getSecret(webhook.id, auth);
     webhook.resetSecret = (auth?: string) => this.resetSecret(webhook.id, auth);
     return webhook;
   }
 
-  public async getById(id: ArtaID, auth?: string): Promise<Webhook> {
+  public async getById(id: ArtaID, auth?: string): Promise<ExtendedWebhook> {
     return this.defaultEndpoint.getById(id, auth);
   }
 
-  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Webhook>> {
+  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<ExtendedWebhook>> {
     return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
 
-  public listAll(auth?: string): AsyncGenerator<Webhook> {
+  public listAll(auth?: string): AsyncGenerator<ExtendedWebhook> {
     return this.defaultEndpoint.listAll(auth);
   }
 
-  public create(payload: WebhookCreateBody, auth?: string): Promise<Webhook> {
+  public create(payload: WebhookCreateBody, auth?: string): Promise<ExtendedWebhook> {
     return this.defaultEndpoint.create({ webhook: payload }, auth);
   }
 
   public async update(
     id: ArtaID,
-    payload: Partial<WebhookCreateBody> | Partial<Webhook>,
+    payload: Partial<WebhookCreateBody> | Partial<ExtendedWebhook>,
     auth?: string,
-  ): Promise<Webhook> {
+  ): Promise<ExtendedWebhook> {
     const webhookUpdate = { webhook: payload } as Partial<WebhookCreate>;
     return this.defaultEndpoint.update(id, webhookUpdate, auth);
   }

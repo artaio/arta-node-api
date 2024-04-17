@@ -1,14 +1,14 @@
 export type Attachment = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: number;
     upload_id: number;
     request_id?: (string | null) | undefined;
     shipment_id?: (string | null) | undefined;
 };
 export type QuoteRequest = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: string;
     bookable: {
         missing: string[];
@@ -134,16 +134,16 @@ export type QuoteRequest = {
     }[];
 };
 export type Key = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: number;
     name: string | null;
     is_testing: boolean;
     token: string;
 };
 export type Shipment = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: string;
     destination: {
         access_restrictions?: (("elevator_only" | "freight_elevator" | "loading_dock" | "loading_dock_low" | "low_clearance" | "non_paved" | "stairs_only" | "steep_gradient")[] | null) | undefined;
@@ -168,8 +168,8 @@ export type Shipment = {
     emissions?: (number | null) | undefined;
     emissions_unit?: (string | null) | undefined;
     exceptions?: ({
-        updated_at?: Date | undefined;
-        created_at?: Date | undefined;
+        updated_at: Date;
+        created_at: Date;
         exception_type_label?: (string | null) | undefined;
         id: string;
         package_id?: (number | null) | undefined;
@@ -283,23 +283,23 @@ export type Shipment = {
     }[] | null) | undefined;
 };
 export type EmailRule = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: number;
     email_notification_id: "booking" | "cancelled" | "collected" | "collection" | "complete" | "custom_quoted_dashboard" | "in_transit" | "invoice" | "self_ship_label" | "payment" | "scheduling" | "eei";
     recipients: ("payer" | "origin" | "destination")[];
 };
 export type EmailSubscription = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: number;
     email_notification_ids: ("booking" | "cancelled" | "collected" | "collection" | "complete" | "custom_quoted_dashboard" | "in_transit" | "invoice" | "self_ship_label" | "payment" | "scheduling" | "eei")[];
     email_address: string;
     name?: (string | null) | undefined;
 };
 export type HostedSession = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: number;
     additional_services?: (("assembly" | "debris_disposal" | "deinstallation" | "destination_additional_labor" | "destination_building_coi" | "destination_condition_check" | "destination_full_condition_report" | "destination_unpacking" | "double_blind_bols" | "installation" | "origin_building_coi" | "origin_condition_check" | "origin_full_condition_report" | "placement" | "signature_delivery" | "tarmac_supervision")[] | null) | undefined;
     cancel_url?: (string | null) | undefined;
@@ -378,8 +378,8 @@ export type HostedSession = {
     url?: (string | null) | undefined;
 };
 export type InvoicePayment = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: number;
     amount: number;
     amount_currency: "CAD" | "EUR" | "GBP" | "HKD" | "USD";
@@ -391,7 +391,7 @@ export type InvoicePayment = {
 };
 export type Invoice = {
     updated_at: Date;
-    created_at?: Date | undefined;
+    created_at: Date;
     id: number;
     amount_owed: number;
     amount_owed_currency: "CAD" | "EUR" | "GBP" | "HKD" | "USD";
@@ -403,8 +403,8 @@ export type Invoice = {
     invoice_url?: (string | null) | undefined;
 };
 export type Log = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: number;
     api_key_id: number;
     arta_version: string;
@@ -417,6 +417,114 @@ export type Log = {
     response_body?: (string | null) | undefined;
     start_at: Date;
     status: number;
+};
+export type Organization = {
+    updated_at: Date;
+    created_at: Date;
+    api_version: string;
+    id: number;
+    name: string;
+    billing_terms?: (string | null) | undefined;
+    company_name?: (string | null) | undefined;
+    display_name?: (string | null) | undefined;
+    shortcode?: (string | null) | undefined;
+    status?: (string | null) | undefined;
+    stripe_customer_id?: (string | null) | undefined;
+};
+export type Payment = {
+    updated_at: Date;
+    created_at: Date;
+    id: number;
+    amount: number;
+    amount_currency: "CAD" | "EUR" | "GBP" | "HKD" | "USD";
+    context: "hosted_checkout" | "invoiced";
+    paid_on: Date;
+};
+export type Carrier = {
+    code: string;
+    name: string;
+    phone_number: string;
+    url: string;
+};
+export type TrackingEvent = {
+    date: Date;
+    location: string;
+    summary: string;
+};
+export type Tracking = {
+    carrier: {
+        code: string;
+        name: string;
+        phone_number: string;
+        url: string;
+    };
+    events: {
+        date: Date;
+        location: string;
+        summary: string;
+    }[];
+    status: string;
+    tracking_number: string;
+};
+export type Upload = {
+    updated_at: Date;
+    created_at: Date;
+    id: number;
+    document_type: "bill_of_lading" | "certificate_of_insurance" | "certificate_of_insurance_template" | "condition_report" | "condition_check" | "image" | "instructions" | "airway_bill" | "commercial_invoice" | "power_of_attorney" | "proof_of_export" | "proof_of_delivery" | "quote" | "shipping_label" | "other";
+    document_type_label?: (string | null) | undefined;
+    download_url?: (string | null) | undefined;
+    file_name: string;
+    mime_type: "application/pdf" | "application/vnd.ms-excel" | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document" | "image/jpeg" | "image/png" | "text/csv" | "video/mp4" | "video/quicktime" | "application/msword";
+    size: number;
+    status: string;
+    presigned_url: string;
+};
+export type WebhookDelivery = {
+    updated_at: Date;
+    created_at: Date;
+    id: string;
+    resource_id: number;
+    resource_type: "ping" | "request" | "shipment";
+    response_status_code: number;
+    status: "delivered" | "failed";
+    type: "request.created" | "request.status.updated" | "shipment.created" | "shipment.eei_form_status.updated" | "shipment.schedule.updated" | "shipment.status.updated" | "shipment.tracking.updated" | "ping";
+    webhook_id: number;
+    webhook_url: string;
+    next_retry?: (string | null) | undefined;
+    request_body?: (string | null) | undefined;
+    response_body?: (string | null) | undefined;
+};
+export type Webhook = {
+    updated_at: Date;
+    created_at: Date;
+    id: number;
+    name: string;
+    url: string;
+};
+export type ArtaService = {
+    amount: number;
+    amount_currency: "CAD" | "EUR" | "GBP" | "HKD" | "USD";
+    is_requested?: boolean | undefined;
+    is_required?: boolean | undefined;
+    name: string;
+    sub_subtype: string;
+    subtype: "specialized" | "consolidated" | "freight" | "parcel" | "collection" | "delivery" | "location" | "unpacking" | "condition" | "installation" | "deinstallation" | "debris_disposal" | "site_visit" | "handling" | "packing" | "packing_materials" | "receive_release" | "warehouse" | "customs" | "coi" | "administration" | "taxes_duties" | "fees" | "security" | "equipment";
+    type: "transport" | "location" | "handling" | "packing" | "storage" | "administration" | "taxes_duties_fees" | "security" | "equipment";
+    included_services: any[];
+};
+export type Disqualification = {
+    quote_types: ("parcel" | "premium" | "select" | "self_ship")[];
+    reason?: (string | null) | undefined;
+    reason_code: "cannot_be_packed" | "client_timeout_reached" | "external_service_unavailable" | "object_not_supported" | "out_of_network" | "over_size" | "over_value" | "over_volume" | "over_weight" | "requested_service_unavailable" | "too_many_items" | "under_value" | "under_volume" | "under_weight";
+};
+export type Detail = {
+    materials?: (("stone_marble" | "precious_stones" | "fiber_synthetic" | "fabric_natural" | "taxidermy" | "carbon_fiber" | "live_animal" | "paper" | "glass" | "presious_metals" | "particleboard" | "styrofoam" | "wood" | "photo_film" | "sand" | "metal" | "plexiglass" | "aquatic_life" | "canvas" | "drywall" | "hard_plastic" | "vinyl" | "soft_plastic" | "leather" | "rubber" | "concreate" | "paint" | "electronics" | "fiber_natural" | "gas" | "fabric_synthetic" | "CITES" | "liquids" | "salts")[] | null) | undefined;
+    creation_date?: (string | null) | undefined;
+    creator?: (string | null) | undefined;
+    notes?: (string | null) | undefined;
+    title?: (string | null) | undefined;
+    is_fragile?: (boolean | null) | undefined;
+    is_cites?: (boolean | null) | undefined;
 };
 export type AdditionalService = "assembly" | "debris_disposal" | "deinstallation" | "destination_additional_labor" | "destination_building_coi" | "destination_condition_check" | "destination_full_condition_report" | "destination_unpacking" | "double_blind_bols" | "installation" | "origin_building_coi" | "origin_condition_check" | "origin_full_condition_report" | "placement" | "signature_delivery" | "tarmac_supervision";
 export type SupportedCurrency = "CAD" | "EUR" | "GBP" | "HKD" | "USD";
@@ -470,15 +578,6 @@ export type Contact = {
     email_address?: (string | null) | undefined;
     phone_number?: (string | null) | undefined;
 };
-export type Payment = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
-    id: number;
-    amount: number;
-    amount_currency: "CAD" | "EUR" | "GBP" | "HKD" | "USD";
-    context: "hosted_checkout" | "invoiced";
-    paid_on: Date;
-};
 export type ShipmentExceptionStatus = "in_progress" | "new" | "resolved";
 export type PackageStatus = "pending" | "transit" | "out_for_delivery" | "delivered" | "unknown" | "notfound" | "undelivered" | "exception" | "expired";
 export type Package = {
@@ -521,8 +620,8 @@ export type Package = {
 };
 export type ShipmentExceptionTypeId = "change_of_address_request" | "customs_information_required" | "damaged_items" | "direct_payment_required" | "held_at_customs" | "inaccurate_object_details" | "incorrect_address" | "lost_in_transit" | "not_ready_for_delivery" | "not_ready_for_release" | "other" | "prepayment_required" | "requested_hold_to_collect" | "requested_hold_to_deliver" | "wrong_item";
 export type ShipmentException = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     exception_type_label?: (string | null) | undefined;
     id: string;
     package_id?: (number | null) | undefined;
@@ -589,8 +688,8 @@ export type Quote = {
     total_currency: "CAD" | "EUR" | "GBP" | "HKD" | "USD";
 };
 export type QuoteRequestListItem = {
-    updated_at?: Date | undefined;
-    created_at?: Date | undefined;
+    updated_at: Date;
+    created_at: Date;
     id: string;
     bookable: {
         missing: string[];
@@ -647,3 +746,5 @@ export type QuoteRequestListItem = {
 };
 export type EmailNotificationId = "booking" | "cancelled" | "collected" | "collection" | "complete" | "custom_quoted_dashboard" | "in_transit" | "invoice" | "self_ship_label" | "payment" | "scheduling" | "eei";
 export type Recipient = "payer" | "origin" | "destination";
+export type ArtaMimeType = "application/pdf" | "application/vnd.ms-excel" | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document" | "image/jpeg" | "image/png" | "text/csv" | "video/mp4" | "video/quicktime" | "application/msword";
+export type ArtaDocumentType = "bill_of_lading" | "certificate_of_insurance" | "certificate_of_insurance_template" | "condition_report" | "condition_check" | "image" | "instructions" | "airway_bill" | "commercial_invoice" | "power_of_attorney" | "proof_of_export" | "proof_of_delivery" | "quote" | "shipping_label" | "other";

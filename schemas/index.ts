@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const datedSchema = z.object({
-  updated_at: z.date().optional(),
-  created_at: z.date().optional(),
+  updated_at: z.date(),
+  created_at: z.date(),
 });
 
 export function createPaginatedResponseSchema<T extends z.ZodTypeAny>(
@@ -628,7 +628,7 @@ export const hostedSessionSchema = datedSchema.extend({
   preferred_quote_types: z.array(quoteTypeSchema).nullish(),
   public_reference: z.string().nullish(),
   shipping_notes: z.string().nullish(),
-  success_url:  z.string().nullish(),
+  success_url: z.string().nullish(),
   payment_process: paymentProcessSchema,
   private_token: z.string(),
   shortcode: z.string(),
@@ -673,4 +673,113 @@ export const logSchema = datedSchema.extend({
   response_body: z.string().nullish(),
   start_at: z.date(),
   status: z.number(),
+});
+
+export const organizationSchema = datedSchema.extend({
+  api_version: z.string(),
+  id: numId,
+  name: z.string(),
+  billing_terms: z.string().nullish(),
+  company_name: z.string().nullish(),
+  display_name: z.string().nullish(),
+  shortcode: z.string().nullish(),
+  status: z.string().nullish(),
+  stripe_customer_id: z.string().nullish(),
+});
+
+export const carrierSchema = z.object({
+  code: z.string(),
+  name: z.string(),
+  phone_number: z.string(),
+  url: z.string(),
+});
+
+export const trackingEventSchema = z.object({
+  date: z.date(),
+  location: z.string(),
+  summary: z.string(),
+});
+
+export const trackingSchema = z.object({
+  carrier: carrierSchema,
+  events: z.array(trackingEventSchema),
+  status: z.string(),
+  tracking_number: z.string(),
+});
+
+export const documentTypeSchema = z.enum([
+  'bill_of_lading',
+  'certificate_of_insurance',
+  'certificate_of_insurance_template',
+  'condition_report',
+  'condition_check',
+  'image',
+  'instructions',
+  'airway_bill',
+  'commercial_invoice',
+  'power_of_attorney',
+  'proof_of_export',
+  'proof_of_delivery',
+  'quote',
+  'shipping_label',
+  'other',
+]);
+
+export const mimeTypeSchema = z.enum([
+  'application/pdf',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'image/jpeg',
+  'image/png',
+  'text/csv',
+  'video/mp4',
+  'video/quicktime',
+  'application/msword',
+]);
+
+export const uploadSchema = datedSchema.extend({
+  id: numId,
+  document_type: documentTypeSchema,
+  document_type_label: z.string().nullish(),
+  download_url: z.string().nullish(),
+  file_name: z.string(),
+  mime_type: mimeTypeSchema,
+  size: z.number(),
+  status: z.string(),
+  presigned_url: z.string(),
+});
+
+export const webhookResourceTypeSchema = z.enum(['ping', 'request', 'shipment']);
+export const webhookDeliveryStatusSchema = z.enum(['delivered', 'failed']);
+
+export const webhookDeliveryTypeSchema = z.enum([
+  'request.created',
+  'request.status.updated',
+  'shipment.created',
+  'shipment.eei_form_status.updated',
+  'shipment.schedule.updated',
+  'shipment.status.updated',
+  'shipment.tracking.updated',
+  'ping',
+]);
+
+export const webhookDeliverySchema = datedSchema.extend({
+  id: z.string().uuid(),
+  resource_id: numId,
+  resource_type: webhookResourceTypeSchema,
+  response_status_code: z.number(),
+  status: webhookDeliveryStatusSchema,
+  type: webhookDeliveryTypeSchema,
+  webhook_id: numId,
+  webhook_url: z.string(),
+  next_retry: z.string().nullish(),
+  request_body: z.string().nullish(),
+  response_body: z.string().nullish()
+});
+
+export const webhookSchema = datedSchema.extend({
+  id: numId,
+  name: z.string(),
+  url: z.string(),
 });

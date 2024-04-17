@@ -1,27 +1,7 @@
 import type { ArtaID } from '../ArtaClient';
 import type { RestClient } from '../net/RestClient';
+import type { Tracking, TrackingEvent } from '../types';
 import { createDateAsUTC } from '../utils';
-
-export interface Carrier {
-  code: string;
-  name: string;
-  phone_number: string;
-  url: string;
-}
-
-export interface TrackingEvent {
-  date: Date;
-  location: string;
-  summary: string;
-}
-
-export interface Tracking {
-  carrier: Carrier;
-  events: TrackingEvent[];
-  status: string;
-  tracking_number: string;
-}
-
 interface UnparsedTrackingEvent extends Omit<TrackingEvent, 'date'> {
   date: string;
 }

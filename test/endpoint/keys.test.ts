@@ -1,4 +1,4 @@
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 import { KeysEndpoint } from '../../lib/endpoint/keys';
 import * as helper from './helper';
 

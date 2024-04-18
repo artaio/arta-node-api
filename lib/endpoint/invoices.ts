@@ -1,24 +1,9 @@
-import { ArtaID } from '../ArtaClient';
-import { SupportedCurrency } from '../MetadataTypes';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import { DatedInterface, Nullable, NullableString } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-
-export interface Invoice extends DatedInterface {
-  amount_owed: number;
-  amount_owed_currency: SupportedCurrency;
-  amount_paid: number;
-  amount_paid_currency: SupportedCurrency;
-  created_at: Date;
-  invoice_url?: NullableString;
-  id: ArtaID;
-  issued_on: Nullable<Date>;
-  shipment_id: NullableString;
-  status: string;
-  updated_at: Date;
-}
-
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type { Invoice } from '../types';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
 export class InvoicesEndpoint {
   private readonly defaultEndpoint: Endpoint<Invoice, never>;
   private readonly path = '/invoices';

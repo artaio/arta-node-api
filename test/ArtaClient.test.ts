@@ -1,6 +1,6 @@
 import { ArtaClient } from '../lib/ArtaClient';
 import { initLogger } from '../lib/logging';
-import { HttpClient, HttpRequestParameters } from '../lib/net/HttpClient';
+import type { HttpClient, HttpRequestParameters } from '../lib/net/HttpClient';
 import { version } from '../package.json';
 
 const ARTA_DOMAIN = 'domain.test';
@@ -20,12 +20,13 @@ describe('tests ArtaClient', () => {
     domain: string,
     params: Partial<HttpRequestParameters>,
   ) => {
-    expect(request).toBeCalledTimes(1);
+    expect(request).toHaveBeenCalledTimes(1);
     params.headers = {
       ...params.headers,
       'User-Agent': `ARTA/v1 arta-node/${version}`,
+      'Content-Type': 'application/json',
     };
-    expect(request).toBeCalledWith(domain, params);
+    expect(request).toHaveBeenCalledWith(domain, params);
   };
 
   const mockJsonResponse = (response: any) => {
@@ -44,7 +45,7 @@ describe('tests ArtaClient', () => {
     expect(res).toEqual({ testResponse: 'ok' });
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },
-      method: 'get',
+      method: 'GET',
       path: '/a_path?page=1&page_size=20',
     });
   });
@@ -53,7 +54,7 @@ describe('tests ArtaClient', () => {
     await artaClient.post('/a_path', { req: 'payload' }, 'another-auth');
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey another-auth' },
-      method: 'post',
+      method: 'POST',
       path: '/a_path',
       requestData: JSON.stringify({ req: 'payload' }),
     });
@@ -63,7 +64,7 @@ describe('tests ArtaClient', () => {
     await artaClient.patch('/a/longer/path/a-id', { req: 'payload' });
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },
-      method: 'patch',
+      method: 'PATCH',
       path: '/a/longer/path/a-id',
       requestData: JSON.stringify({ req: 'payload' }),
     });
@@ -74,7 +75,7 @@ describe('tests ArtaClient', () => {
     expect(res).toBeUndefined();
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },
-      method: 'delete',
+      method: 'DELETE',
       path: '/a/longer/path/a-id',
     });
   });
@@ -116,7 +117,7 @@ describe('tests ArtaClient', () => {
       }),
     });
 
-    await expect(artaClient.get('/a_path')).rejects.toThrowError(
+    await expect(artaClient.get('/a_path')).rejects.toThrow(
       'property is not in correct format, HTTP status: 422',
     );
   });
@@ -128,7 +129,7 @@ describe('tests ArtaClient', () => {
       json: jest.fn().mockReturnValueOnce({ errors: {} }),
     });
 
-    await expect(artaClient.get('/a_path')).rejects.toThrowError(
+    await expect(artaClient.get('/a_path')).rejects.toThrow(
       'Unknwon API error, HTTP status: 503',
     );
   });

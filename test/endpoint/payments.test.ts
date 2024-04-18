@@ -1,4 +1,4 @@
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 import { PaymentsEndpoint } from '../../lib/endpoint/payments';
 import * as helper from './helper';
 import { createDateAsUTC } from '../../lib/utils';

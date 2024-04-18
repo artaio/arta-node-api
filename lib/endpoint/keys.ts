@@ -1,20 +1,10 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { DatedInterface, NullableString } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-import { Page } from '../pagination';
+import type { RestClient } from '../net/RestClient';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
+import type { Page } from '../pagination';
+import type { Key } from '../types';
 
-export interface Key extends DatedInterface {
-  id: ArtaID;
-  is_testing: boolean;
-  name?: NullableString;
-  token: string;
-}
-
-export interface KeyCreateBody {
-  is_testing: boolean;
-  name?: NullableString;
-}
+export type KeyCreateBody = Pick<Key, 'is_testing' | 'name'>;
 
 export interface KeyCreate {
   api_key: KeyCreateBody;
@@ -30,7 +20,7 @@ export class KeysEndpoint {
     );
   }
 
-  public getById(id: ArtaID, auth?: string): Promise<Key> {
+  public getById(id: Key['id'], auth?: string): Promise<Key> {
     return this.defaultEndpoint.getById(id, auth);
   }
 
@@ -46,7 +36,7 @@ export class KeysEndpoint {
     return this.defaultEndpoint.create({ api_key: payload }, auth);
   }
 
-  public remove(id: ArtaID, auth?: string): Promise<void> {
+  public remove(id: Key['id'], auth?: string): Promise<void> {
     return this.defaultEndpoint.remove(id, auth);
   }
 }

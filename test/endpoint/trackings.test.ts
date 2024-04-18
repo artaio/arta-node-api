@@ -1,6 +1,7 @@
-import { RestClient } from '../../lib/net/RestClient';
-import { TrackingEvent, TrackingsEndpoint } from '../../lib/endpoint/trackings';
+import type { RestClient } from '../../lib/net/RestClient';
+import { TrackingsEndpoint } from '../../lib/endpoint/trackings';
 import * as helper from './helper';
+import type { TrackingEvent } from '../../lib';
 
 describe('tests trackings Arta endpoint', () => {
   const responseMock = {
@@ -53,7 +54,7 @@ describe('tests trackings Arta endpoint', () => {
   it('should be able to get and update a single org', async () => {
     const res = await helper.testGet({ path, clientMock, endpoint });
     const isoDates = res.events.map((e: TrackingEvent) => e.date.toISOString());
-    expect(isoDates).toStrictEqual([
+    expect(isoDates).toEqual([
       '2020-10-20T13:53:00.000Z',
       '2020-10-20T00:42:00.000Z',
       '2020-10-19T21:17:00.000Z',

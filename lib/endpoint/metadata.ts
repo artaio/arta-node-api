@@ -1,4 +1,4 @@
-import {
+import type {
   AccessRestriction,
   APIStatus,
   ArtaTrackingServiceSubSubType,
@@ -17,12 +17,12 @@ import {
   PaymentProcessType,
   QuoteRequestStatus,
   QuoteType,
-  Recipients,
+  Recipient,
   ShipmentExceptionTypeId,
   ShipmentStatus,
   SupportedCurrency,
 } from '../MetadataTypes';
-import { RestClient } from '../net/RestClient';
+import type { RestClient } from '../net/RestClient';
 
 export interface APIVersionMetadata {
   authentication: AuthTypes[];
@@ -39,7 +39,7 @@ export interface CurrencyMetadata {
 
 export interface EmailNotificationMetadata {
   description: string;
-  optional_recipients: Recipients;
+  optional_recipients: Recipient[];
   id: EmailNotificationId;
 }
 

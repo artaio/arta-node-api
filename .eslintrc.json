@@ -25,6 +25,7 @@
   "rules": {
     "semi": "off",
     "@typescript-eslint/semi": ["error", "always"],
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/consistent-type-imports": "error"
   }
 }

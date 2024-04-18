@@ -1,4 +1,5 @@
-import { getLogger, initLogger, Logger } from '../lib/logging';
+import type { Logger } from '../lib/logging';
+import { getLogger, initLogger } from '../lib/logging';
 
 const loggerMock = {
   debug: jest.fn(),

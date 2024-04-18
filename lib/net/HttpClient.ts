@@ -1,13 +1,10 @@
-export type HttpMethod = 'get' | 'post' | 'patch' | 'put' | 'delete';
+export type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
-export interface HttpClientHeaders {
-  [key: string]: string | string[] | undefined;
-}
+export type HttpClientHeaders = Record<string, string>;
 
 export interface HttpClientResponse {
   statusCode?: number;
   headers?: HttpClientHeaders;
-  body: () => Promise<string>;
   json: <T>() => Promise<T>;
 }
 
@@ -17,7 +14,7 @@ export interface HttpRequestParameters {
   path: string;
   method: HttpMethod;
   headers: HttpClientHeaders;
-  requestData: string;
+  requestData: string | null;
   timeout: number;
 }
 

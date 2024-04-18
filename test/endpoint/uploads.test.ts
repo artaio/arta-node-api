@@ -1,4 +1,4 @@
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 import { UploadsEndpoint } from '../../lib/endpoint/uploads';
 import * as helper from './helper';
 

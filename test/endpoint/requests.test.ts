@@ -1,5 +1,5 @@
 import { QuoteRequestsEndpoint } from '../../lib/endpoint/requests';
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 import * as helper from './helper';
 import { createPayload, responseMock } from './request.mock';
 
@@ -32,21 +32,21 @@ describe('tests quote requests Arta endpoint', () => {
   });
 
   it('should have a custom methods', async () => {
-    await endpoint.cancel(123);
+    await endpoint.cancel('123');
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/cancel`,
       undefined,
       undefined,
     );
 
-    await endpoint.requireCustomQuotes(123, { note: 'test note' });
+    await endpoint.requireCustomQuotes('123', { note: 'test note' });
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/custom`,
       { note: 'test note' },
       undefined,
     );
 
-    await endpoint.updateContacts(123, { origin: [{ name: 'test' }] });
+    await endpoint.updateContacts('123', { origin: [{ name: 'test' }] });
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/contacts`,
       { origin: [{ name: 'test' }] },
@@ -59,7 +59,7 @@ describe('tests quote requests Arta endpoint', () => {
     const custom = jest.spyOn(endpoint, 'requireCustomQuotes');
     const contacts = jest.spyOn(endpoint, 'updateContacts');
 
-    const req = await endpoint.getById(4);
+    const req = await endpoint.getById('4');
 
     await req.cancel();
     expect(cancel).toHaveBeenCalledWith(req.id, undefined);

@@ -1,28 +1,17 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import { DocumentType, MimeType } from '../MetadataTypes';
-import { DatedInterface, NullableString } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-
-export interface Upload extends DatedInterface {
-  id: ArtaID;
-  document_type: DocumentType;
-  document_type_label?: NullableString;
-  download_url: NullableString;
-  file_name: string;
-  mime_type: MimeType;
-  size: number;
-  status: string;
-  presigned_url: string;
-}
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type { ArtaDocumentType, ArtaMimeType, Upload } from '../MetadataTypes';
+import type { NullableString } from '../utils';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
 
 export interface UploadCreateBody {
-  document_type: DocumentType;
+  document_type: ArtaDocumentType;
   document_type_label?: NullableString;
   file_name: boolean;
   size: string;
-  mime_type: MimeType;
+  mime_type: ArtaMimeType;
 }
 
 export interface UploadCreate {

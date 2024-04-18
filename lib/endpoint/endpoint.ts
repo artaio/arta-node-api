@@ -1,11 +1,13 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { convertDatesToUtc, DatedInterface, NotDateParsed } from '../utils';
-import { Page } from '../pagination';
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { DatedInterface, NotDateParsed } from '../utils';
+import { convertDatesToUtc } from '../utils';
+import type { Page } from '../pagination';
+import type {
+  QueryParameters} from '../queryParams';
 import {
   defaultQueryParams,
-  parseQueryParams,
-  QueryParameters,
+  parseQueryParams
 } from '../queryParams';
 
 export interface Endpoint<T, U> {
@@ -38,6 +40,7 @@ export class DefaultEndpoint<T extends DatedInterface, U>
       `${this.path}/${id}`,
       auth,
     );
+
     return this.processBody(req);
   }
 
@@ -75,11 +78,13 @@ export class DefaultEndpoint<T extends DatedInterface, U>
   }
 
   public async create(payload: U, auth?: string): Promise<T> {
+
     const body = await this.artaClient.post<U, NotDateParsed<T>>(
       this.path,
       payload,
       auth,
     );
+
     return this.processBody(body);
   }
 
@@ -102,6 +107,7 @@ export class DefaultEndpoint<T extends DatedInterface, U>
   private processBody(payload: NotDateParsed<T>): T {
     let resource = convertDatesToUtc<T>(payload);
     resource = this.onReturn ? this.onReturn(resource) : resource;
+
     return resource;
   }
 }

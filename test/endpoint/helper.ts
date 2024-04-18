@@ -1,4 +1,4 @@
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 
 interface RequestTestConfig {
   path: string;

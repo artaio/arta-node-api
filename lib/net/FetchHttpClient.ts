@@ -1,4 +1,5 @@
-import { getLogger, Logger } from '../logging';
+import type { Logger } from '../logging';
+import { getLogger } from '../logging';
 import type {
   HttpClient,
   HttpClientHeaders,
@@ -29,7 +30,7 @@ function initParams(
     protocol: 'https' as const,
     port: 443,
     path: '/',
-    method: 'get' as const,
+    method: 'GET' as const,
     headers: {},
     requestData: null,
     timeout: 30000,
@@ -80,6 +81,7 @@ export class FetchHttpClient implements HttpClient {
     });
     try {
       const response = await Promise.race([fetchUrl, rejectTimeout]) as Response;
+
       return new FetchHttpClientResponse(response);
     } finally {
       setTimeoutId != null && clearTimeout(setTimeoutId);

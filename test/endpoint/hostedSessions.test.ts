@@ -1,4 +1,4 @@
-import { RestClient } from '../../lib/net/RestClient';
+import type { RestClient } from '../../lib/net/RestClient';
 import { HostedSessionsEndpoint } from '../../lib/endpoint/hostedSessions';
 import * as helper from './helper';
 import { createPayload, responseMock } from './hostedSessions.mock';
@@ -23,7 +23,7 @@ describe('tests hosted session Arta endpoint', () => {
   });
 
   it('should have a cancel method', async () => {
-    await endpoint.cancel(123);
+    await endpoint.cancel('123');
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/cancel`,
       undefined,

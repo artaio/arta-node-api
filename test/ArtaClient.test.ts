@@ -1,6 +1,6 @@
 import { ArtaClient } from '../lib/ArtaClient';
 import { initLogger } from '../lib/logging';
-import { HttpClient, HttpRequestParameters } from '../lib/net/HttpClient';
+import type { HttpClient, HttpRequestParameters } from '../lib/net/HttpClient';
 import { version } from '../package.json';
 
 const ARTA_DOMAIN = 'domain.test';
@@ -45,7 +45,7 @@ describe('tests ArtaClient', () => {
     expect(res).toEqual({ testResponse: 'ok' });
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },
-      method: 'get',
+      method: 'GET',
       path: '/a_path?page=1&page_size=20',
     });
   });
@@ -54,7 +54,7 @@ describe('tests ArtaClient', () => {
     await artaClient.post('/a_path', { req: 'payload' }, 'another-auth');
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey another-auth' },
-      method: 'post',
+      method: 'POST',
       path: '/a_path',
       requestData: JSON.stringify({ req: 'payload' }),
     });
@@ -64,7 +64,7 @@ describe('tests ArtaClient', () => {
     await artaClient.patch('/a/longer/path/a-id', { req: 'payload' });
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },
-      method: 'patch',
+      method: 'PATCH',
       path: '/a/longer/path/a-id',
       requestData: JSON.stringify({ req: 'payload' }),
     });
@@ -75,7 +75,7 @@ describe('tests ArtaClient', () => {
     expect(res).toBeUndefined();
     expectRequestCalledWith(ARTA_DOMAIN, {
       headers: { Authorization: 'ARTA_APIKey test' },
-      method: 'delete',
+      method: 'DELETE',
       path: '/a/longer/path/a-id',
     });
   });

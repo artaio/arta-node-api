@@ -29,7 +29,10 @@ export class ArtaClient implements RestClient {
     const authValue = this.makeArtaAuthHeader(this.config.apiKey);
 
     if (params.headers == null) {
-      params.headers = {};
+      params.headers = {
+        'Content-Type': 'application/json',
+        'User-Agent': `ARTA/v1 arta-node/${version}`,
+      };
     }
 
     if (params.headers.Authorization == null) {
@@ -67,7 +70,10 @@ export class ArtaClient implements RestClient {
 
     if (auth) {
       if (reqParams.headers == null) {
-        reqParams.headers = {};
+        reqParams.headers = {
+          'User-Agent': `ARTA/v1 arta-node/${version}`,
+          'Content-Type': 'application/json'
+        };
       }
       reqParams.headers.Authorization = this.makeArtaAuthHeader(auth);
     }
@@ -84,7 +90,7 @@ export class ArtaClient implements RestClient {
   }
 
   public async get<T>(path: string, auth?: string): Promise<T> {
-    const reqParams = this.makeReqParams(path, 'get', auth);
+    const reqParams = this.makeReqParams(path, 'GET', auth);
     const res = await this.request(reqParams);
     return res.json<T>();
   }
@@ -92,7 +98,7 @@ export class ArtaClient implements RestClient {
   public async post<U, T>(path: string, payload: U, auth?: string): Promise<T> {
     const reqParams = this.makeReqParams(
       path,
-      'post',
+      'POST',
       auth,
       JSON.stringify(payload),
     );
@@ -107,7 +113,7 @@ export class ArtaClient implements RestClient {
   ): Promise<T> {
     const reqParams = this.makeReqParams(
       path,
-      'patch',
+      'PATCH',
       auth,
       JSON.stringify(payload),
     );
@@ -116,7 +122,7 @@ export class ArtaClient implements RestClient {
   }
 
   public async delete(path: string, auth?: string): Promise<void> {
-    await this.request(this.makeReqParams(path, 'delete', auth));
+    await this.request(this.makeReqParams(path, 'DELETE', auth));
     return Promise.resolve();
   }
 }

@@ -1,7 +1,8 @@
 import { ArtaClient } from './ArtaClient';
-import { initLogger, Logger, LoggerVerbosity } from './logging';
+import type { Logger, LoggerVerbosity } from './logging';
+import { initLogger } from './logging';
 import { FetchHttpClient } from './net/FetchHttpClient';
-import { RestClient } from './net/RestClient';
+import type { RestClient } from './net/RestClient';
 
 import { AttachmentsEndpoint } from './endpoint/attachment';
 import { EmailRulesEndpoint } from './endpoint/emailRules';

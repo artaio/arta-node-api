@@ -1,4 +1,4 @@
-export type HttpMethod = 'get' | 'post' | 'patch' | 'put' | 'delete';
+export type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 export type HttpClientHeaders = Record<string, string>;
 

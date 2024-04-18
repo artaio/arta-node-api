@@ -1,20 +1,10 @@
-import { ArtaID } from '../ArtaClient';
-import { SupportedCurrency } from '../MetadataTypes';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import { DatedInterface, NullableString, createDateAsUTC } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-
-export interface InvoicePayment extends DatedInterface {
-  id: ArtaID;
-  amount: number;
-  amount_currency: SupportedCurrency;
-  credit_id: NullableString;
-  invoice_id: NullableString;
-  paid_on: Date;
-  payment_id?: NullableString;
-  shipment_id?: NullableString;
-}
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type { InvoicePayment } from '../types';
+import { createDateAsUTC } from '../utils';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
 
 export interface UnparsedInvoicePayment
   extends Omit<InvoicePayment, 'paid_on' | 'amount'> {

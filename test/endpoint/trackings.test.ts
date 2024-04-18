@@ -1,6 +1,7 @@
-import { RestClient } from '../../lib/net/RestClient';
-import { TrackingEvent, TrackingsEndpoint } from '../../lib/endpoint/trackings';
+import type { RestClient } from '../../lib/net/RestClient';
+import { TrackingsEndpoint } from '../../lib/endpoint/trackings';
 import * as helper from './helper';
+import type { TrackingEvent } from '../../lib';
 
 describe('tests trackings Arta endpoint', () => {
   const responseMock = {

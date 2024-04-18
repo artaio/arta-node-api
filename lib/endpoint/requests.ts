@@ -1,63 +1,36 @@
-import { ArtaID } from '../ArtaClient';
-import {
+import type {
   AdditionalService,
   ArtaLocation,
   ArtaObject,
   Contact,
-  Disqualification,
   Insurance,
-  PaymentProcessType,
-  Quote,
-  QuoteRequestStatus,
   QuoteType,
   SupportedCurrency,
-} from '../MetadataTypes';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import { RequestsSearch } from '../search';
-import {
-  DatedInterface,
+} from '../types';
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type { RequestsSearch } from '../search';
+import type { QuoteRequest, QuoteRequestListItem } from '../types';
+import type {
   Nullable,
-  NullableString,
+  NullableString} from '../utils';
+import {
   parseService,
 } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
 
-export interface QuoteRequest extends DatedInterface {
-  id: ArtaID;
-  currency: SupportedCurrency;
-  additional_services: AdditionalService[];
-  bookable: {
-    missing: string[];
-    ready: boolean;
-  };
-  destination: ArtaLocation;
-  disqualifications: Disqualification[];
-  insurance: Nullable<Insurance>;
-  internal_reference: NullableString;
-  log_request_id: string;
-  hosted_session_id: Nullable<number>;
-  object_count: number;
-  objects: ArtaObject[];
-  origin: ArtaLocation;
-  payment_process: PaymentProcessType;
-  preferred_quote_types?: Nullable<QuoteType[]>;
-  public_reference?: NullableString;
-  quote_types: QuoteType[];
-  shipping_notes?: NullableString;
-  shortcode: string;
-  quotes: Quote[];
-  status: QuoteRequestStatus;
+export type EnrichRequest<T> = T & {
   updateContacts: (
     contacts: UpdateRequestsContactsBody,
     auth?: string,
-  ) => Promise<QuoteRequest>;
+  ) => Promise<T>;
   requireCustomQuotes: (
     customQuote: CustomQuotePayload,
     auth?: string,
-  ) => Promise<QuoteRequest>;
-  cancel: (auth?: string) => Promise<QuoteRequest>;
-}
+  ) => Promise<T>;
+  cancel: (auth?: string) => Promise<T>;
+};
 
 export interface QuoteRequestCreateBody {
   additional_services?: Nullable<AdditionalService[]>;
@@ -86,40 +59,41 @@ export interface CustomQuotePayload {
 }
 
 export class QuoteRequestsEndpoint {
-  private readonly defaultEndpoint: Endpoint<QuoteRequest, QuoteRequestCreate>;
+  private readonly defaultEndpoint: Endpoint<EnrichRequest<QuoteRequestListItem | QuoteRequest>, QuoteRequestCreate>;
   private readonly path = '/requests';
   constructor(private readonly artaClient: RestClient) {
     this.defaultEndpoint = new DefaultEndpoint<
-      QuoteRequest,
+      EnrichRequest<QuoteRequestListItem | QuoteRequest>,
       QuoteRequestCreate
     >(this.path, this.artaClient, this.enrichFields.bind(this));
   }
 
-  private enrichFields(resource: any): QuoteRequest {
-    resource.quotes &&
-      resource.quotes.forEach((q: any) => {
+  private enrichFields(resource: QuoteRequestListItem | QuoteRequest): EnrichRequest<QuoteRequestListItem | QuoteRequest> {
+    if (Object.prototype.hasOwnProperty.call(resource, 'quotes')) {
+      (resource as QuoteRequest).quotes.forEach((q: any) => {
         q.total = Number(q.total);
         q.included_services.forEach(parseService);
         q.optional_services.forEach(parseService);
       });
+    }
 
-    resource.updateContacts = (
+    const updateContacts = (
       contacts: UpdateRequestsContactsBody,
       auth?: string,
     ) => this.updateContacts(resource.id, contacts, auth);
 
-    resource.requireCustomQuotes = (
+    const requireCustomQuotes = (
       customQuote: CustomQuotePayload,
       auth?: string,
     ) => this.requireCustomQuotes(resource.id, customQuote, auth);
 
-    resource.cancel = (auth?: string) => this.cancel(resource.id, auth);
+    const cancel = (auth?: string) => this.cancel(resource.id, auth);
 
-    return resource;
+    return { ...resource, updateContacts, requireCustomQuotes, cancel };
   }
 
-  public getById(id: ArtaID, auth?: string): Promise<QuoteRequest> {
-    return this.defaultEndpoint.getById(id, auth);
+  public getById(id: string, auth?: string): Promise<EnrichRequest<QuoteRequest>> {
+    return this.defaultEndpoint.getById(id, auth) as Promise<EnrichRequest<QuoteRequest>>;
   }
 
   public list(
@@ -127,7 +101,7 @@ export class QuoteRequestsEndpoint {
     page = 1,
     pageSize = 20,
     auth?: string,
-  ): Promise<Page<QuoteRequest>> {
+  ): Promise<Page<EnrichRequest<QuoteRequestListItem>>> {
     return this.defaultEndpoint.list(
       { page, page_size: pageSize, search },
       auth,
@@ -137,25 +111,25 @@ export class QuoteRequestsEndpoint {
   public create(
     payload: QuoteRequestCreateBody,
     auth?: string,
-  ): Promise<QuoteRequest> {
-    return this.defaultEndpoint.create({ request: payload }, auth);
+  ): Promise<EnrichRequest<QuoteRequest>> {
+    return this.defaultEndpoint.create({ request: payload }, auth) as Promise<EnrichRequest<QuoteRequest>>;
   }
 
   public async updateContacts(
-    id: ArtaID,
+    id: string,
     contacts: UpdateRequestsContactsBody,
     auth?: string,
-  ): Promise<QuoteRequest> {
+  ): Promise<EnrichRequest<QuoteRequest>> {
     const rawReq = await this.artaClient.patch(
       `${this.path}/${id}/contacts`,
       contacts,
       auth,
-    );
-    return this.enrichFields(rawReq);
+    ) as QuoteRequest;
+    return this.enrichFields(rawReq) as EnrichRequest<QuoteRequest>;
   }
 
   public async requireCustomQuotes(
-    id: ArtaID,
+    id: string,
     customQuote: CustomQuotePayload,
     auth?: string,
   ): Promise<QuoteRequest> {
@@ -163,16 +137,16 @@ export class QuoteRequestsEndpoint {
       `${this.path}/${id}/custom`,
       customQuote,
       auth,
-    );
-    return this.enrichFields(rawReq);
+    ) as QuoteRequest;
+    return this.enrichFields(rawReq) as EnrichRequest<QuoteRequest>;
   }
 
-  public async cancel(id: ArtaID, auth?: string): Promise<QuoteRequest> {
+  public async cancel(id: string, auth?: string): Promise<QuoteRequest> {
     const rawReq = await this.artaClient.patch(
       `${this.path}/${id}/cancel`,
       undefined,
       auth,
-    );
-    return this.enrichFields(rawReq);
+    ) as QuoteRequest;
+    return this.enrichFields(rawReq) as EnrichRequest<QuoteRequest>;
   }
 }

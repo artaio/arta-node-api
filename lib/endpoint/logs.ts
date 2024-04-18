@@ -1,25 +1,10 @@
-import { ArtaID } from '../ArtaClient';
-import { RestClient } from '../net/RestClient';
-import { Page } from '../pagination';
-import { DatedInterface, NullableString, createDateAsUTC } from '../utils';
-import { DefaultEndpoint, Endpoint } from './endpoint';
-
-export interface Log extends DatedInterface {
-  api_key_id: number;
-  arta_version: string;
-  end_at: Date;
-  id: ArtaID;
-  created_at: Date;
-  method: string;
-  path: string;
-  query_params: string;
-  request_body?: NullableString;
-  request_id: string;
-  response_body?: NullableString;
-  start_at: Date;
-  status: number;
-  updated_at: Date;
-}
+import type { ArtaID } from '../ArtaClient';
+import type { RestClient } from '../net/RestClient';
+import type { Page } from '../pagination';
+import type { Log } from '../types';
+import { createDateAsUTC } from '../utils';
+import type { Endpoint } from './endpoint';
+import { DefaultEndpoint } from './endpoint';
 
 export interface UnparsedLog extends Omit<Log, 'start_at' | 'end_at'> {
   start_at: string;

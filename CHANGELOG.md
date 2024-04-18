@@ -1,3 +1,12 @@
+# [0.32.0](https://github.com/artaio/arta-node-api/compare/v0.31.0...v0.32.0) (2024-04-18)
+
+
+### Features
+
+* moves from node http to native fetch api ([#51](https://github.com/artaio/arta-node-api/issues/51)) ([19126ee](https://github.com/artaio/arta-node-api/commit/19126ee76857f61062087aa078ea2f096afc7b91))
+
+
+
 # [0.31.0](https://github.com/artaio/arta-node-api/compare/v0.30.1...v0.31.0) (2023-11-08)
 
 

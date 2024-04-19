@@ -44,6 +44,11 @@ const myHook: Webhook = items[0];
 myHook.ping().then(console.log);
 ```
 
+## Environment
+**WARNING**: Arta Node SDK was meant to be used on server side javascript, and altough it only uses WebAPIs (fetch) it shouldn't be used on browsers as it requires a Private API Key.
+
+This is a very tiny (about 12kb minified), 0 dependencies JS SDK for interacting with Arta backend that should be able to run in any javascript backend environment that supports fetch webapi.
+
 ## Contributing
 
 Please be aware of our zero-dependency policy and ensure that there are no packages under "dependencies" in the `package.json`. Dev dependencies are fine, as these will not be contained in the final published package.

@@ -1,3 +1,7 @@
+## [0.32.1](https://github.com/artaio/arta-node-api/compare/v0.32.0...v0.32.1) (2024-04-19)
+
+
+
 # [0.32.0](https://github.com/artaio/arta-node-api/compare/v0.31.0...v0.32.0) (2024-04-18)
 
 

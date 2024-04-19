@@ -1,7 +1,7 @@
 {
   "name": "@artaio/node-api",
   "version": "0.32.2",
-  "description": "The Arta Node library provides a seamless integration to Arta API for applications running on Node.js using both Typescript or Javascript.",
+  "description": "The Arta Node library provides a seamless integration to Arta API for backend applications using both Typescript or Javascript.",
   "scripts": {
     "build": "npm run build:types && tsc -p tsconfig-build.json",
     "build:types": "npx ts-node ./schemas/generate.ts > lib/types.ts",

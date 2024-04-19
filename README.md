@@ -20,24 +20,28 @@ $ npm install @artaio/node-api
 
 ### 2. Use it to interact with our API in pure JS
 ```js
+// With top level async/await
 const { Arta } = require('@artaio/node-api');
 const arta = new Arta('<YOUR_API_TOKEN>');
 
-const { items } = arta.webhooks.list();
+const { items } = await arta.webhooks.list();
 const myHook = items[0];
 
-myHook.ping().then(console.log);
+const pingResult = await myHook.ping();
+console.log(pingResult);
 ```
 
 ### 3. Use it to interact with our API in TS
 ```ts
-import { Arta, Webhook } from '@artaio/node-api';
+// With top level async/await
+import { Arta, type Webhook } from '@artaio/node-api';
 const arta: Arta = new Arta('<YOUR_API_TOKEN>');
 
-const { items } = arta.webhooks.list();
+const { items } = await arta.webhooks.list();
 const myHook: Webhook = items[0];
 
-myHook.ping().then(console.log);
+const pingResult = await myHook.ping();
+console.log(pingResult);
 ```
 
 ## Environment

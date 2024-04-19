@@ -1,3 +1,17 @@
+# [1.0.0](https://github.com/artaio/arta-node-api/compare/v0.32.2...v1.0.0) (2024-04-19)
+
+
+### Features
+
+* release v1 ([#57](https://github.com/artaio/arta-node-api/issues/57)) ([9fb3b2e](https://github.com/artaio/arta-node-api/commit/9fb3b2e7816bc5a2f9033a310f267640f61d69bf))
+
+
+### BREAKING CHANGES
+
+* Bumps to V1 & release first supported version
+
+
+
 ## [0.32.2](https://github.com/artaio/arta-node-api/compare/v0.32.1...v0.32.2) (2024-04-19)
 
 

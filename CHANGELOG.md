@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/artaio/arta-node-api/compare/v1.0.0...v1.0.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* removes published test schema files ([#58](https://github.com/artaio/arta-node-api/issues/58)) ([0d8d986](https://github.com/artaio/arta-node-api/commit/0d8d98660b5d955fe788cb7522fc8cbfe9662766))
+
+
+
 # [1.0.0](https://github.com/artaio/arta-node-api/compare/v0.32.2...v1.0.0) (2024-04-19)
 
 

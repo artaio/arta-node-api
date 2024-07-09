@@ -26,6 +26,7 @@ export const responseMock = {
     title: 'Home',
   },
   eei_form_status: null,
+  eei_form_url: null,
   emissions: '19.35',
   emissions_unit: 'kg_co2e',
   exceptions: [

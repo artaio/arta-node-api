@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/artaio/arta-node-api/compare/v1.0.1...v1.1.0) (2024-07-10)
+
+
+### Features
+
+* adds eei_form_url to shipments resource ([#59](https://github.com/artaio/arta-node-api/issues/59)) ([7557670](https://github.com/artaio/arta-node-api/commit/755767006dddc0097cda8c0cec0ef0ae61f2b7ea))
+
+
+
 ## [1.0.1](https://github.com/artaio/arta-node-api/compare/v1.0.0...v1.0.1) (2024-04-19)
 
 

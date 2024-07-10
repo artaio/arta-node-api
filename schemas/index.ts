@@ -6,7 +6,7 @@ export const datedSchema = z.object({
 });
 
 export function createPaginatedResponseSchema<T extends z.ZodTypeAny>(
-  itemSchema: T,
+  itemSchema: T
 ) {
   return z.object({
     metadata: z.object({
@@ -16,7 +16,7 @@ export function createPaginatedResponseSchema<T extends z.ZodTypeAny>(
     }),
     items: z.array(itemSchema),
   });
-};
+}
 
 const numId = z.number().int().positive();
 
@@ -27,7 +27,13 @@ export const keySchema = datedSchema.extend({
   token: z.string(),
 });
 
-export const supportedCurrencySchema = z.enum(['CAD', 'EUR', 'GBP', 'HKD', 'USD']);
+export const supportedCurrencySchema = z.enum([
+  'CAD',
+  'EUR',
+  'GBP',
+  'HKD',
+  'USD',
+]);
 export const additionalServiceSchema = z.enum([
   'assembly',
   'debris_disposal',
@@ -47,14 +53,15 @@ export const additionalServiceSchema = z.enum([
   'tarmac_supervision',
 ]);
 
-export const accessRetrictionSchema = z.enum(['elevator_only',
+export const accessRetrictionSchema = z.enum([
+  'elevator_only',
   'freight_elevator',
   'loading_dock',
   'loading_dock_low',
   'low_clearance',
   'non_paved',
   'stairs_only',
-  'steep_gradient'
+  'steep_gradient',
 ]);
 
 const packingSubTypeSchema = z.enum([
@@ -261,7 +268,12 @@ const objectSubTypeSchema = z.enum([
   'other',
 ]);
 
-export const quoteTypeSchema = z.enum(['parcel', 'premium', 'select', 'self_ship']);
+export const quoteTypeSchema = z.enum([
+  'parcel',
+  'premium',
+  'select',
+  'self_ship',
+]);
 export const disqualificationResonSchema = z.enum([
   'cannot_be_packed',
   'client_timeout_reached',
@@ -276,10 +288,17 @@ export const disqualificationResonSchema = z.enum([
   'too_many_items',
   'under_value',
   'under_volume',
-  'under_weight'
+  'under_weight',
 ]);
-export const insuranceSchema = z.enum(['arta_transit_insurance', 'no_arta_insurance']);
-export const paymentProcessSchema = z.enum(['checkout', 'checkout_direct', 'invoicing']);
+export const insuranceSchema = z.enum([
+  'arta_transit_insurance',
+  'no_arta_insurance',
+]);
+export const paymentProcessSchema = z.enum([
+  'checkout',
+  'checkout_direct',
+  'invoicing',
+]);
 export const quoteRequestStatusSchema = z.enum([
   'cancelled',
   'closed',
@@ -437,7 +456,7 @@ export const requestListItemSchema = datedSchema.extend({
   quote_types: z.array(quoteTypeSchema),
   shortcode: z.string(),
   status: quoteRequestStatusSchema,
-  tags: z.any() // TODO!!!
+  tags: z.any(), // TODO!!!
 });
 
 export const requestSchema = requestListItemSchema.extend({
@@ -461,9 +480,14 @@ export const paymentSchema = datedSchema.extend({
   paid_on: z.date(),
 });
 
-export const shipmentExceptionStatusSchema = z.enum(['in_progress', 'new', 'resolved']);
+export const shipmentExceptionStatusSchema = z.enum([
+  'in_progress',
+  'new',
+  'resolved',
+]);
 
-export const packageStatusSechema = z.enum(['pending',
+export const packageStatusSechema = z.enum([
+  'pending',
   'transit',
   'out_for_delivery',
   'delivered',
@@ -471,7 +495,7 @@ export const packageStatusSechema = z.enum(['pending',
   'notfound',
   'undelivered',
   'exception',
-  'expired'
+  'expired',
 ]);
 
 export const packageSchema = z.object({
@@ -505,7 +529,7 @@ export const shipmentExceptionTypeIdSchema = z.enum([
   'prepayment_required',
   'requested_hold_to_collect',
   'requested_hold_to_deliver',
-  'wrong_item'
+  'wrong_item',
 ]);
 
 export const shipmentExceptionSchema = datedSchema.extend({
@@ -523,7 +547,7 @@ export const shipmentScheduleSchema = z.object({
   delivery_window_modifier: z.string(),
   pickup_end: z.date().nullish(),
   pickup_start: z.date().nullish(),
-  pickup_window_modifier: z.string()
+  pickup_window_modifier: z.string(),
 });
 
 export const shipmentTrackingSchema = z.object({
@@ -539,7 +563,7 @@ export const eeiFormStatusSchema = z.enum([
   'cleared',
   'approved',
   'rejected',
-  'submitted'
+  'submitted',
 ]);
 
 export const shipmentStatusSchema = z.enum([
@@ -547,13 +571,14 @@ export const shipmentStatusSchema = z.enum([
   'confirmed',
   'collected',
   'in_transit',
-  'completed'
+  'completed',
 ]);
 
 export const shipmentSchema = datedSchema.extend({
   id: z.string().uuid(),
   destination: artaLocationSchema,
   eei_form_status: eeiFormStatusSchema.nullish(),
+  eei_form_url: z.string().nullish(),
   emissions: z.number().nullish(),
   emissions_unit: z.string().nullish(),
   exceptions: z.array(shipmentExceptionSchema).nullish(),
@@ -598,7 +623,7 @@ export const emailNotificationIdSchema = z.enum([
   'self_ship_label',
   'payment',
   'scheduling',
-  'eei'
+  'eei',
 ]);
 
 export const recipientSchema = z.enum(['payer', 'origin', 'destination']);
@@ -633,7 +658,7 @@ export const hostedSessionSchema = datedSchema.extend({
   private_token: z.string(),
   shortcode: z.string(),
   status: quoteRequestStatusSchema,
-  url: z.string().nullish()
+  url: z.string().nullish(),
 });
 
 export const invoicePaymentSchema = datedSchema.extend({
@@ -644,7 +669,7 @@ export const invoicePaymentSchema = datedSchema.extend({
   invoice_id: z.string().nullish(),
   paid_on: z.date(),
   payment_id: z.string().nullish(),
-  shipment_id: z.string().nullish()
+  shipment_id: z.string().nullish(),
 });
 
 export const invoiceSchema = datedSchema.extend({
@@ -750,7 +775,11 @@ export const uploadSchema = datedSchema.extend({
   presigned_url: z.string(),
 });
 
-export const webhookResourceTypeSchema = z.enum(['ping', 'request', 'shipment']);
+export const webhookResourceTypeSchema = z.enum([
+  'ping',
+  'request',
+  'shipment',
+]);
 export const webhookDeliveryStatusSchema = z.enum(['delivered', 'failed']);
 
 export const webhookDeliveryTypeSchema = z.enum([
@@ -775,7 +804,7 @@ export const webhookDeliverySchema = datedSchema.extend({
   webhook_url: z.string(),
   next_retry: z.string().nullish(),
   request_body: z.string().nullish(),
-  response_body: z.string().nullish()
+  response_body: z.string().nullish(),
 });
 
 export const webhookSchema = datedSchema.extend({

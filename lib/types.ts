@@ -165,6 +165,7 @@ export type Shipment = {
         estimated_city?: string | undefined;
     };
     eei_form_status?: (("pending" | "cleared" | "approved" | "rejected" | "submitted") | null) | undefined;
+    eei_form_url?: (string | null) | undefined;
     emissions?: (number | null) | undefined;
     emissions_unit?: (string | null) | undefined;
     exceptions?: ({

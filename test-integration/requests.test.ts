@@ -1,11 +1,14 @@
-import { arta } from ".";
-import { createPaginatedResponseSchema, requestListItemSchema, requestSchema } from "../schemas";
-import type { Page } from "../lib/pagination";
-import type { QuoteRequest, QuoteRequestListItem } from "../lib/types";
+import { arta } from '.';
+import {
+  createPaginatedResponseSchema,
+  requestListItemSchema,
+  requestSchema,
+} from '../schemas';
+import type { Page } from '../lib/pagination';
+import type { QuoteRequest, QuoteRequestListItem } from '../lib/types';
 
 describe('tests requests Arta endpoint', () => {
   it('should be able to CRUD quote requests', async () => {
-
     const request = await arta.requests.create({
       destination: {
         postal_code: '90024',
@@ -31,7 +34,9 @@ describe('tests requests Arta endpoint', () => {
 
     const requests = await arta.requests.list();
 
-    const parsedRequests = createPaginatedResponseSchema(requestListItemSchema).parse(requests) satisfies Page<QuoteRequestListItem>;
+    const parsedRequests = createPaginatedResponseSchema(
+      requestListItemSchema,
+    ).parse(requests) satisfies Page<QuoteRequestListItem>;
     expect(parsedRequests.items.length).toBeGreaterThanOrEqual(1);
 
     await arta.requests.cancel(parsedRequest.id);

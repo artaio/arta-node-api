@@ -1,9 +1,7 @@
 import type { RestClient } from '../net/RestClient';
 import type { Organization } from '../types';
 import type { NotDateParsed } from '../utils';
-import {
-  convertDatesToUtc
-} from '../utils';
+import { convertDatesToUtc } from '../utils';
 
 export class OrganizationsEndpoint {
   private readonly path = '/organization';

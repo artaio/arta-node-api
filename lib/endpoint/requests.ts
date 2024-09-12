@@ -11,12 +11,8 @@ import type { RestClient } from '../net/RestClient';
 import type { Page } from '../pagination';
 import type { RequestsSearch } from '../search';
 import type { QuoteRequest, QuoteRequestListItem } from '../types';
-import type {
-  Nullable,
-  NullableString} from '../utils';
-import {
-  parseService,
-} from '../utils';
+import type { Nullable, NullableString } from '../utils';
+import { parseService } from '../utils';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
 
@@ -59,7 +55,10 @@ export interface CustomQuotePayload {
 }
 
 export class QuoteRequestsEndpoint {
-  private readonly defaultEndpoint: Endpoint<EnrichRequest<QuoteRequestListItem | QuoteRequest>, QuoteRequestCreate>;
+  private readonly defaultEndpoint: Endpoint<
+    EnrichRequest<QuoteRequestListItem | QuoteRequest>,
+    QuoteRequestCreate
+  >;
   private readonly path = '/requests';
   constructor(private readonly artaClient: RestClient) {
     this.defaultEndpoint = new DefaultEndpoint<
@@ -68,7 +67,9 @@ export class QuoteRequestsEndpoint {
     >(this.path, this.artaClient, this.enrichFields.bind(this));
   }
 
-  private enrichFields(resource: QuoteRequestListItem | QuoteRequest): EnrichRequest<QuoteRequestListItem | QuoteRequest> {
+  private enrichFields(
+    resource: QuoteRequestListItem | QuoteRequest,
+  ): EnrichRequest<QuoteRequestListItem | QuoteRequest> {
     if (Object.prototype.hasOwnProperty.call(resource, 'quotes')) {
       (resource as QuoteRequest).quotes.forEach((q: any) => {
         q.total = Number(q.total);
@@ -92,8 +93,13 @@ export class QuoteRequestsEndpoint {
     return { ...resource, updateContacts, requireCustomQuotes, cancel };
   }
 
-  public getById(id: string, auth?: string): Promise<EnrichRequest<QuoteRequest>> {
-    return this.defaultEndpoint.getById(id, auth) as Promise<EnrichRequest<QuoteRequest>>;
+  public getById(
+    id: string,
+    auth?: string,
+  ): Promise<EnrichRequest<QuoteRequest>> {
+    return this.defaultEndpoint.getById(id, auth) as Promise<
+      EnrichRequest<QuoteRequest>
+    >;
   }
 
   public list(
@@ -112,7 +118,9 @@ export class QuoteRequestsEndpoint {
     payload: QuoteRequestCreateBody,
     auth?: string,
   ): Promise<EnrichRequest<QuoteRequest>> {
-    return this.defaultEndpoint.create({ request: payload }, auth) as Promise<EnrichRequest<QuoteRequest>>;
+    return this.defaultEndpoint.create({ request: payload }, auth) as Promise<
+      EnrichRequest<QuoteRequest>
+    >;
   }
 
   public async updateContacts(
@@ -120,11 +128,11 @@ export class QuoteRequestsEndpoint {
     contacts: UpdateRequestsContactsBody,
     auth?: string,
   ): Promise<EnrichRequest<QuoteRequest>> {
-    const rawReq = await this.artaClient.patch(
+    const rawReq = (await this.artaClient.patch(
       `${this.path}/${id}/contacts`,
       contacts,
       auth,
-    ) as QuoteRequest;
+    )) as QuoteRequest;
     return this.enrichFields(rawReq) as EnrichRequest<QuoteRequest>;
   }
 
@@ -133,20 +141,20 @@ export class QuoteRequestsEndpoint {
     customQuote: CustomQuotePayload,
     auth?: string,
   ): Promise<QuoteRequest> {
-    const rawReq = await this.artaClient.patch(
+    const rawReq = (await this.artaClient.patch(
       `${this.path}/${id}/custom`,
       customQuote,
       auth,
-    ) as QuoteRequest;
+    )) as QuoteRequest;
     return this.enrichFields(rawReq) as EnrichRequest<QuoteRequest>;
   }
 
   public async cancel(id: string, auth?: string): Promise<QuoteRequest> {
-    const rawReq = await this.artaClient.patch(
+    const rawReq = (await this.artaClient.patch(
       `${this.path}/${id}/cancel`,
       undefined,
       auth,
-    ) as QuoteRequest;
+    )) as QuoteRequest;
     return this.enrichFields(rawReq) as EnrichRequest<QuoteRequest>;
   }
 }

@@ -53,15 +53,8 @@ export class FetchHttpClient implements HttpClient {
     host: string,
     params?: Partial<HttpRequestParameters>,
   ): Promise<HttpClientResponse> {
-    const {
-      protocol,
-      port,
-      path,
-      method,
-      timeout,
-      headers,
-      requestData,
-    } = initParams(params);
+    const { protocol, port, path, method, timeout, headers, requestData } =
+      initParams(params);
 
     const url = `${protocol}://${host}:${port}${path}`;
 
@@ -80,7 +73,10 @@ export class FetchHttpClient implements HttpClient {
       }, timeout);
     });
     try {
-      const response = await Promise.race([fetchUrl, rejectTimeout]) as Response;
+      const response = (await Promise.race([
+        fetchUrl,
+        rejectTimeout,
+      ])) as Response;
 
       return new FetchHttpClientResponse(response);
     } finally {

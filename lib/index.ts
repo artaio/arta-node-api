@@ -7,12 +7,8 @@ export {
   AttachmentCreateBody,
 } from './endpoint/attachment';
 export { EmailRuleCreateBody } from './endpoint/emailRules';
-export {
-  EmailSubscriptionCreateBody,
-} from './endpoint/emailSubscriptions';
-export {
-  HostedSessionCreateBody,
-} from './endpoint/hostedSessions';
+export { EmailSubscriptionCreateBody } from './endpoint/emailSubscriptions';
+export { HostedSessionCreateBody } from './endpoint/hostedSessions';
 export { KeyCreateBody } from './endpoint/keys';
 export * from './MetadataTypes';
 export { UploadCreateBody } from './endpoint/uploads';
@@ -22,6 +18,4 @@ export {
   UpdateRequestsContactsBody,
   CustomQuotePayload,
 } from './endpoint/requests';
-export {
-  ShipmentCreateBody,
-} from './endpoint/shipments';
+export { ShipmentCreateBody } from './endpoint/shipments';

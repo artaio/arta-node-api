@@ -3,12 +3,8 @@ import type { RestClient } from '../net/RestClient';
 import type { DatedInterface, NotDateParsed } from '../utils';
 import { convertDatesToUtc } from '../utils';
 import type { Page } from '../pagination';
-import type {
-  QueryParameters} from '../queryParams';
-import {
-  defaultQueryParams,
-  parseQueryParams
-} from '../queryParams';
+import type { QueryParameters } from '../queryParams';
+import { defaultQueryParams, parseQueryParams } from '../queryParams';
 
 export interface Endpoint<T, U> {
   list: (queryParam?: QueryParameters, auth?: string) => Promise<Page<T>>;
@@ -78,7 +74,6 @@ export class DefaultEndpoint<T extends DatedInterface, U>
   }
 
   public async create(payload: U, auth?: string): Promise<T> {
-
     const body = await this.artaClient.post<U, NotDateParsed<T>>(
       this.path,
       payload,

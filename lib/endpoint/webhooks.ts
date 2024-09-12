@@ -41,7 +41,11 @@ export class WebhooksEndpoint {
     return this.defaultEndpoint.getById(id, auth);
   }
 
-  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<ExtendedWebhook>> {
+  public list(
+    page = 1,
+    pageSize = 20,
+    auth?: string,
+  ): Promise<Page<ExtendedWebhook>> {
     return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
   }
 
@@ -49,7 +53,10 @@ export class WebhooksEndpoint {
     return this.defaultEndpoint.listAll(auth);
   }
 
-  public create(payload: WebhookCreateBody, auth?: string): Promise<ExtendedWebhook> {
+  public create(
+    payload: WebhookCreateBody,
+    auth?: string,
+  ): Promise<ExtendedWebhook> {
     return this.defaultEndpoint.create({ webhook: payload }, auth);
   }
 

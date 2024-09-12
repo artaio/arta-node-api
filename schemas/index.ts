@@ -29,6 +29,7 @@ export const keySchema = datedSchema.extend({
 
 export const supportedCurrencySchema = z.enum([
   'CAD',
+  'CHF',
   'EUR',
   'GBP',
   'HKD',

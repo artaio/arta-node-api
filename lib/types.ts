@@ -107,7 +107,7 @@ export type QuoteRequest = {
     | 'pending'
     | 'quoted';
   tags?: any;
-  currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   additional_services: (
     | 'assembly'
     | 'debris_disposal'
@@ -376,7 +376,7 @@ export type QuoteRequest = {
       | 'other';
     unit_of_measurement?: (string | null) | undefined;
     weight_unit?: (string | null) | undefined;
-    value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+    value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   }[];
   payment_process: 'checkout' | 'checkout_direct' | 'invoicing';
   preferred_quote_types?:
@@ -387,7 +387,7 @@ export type QuoteRequest = {
     id: number;
     included_services: {
       amount: number;
-      amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+      amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
       is_requested?: boolean | undefined;
       is_required?: boolean | undefined;
       name: string;
@@ -433,15 +433,15 @@ export type QuoteRequest = {
     included_insurance_policy?:
       | ({
           amount: number;
-          amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+          amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
           id: string;
           insured_value: number;
-          insured_value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+          insured_value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
         } | null)
       | undefined;
     optional_services: {
       amount: number;
-      amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+      amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
       is_requested?: boolean | undefined;
       is_required?: boolean | undefined;
       name: string;
@@ -487,7 +487,7 @@ export type QuoteRequest = {
     quote_type: 'parcel' | 'premium' | 'select' | 'self_ship';
     status: string;
     total: number;
-    total_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+    total_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   }[];
 };
 export type Key = {
@@ -580,10 +580,10 @@ export type Shipment = {
   insurance_policy?:
     | ({
         amount: number;
-        amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+        amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
         id: string;
         insured_value: number;
-        insured_value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+        insured_value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
       } | null)
     | undefined;
   internal_reference?: (string | null) | undefined;
@@ -868,7 +868,7 @@ export type Shipment = {
                 | 'other';
               unit_of_measurement?: (string | null) | undefined;
               weight_unit?: (string | null) | undefined;
-              value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+              value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
             }[];
             packing_materials: (
               | 'alcohol_case'
@@ -965,7 +965,7 @@ export type Shipment = {
     | (
         | {
             amount: number;
-            amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+            amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
             is_requested?: boolean | undefined;
             is_required?: boolean | undefined;
             name: string;
@@ -1015,7 +1015,7 @@ export type Shipment = {
   shortcode: string;
   status: 'pending' | 'confirmed' | 'collected' | 'in_transit' | 'completed';
   total: number;
-  total_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  total_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   url?: (string | null) | undefined;
   tracking?:
     | (
@@ -1373,7 +1373,7 @@ export type HostedSession = {
       | 'other';
     unit_of_measurement?: (string | null) | undefined;
     weight_unit?: (string | null) | undefined;
-    value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+    value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   }[];
   origin: {
     access_restrictions?:
@@ -1437,7 +1437,7 @@ export type InvoicePayment = {
   created_at: Date;
   id: number;
   amount: number;
-  amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   credit_id?: (string | null) | undefined;
   invoice_id?: (string | null) | undefined;
   paid_on: Date;
@@ -1449,9 +1449,9 @@ export type Invoice = {
   created_at: Date;
   id: number;
   amount_owed: number;
-  amount_owed_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  amount_owed_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   amount_paid: number;
-  amount_paid_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  amount_paid_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   issued_on?: (Date | null) | undefined;
   shipment_id?: (string | null) | undefined;
   status: string;
@@ -1491,7 +1491,7 @@ export type Payment = {
   created_at: Date;
   id: number;
   amount: number;
-  amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   context: 'hosted_checkout' | 'invoiced';
   paid_on: Date;
 };
@@ -1591,7 +1591,7 @@ export type Webhook = {
 };
 export type ArtaService = {
   amount: number;
-  amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   is_requested?: boolean | undefined;
   is_required?: boolean | undefined;
   name: string;
@@ -1719,7 +1719,7 @@ export type AdditionalService =
   | 'placement'
   | 'signature_delivery'
   | 'tarmac_supervision';
-export type SupportedCurrency = 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+export type SupportedCurrency = 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
 export type ArtaLocation = {
   access_restrictions?:
     | (
@@ -1990,7 +1990,7 @@ export type ArtaObject = {
     | 'other';
   unit_of_measurement?: (string | null) | undefined;
   weight_unit?: (string | null) | undefined;
-  value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
 };
 export type QuoteType = 'parcel' | 'premium' | 'select' | 'self_ship';
 export type Contact = {
@@ -2247,7 +2247,7 @@ export type Package = {
       | 'other';
     unit_of_measurement?: (string | null) | undefined;
     weight_unit?: (string | null) | undefined;
-    value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+    value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   }[];
   packing_materials: (
     | 'alcohol_case'
@@ -2380,16 +2380,16 @@ export type ShipmentTracking = {
 };
 export type InsurancePolicy = {
   amount: number;
-  amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   id: string;
   insured_value: number;
-  insured_value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  insured_value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
 };
 export type Quote = {
   id: number;
   included_services: {
     amount: number;
-    amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+    amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
     is_requested?: boolean | undefined;
     is_required?: boolean | undefined;
     name: string;
@@ -2435,15 +2435,15 @@ export type Quote = {
   included_insurance_policy?:
     | ({
         amount: number;
-        amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+        amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
         id: string;
         insured_value: number;
-        insured_value_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+        insured_value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
       } | null)
     | undefined;
   optional_services: {
     amount: number;
-    amount_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+    amount_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
     is_requested?: boolean | undefined;
     is_required?: boolean | undefined;
     name: string;
@@ -2489,7 +2489,7 @@ export type Quote = {
   quote_type: 'parcel' | 'premium' | 'select' | 'self_ship';
   status: string;
   total: number;
-  total_currency: 'CAD' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  total_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
 };
 export type QuoteRequestListItem = {
   updated_at: Date;

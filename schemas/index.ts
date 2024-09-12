@@ -6,7 +6,7 @@ export const datedSchema = z.object({
 });
 
 export function createPaginatedResponseSchema<T extends z.ZodTypeAny>(
-  itemSchema: T
+  itemSchema: T,
 ) {
   return z.object({
     metadata: z.object({

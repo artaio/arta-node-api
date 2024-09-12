@@ -1,10 +1,9 @@
-import { arta } from ".";
-import type { Page } from "../lib/pagination";
-import type { QuoteRequest, Shipment } from "../lib/types";
-import { createPaginatedResponseSchema, shipmentSchema } from "../schemas";
+import { arta } from '.';
+import type { Page } from '../lib/pagination';
+import type { QuoteRequest, Shipment } from '../lib/types';
+import { createPaginatedResponseSchema, shipmentSchema } from '../schemas';
 
 describe.only('tests shipments Arta endpoint', () => {
-
   let request: QuoteRequest;
 
   beforeAll(async () => {
@@ -15,11 +14,11 @@ describe.only('tests shipments Arta endpoint', () => {
         address_line_1: '11 W 53rd St',
         contacts: [
           {
-            'name': 'John Doe',
-            'email_address': 'johndoe@test.test',
-            'phone_number': '1234567890',
-          }
-        ]
+            name: 'John Doe',
+            email_address: 'johndoe@test.test',
+            phone_number: '1234567890',
+          },
+        ],
       },
       objects: [
         {
@@ -38,17 +37,16 @@ describe.only('tests shipments Arta endpoint', () => {
         city: 'brooklyn',
         contacts: [
           {
-            'name': 'John Doe',
-            'email_address': 'johndoe@test.test',
-            'phone_number': '1234567890',
-          }
-        ]
+            name: 'John Doe',
+            email_address: 'johndoe@test.test',
+            phone_number: '1234567890',
+          },
+        ],
       },
     });
   });
 
   it('should be able to CRUD shipments', async () => {
-
     const shipment = await arta.shipments.create({
       quote_id: request.quotes[0].id,
     });
@@ -57,13 +55,16 @@ describe.only('tests shipments Arta endpoint', () => {
     expect(parsedShipment.status).toBe('pending');
 
     const shipments = await arta.shipments.list();
-    const parsedShipmentList = createPaginatedResponseSchema(shipmentSchema).parse(shipments) satisfies Page<Shipment>;
+    const parsedShipmentList = createPaginatedResponseSchema(
+      shipmentSchema,
+    ).parse(shipments) satisfies Page<Shipment>;
     expect(parsedShipmentList.items.length).toBeGreaterThanOrEqual(1);
 
     const shipmentItem = await arta.shipments.getById(parsedShipment.id);
-    const parsedShipmentItem = shipmentSchema.parse(shipmentItem) satisfies Shipment;
+    const parsedShipmentItem = shipmentSchema.parse(
+      shipmentItem,
+    ) satisfies Shipment;
 
     expect(parsedShipmentItem.id).toBe(parsedShipment.id);
-
   });
 });

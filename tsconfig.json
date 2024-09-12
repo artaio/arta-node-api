@@ -11,5 +11,5 @@
     "skipLibCheck": false,
     "resolveJsonModule": true
   },
-  "include": ["lib/**/*", "test/**/*", "test-integration/**/*", "schemas/**/*"],
+  "include": ["lib/**/*", "test/**/*", "test-integration/**/*", "schemas/**/*"]
 }

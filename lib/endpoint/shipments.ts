@@ -2,12 +2,8 @@ import type { ArtaID } from '../ArtaClient';
 import type { RestClient } from '../net/RestClient';
 import type { Page } from '../pagination';
 import type { ShipmentsSearch } from '../search';
-import type {
-  NullableString} from '../utils';
-import {
-  createDateAsUTC,
-  parseService,
-} from '../utils';
+import type { NullableString } from '../utils';
+import { createDateAsUTC, parseService } from '../utils';
 import type { Shipment } from '../types';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';

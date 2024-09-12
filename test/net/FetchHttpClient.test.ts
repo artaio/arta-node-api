@@ -96,7 +96,10 @@ describe('tests FetchHttpClient wrapper', () => {
   });
 
   it('should be able to handle timeouts', async () => {
-    nock('https://otherdomain.com').get('/').delayConnection(1100).reply(200, { 'ok': 'ok' });
+    nock('https://otherdomain.com')
+      .get('/')
+      .delayConnection(1100)
+      .reply(200, { ok: 'ok' });
 
     const httpClient = new FetchHttpClient();
     const req = httpClient.request('otherdomain.com', { timeout: 1000 });

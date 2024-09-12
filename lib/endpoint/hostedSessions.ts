@@ -54,7 +54,9 @@ export class HostedSessionsEndpoint {
     >(this.path, this.artaClient, this.withFunctionCalls.bind(this));
   }
 
-  private withFunctionCalls(hostedSession: EnrichedHostedSession): EnrichedHostedSession {
+  private withFunctionCalls(
+    hostedSession: EnrichedHostedSession,
+  ): EnrichedHostedSession {
     hostedSession.cancel = (auth?: string) =>
       this.cancel(hostedSession.id, auth);
     return hostedSession;
@@ -83,7 +85,10 @@ export class HostedSessionsEndpoint {
     return this.defaultEndpoint.create({ hosted_session: payload }, auth);
   }
 
-  public async cancel(id: ArtaID, auth?: string): Promise<EnrichedHostedSession> {
+  public async cancel(
+    id: ArtaID,
+    auth?: string,
+  ): Promise<EnrichedHostedSession> {
     const rawSession = await this.artaClient.patch<
       undefined,
       NotDateParsed<EnrichedHostedSession>

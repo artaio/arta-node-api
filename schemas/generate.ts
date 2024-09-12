@@ -1,12 +1,54 @@
-
 import { createTypeAlias, printNode, zodToTs } from 'zod-to-ts';
-import { additionalServiceSchema, artaLocationSchema, artaObjectSchema, artaServiceSchema, attatchmentSchema, carrierSchema, contactSchema, detailsSchema, disqualificationSchema, documentTypeSchema, emailNotificationIdSchema, emailRuleSchema, emailSubscriptionSchema, hostedSessionSchema, insurancePolicySchema, insuranceSchema, invoicePaymentSchema, invoiceSchema, keySchema, logSchema, mimeTypeSchema, organizationSchema, packageSchema, packageStatusSechema, paymentSchema, quoteSchema, quoteTypeSchema, recipientSchema, requestListItemSchema, requestSchema, shipmentExceptionSchema, shipmentExceptionStatusSchema, shipmentExceptionTypeIdSchema, shipmentScheduleSchema, shipmentSchema, shipmentTrackingSchema, supportedCurrencySchema, trackingEventSchema, trackingSchema, uploadSchema, webhookDeliverySchema, webhookSchema } from '.';
+import {
+  additionalServiceSchema,
+  artaLocationSchema,
+  artaObjectSchema,
+  artaServiceSchema,
+  attatchmentSchema,
+  carrierSchema,
+  contactSchema,
+  detailsSchema,
+  disqualificationSchema,
+  documentTypeSchema,
+  emailNotificationIdSchema,
+  emailRuleSchema,
+  emailSubscriptionSchema,
+  hostedSessionSchema,
+  insurancePolicySchema,
+  insuranceSchema,
+  invoicePaymentSchema,
+  invoiceSchema,
+  keySchema,
+  logSchema,
+  mimeTypeSchema,
+  organizationSchema,
+  packageSchema,
+  packageStatusSechema,
+  paymentSchema,
+  quoteSchema,
+  quoteTypeSchema,
+  recipientSchema,
+  requestListItemSchema,
+  requestSchema,
+  shipmentExceptionSchema,
+  shipmentExceptionStatusSchema,
+  shipmentExceptionTypeIdSchema,
+  shipmentScheduleSchema,
+  shipmentSchema,
+  shipmentTrackingSchema,
+  supportedCurrencySchema,
+  trackingEventSchema,
+  trackingSchema,
+  uploadSchema,
+  webhookDeliverySchema,
+  webhookSchema,
+} from '.';
 import type { Schema } from 'zod';
 
 const generate = (schema: Schema, identifier: string) => {
-    const { node } = zodToTs(schema, identifier);
-    const typeAlias = createTypeAlias(node, identifier);
-    console.log('export ' + printNode(typeAlias));
+  const { node } = zodToTs(schema, identifier);
+  const typeAlias = createTypeAlias(node, identifier);
+  console.log('export ' + printNode(typeAlias));
 };
 
 generate(attatchmentSchema, 'Attachment');
@@ -53,5 +95,3 @@ generate(emailNotificationIdSchema, 'EmailNotificationId');
 generate(recipientSchema, 'Recipient');
 generate(mimeTypeSchema, 'ArtaMimeType');
 generate(documentTypeSchema, 'ArtaDocumentType');
-
-

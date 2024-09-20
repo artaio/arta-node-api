@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/artaio/arta-node-api/compare/v1.1.1...v1.2.0) (2024-09-20)
+
+
+### Features
+
+* add support for CHF currency ([#61](https://github.com/artaio/arta-node-api/issues/61)) ([ef91379](https://github.com/artaio/arta-node-api/commit/ef91379302aec187298cbdf039c86b32fa37f37c))
+
+
+
 ## [1.1.1](https://github.com/artaio/arta-node-api/compare/v1.1.0...v1.1.1) (2024-09-12)
 
 

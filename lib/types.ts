@@ -1,3 +1,14 @@
+export type Tag = {
+  updated_at: Date;
+  created_at: Date;
+  id: string;
+  created_by?: (number | null) | undefined;
+  description?: (string | null) | undefined;
+  name: string;
+  updated_by?: (number | null) | undefined;
+  color: string;
+  is_active: boolean;
+};
 export type Attachment = {
   updated_at: Date;
   created_at: Date;
@@ -106,7 +117,17 @@ export type QuoteRequest = {
     | 'in_progress'
     | 'pending'
     | 'quoted';
-  tags?: any;
+  tags: {
+    updated_at: Date;
+    created_at: Date;
+    id: string;
+    created_by?: (number | null) | undefined;
+    description?: (string | null) | undefined;
+    name: string;
+    updated_by?: (number | null) | undefined;
+    color: string;
+    is_active: boolean;
+  }[];
   currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   additional_services: (
     | 'assembly'
@@ -2591,7 +2612,17 @@ export type QuoteRequestListItem = {
     | 'in_progress'
     | 'pending'
     | 'quoted';
-  tags?: any;
+  tags: {
+    updated_at: Date;
+    created_at: Date;
+    id: string;
+    created_by?: (number | null) | undefined;
+    description?: (string | null) | undefined;
+    name: string;
+    updated_by?: (number | null) | undefined;
+    color: string;
+    is_active: boolean;
+  }[];
 };
 export type EmailNotificationId =
   | 'booking'

@@ -37,6 +37,7 @@ import {
   shipmentSchema,
   shipmentTrackingSchema,
   supportedCurrencySchema,
+  tagSchema,
   trackingEventSchema,
   trackingSchema,
   uploadSchema,
@@ -51,6 +52,7 @@ const generate = (schema: Schema, identifier: string) => {
   console.log('export ' + printNode(typeAlias));
 };
 
+generate(tagSchema, 'Tag');
 generate(attatchmentSchema, 'Attachment');
 generate(requestSchema, 'QuoteRequest');
 generate(keySchema, 'Key');

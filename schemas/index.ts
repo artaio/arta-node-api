@@ -440,6 +440,16 @@ export const quoteSchema = z.object({
   total_currency: supportedCurrencySchema,
 });
 
+export const tagSchema = datedSchema.extend({
+  id: z.string().uuid(),
+  created_by: z.number().nullish(),
+  description: z.string().nullish(),
+  name: z.string(),
+  updated_by: z.number().nullish(),
+  color: z.string(),
+  is_active: z.boolean(),
+});
+
 export const requestListItemSchema = datedSchema.extend({
   id: z.string().uuid(),
   bookable: z.object({
@@ -457,7 +467,7 @@ export const requestListItemSchema = datedSchema.extend({
   quote_types: z.array(quoteTypeSchema),
   shortcode: z.string(),
   status: quoteRequestStatusSchema,
-  tags: z.any(), // TODO!!!
+  tags: z.array(tagSchema),
 });
 
 export const requestSchema = requestListItemSchema.extend({

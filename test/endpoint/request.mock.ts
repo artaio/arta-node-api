@@ -105,6 +105,19 @@ export const responseMock = {
   preferred_quote_types: [],
   public_reference: null,
   quote_types: ['self_ship', 'parcel', 'premium'],
+  tags: [
+    {
+      color: 'D7D6D0',
+      created_at: '2024-10-17T23:57:51.027146',
+      created_by: null,
+      description: 'test description',
+      id: 'f5e92ee6-c8ad-4117-b307-aee864074bfc',
+      is_active: true,
+      name: 'yvlprx2d',
+      updated_at: '2024-10-17T23:57:51.027146',
+      updated_by: null,
+    },
+  ],
   quotes: [
     {
       id: 1743970,
@@ -172,6 +185,19 @@ export const responseMock = {
       status: 'published',
       total: '2.00',
       total_currency: 'USD',
+      tags: [
+        {
+          color: 'D7D6D0',
+          created_at: '2024-10-17T23:57:51.027146',
+          created_by: null,
+          description: 'test description',
+          id: 'f5e92ee6-c8ad-4117-b307-aee864074bfc',
+          is_active: true,
+          name: 'yvlprx2d',
+          updated_at: '2024-10-17T23:57:51.027146',
+          updated_by: null,
+        },
+      ]
     },
     {
       id: 1743969,

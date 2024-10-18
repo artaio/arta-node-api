@@ -14,12 +14,13 @@ describe('tests quote requests Arta endpoint', () => {
     endpoint = new QuoteRequestsEndpoint(clientMock);
   });
 
-  it('should have get, create, and list methods', async () => {
+  it('should have get, create, update and list methods', async () => {
     const requestConfig = { path, clientMock, endpoint };
     const result = await helper.testGet(requestConfig);
     await helper.testCreate(createPayload, 'request', requestConfig);
     await helper.testList(responseMock, requestConfig);
     await helper.testListWithSearch(responseMock, requestConfig);
+    await helper.testUpdate({ tags: ['abc'] }, 'request', requestConfig);
 
     expect(result.quotes[0].optional_services[0].amount).toBe(1.0);
     expect(

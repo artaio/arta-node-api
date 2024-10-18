@@ -12,7 +12,7 @@ import type { Page } from '../pagination';
 import type { RequestsSearch } from '../search';
 import type { QuoteRequest, QuoteRequestListItem } from '../types';
 import type { Nullable, NullableString } from '../utils';
-import { parseService } from '../utils';
+import { createDateAsUTC, parseService } from '../utils';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
 
@@ -75,7 +75,20 @@ export class QuoteRequestsEndpoint {
         q.total = Number(q.total);
         q.included_services.forEach(parseService);
         q.optional_services.forEach(parseService);
+        if (q.tags) {
+          q.tags.forEach((t: any) => {
+            q.created_at = createDateAsUTC(t.created_at);
+            q.updated_at = createDateAsUTC(t.updated_at);
+          });
+        }
       });
+
+      if (resource.tags) {
+        resource.tags.forEach((t: any) => {
+          t.created_at = createDateAsUTC(t.created_at);
+          t.updated_at = createDateAsUTC(t.updated_at);
+        });
+      }
     }
 
     const updateContacts = (
@@ -121,6 +134,27 @@ export class QuoteRequestsEndpoint {
     return this.defaultEndpoint.create({ request: payload }, auth) as Promise<
       EnrichRequest<QuoteRequest>
     >;
+  }
+
+  public update(
+    id: QuoteRequest['id'],
+    payload: Partial<
+      Pick<
+        QuoteRequest,
+        | 'destination'
+        | 'internal_reference'
+        | 'origin'
+        | 'payment_process'
+        | 'public_reference'
+      > & { tags: Array<string> }
+    >,
+    auth?: string,
+  ): Promise<EnrichRequest<QuoteRequest>> {
+    return this.defaultEndpoint.update(
+      id,
+      { request: payload } as Partial<QuoteRequestCreateBody>,
+      auth,
+    ) as Promise<EnrichRequest<QuoteRequest>>;
   }
 
   public async updateContacts(

@@ -14,11 +14,12 @@ describe('tests shipments Arta endpoint', () => {
     endpoint = new ShipmentsEndpoint(clientMock);
   });
 
-  it('should have get, create, list and list with search methods', async () => {
+  it('should have get, create, update, list and list with search methods', async () => {
     const requestConfig = { path, clientMock, endpoint };
     const result = await helper.testGet(requestConfig);
     await helper.testCreate(createPayload, 'shipment', requestConfig);
     await helper.testList(responseMock, requestConfig);
+    await helper.testUpdate({ tags: ['abc'] }, 'shipment', requestConfig);
     await helper.testListWithSearch(responseMock, requestConfig);
 
     expect(result.emissions).toBe(19.35);

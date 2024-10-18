@@ -3,7 +3,7 @@ import type { Page } from '../lib/pagination';
 import type { QuoteRequest, Shipment } from '../lib/types';
 import { createPaginatedResponseSchema, shipmentSchema } from '../schemas';
 
-describe.only('tests shipments Arta endpoint', () => {
+describe('tests shipments Arta endpoint', () => {
   let request: QuoteRequest;
 
   beforeAll(async () => {

@@ -57,6 +57,12 @@ export class ShipmentsEndpoint {
         e.updated_at = createDateAsUTC(e.updated_at);
       });
     }
+    if (s.tags) {
+      s.tags.forEach((t: any) => {
+        t.created_at = createDateAsUTC(t.created_at);
+        t.updated_at = createDateAsUTC(t.updated_at);
+      });
+    }
 
     s.services && s.services.forEach(parseService);
     return s;
@@ -80,5 +86,22 @@ export class ShipmentsEndpoint {
 
   public create(payload: ShipmentCreateBody, auth?: string): Promise<Shipment> {
     return this.defaultEndpoint.create({ shipment: payload }, auth);
+  }
+
+  public update(
+    id: Shipment['id'],
+    payload: Partial<
+      Pick<
+        Shipment,
+        'internal_reference' | 'payment_process' | 'public_reference'
+      > & { tags: Array<string> }
+    >,
+    auth?: string,
+  ): Promise<Shipment> {
+    return this.defaultEndpoint.update(
+      id,
+      { shipment: payload } as Partial<ShipmentCreateBody>,
+      auth,
+    );
   }
 }

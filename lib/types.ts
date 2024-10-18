@@ -1036,6 +1036,17 @@ export type Shipment = {
   shortcode: string;
   status: 'pending' | 'confirmed' | 'collected' | 'in_transit' | 'completed';
   total: number;
+  tags: {
+    updated_at: Date;
+    created_at: Date;
+    id: string;
+    created_by?: (number | null) | undefined;
+    description?: (string | null) | undefined;
+    name: string;
+    updated_by?: (number | null) | undefined;
+    color: string;
+    is_active: boolean;
+  }[];
   total_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
   url?: (string | null) | undefined;
   tracking?:

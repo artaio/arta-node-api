@@ -610,6 +610,7 @@ export const shipmentSchema = datedSchema.extend({
   shortcode: z.string(),
   status: shipmentStatusSchema,
   total: z.number(),
+  tags: z.array(tagSchema),
   total_currency: supportedCurrencySchema,
   url: z.string().nullish(),
   tracking: z.array(shipmentTrackingSchema).nullish(),

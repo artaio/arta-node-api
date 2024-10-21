@@ -8,6 +8,9 @@
 
 ## [1.2.1](https://github.com/artaio/arta-node-api/compare/v1.2.0...v1.2.1) (2024-10-21)
 
+### Features
+
+* adds tags resource and endpoints ([#62](https://github.com/artaio/arta-node-api/pull/62)) ([0516828](https://github.com/artaio/arta-node-api/commit/0516828256bf335b35e7182c361d6c1f57682c97))
 
 
 # [1.2.0](https://github.com/artaio/arta-node-api/compare/v1.1.1...v1.2.0) (2024-09-20)
@@ -391,6 +394,3 @@
 ### Features
 
 * project setup ([648605f](https://github.com/artaio/arta-node-api/commit/648605ff8456af0cdf31b118783fc1516795a073))
-
-
-

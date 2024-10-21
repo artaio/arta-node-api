@@ -26,9 +26,9 @@ export class TagsEndpoint {
   }
 
   public list(
+    search?: TagsSearch,
     page = 1,
     pageSize = 20,
-    search?: TagsSearch,
     auth?: string,
   ): Promise<Page<Tag>> {
     return this.defaultEndpoint.list(

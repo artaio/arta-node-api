@@ -2,6 +2,7 @@ import type { RestClient } from '../net/RestClient';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
 import type { Page } from '../pagination';
+import type { TagsSearch } from '../search';
 import type { Tag } from '../types';
 
 export type TagCreateBody = Omit<Tag, 'id' | 'created_at' | 'updated_at'>;
@@ -24,8 +25,16 @@ export class TagsEndpoint {
     return this.defaultEndpoint.getById(name, auth);
   }
 
-  public list(page = 1, pageSize = 20, auth?: string): Promise<Page<Tag>> {
-    return this.defaultEndpoint.list({ page, page_size: pageSize }, auth);
+  public list(
+    search?: TagsSearch,
+    page = 1,
+    pageSize = 20,
+    auth?: string,
+  ): Promise<Page<Tag>> {
+    return this.defaultEndpoint.list(
+      { page, page_size: pageSize, search },
+      auth,
+    );
   }
 
   public create(payload: TagCreateBody, auth?: string): Promise<Tag> {

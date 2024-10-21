@@ -34,6 +34,7 @@ describe('tests tags Arta endpoint', () => {
 
     await helper.testCreate(createPayload, 'tag', requestConfig);
     await helper.testList(responseMock, requestConfig);
+    await helper.testListWithSearch(responseMock, requestConfig);
     await helper.testUpdate({ color: 'D7D6D1' }, 'tag', requestConfig);
   });
 });

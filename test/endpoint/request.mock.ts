@@ -197,7 +197,7 @@ export const responseMock = {
           updated_at: '2024-10-17T23:57:51.027146',
           updated_by: null,
         },
-      ]
+      ],
     },
     {
       id: 1743969,

@@ -450,6 +450,9 @@ export type QuoteRequest = {
         | 'security'
         | 'equipment';
       included_services: any[];
+      metadata: {
+        [x: string]: unknown;
+      };
     }[];
     included_insurance_policy?:
       | ({
@@ -1028,6 +1031,9 @@ export type Shipment = {
               | 'security'
               | 'equipment';
             included_services: any[];
+            metadata: {
+              [x: string]: unknown;
+            };
           }[]
         | null
       )
@@ -2463,6 +2469,9 @@ export type Quote = {
       | 'security'
       | 'equipment';
     included_services: any[];
+    metadata: {
+      [x: string]: unknown;
+    };
   }[];
   included_insurance_policy?:
     | ({

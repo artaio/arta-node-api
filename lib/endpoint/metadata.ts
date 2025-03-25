@@ -55,6 +55,8 @@ export interface BaseMetadata<T> {
   name: string;
 }
 
+type GenericMetadata = Pick<BaseMetadata<string>, 'id' | 'name'>;
+
 export type InsurancesMetadata = BaseMetadata<Insurance>;
 export type LocationAccessRestrictionMetadata = BaseMetadata<AccessRestriction>;
 export type ObjectMaterialsMetadata = BaseMetadata<ObjectMaterial>;
@@ -153,6 +155,17 @@ export class MetadataEndpoint {
 
   public quotes(auth?: string): Promise<QuotesMetadata[]> {
     return this.artaClient.get(`${this.path}/quotes`, auth);
+  }
+
+  public referenceRateProviders(auth?: string): Promise<GenericMetadata[]> {
+    return this.artaClient.get(`${this.path}/reference_rate_providers`, auth);
+  }
+
+  public referenceRateServiceLevels(auth?: string): Promise<GenericMetadata[]> {
+    return this.artaClient.get(
+      `${this.path}/reference_rate_service_levels`,
+      auth,
+    );
   }
 
   public requestStatuses(auth?: string): Promise<RequestStatusesMetadata[]> {

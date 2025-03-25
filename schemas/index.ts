@@ -429,9 +429,13 @@ export const artaServiceSchema = z.object({
   included_services: z.array(z.any()),
 });
 
+export const artaServiceWithMetadata = artaServiceSchema.extend({
+  metadata: z.record(z.unknown()),
+});
+
 export const quoteSchema = z.object({
   id: z.number(),
-  included_services: z.array(artaServiceSchema),
+  included_services: z.array(artaServiceWithMetadata),
   included_insurance_policy: insurancePolicySchema.nullish(),
   optional_services: z.array(artaServiceSchema),
   quote_type: quoteTypeSchema,
@@ -605,7 +609,7 @@ export const shipmentSchema = datedSchema.extend({
   public_reference: z.string().nullish(),
   quote_type: quoteTypeSchema,
   schedule: shipmentScheduleSchema.nullish(),
-  services: z.array(artaServiceSchema).nullish(),
+  services: z.array(artaServiceWithMetadata).nullish(),
   shipping_notes: z.string().nullish(),
   shortcode: z.string(),
   status: shipmentStatusSchema,

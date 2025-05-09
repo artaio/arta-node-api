@@ -2001,6 +2001,55 @@ export type HostedSession = {
   public_instructions_confirmation?: (string | null) | undefined;
   quoting_strategy: 'all_rates' | 'best_rate' | 'compare_carriers';
 };
+export type ImportCostEstimate = {
+  updated_at: Date;
+  created_at: Date;
+  id: string;
+  currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  destination: {
+    city?: (string | null) | undefined;
+    country: string;
+    postal_code?: (string | null) | undefined;
+    region?: (string | null) | undefined;
+  };
+  end_use?: (string | null) | undefined;
+  origin: {
+    country: string;
+  };
+  quote_id?: (string | null) | undefined;
+  reference?: (string | null) | undefined;
+  shortcode: string;
+  status: 'failed' | 'success';
+  transport: {
+    service_level: string;
+    amount: string | number;
+    amount_currency?: (string | null) | undefined;
+  };
+  objects: {
+    value: string | number;
+    quantity?: (number | null) | undefined;
+    value_currency?:
+      | (('CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD') | null)
+      | undefined;
+    hs_code: string;
+    reference?: (string | null) | undefined;
+    country_of_origin?: (string | null) | undefined;
+  }[];
+  estimate: {
+    line_items: {
+      description: string;
+      subtype: string;
+      type: string;
+      amount: string | number;
+    }[];
+    summary: {
+      ddp_service_fees: string | number;
+      fees: string | number;
+      duties: string | number;
+      taxes: string | number;
+    };
+  };
+};
 export type InvoicePayment = {
   updated_at: Date;
   created_at: Date;

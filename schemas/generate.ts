@@ -20,6 +20,7 @@ import {
   hostedSessionSchema,
   inboundHostedSessionSchema,
   inboundObject,
+  importCostEstimate,
   insurancePolicySchema,
   insuranceSchema,
   invoicePaymentSchema,
@@ -69,6 +70,7 @@ generate(shipmentSchema, 'Shipment');
 generate(emailRuleSchema, 'EmailRule');
 generate(emailSubscriptionSchema, 'EmailSubscription');
 generate(hostedSessionSchema, 'HostedSession');
+generate(importCostEstimate, 'ImportCostEstimate');
 generate(invoicePaymentSchema, 'InvoicePayment');
 generate(invoiceSchema, 'Invoice');
 generate(logSchema, 'Log');

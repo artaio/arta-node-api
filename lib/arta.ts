@@ -22,6 +22,7 @@ import { TrackingsEndpoint } from './endpoint/trackings';
 import { QuoteRequestsEndpoint } from './endpoint/requests';
 import { ShipmentsEndpoint } from './endpoint/shipments';
 import { TagsEndpoint } from './endpoint/tags';
+import { ImportCostEstimatesEndpoint } from './endpoint/importCostEstimates';
 
 export interface ArtaConfig {
   host: string;
@@ -43,6 +44,7 @@ export class Arta {
   public email_rules: EmailRulesEndpoint;
   public email_subscriptions: EmailSubscriptionsEndpoint;
   public hosted_sessions: HostedSessionsEndpoint;
+  public import_cost_estimates: ImportCostEstimatesEndpoint;
   public invoice_payments: InvoicePaymentsEndpoint;
   public invoices: InvoicesEndpoint;
   public keys: KeysEndpoint;
@@ -72,6 +74,9 @@ export class Arta {
     this.email_rules = new EmailRulesEndpoint(this.artaClient);
     this.email_subscriptions = new EmailSubscriptionsEndpoint(this.artaClient);
     this.hosted_sessions = new HostedSessionsEndpoint(this.artaClient);
+    this.import_cost_estimates = new ImportCostEstimatesEndpoint(
+      this.artaClient,
+    );
     this.invoice_payments = new InvoicePaymentsEndpoint(this.artaClient);
     this.invoices = new InvoicesEndpoint(this.artaClient);
     this.keys = new KeysEndpoint(this.artaClient);

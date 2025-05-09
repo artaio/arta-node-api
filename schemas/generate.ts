@@ -14,6 +14,7 @@ import {
   emailRuleSchema,
   emailSubscriptionSchema,
   hostedSessionSchema,
+  importCostEstimate,
   insurancePolicySchema,
   insuranceSchema,
   invoicePaymentSchema,
@@ -60,7 +61,8 @@ generate(shipmentSchema, 'Shipment');
 generate(emailRuleSchema, 'EmailRule');
 generate(emailSubscriptionSchema, 'EmailSubscription');
 generate(hostedSessionSchema, 'HostedSession');
-generate(invoicePaymentSchema, 'InvoicePayment');
+generate(importCostEstimate, 'ImportCostEstimate'),
+  generate(invoicePaymentSchema, 'InvoicePayment');
 generate(invoiceSchema, 'Invoice');
 generate(logSchema, 'Log');
 generate(organizationSchema, 'Organization');

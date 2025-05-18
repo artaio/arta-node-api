@@ -403,6 +403,21 @@ export type QuoteRequest = {
   preferred_quote_types?:
     | (('parcel' | 'premium' | 'select' | 'self_ship')[] | null)
     | undefined;
+  preferred_parcel_transport_services?:
+    | (
+        | (
+            | 'economy'
+            | 'economy_freight'
+            | 'ground'
+            | 'next_day_air'
+            | 'priority'
+            | 'priority_freight'
+            | 'second_day_air'
+            | 'standard'
+          )[]
+        | null
+      )
+    | undefined;
   shipping_notes?: (string | null) | undefined;
   quotes: {
     id: number;
@@ -1451,6 +1466,21 @@ export type HostedSession = {
     estimated_region?: string | undefined;
     estimated_city?: string | undefined;
   };
+  preferred_parcel_transport_services?:
+    | (
+        | (
+            | 'economy'
+            | 'economy_freight'
+            | 'ground'
+            | 'next_day_air'
+            | 'priority'
+            | 'priority_freight'
+            | 'second_day_air'
+            | 'standard'
+          )[]
+        | null
+      )
+    | undefined;
   preferred_quote_types?:
     | (('parcel' | 'premium' | 'select' | 'self_ship')[] | null)
     | undefined;
@@ -2685,3 +2715,12 @@ export type ArtaDocumentType =
   | 'quote'
   | 'shipping_label'
   | 'other';
+export type ParcelTransportServices =
+  | 'economy'
+  | 'economy_freight'
+  | 'ground'
+  | 'next_day_air'
+  | 'priority'
+  | 'priority_freight'
+  | 'second_day_air'
+  | 'standard';

@@ -24,6 +24,7 @@ import {
   organizationSchema,
   packageSchema,
   packageStatusSechema,
+  parcelTransportServicesSchema,
   paymentSchema,
   quoteSchema,
   quoteTypeSchema,
@@ -97,3 +98,4 @@ generate(emailNotificationIdSchema, 'EmailNotificationId');
 generate(recipientSchema, 'Recipient');
 generate(mimeTypeSchema, 'ArtaMimeType');
 generate(documentTypeSchema, 'ArtaDocumentType');
+generate(parcelTransportServicesSchema, 'ParcelTransportServices');

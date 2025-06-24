@@ -33,7 +33,7 @@ export interface HostedSessionCreateBody {
   objects: ArtaObject[];
   origin: ArtaLocation;
   preferred_quote_types?: Nullable<QuoteType[]>;
-  preferred_parcel_transport_services?: Nullable<ParcelTransportServices>;
+  preferred_parcel_transport_services?: Nullable<ParcelTransportServices[]>;
   public_reference?: NullableString;
   shipping_notes?: NullableString;
   success_url?: NullableString;

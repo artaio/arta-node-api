@@ -1,3 +1,13 @@
+# [1.4.0](https://github.com/artaio/arta-node-api/compare/v1.3.1...v1.4.0) (2025-06-24)
+
+
+### Features
+
+* add preferred_parcel_transport_services to request & hosted_session ([#70](https://github.com/artaio/arta-node-api/issues/70)) ([3505d01](https://github.com/artaio/arta-node-api/commit/3505d01b5114ae585b74e888dfbe7402dc5fd277))
+* add requests.quoting_strategy & shipments.tracking.label_format_urls ([#76](https://github.com/artaio/arta-node-api/issues/76)) ([bf9c650](https://github.com/artaio/arta-node-api/commit/bf9c65093ee3075ba4c1e55d302c4c025ad510b5))
+
+
+
 ## [1.3.1](https://github.com/artaio/arta-node-api/compare/v1.3.0...v1.3.1) (2025-03-25)
 
 

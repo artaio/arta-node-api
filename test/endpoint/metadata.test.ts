@@ -68,6 +68,12 @@ describe('tests logs Arta endpoint', () => {
     await endpoint.quotes();
     expect(clientMock.get).lastCalledWith(`/${path}/quotes`, undefined);
 
+    await endpoint.quotingStrategies();
+    expect(clientMock.get).lastCalledWith(
+      `/${path}/quoting_strategies`,
+      undefined,
+    );
+
     await endpoint.requestStatuses();
     expect(clientMock.get).lastCalledWith(
       `/${path}/request_statuses`,

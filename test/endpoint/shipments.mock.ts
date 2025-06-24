@@ -180,7 +180,34 @@ export const responseMock = {
   ],
   total: '4',
   total_currency: 'USD',
-  tracking: [],
+  tracking: [
+    {
+      carrier_name: 'FedEx',
+      label_format_urls: {
+        pdf_4_x_6:
+          'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=pdf_4_x_6',
+        pdf_a4:
+          'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=pdf_a4',
+        pdf_a4_half_page:
+          'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=pdf_a4_half_page',
+        pdf_letter:
+          'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=pdf_letter',
+        pdf_letter_half_page:
+          'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=pdf_letter_half_page',
+        png_4_x_6:
+          'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=png_4_x_6',
+        zpl_12dpmm:
+          'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=zpl_12dpmm',
+        zpl_8dpmm:
+          'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=zpl_8dpmm',
+      },
+      label_url: 'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od',
+      package_id: 131,
+      tracking_number: 'EXAMPLE',
+      url: 'https://www.fedex.com/apps/fedextrack/?action=track&cntry_code=us&trackingnumber=EXAMPLE',
+    },
+  ],
+
   updated_at: '2021-01-21T21:00:58.579870',
   url: 'https://connect.shiparta.com/shipments/6b12c76a-5217-4cd6-82d8-7aa5265egood/5xTRnCvYkdMFdcFFMWUZaCmXz',
 };

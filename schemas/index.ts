@@ -275,6 +275,7 @@ export const quoteTypeSchema = z.enum([
   'select',
   'self_ship',
 ]);
+export const quotingStrategySchema = z.enum(['best_rate', 'compare_carriers']);
 export const disqualificationResonSchema = z.enum([
   'cannot_be_packed',
   'client_timeout_reached',
@@ -479,6 +480,7 @@ export const requestListItemSchema = datedSchema.extend({
   origin: artaLocationSchema,
   public_reference: z.string().nullish(),
   quote_types: z.array(quoteTypeSchema),
+  quoting_strategy: quotingStrategySchema,
   shortcode: z.string(),
   status: quoteRequestStatusSchema,
   tags: z.array(tagSchema),
@@ -581,6 +583,18 @@ export const shipmentScheduleSchema = z.object({
 export const shipmentTrackingSchema = z.object({
   carrier_name: z.string(),
   label_url: z.string().nullish(),
+  label_format_urls: z
+    .object({
+      pdf_4_x_6: z.string().nullish(),
+      pdf_a4: z.string().nullish(),
+      pdf_a4_half_page: z.string().nullish(),
+      pdf_letter: z.string().nullish(),
+      pdf_letter_half_page: z.string().nullish(),
+      png_4_x_6: z.string().nullish(),
+      zpl_12dpmm: z.string().nullish(),
+      zpl_8dpmm: z.string().nullish(),
+    })
+    .nullable(),
   package_id: z.number(),
   tracking_number: z.string(),
   url: z.string(),

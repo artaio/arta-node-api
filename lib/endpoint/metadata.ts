@@ -17,6 +17,7 @@ import type {
   PaymentProcessType,
   QuoteRequestStatus,
   QuoteType,
+  QuotingStrategy,
   Recipient,
   ShipmentExceptionTypeId,
   ShipmentStatus,
@@ -60,6 +61,7 @@ type GenericMetadata = Pick<BaseMetadata<string>, 'id' | 'name'>;
 export type InsurancesMetadata = BaseMetadata<Insurance>;
 export type LocationAccessRestrictionMetadata = BaseMetadata<AccessRestriction>;
 export type ObjectMaterialsMetadata = BaseMetadata<ObjectMaterial>;
+export type QuotingStrategyMetadata = BaseMetadata<QuotingStrategy>;
 
 export interface ObjectMetadata extends BaseMetadata<ObjectType> {
   subtypes: BaseMetadata<ObjectSubType>[];
@@ -155,6 +157,10 @@ export class MetadataEndpoint {
 
   public quotes(auth?: string): Promise<QuotesMetadata[]> {
     return this.artaClient.get(`${this.path}/quotes`, auth);
+  }
+
+  public quotingStrategies(auth?: string): Promise<QuotingStrategyMetadata[]> {
+    return this.artaClient.get(`${this.path}/quoting_strategies`, auth);
   }
 
   public referenceRateProviders(auth?: string): Promise<GenericMetadata[]> {

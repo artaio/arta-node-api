@@ -17,6 +17,7 @@ export const createPayload = {
     country: 'US',
     postal_code: '11249',
   },
+  quoting_strategy: 'best_rate',
 };
 
 export const responseMock = {
@@ -106,6 +107,7 @@ export const responseMock = {
   preferred_parcel_transport_services: [],
   public_reference: null,
   quote_types: ['self_ship', 'parcel', 'premium'],
+  quoting_strategy: 'best_rate',
   tags: [
     {
       color: 'D7D6D0',

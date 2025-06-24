@@ -5,13 +5,15 @@ import type {
   Contact,
   Insurance,
   ParcelTransportServices,
+  QuoteRequest,
+  QuoteRequestListItem,
   QuoteType,
+  QuotingStrategy,
   SupportedCurrency,
 } from '../types';
 import type { RestClient } from '../net/RestClient';
 import type { Page } from '../pagination';
 import type { RequestsSearch } from '../search';
-import type { QuoteRequest, QuoteRequestListItem } from '../types';
 import type { Nullable, NullableString } from '../utils';
 import { createDateAsUTC, parseService } from '../utils';
 import type { Endpoint } from './endpoint';
@@ -37,8 +39,9 @@ export interface QuoteRequestCreateBody {
   internal_reference?: NullableString;
   objects: ArtaObject[];
   origin: ArtaLocation;
+  preferred_parcel_transport_services?: Nullable<ParcelTransportServices[]>;
   preferred_quote_types?: Nullable<QuoteType[]>;
-  preferred_parcel_transport_services?: Nullable<ParcelTransportServices>;
+  quoting_strategy?: QuotingStrategy;
   public_reference?: NullableString;
   shipping_notes?: NullableString;
 }

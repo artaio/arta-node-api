@@ -22,6 +22,7 @@ describe('tests quote requests Arta endpoint', () => {
     await helper.testListWithSearch(responseMock, requestConfig);
     await helper.testUpdate({ tags: ['abc'] }, 'request', requestConfig);
 
+    expect(result.quoting_strategy).toBe('best_rate');
     expect(result.quotes[0].optional_services[0].amount).toBe(1.0);
     expect(
       result.quotes[0].optional_services[0].included_services[0].amount,

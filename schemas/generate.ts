@@ -28,6 +28,7 @@ import {
   paymentSchema,
   quoteSchema,
   quoteTypeSchema,
+  quotingStrategySchema,
   recipientSchema,
   requestListItemSchema,
   requestSchema,
@@ -93,6 +94,7 @@ generate(shipmentScheduleSchema, 'ShipmentSchedule');
 generate(shipmentTrackingSchema, 'ShipmentTracking');
 generate(insurancePolicySchema, 'InsurancePolicy');
 generate(quoteSchema, 'Quote');
+generate(quotingStrategySchema, 'QuotingStrategy');
 generate(requestListItemSchema, 'QuoteRequestListItem');
 generate(emailNotificationIdSchema, 'EmailNotificationId');
 generate(recipientSchema, 'Recipient');

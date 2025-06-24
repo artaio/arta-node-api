@@ -23,6 +23,13 @@ describe('tests shipments Arta endpoint', () => {
     await helper.testListWithSearch(responseMock, requestConfig);
 
     expect(result.emissions).toBe(19.35);
+    expect(result.tracking[0].carrier_name).toBe('FedEx');
+    expect(result.tracking[0].label_url).toBe(
+      'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od',
+    );
+    expect(result.tracking[0].label_format_urls.zpl_12dpmm).toBe(
+      'https://api.arta.io/labels/42/rSmdi49ONI9JbY2UrtH8C4Od?format=zpl_12dpmm',
+    );
 
     expect(result.exceptions[0].type).toBe('customs_information_required');
 

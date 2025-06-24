@@ -108,6 +108,7 @@ export type QuoteRequest = {
   };
   public_reference?: (string | null) | undefined;
   quote_types: ('parcel' | 'premium' | 'select' | 'self_ship')[];
+  quoting_strategy: 'best_rate' | 'compare_carriers';
   shortcode: string;
   status:
     | 'cancelled'
@@ -1075,6 +1076,16 @@ export type Shipment = {
         | {
             carrier_name: string;
             label_url?: (string | null) | undefined;
+            label_format_urls: {
+              pdf_4_x_6?: (string | null) | undefined;
+              pdf_a4?: (string | null) | undefined;
+              pdf_a4_half_page?: (string | null) | undefined;
+              pdf_letter?: (string | null) | undefined;
+              pdf_letter_half_page?: (string | null) | undefined;
+              png_4_x_6?: (string | null) | undefined;
+              zpl_12dpmm?: (string | null) | undefined;
+              zpl_8dpmm?: (string | null) | undefined;
+            } | null;
             package_id: number;
             tracking_number: string;
             url: string;
@@ -2442,6 +2453,16 @@ export type ShipmentSchedule = {
 export type ShipmentTracking = {
   carrier_name: string;
   label_url?: (string | null) | undefined;
+  label_format_urls: {
+    pdf_4_x_6?: (string | null) | undefined;
+    pdf_a4?: (string | null) | undefined;
+    pdf_a4_half_page?: (string | null) | undefined;
+    pdf_letter?: (string | null) | undefined;
+    pdf_letter_half_page?: (string | null) | undefined;
+    png_4_x_6?: (string | null) | undefined;
+    zpl_12dpmm?: (string | null) | undefined;
+    zpl_8dpmm?: (string | null) | undefined;
+  } | null;
   package_id: number;
   tracking_number: string;
   url: string;
@@ -2562,6 +2583,7 @@ export type Quote = {
   total: number;
   total_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
 };
+export type QuotingStrategy = 'best_rate' | 'compare_carriers';
 export type QuoteRequestListItem = {
   updated_at: Date;
   created_at: Date;
@@ -2653,6 +2675,7 @@ export type QuoteRequestListItem = {
   };
   public_reference?: (string | null) | undefined;
   quote_types: ('parcel' | 'premium' | 'select' | 'self_ship')[];
+  quoting_strategy: 'best_rate' | 'compare_carriers';
   shortcode: string;
   status:
     | 'cancelled'

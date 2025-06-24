@@ -309,6 +309,16 @@ export const quoteRequestStatusSchema = z.enum([
   'pending',
   'quoted',
 ]);
+export const parcelTransportServicesSchema = z.enum([
+  'economy',
+  'economy_freight',
+  'ground',
+  'next_day_air',
+  'priority',
+  'priority_freight',
+  'second_day_air',
+  'standard',
+]);
 
 export const contactSchema = z.object({
   name: z.string(),
@@ -481,6 +491,9 @@ export const requestSchema = requestListItemSchema.extend({
   objects: z.array(artaObjectSchema),
   payment_process: paymentProcessSchema,
   preferred_quote_types: z.array(quoteTypeSchema).nullish(),
+  preferred_parcel_transport_services: z
+    .array(parcelTransportServicesSchema)
+    .nullish(),
   shipping_notes: z.string().nullish(),
   quotes: z.array(quoteSchema),
 });
@@ -666,6 +679,9 @@ export const hostedSessionSchema = datedSchema.extend({
   internal_reference: z.string().nullish(),
   objects: z.array(artaObjectSchema),
   origin: artaLocationSchema,
+  preferred_parcel_transport_services: z
+    .array(parcelTransportServicesSchema)
+    .nullish(),
   preferred_quote_types: z.array(quoteTypeSchema).nullish(),
   public_reference: z.string().nullish(),
   shipping_notes: z.string().nullish(),

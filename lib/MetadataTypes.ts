@@ -218,16 +218,6 @@ export type ObjectSubType =
   | 'medical_equipment'
   | 'other';
 
-export type ParcelTransportServices =
-  | 'economy'
-  | 'economy_freight'
-  | 'ground'
-  | 'next_day_air'
-  | 'priority'
-  | 'priority_freight'
-  | 'second_day_air'
-  | 'standard';
-
 export type ObjectMaterial =
   | 'stone_marble'
   | 'precious_stones'

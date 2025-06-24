@@ -103,6 +103,7 @@ export const responseMock = {
   },
   payment_process: 'checkout',
   preferred_quote_types: [],
+  preferred_parcel_transport_services: [],
   public_reference: null,
   quote_types: ['self_ship', 'parcel', 'premium'],
   tags: [

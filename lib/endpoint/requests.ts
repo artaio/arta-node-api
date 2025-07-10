@@ -2,6 +2,7 @@ import type {
   AdditionalService,
   ArtaLocation,
   ArtaObject,
+  Contact,
   Insurance,
   ParcelTransportServices,
   QuoteRequest,
@@ -50,8 +51,12 @@ export interface QuoteRequestCreate {
 }
 
 export interface UpdateRequestsContactsBody {
-  origin?: ArtaLocation;
-  destination?: ArtaLocation;
+  origin?: {
+    contacts: Array<Partial<Contact>>;
+  };
+  destination?: {
+    contacts: Array<Partial<Contact>>;
+  };
 }
 
 export interface CustomQuotePayload {

@@ -51,8 +51,12 @@ export interface QuoteRequestCreate {
 }
 
 export interface UpdateRequestsContactsBody {
-  origin?: Nullable<Contact[]>;
-  destination?: Nullable<Contact[]>;
+  origin?: {
+    contacts: Array<Partial<Contact>>;
+  };
+  destination?: {
+    contacts: Array<Partial<Contact>>;
+  };
 }
 
 export interface CustomQuotePayload {

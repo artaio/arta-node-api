@@ -1,3 +1,12 @@
+## [1.4.1](https://github.com/artaio/arta-node-api/compare/v1.4.0...v1.4.1) (2025-07-10)
+
+
+### Bug Fixes
+
+* add correct type for origin and destination ([#78](https://github.com/artaio/arta-node-api/issues/78)) ([40c9345](https://github.com/artaio/arta-node-api/commit/40c93450f785b49bc897236bc3e697ee968e16df))
+
+
+
 # [1.4.0](https://github.com/artaio/arta-node-api/compare/v1.3.1...v1.4.0) (2025-06-24)
 
 

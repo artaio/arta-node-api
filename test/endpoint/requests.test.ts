@@ -48,10 +48,10 @@ describe('tests quote requests Arta endpoint', () => {
       undefined,
     );
 
-    await endpoint.updateContacts('123', { origin: [{ name: 'test' }] });
+    await endpoint.updateContacts('123', { origin: { country: 'US' } });
     expect(clientMock.patch).toHaveBeenCalledWith(
       `/${path}/123/contacts`,
-      { origin: [{ name: 'test' }] },
+      { origin: { country: 'US' } },
       undefined,
     );
   });
@@ -73,10 +73,10 @@ describe('tests quote requests Arta endpoint', () => {
       undefined,
     );
 
-    await req.updateContacts({ origin: [{ name: 'test' }] });
+    await req.updateContacts({ origin: { country: 'US' } });
     expect(contacts).toHaveBeenCalledWith(
       req.id,
-      { origin: [{ name: 'test' }] },
+      { origin: { country: 'US' } },
       undefined,
     );
   });

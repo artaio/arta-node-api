@@ -6,6 +6,7 @@ import {
   artaServiceSchema,
   attatchmentSchema,
   carrierSchema,
+  componentSchema,
   contactSchema,
   detailsSchema,
   disqualificationSchema,
@@ -21,6 +22,7 @@ import {
   keySchema,
   logSchema,
   mimeTypeSchema,
+  objectComponentsSchema,
   organizationSchema,
   packageSchema,
   packageStatusSechema,
@@ -101,3 +103,5 @@ generate(recipientSchema, 'Recipient');
 generate(mimeTypeSchema, 'ArtaMimeType');
 generate(documentTypeSchema, 'ArtaDocumentType');
 generate(parcelTransportServicesSchema, 'ParcelTransportServices');
+generate(componentSchema, 'ArtaComponent');
+generate(objectComponentsSchema, 'ArtaComponentType');

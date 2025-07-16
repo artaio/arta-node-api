@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/artaio/arta-node-api/compare/v1.4.1...v1.5.0) (2025-07-16)
+
+
+### Features
+
+* add prepacked box objects & metadata.objectComponents method ([#79](https://github.com/artaio/arta-node-api/issues/79)) ([a6851ce](https://github.com/artaio/arta-node-api/commit/a6851ce9f842d9efbbb7113c44c22b637967f3f9))
+
+
+
 ## [1.4.1](https://github.com/artaio/arta-node-api/compare/v1.4.0...v1.4.1) (2025-07-10)
 
 

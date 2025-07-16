@@ -74,6 +74,12 @@ describe('tests logs Arta endpoint', () => {
       undefined,
     );
 
+    await endpoint.objectComponents();
+    expect(clientMock.get).lastCalledWith(
+      `/${path}/object_components`,
+      undefined,
+    );
+
     await endpoint.requestStatuses();
     expect(clientMock.get).lastCalledWith(
       `/${path}/request_statuses`,

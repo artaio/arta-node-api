@@ -1,6 +1,7 @@
 import type {
   AccessRestriction,
   APIStatus,
+  ArtaComponentType,
   ArtaTrackingServiceSubSubType,
   ArtaTrackingServiceSubType,
   ArtaTrackingServiceType,
@@ -62,6 +63,7 @@ export type InsurancesMetadata = BaseMetadata<Insurance>;
 export type LocationAccessRestrictionMetadata = BaseMetadata<AccessRestriction>;
 export type ObjectMaterialsMetadata = BaseMetadata<ObjectMaterial>;
 export type QuotingStrategyMetadata = BaseMetadata<QuotingStrategy>;
+export type ObjectComponentMetadata = BaseMetadata<ArtaComponentType>;
 
 export interface ObjectMetadata extends BaseMetadata<ObjectType> {
   subtypes: BaseMetadata<ObjectSubType>[];
@@ -172,6 +174,10 @@ export class MetadataEndpoint {
       `${this.path}/reference_rate_service_levels`,
       auth,
     );
+  }
+
+  public objectComponents(auth?: string): Promise<ObjectComponentMetadata[]> {
+    return this.artaClient.get(`${this.path}/object_components`, auth);
   }
 
   public requestStatuses(auth?: string): Promise<RequestStatusesMetadata[]> {

@@ -1965,6 +1965,14 @@ export type HostedSession = {
     | 'pending'
     | 'quoted';
   url?: (string | null) | undefined;
+  type?: (('booking' | 'inbound_booking') | null) | undefined;
+  can_user_confirm_object_dimensions?: (boolean | null) | undefined;
+  public_instructions_object_details?: (string | null) | undefined;
+  public_instructions_location_quotes?: (string | null) | undefined;
+  public_instructions_payment?: (string | null) | undefined;
+  public_instructions_booking_review?: (string | null) | undefined;
+  public_instructions_confirmation?: (string | null) | undefined;
+  quoting_strategy: 'best_rate' | 'compare_carriers';
 };
 export type InvoicePayment = {
   updated_at: Date;
@@ -3766,3 +3774,921 @@ export type ArtaComponentType =
   | 'memorabilia'
   | 'necklace'
   | 'sidecar';
+export type InboundHostedSession = {
+  updated_at: Date;
+  created_at: Date;
+  id: number;
+  additional_services?:
+    | (
+        | (
+            | 'assembly'
+            | 'debris_disposal'
+            | 'deinstallation'
+            | 'destination_additional_labor'
+            | 'destination_building_coi'
+            | 'destination_condition_check'
+            | 'destination_full_condition_report'
+            | 'destination_unpacking'
+            | 'double_blind_bols'
+            | 'installation'
+            | 'origin_building_coi'
+            | 'origin_condition_check'
+            | 'origin_full_condition_report'
+            | 'placement'
+            | 'signature_delivery'
+            | 'tarmac_supervision'
+          )[]
+        | null
+      )
+    | undefined;
+  cancel_url?: (string | null) | undefined;
+  destination: {
+    access_restrictions?:
+      | (
+          | (
+              | 'elevator_only'
+              | 'freight_elevator'
+              | 'loading_dock'
+              | 'loading_dock_low'
+              | 'low_clearance'
+              | 'non_paved'
+              | 'stairs_only'
+              | 'steep_gradient'
+            )[]
+          | null
+        )
+      | undefined;
+    address_line_1?: (string | null) | undefined;
+    address_line_2?: (string | null) | undefined;
+    address_line_3?: (string | null) | undefined;
+    city?: (string | null) | undefined;
+    region?: (string | null) | undefined;
+    postal_code?: (string | null) | undefined;
+    country: string;
+    title?: (string | null) | undefined;
+    contacts?:
+      | (
+          | {
+              name: string;
+              email_address?: (string | null) | undefined;
+              phone_number?: (string | null) | undefined;
+            }[]
+          | null
+        )
+      | undefined;
+    estimated_country?: string | undefined;
+    estimated_region?: string | undefined;
+    estimated_city?: string | undefined;
+  };
+  insurance?:
+    | (('arta_transit_insurance' | 'no_arta_insurance') | null)
+    | undefined;
+  internal_reference?: (string | null) | undefined;
+  objects: {
+    internal_reference?: (string | null) | undefined;
+    current_packing?:
+      | (
+          | (
+              | 'alcohol_case'
+              | 'lay_flat_wine_box'
+              | 'blanket'
+              | 'wardrobe_box'
+              | 'cardboard_box'
+              | 'chandelier_box'
+              | 'chair_box'
+              | 'cbin_closed'
+              | 'cbin_open'
+              | 'ply_box'
+              | 'fine_art_econo_crate'
+              | 'fine_art_international_crate'
+              | 'econo_crate'
+              | 'international_econo_crate'
+              | 'furniture_crate'
+              | 'international_furniture_crate'
+              | 'parcel_crate'
+              | 'museum_crate'
+              | 'international_museum_crate'
+              | 'foam_lined_box'
+              | 'cavity_box'
+              | 'strongbox'
+              | 'double_box'
+              | 'travel_frame'
+              | 'travel_frame_art'
+              | 'travel_frame_other'
+              | 'a_frame'
+              | 'slat_crate'
+              | 'tri_wall_crate'
+              | 'lockbox'
+              | 'no_packing'
+              | 'pallet'
+              | 'international_pallet'
+              | 'portfolio'
+              | 'rug_rolled'
+              | 'shadow_box'
+              | 'slipcase'
+              | 'slipcase_glass_tape'
+              | 'poly_cardboard'
+              | 'bubble_cardboard'
+              | 'garment_bag'
+              | 'poly_only'
+              | 'dartek_only'
+              | 'bubble_only'
+              | 'cling_wrap'
+              | 'cbin_communal'
+              | 'sonotube'
+              | 'stabilizing_box'
+              | 'shipping_tube_small'
+              | 'shipping_tube_large'
+            )[]
+          | null
+        )
+      | undefined;
+    details?:
+      | ({
+          materials?:
+            | (
+                | (
+                    | 'stone_marble'
+                    | 'precious_stones'
+                    | 'fiber_synthetic'
+                    | 'fabric_natural'
+                    | 'taxidermy'
+                    | 'carbon_fiber'
+                    | 'live_animal'
+                    | 'paper'
+                    | 'glass'
+                    | 'presious_metals'
+                    | 'particleboard'
+                    | 'styrofoam'
+                    | 'wood'
+                    | 'photo_film'
+                    | 'sand'
+                    | 'metal'
+                    | 'plexiglass'
+                    | 'aquatic_life'
+                    | 'canvas'
+                    | 'drywall'
+                    | 'hard_plastic'
+                    | 'vinyl'
+                    | 'soft_plastic'
+                    | 'leather'
+                    | 'rubber'
+                    | 'concreate'
+                    | 'paint'
+                    | 'electronics'
+                    | 'fiber_natural'
+                    | 'gas'
+                    | 'fabric_synthetic'
+                    | 'CITES'
+                    | 'liquids'
+                    | 'salts'
+                  )[]
+                | null
+              )
+            | undefined;
+          creation_date?: (string | null) | undefined;
+          creator?: (string | null) | undefined;
+          notes?: (string | null) | undefined;
+          title?: (string | null) | undefined;
+          is_fragile?: (boolean | null) | undefined;
+          is_cites?: (boolean | null) | undefined;
+        } | null)
+      | undefined;
+    height?: ((number | string) | null) | undefined;
+    width?: ((number | string) | null) | undefined;
+    weight?: ((number | string) | null) | undefined;
+    value: number | string;
+    depth?: ((number | string) | null) | undefined;
+    images?: (string[] | null) | undefined;
+    public_reference?: (string | null) | undefined;
+    subtype:
+      | 'painting_unframed'
+      | 'painting_framed'
+      | 'painting_framed_plexi'
+      | 'painting_framed_glass'
+      | 'work_on_paper_unframed'
+      | 'work_on_paper_framed'
+      | 'work_on_paper_framed_plexi'
+      | 'work_on_paper_framed_glass'
+      | 'mixed_media_unframed'
+      | 'mixed_media_framed'
+      | 'mixed_media_framed_plexi'
+      | 'mixed_media_framed_glass'
+      | 'photograph_unframed'
+      | 'photograph_framed'
+      | 'photograph_framed_plexi'
+      | 'photograph_framed_glass'
+      | 'new_media'
+      | 'sculpture'
+      | 'pedestal'
+      | 'pedestal_case_glass'
+      | 'pedestal_case_plexi'
+      | 'ceramic'
+      | 'neon'
+      | 'tapestry'
+      | 'other_art'
+      | 'table'
+      | 'chair'
+      | 'sofa_loveseat_chaise'
+      | 'floor_lamp'
+      | 'floor_lamp_shade'
+      | 'table_lamp'
+      | 'table_lamp_shade'
+      | 'sconce'
+      | 'ottoman'
+      | 'bookcase_storage'
+      | 'nightstand'
+      | 'armoire_dresser'
+      | 'carpet_rug'
+      | 'mirror'
+      | 'chandelier'
+      | 'bedframe'
+      | 'headboard'
+      | 'desk_vanity'
+      | 'media_console'
+      | 'other_furniture'
+      | 'earrings'
+      | 'necklace'
+      | 'bracelet'
+      | 'ring'
+      | 'brooch'
+      | 'watch'
+      | 'cufflinks'
+      | 'eyeglasses'
+      | 'set'
+      | 'precious_stones'
+      | 'snuff_box_cigarette_case'
+      | 'other_jewelry'
+      | 'vase_vessel'
+      | 'bowl'
+      | 'plaque'
+      | 'object_of_vertu'
+      | 'candelabra_candlestick'
+      | 'dinnerware'
+      | 'flatware'
+      | 'glassware'
+      | 'serveware'
+      | 'porcelain_plate'
+      | 'porcelain_bowl'
+      | 'tabletop_accessory'
+      | 'clock'
+      | 'other_decorative_arts'
+      | 'stamp'
+      | 'book'
+      | 'coin'
+      | 'document_manuscript'
+      | 'toy'
+      | 'miniature_model'
+      | 'figurine_doll'
+      | 'neon_sign'
+      | 'memorabilia'
+      | 'camera_electrical'
+      | 'other_collectibles'
+      | 'wine_bottle'
+      | 'spirits_bottle'
+      | 'beer_bottle'
+      | 'wine_case'
+      | 'spirits_case'
+      | 'beer_case'
+      | 'wine_barrel'
+      | 'spirits_barrel'
+      | 'beer_barrel'
+      | 'other_alcohols'
+      | 'car'
+      | 'motorcycle'
+      | 'bus'
+      | 'van'
+      | 'limousine'
+      | 'carriage'
+      | 'trailer'
+      | 'sidecar'
+      | 'other_automotive'
+      | 'clothing'
+      | 'footwear'
+      | 'handbag'
+      | 'accessories'
+      | 'other_fashion'
+      | 'musical_instrument'
+      | 'firearm_weapon'
+      | 'hunting_fishing'
+      | 'medical_equipment'
+      | 'other'
+      | 'prepacked_box';
+    unit_of_measurement?: (string | null) | undefined;
+    weight_unit?: (string | null) | undefined;
+    value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+    components?:
+      | (
+          | {
+              customs?:
+                | ({
+                    country_of_origin?: (string | null) | undefined;
+                    hs_code?: (string | null) | undefined;
+                    medium?: (string | null) | undefined;
+                    temporary_admission?: (boolean | null) | undefined;
+                  } | null)
+                | undefined;
+              details?:
+                | ({
+                    creation_date?: (string | null) | undefined;
+                    creator?: (string | null) | undefined;
+                    notes?: (string | null) | undefined;
+                    title?: (string | null) | undefined;
+                  } | null)
+                | undefined;
+              internal_reference?: (string | null) | undefined;
+              public_reference?: (string | null) | undefined;
+              type:
+                | 'mixed_media_framed_glass'
+                | 'mineral'
+                | 'chair'
+                | 'flatware'
+                | 'plaque'
+                | 'brooch'
+                | 'dinnerware'
+                | 'glass_sculpture'
+                | 'desk_vanity'
+                | 'photograph_framed_plexi'
+                | 'coin'
+                | 'work_on_paper_unframed'
+                | 'painting_framed_plexi'
+                | 'other_fashion'
+                | 'handbag'
+                | 'document_manuscript'
+                | 'tabletop_accessory'
+                | 'bookcase_storage'
+                | 'work_on_paper_framed_plexi'
+                | 'other_automotive'
+                | 'set'
+                | 'photograph_unframed'
+                | 'sofa_loveseat_chaise'
+                | 'eyeglasses'
+                | 'mixed_media_framed'
+                | 'bedframe'
+                | 'firearm_weapon'
+                | 'ottoman'
+                | 'bowl'
+                | 'neon_sign'
+                | 'armoire_dresser'
+                | 'bus'
+                | 'pedestal'
+                | 'new_media'
+                | 'media_console'
+                | 'motorcycle'
+                | 'wine_case'
+                | 'beer_barrel'
+                | 'figurine_doll'
+                | 'mixed_media_unframed'
+                | 'pedestal_case_glass'
+                | 'earrings'
+                | 'snuff_box_cigarette_case'
+                | 'painting_framed'
+                | 'wine_barrel'
+                | 'other_alcohols'
+                | 'vase_vessel'
+                | 'floor_lamp'
+                | 'watch'
+                | 'limousine'
+                | 'nightstand'
+                | 'pedestal_case_plexi'
+                | 'musical_instrument'
+                | 'object_of_vertu'
+                | 'glassware'
+                | 'beer_case'
+                | 'cufflinks'
+                | 'wine_bottle'
+                | 'spirits_barrel'
+                | 'stamp'
+                | 'sculpture'
+                | 'other_collectibles'
+                | 'chandelier'
+                | 'headboard'
+                | 'carriage'
+                | 'ceramic'
+                | 'candelabra_candlestick'
+                | 'porcelain_plate'
+                | 'hunting_fishing'
+                | 'van'
+                | 'table_lamp'
+                | 'tapestry'
+                | 'photograph_framed_glass'
+                | 'beer_bottle'
+                | 'other_furniture'
+                | 'trailer'
+                | 'fossil'
+                | 'work_on_paper_framed'
+                | 'camera_electrical'
+                | 'painting_framed_glass'
+                | 'mixed_media_framed_plexi'
+                | 'porcelain_bowl'
+                | 'medical_equipment'
+                | 'bracelet'
+                | 'accessories'
+                | 'serveware'
+                | 'neon'
+                | 'table'
+                | 'other_jewelry'
+                | 'book'
+                | 'clock'
+                | 'work_on_paper_framed_glass'
+                | 'mirror'
+                | 'photograph_framed'
+                | 'toy'
+                | 'carpet_rug'
+                | 'spirits_bottle'
+                | 'trading_card'
+                | 'folding_screen'
+                | 'other'
+                | 'other_decorative_arts'
+                | 'other_art'
+                | 'sconce'
+                | 'lighting_fixture'
+                | 'floor_lamp_shade'
+                | 'table_lamp_shade'
+                | 'ring'
+                | 'spirits_case'
+                | 'miniature_model'
+                | 'collectible_apparel'
+                | 'clothing'
+                | 'painting_unframed'
+                | 'footwear'
+                | 'precious_stones'
+                | 'car'
+                | 'decoy'
+                | 'memorabilia'
+                | 'necklace'
+                | 'sidecar';
+              value: number | string;
+              value_currency?:
+                | (('CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD') | null)
+                | undefined;
+            }[]
+          | null
+        )
+      | undefined;
+  }[];
+  origin?:
+    | ({
+        access_restrictions?:
+          | (
+              | (
+                  | 'elevator_only'
+                  | 'freight_elevator'
+                  | 'loading_dock'
+                  | 'loading_dock_low'
+                  | 'low_clearance'
+                  | 'non_paved'
+                  | 'stairs_only'
+                  | 'steep_gradient'
+                )[]
+              | null
+            )
+          | undefined;
+        address_line_1?: (string | null) | undefined;
+        address_line_2?: (string | null) | undefined;
+        address_line_3?: (string | null) | undefined;
+        city?: (string | null) | undefined;
+        region?: (string | null) | undefined;
+        postal_code?: (string | null) | undefined;
+        country: string;
+        title?: (string | null) | undefined;
+        contacts?:
+          | (
+              | {
+                  name: string;
+                  email_address?: (string | null) | undefined;
+                  phone_number?: (string | null) | undefined;
+                }[]
+              | null
+            )
+          | undefined;
+        estimated_country?: string | undefined;
+        estimated_region?: string | undefined;
+        estimated_city?: string | undefined;
+      } | null)
+    | undefined;
+  preferred_parcel_transport_services?:
+    | (
+        | (
+            | 'economy'
+            | 'economy_freight'
+            | 'ground'
+            | 'next_day_air'
+            | 'priority'
+            | 'priority_freight'
+            | 'second_day_air'
+            | 'standard'
+          )[]
+        | null
+      )
+    | undefined;
+  preferred_quote_types?:
+    | (('parcel' | 'premium' | 'select' | 'self_ship')[] | null)
+    | undefined;
+  public_reference?: (string | null) | undefined;
+  shipping_notes?: (string | null) | undefined;
+  success_url?: (string | null) | undefined;
+  payment_process: 'checkout' | 'checkout_direct' | 'invoicing';
+  private_token: string;
+  shortcode: string;
+  status:
+    | 'cancelled'
+    | 'closed'
+    | 'disqualified'
+    | 'expired'
+    | 'in_progress'
+    | 'pending'
+    | 'quoted';
+  url?: (string | null) | undefined;
+  type?: (('booking' | 'inbound_booking') | null) | undefined;
+  can_user_confirm_object_dimensions?: (boolean | null) | undefined;
+  public_instructions_object_details?: (string | null) | undefined;
+  public_instructions_location_quotes?: (string | null) | undefined;
+  public_instructions_payment?: (string | null) | undefined;
+  public_instructions_booking_review?: (string | null) | undefined;
+  public_instructions_confirmation?: (string | null) | undefined;
+  quoting_strategy: 'best_rate' | 'compare_carriers';
+};
+export type ArtaInboundObject = {
+  internal_reference?: (string | null) | undefined;
+  current_packing?:
+    | (
+        | (
+            | 'alcohol_case'
+            | 'lay_flat_wine_box'
+            | 'blanket'
+            | 'wardrobe_box'
+            | 'cardboard_box'
+            | 'chandelier_box'
+            | 'chair_box'
+            | 'cbin_closed'
+            | 'cbin_open'
+            | 'ply_box'
+            | 'fine_art_econo_crate'
+            | 'fine_art_international_crate'
+            | 'econo_crate'
+            | 'international_econo_crate'
+            | 'furniture_crate'
+            | 'international_furniture_crate'
+            | 'parcel_crate'
+            | 'museum_crate'
+            | 'international_museum_crate'
+            | 'foam_lined_box'
+            | 'cavity_box'
+            | 'strongbox'
+            | 'double_box'
+            | 'travel_frame'
+            | 'travel_frame_art'
+            | 'travel_frame_other'
+            | 'a_frame'
+            | 'slat_crate'
+            | 'tri_wall_crate'
+            | 'lockbox'
+            | 'no_packing'
+            | 'pallet'
+            | 'international_pallet'
+            | 'portfolio'
+            | 'rug_rolled'
+            | 'shadow_box'
+            | 'slipcase'
+            | 'slipcase_glass_tape'
+            | 'poly_cardboard'
+            | 'bubble_cardboard'
+            | 'garment_bag'
+            | 'poly_only'
+            | 'dartek_only'
+            | 'bubble_only'
+            | 'cling_wrap'
+            | 'cbin_communal'
+            | 'sonotube'
+            | 'stabilizing_box'
+            | 'shipping_tube_small'
+            | 'shipping_tube_large'
+          )[]
+        | null
+      )
+    | undefined;
+  details?:
+    | ({
+        materials?:
+          | (
+              | (
+                  | 'stone_marble'
+                  | 'precious_stones'
+                  | 'fiber_synthetic'
+                  | 'fabric_natural'
+                  | 'taxidermy'
+                  | 'carbon_fiber'
+                  | 'live_animal'
+                  | 'paper'
+                  | 'glass'
+                  | 'presious_metals'
+                  | 'particleboard'
+                  | 'styrofoam'
+                  | 'wood'
+                  | 'photo_film'
+                  | 'sand'
+                  | 'metal'
+                  | 'plexiglass'
+                  | 'aquatic_life'
+                  | 'canvas'
+                  | 'drywall'
+                  | 'hard_plastic'
+                  | 'vinyl'
+                  | 'soft_plastic'
+                  | 'leather'
+                  | 'rubber'
+                  | 'concreate'
+                  | 'paint'
+                  | 'electronics'
+                  | 'fiber_natural'
+                  | 'gas'
+                  | 'fabric_synthetic'
+                  | 'CITES'
+                  | 'liquids'
+                  | 'salts'
+                )[]
+              | null
+            )
+          | undefined;
+        creation_date?: (string | null) | undefined;
+        creator?: (string | null) | undefined;
+        notes?: (string | null) | undefined;
+        title?: (string | null) | undefined;
+        is_fragile?: (boolean | null) | undefined;
+        is_cites?: (boolean | null) | undefined;
+      } | null)
+    | undefined;
+  height?: ((number | string) | null) | undefined;
+  width?: ((number | string) | null) | undefined;
+  weight?: ((number | string) | null) | undefined;
+  value: number | string;
+  depth?: ((number | string) | null) | undefined;
+  images?: (string[] | null) | undefined;
+  public_reference?: (string | null) | undefined;
+  subtype:
+    | 'painting_unframed'
+    | 'painting_framed'
+    | 'painting_framed_plexi'
+    | 'painting_framed_glass'
+    | 'work_on_paper_unframed'
+    | 'work_on_paper_framed'
+    | 'work_on_paper_framed_plexi'
+    | 'work_on_paper_framed_glass'
+    | 'mixed_media_unframed'
+    | 'mixed_media_framed'
+    | 'mixed_media_framed_plexi'
+    | 'mixed_media_framed_glass'
+    | 'photograph_unframed'
+    | 'photograph_framed'
+    | 'photograph_framed_plexi'
+    | 'photograph_framed_glass'
+    | 'new_media'
+    | 'sculpture'
+    | 'pedestal'
+    | 'pedestal_case_glass'
+    | 'pedestal_case_plexi'
+    | 'ceramic'
+    | 'neon'
+    | 'tapestry'
+    | 'other_art'
+    | 'table'
+    | 'chair'
+    | 'sofa_loveseat_chaise'
+    | 'floor_lamp'
+    | 'floor_lamp_shade'
+    | 'table_lamp'
+    | 'table_lamp_shade'
+    | 'sconce'
+    | 'ottoman'
+    | 'bookcase_storage'
+    | 'nightstand'
+    | 'armoire_dresser'
+    | 'carpet_rug'
+    | 'mirror'
+    | 'chandelier'
+    | 'bedframe'
+    | 'headboard'
+    | 'desk_vanity'
+    | 'media_console'
+    | 'other_furniture'
+    | 'earrings'
+    | 'necklace'
+    | 'bracelet'
+    | 'ring'
+    | 'brooch'
+    | 'watch'
+    | 'cufflinks'
+    | 'eyeglasses'
+    | 'set'
+    | 'precious_stones'
+    | 'snuff_box_cigarette_case'
+    | 'other_jewelry'
+    | 'vase_vessel'
+    | 'bowl'
+    | 'plaque'
+    | 'object_of_vertu'
+    | 'candelabra_candlestick'
+    | 'dinnerware'
+    | 'flatware'
+    | 'glassware'
+    | 'serveware'
+    | 'porcelain_plate'
+    | 'porcelain_bowl'
+    | 'tabletop_accessory'
+    | 'clock'
+    | 'other_decorative_arts'
+    | 'stamp'
+    | 'book'
+    | 'coin'
+    | 'document_manuscript'
+    | 'toy'
+    | 'miniature_model'
+    | 'figurine_doll'
+    | 'neon_sign'
+    | 'memorabilia'
+    | 'camera_electrical'
+    | 'other_collectibles'
+    | 'wine_bottle'
+    | 'spirits_bottle'
+    | 'beer_bottle'
+    | 'wine_case'
+    | 'spirits_case'
+    | 'beer_case'
+    | 'wine_barrel'
+    | 'spirits_barrel'
+    | 'beer_barrel'
+    | 'other_alcohols'
+    | 'car'
+    | 'motorcycle'
+    | 'bus'
+    | 'van'
+    | 'limousine'
+    | 'carriage'
+    | 'trailer'
+    | 'sidecar'
+    | 'other_automotive'
+    | 'clothing'
+    | 'footwear'
+    | 'handbag'
+    | 'accessories'
+    | 'other_fashion'
+    | 'musical_instrument'
+    | 'firearm_weapon'
+    | 'hunting_fishing'
+    | 'medical_equipment'
+    | 'other'
+    | 'prepacked_box';
+  unit_of_measurement?: (string | null) | undefined;
+  weight_unit?: (string | null) | undefined;
+  value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  components?:
+    | (
+        | {
+            customs?:
+              | ({
+                  country_of_origin?: (string | null) | undefined;
+                  hs_code?: (string | null) | undefined;
+                  medium?: (string | null) | undefined;
+                  temporary_admission?: (boolean | null) | undefined;
+                } | null)
+              | undefined;
+            details?:
+              | ({
+                  creation_date?: (string | null) | undefined;
+                  creator?: (string | null) | undefined;
+                  notes?: (string | null) | undefined;
+                  title?: (string | null) | undefined;
+                } | null)
+              | undefined;
+            internal_reference?: (string | null) | undefined;
+            public_reference?: (string | null) | undefined;
+            type:
+              | 'mixed_media_framed_glass'
+              | 'mineral'
+              | 'chair'
+              | 'flatware'
+              | 'plaque'
+              | 'brooch'
+              | 'dinnerware'
+              | 'glass_sculpture'
+              | 'desk_vanity'
+              | 'photograph_framed_plexi'
+              | 'coin'
+              | 'work_on_paper_unframed'
+              | 'painting_framed_plexi'
+              | 'other_fashion'
+              | 'handbag'
+              | 'document_manuscript'
+              | 'tabletop_accessory'
+              | 'bookcase_storage'
+              | 'work_on_paper_framed_plexi'
+              | 'other_automotive'
+              | 'set'
+              | 'photograph_unframed'
+              | 'sofa_loveseat_chaise'
+              | 'eyeglasses'
+              | 'mixed_media_framed'
+              | 'bedframe'
+              | 'firearm_weapon'
+              | 'ottoman'
+              | 'bowl'
+              | 'neon_sign'
+              | 'armoire_dresser'
+              | 'bus'
+              | 'pedestal'
+              | 'new_media'
+              | 'media_console'
+              | 'motorcycle'
+              | 'wine_case'
+              | 'beer_barrel'
+              | 'figurine_doll'
+              | 'mixed_media_unframed'
+              | 'pedestal_case_glass'
+              | 'earrings'
+              | 'snuff_box_cigarette_case'
+              | 'painting_framed'
+              | 'wine_barrel'
+              | 'other_alcohols'
+              | 'vase_vessel'
+              | 'floor_lamp'
+              | 'watch'
+              | 'limousine'
+              | 'nightstand'
+              | 'pedestal_case_plexi'
+              | 'musical_instrument'
+              | 'object_of_vertu'
+              | 'glassware'
+              | 'beer_case'
+              | 'cufflinks'
+              | 'wine_bottle'
+              | 'spirits_barrel'
+              | 'stamp'
+              | 'sculpture'
+              | 'other_collectibles'
+              | 'chandelier'
+              | 'headboard'
+              | 'carriage'
+              | 'ceramic'
+              | 'candelabra_candlestick'
+              | 'porcelain_plate'
+              | 'hunting_fishing'
+              | 'van'
+              | 'table_lamp'
+              | 'tapestry'
+              | 'photograph_framed_glass'
+              | 'beer_bottle'
+              | 'other_furniture'
+              | 'trailer'
+              | 'fossil'
+              | 'work_on_paper_framed'
+              | 'camera_electrical'
+              | 'painting_framed_glass'
+              | 'mixed_media_framed_plexi'
+              | 'porcelain_bowl'
+              | 'medical_equipment'
+              | 'bracelet'
+              | 'accessories'
+              | 'serveware'
+              | 'neon'
+              | 'table'
+              | 'other_jewelry'
+              | 'book'
+              | 'clock'
+              | 'work_on_paper_framed_glass'
+              | 'mirror'
+              | 'photograph_framed'
+              | 'toy'
+              | 'carpet_rug'
+              | 'spirits_bottle'
+              | 'trading_card'
+              | 'folding_screen'
+              | 'other'
+              | 'other_decorative_arts'
+              | 'other_art'
+              | 'sconce'
+              | 'lighting_fixture'
+              | 'floor_lamp_shade'
+              | 'table_lamp_shade'
+              | 'ring'
+              | 'spirits_case'
+              | 'miniature_model'
+              | 'collectible_apparel'
+              | 'clothing'
+              | 'painting_unframed'
+              | 'footwear'
+              | 'precious_stones'
+              | 'car'
+              | 'decoy'
+              | 'memorabilia'
+              | 'necklace'
+              | 'sidecar';
+            value: number | string;
+            value_currency?:
+              | (('CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD') | null)
+              | undefined;
+          }[]
+        | null
+      )
+    | undefined;
+};

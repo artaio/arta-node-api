@@ -64,7 +64,9 @@ export class ShipmentsEndpoint {
       });
     }
 
-    s.services && s.services.forEach(parseService);
+    if (s.services != null) {
+      s.services.forEach(parseService);
+    }
     return s;
   }
 

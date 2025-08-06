@@ -852,6 +852,25 @@ export const hostedSessionSchema = datedSchema.extend({
   shortcode: z.string(),
   status: quoteRequestStatusSchema,
   url: z.string().nullish(),
+  type: z.enum(['booking', 'inbound_booking']).nullish(),
+  can_user_confirm_object_dimensions: z.boolean().nullish(),
+  public_instructions_object_details: z.string().nullish(),
+  public_instructions_location_quotes: z.string().nullish(),
+  public_instructions_payment: z.string().nullish(),
+  public_instructions_booking_review: z.string().nullish(),
+  public_instructions_confirmation: z.string().nullish(),
+  quoting_strategy: quotingStrategySchema,
+});
+
+export const inboundObject = artaObjectSchema.extend({
+  height: artaObjectSchema.shape.height.nullish(),
+  width: artaObjectSchema.shape.height.nullish(),
+});
+
+export const inboundHostedSessionSchema = hostedSessionSchema.extend({
+  origin: artaLocationSchema.nullish(),
+  destination: artaLocationSchema,
+  objects: z.array(inboundObject),
 });
 
 export const invoicePaymentSchema = datedSchema.extend({

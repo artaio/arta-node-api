@@ -1,3 +1,12 @@
+## [1.5.1](https://github.com/artaio/arta-node-api/compare/v1.5.0...v1.5.1) (2025-09-11)
+
+
+### Bug Fixes
+
+* correct object subtypes and component types ([#82](https://github.com/artaio/arta-node-api/issues/82)) ([773849f](https://github.com/artaio/arta-node-api/commit/773849f7a99bd3275f946710681b32f9740f00cc))
+
+
+
 # [1.5.0](https://github.com/artaio/arta-node-api/compare/v1.4.1...v1.5.0) (2025-07-16)
 
 

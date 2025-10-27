@@ -6,7 +6,7 @@ on:
 
 permissions:
   id-token: write  # Required for OIDC
-  contents: read
+  contents: write
 
 jobs:
   changelog:
@@ -18,7 +18,7 @@ jobs:
         fetch-depth: 0
 
     - name: Conventional Changelog Action
-      uses: TriPSs/conventional-changelog-action@v5
+      uses: TriPSs/conventional-changelog-action@v6
       with:
         github-token: ${{ secrets.github_token }}
         skip-git-pull: "true"

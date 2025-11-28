@@ -328,6 +328,7 @@ export const parcelTransportServicesSchema = z.enum([
   'priority_freight',
   'second_day_air',
   'standard',
+  'three_day',
 ]);
 export const objectComponentsSchema = z.enum([
   'accessories',

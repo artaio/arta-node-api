@@ -573,6 +573,7 @@ export type QuoteRequest = {
             | 'priority_freight'
             | 'second_day_air'
             | 'standard'
+            | 'three_day'
           )[]
         | null
       )
@@ -1967,6 +1968,7 @@ export type HostedSession = {
             | 'priority_freight'
             | 'second_day_air'
             | 'standard'
+            | 'three_day'
           )[]
         | null
       )
@@ -3541,7 +3543,8 @@ export type ParcelTransportServices =
   | 'priority'
   | 'priority_freight'
   | 'second_day_air'
-  | 'standard';
+  | 'standard'
+  | 'three_day';
 export type ArtaComponent = {
   customs?:
     | ({

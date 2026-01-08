@@ -863,6 +863,59 @@ export const hostedSessionSchema = datedSchema.extend({
   url: z.string().nullish(),
 });
 
+const currencyNumericField = z
+  .string()
+  .refine((value) => /^\\d+(\\.\\d{1,2})?$/.test(value ?? ''))
+  .or(z.number().nonnegative().multipleOf(0.01));
+
+export const importCostEstimateObject = z.object({
+  value: currencyNumericField,
+  quantity: z.number().nonnegative().nullish(),
+  value_currency: supportedCurrencySchema.nullish(),
+  hs_code: z.string(),
+  reference: z.string().nullish(),
+  country_of_origin: z.string().nullish(),
+});
+
+const importCostEstimateLineItem = z.object({
+  description: z.string(),
+  subtype: z.string(),
+  type: z.string(),
+  amount: currencyNumericField,
+});
+
+export const importCostEstimate = datedSchema.extend({
+  id: z.string().uuid(),
+  currency: supportedCurrencySchema,
+  destination: z.object({
+    city: z.string().nullish(),
+    country: z.string(),
+    postal_code: z.string().nullish(),
+    region: z.string().nullish(),
+  }),
+  end_use: z.string().nullish(),
+  origin: z.object({
+    country: z.string(),
+  }),
+  reference: z.string().nullish(),
+  shortcode: z.string(),
+  status: z.enum(['failed', 'success']),
+  transport: z.object({
+    service_level: z.string(),
+    amount: currencyNumericField,
+    amount_currency: z.string().nullish(),
+  }),
+  objects: z.array(importCostEstimateObject),
+  estimate: z.object({
+    line_items: z.array(importCostEstimateLineItem),
+    summary: z.object({
+      fees: currencyNumericField,
+      duties: currencyNumericField,
+      taxes: currencyNumericField,
+    }),
+  }),
+});
+
 export const invoicePaymentSchema = datedSchema.extend({
   id: numId,
   amount: z.number(),

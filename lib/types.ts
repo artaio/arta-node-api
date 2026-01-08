@@ -1992,6 +1992,53 @@ export type HostedSession = {
     | 'quoted';
   url?: (string | null) | undefined;
 };
+export type ImportCostEstimate = {
+  updated_at: Date;
+  created_at: Date;
+  id: string;
+  currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
+  destination: {
+    city?: (string | null) | undefined;
+    country: string;
+    postal_code?: (string | null) | undefined;
+    region?: (string | null) | undefined;
+  };
+  end_use?: (string | null) | undefined;
+  origin: {
+    country: string;
+  };
+  reference?: (string | null) | undefined;
+  shortcode: string;
+  status: 'failed' | 'success';
+  transport: {
+    service_level: string;
+    amount: string | number;
+    amount_currency?: (string | null) | undefined;
+  };
+  objects: {
+    value: string | number;
+    quantity?: (number | null) | undefined;
+    value_currency?:
+      | (('CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD') | null)
+      | undefined;
+    hs_code: string;
+    reference?: (string | null) | undefined;
+    country_of_origin?: (string | null) | undefined;
+  }[];
+  estimate: {
+    line_items: {
+      description: string;
+      subtype: string;
+      type: string;
+      amount: string | number;
+    }[];
+    summary: {
+      fees: string | number;
+      duties: string | number;
+      taxes: string | number;
+    };
+  };
+};
 export type InvoicePayment = {
   updated_at: Date;
   created_at: Date;

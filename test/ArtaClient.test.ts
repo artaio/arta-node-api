@@ -89,7 +89,7 @@ describe('tests ArtaClient', () => {
         .mockReturnValueOnce({ errors: { detail: 'Unauthorized' } }),
     });
 
-    await expect(artaClient.get('/a_path')).rejects.toThrowError(
+    await expect(artaClient.get('/a_path')).rejects.toThrow(
       'Unauthorized, HTTP status: 401',
     );
   });
@@ -103,7 +103,7 @@ describe('tests ArtaClient', () => {
         .mockReturnValueOnce({ errors: { '#': ['a error', 'another error'] } }),
     });
 
-    await expect(artaClient.get('/a_path')).rejects.toThrowError(
+    await expect(artaClient.get('/a_path')).rejects.toThrow(
       '# a error, # another error, HTTP status: 400',
     );
   });

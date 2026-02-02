@@ -284,7 +284,11 @@ export const quoteTypeSchema = z.enum([
   'select',
   'self_ship',
 ]);
-export const quotingStrategySchema = z.enum(['best_rate', 'compare_carriers']);
+export const quotingStrategySchema = z.enum([
+  'all_rates',
+  'best_rate',
+  'compare_carriers',
+]);
 export const disqualificationResonSchema = z.enum([
   'cannot_be_packed',
   'client_timeout_reached',
@@ -861,6 +865,25 @@ export const hostedSessionSchema = datedSchema.extend({
   shortcode: z.string(),
   status: quoteRequestStatusSchema,
   url: z.string().nullish(),
+  type: z.enum(['booking', 'inbound_booking']).nullish(),
+  can_user_confirm_object_dimensions: z.boolean().nullish(),
+  public_instructions_object_details: z.string().nullish(),
+  public_instructions_location_quotes: z.string().nullish(),
+  public_instructions_payment: z.string().nullish(),
+  public_instructions_booking_review: z.string().nullish(),
+  public_instructions_confirmation: z.string().nullish(),
+  quoting_strategy: quotingStrategySchema,
+});
+
+export const inboundObject = artaObjectSchema.extend({
+  height: artaObjectSchema.shape.height.nullish(),
+  width: artaObjectSchema.shape.width.nullish(),
+});
+
+export const inboundHostedSessionSchema = hostedSessionSchema.extend({
+  origin: artaLocationSchema.nullish(),
+  destination: artaLocationSchema,
+  objects: z.array(inboundObject),
 });
 
 export const invoicePaymentSchema = datedSchema.extend({

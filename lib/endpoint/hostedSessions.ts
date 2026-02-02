@@ -3,12 +3,14 @@ import type { RestClient } from '../net/RestClient';
 import type { Page } from '../pagination';
 import type {
   AdditionalService,
+  ArtaInboundObject,
   ArtaLocation,
   ArtaObject,
   HostedSession,
   Insurance,
   ParcelTransportServices,
   QuoteType,
+  QuotingStrategy,
 } from '../MetadataTypes';
 import {
   convertDatesToUtc,
@@ -24,20 +26,61 @@ export type EnrichedHostedSession = HostedSession & {
   cancel: (auth?: string) => Promise<HostedSession>;
 };
 
-export interface HostedSessionCreateBody {
-  additional_services?: Nullable<AdditionalService[]>;
-  cancel_url?: NullableString;
-  destination?: Nullable<ArtaLocation>;
-  insurance?: Nullable<Insurance>;
-  internal_reference?: NullableString;
-  objects: ArtaObject[];
-  origin: ArtaLocation;
-  preferred_quote_types?: Nullable<QuoteType[]>;
-  preferred_parcel_transport_services?: Nullable<ParcelTransportServices[]>;
-  public_reference?: NullableString;
-  shipping_notes?: NullableString;
-  success_url?: NullableString;
-}
+export type HostedSessionCreateBody =
+  | {
+      additional_services?: Nullable<AdditionalService[]>;
+      cancel_url?: NullableString;
+      destination?: Nullable<ArtaLocation>;
+      insurance?: Nullable<Insurance>;
+      internal_reference?: NullableString;
+      objects: ArtaObject[];
+      origin: ArtaLocation;
+      preferred_quote_types?: Nullable<QuoteType[]>;
+      preferred_parcel_transport_services?: Nullable<ParcelTransportServices[]>;
+      public_reference?: NullableString;
+      shipping_notes?: NullableString;
+      success_url?: NullableString;
+      public_instructions_location_quotes?: HostedSession['public_instructions_location_quotes'];
+      public_instructions_payment?: HostedSession['public_instructions_payment'];
+      public_instructions_booking_review?: HostedSession['public_instructions_booking_review'];
+      public_instructions_confirmation?: HostedSession['public_instructions_confirmation'];
+      quoting_strategy?: QuotingStrategy;
+      type?: 'booking';
+    }
+  | {
+      request_id: string;
+    }
+  | {
+      additional_services?: Nullable<AdditionalService[]>;
+      cancel_url?: NullableString;
+      destination: ArtaLocation;
+      insurance?: Nullable<Insurance>;
+      internal_reference?: NullableString;
+      objects: ArtaInboundObject[];
+      origin?: Nullable<ArtaLocation>;
+      preferred_quote_types?: Nullable<QuoteType[]>;
+      preferred_parcel_transport_services?: Nullable<ParcelTransportServices[]>;
+      public_reference?: NullableString;
+      shipping_notes?: NullableString;
+      success_url?: NullableString;
+      can_user_confirm_object_dimensions?: HostedSession['can_user_confirm_object_dimensions'];
+      public_instructions_object_details?: HostedSession['public_instructions_object_details'];
+      public_instructions_location_quotes?: HostedSession['public_instructions_location_quotes'];
+      public_instructions_payment?: HostedSession['public_instructions_payment'];
+      public_instructions_booking_review?: HostedSession['public_instructions_booking_review'];
+      public_instructions_confirmation?: HostedSession['public_instructions_confirmation'];
+      quoting_strategy?: QuotingStrategy;
+      type: 'inbound_booking';
+    };
+
+type HostedSessionListItem = Omit<
+  HostedSession,
+  | 'public_instructions_object_details'
+  | 'public_instructions_location_quotes'
+  | 'public_instructions_payment'
+  | 'public_instructions_booking_review'
+  | 'public_instructions_confirmation'
+>;
 
 export interface HostedSessionCreate {
   hosted_session: HostedSessionCreateBody;
@@ -73,7 +116,7 @@ export class HostedSessionsEndpoint {
     page = 1,
     pageSize = 20,
     auth?: string,
-  ): Promise<Page<EnrichedHostedSession>> {
+  ): Promise<Page<HostedSessionListItem>> {
     return this.defaultEndpoint.list(
       { page, page_size: pageSize, search },
       auth,

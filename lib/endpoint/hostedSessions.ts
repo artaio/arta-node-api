@@ -10,6 +10,7 @@ import type {
   Insurance,
   ParcelTransportServices,
   QuoteType,
+  QuotingStrategy,
 } from '../MetadataTypes';
 import {
   convertDatesToUtc,
@@ -43,6 +44,7 @@ export type HostedSessionCreateBody =
       public_instructions_payment?: HostedSession['public_instructions_payment'];
       public_instructions_booking_review?: HostedSession['public_instructions_booking_review'];
       public_instructions_confirmation?: HostedSession['public_instructions_confirmation'];
+      quoting_strategy?: QuotingStrategy;
       type?: 'booking';
     }
   | {
@@ -67,6 +69,7 @@ export type HostedSessionCreateBody =
       public_instructions_payment?: HostedSession['public_instructions_payment'];
       public_instructions_booking_review?: HostedSession['public_instructions_booking_review'];
       public_instructions_confirmation?: HostedSession['public_instructions_confirmation'];
+      quoting_strategy?: QuotingStrategy;
       type: 'inbound_booking';
     };
 

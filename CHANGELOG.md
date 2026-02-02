@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/artaio/arta-node-api/compare/v1.5.4...v1.6.0) (2026-02-02)
+
+
+### Features
+
+* add inbound hosted_session typings & schema ([#80](https://github.com/artaio/arta-node-api/issues/80)) ([10ae30b](https://github.com/artaio/arta-node-api/commit/10ae30baab2d28451151ef523a8abe593038694c))
+
+
+
 ## [1.5.4](https://github.com/artaio/arta-node-api/compare/v1.5.3...v1.5.4) (2026-01-07)
 
 

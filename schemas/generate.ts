@@ -15,6 +15,8 @@ import {
   emailRuleSchema,
   emailSubscriptionSchema,
   hostedSessionSchema,
+  inboundHostedSessionSchema,
+  inboundObject,
   insurancePolicySchema,
   insuranceSchema,
   invoicePaymentSchema,
@@ -105,3 +107,5 @@ generate(documentTypeSchema, 'ArtaDocumentType');
 generate(parcelTransportServicesSchema, 'ParcelTransportServices');
 generate(componentSchema, 'ArtaComponent');
 generate(objectComponentsSchema, 'ArtaComponentType');
+generate(inboundHostedSessionSchema, 'InboundHostedSession');
+generate(inboundObject, 'ArtaInboundObject');

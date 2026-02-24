@@ -4,6 +4,7 @@ import { initLogger } from './logging';
 import { FetchHttpClient } from './net/FetchHttpClient';
 import type { RestClient } from './net/RestClient';
 
+import { AddressVerificationsEndpoint } from './endpoint/addressVerifications';
 import { AttachmentsEndpoint } from './endpoint/attachment';
 import { EmailRulesEndpoint } from './endpoint/emailRules';
 import { EmailSubscriptionsEndpoint } from './endpoint/emailSubscriptions';
@@ -39,6 +40,7 @@ export class Arta {
   private readonly artaClient: RestClient;
   private readonly config: ArtaConfig;
 
+  public address_verifications: AddressVerificationsEndpoint;
   public attachments: AttachmentsEndpoint;
   public email_rules: EmailRulesEndpoint;
   public email_subscriptions: EmailSubscriptionsEndpoint;
@@ -68,6 +70,9 @@ export class Arta {
       host: this.config.host,
     });
 
+    this.address_verifications = new AddressVerificationsEndpoint(
+      this.artaClient,
+    );
     this.attachments = new AttachmentsEndpoint(this.artaClient);
     this.email_rules = new EmailRulesEndpoint(this.artaClient);
     this.email_subscriptions = new EmailSubscriptionsEndpoint(this.artaClient);

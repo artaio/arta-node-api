@@ -4752,3 +4752,39 @@ export type ArtaInboundObject = {
       )
     | undefined;
 };
+export type AddressVerification = {
+  updated_at: Date;
+  created_at: Date;
+  id: string;
+  shortcode: string;
+  status: 'success' | 'partial' | 'failed';
+  match_level:
+    | 'delivery_point'
+    | 'premise'
+    | 'thoroughfare'
+    | 'locality'
+    | 'administrative_area'
+    | 'none';
+  reference: string | null;
+  input: {
+    address_line_1: string;
+    address_line_2: string | null;
+    address_line_3: string | null;
+    city: string | null;
+    region: string | null;
+    postal_code: string | null;
+    country: string;
+  };
+  recommendation: {
+    address_line_1: string | null;
+    address_line_2: string | null;
+    address_line_3: string | null;
+    city: string | null;
+    region: string | null;
+    postal_code: string | null;
+    country: string | null;
+    latitude: number | null;
+    longitude: number | null;
+    is_residential: boolean | null;
+  };
+};

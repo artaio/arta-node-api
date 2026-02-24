@@ -1,6 +1,8 @@
 export { Arta } from './arta';
 export { Logger, LoggerVerbosity } from './logging';
 
+export { AddressVerificationCreateBody } from './endpoint/addressVerifications';
+
 export {
   AttachmentCreateBodyRequest,
   AttachmentCreateBodyShipment,

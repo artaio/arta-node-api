@@ -1037,3 +1037,51 @@ export const webhookSchema = datedSchema.extend({
   name: z.string(),
   url: z.string(),
 });
+
+export const addressVerificationStatusSchema = z.enum([
+  'success',
+  'partial',
+  'failed',
+]);
+
+export const addressVerificationMatchLevelSchema = z.enum([
+  'delivery_point',
+  'premise',
+  'thoroughfare',
+  'locality',
+  'administrative_area',
+  'none',
+]);
+
+export const addressVerificationInputSchema = z.object({
+  address_line_1: z.string(),
+  address_line_2: z.string().nullable(),
+  address_line_3: z.string().nullable(),
+  city: z.string().nullable(),
+  region: z.string().nullable(),
+  postal_code: z.string().nullable(),
+  country: z.string(),
+});
+
+export const addressVerificationRecommendationSchema = z.object({
+  address_line_1: z.string().nullable(),
+  address_line_2: z.string().nullable(),
+  address_line_3: z.string().nullable(),
+  city: z.string().nullable(),
+  region: z.string().nullable(),
+  postal_code: z.string().nullable(),
+  country: z.string().nullable(),
+  latitude: z.number().nullable(),
+  longitude: z.number().nullable(),
+  is_residential: z.boolean().nullable(),
+});
+
+export const addressVerificationSchema = datedSchema.extend({
+  id: z.string().uuid(),
+  shortcode: z.string(),
+  status: addressVerificationStatusSchema,
+  match_level: addressVerificationMatchLevelSchema,
+  reference: z.string().nullable(),
+  input: addressVerificationInputSchema,
+  recommendation: addressVerificationRecommendationSchema,
+});

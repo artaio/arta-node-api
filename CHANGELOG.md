@@ -1,3 +1,12 @@
+# [1.7.0](https://github.com/artaio/arta-node-api/compare/v1.6.0...v1.7.0) (2026-02-24)
+
+
+### Features
+
+* adds address verifications endpoints ([#88](https://github.com/artaio/arta-node-api/issues/88)) ([ab4fa3d](https://github.com/artaio/arta-node-api/commit/ab4fa3d23313bb72fe2a774b2a8656dd04aaed38))
+
+
+
 # [1.6.0](https://github.com/artaio/arta-node-api/compare/v1.5.4...v1.6.0) (2026-02-02)
 
 

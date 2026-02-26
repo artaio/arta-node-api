@@ -20,4 +20,9 @@ export {
   UpdateRequestsContactsBody,
   CustomQuotePayload,
 } from './endpoint/requests';
+export {
+  GetPickupAvailabilityPayload,
+  SelfShipCollectionCreateBody,
+  SelfShipCollectionListParams,
+} from './endpoint/selfShipCollections';
 export { ShipmentCreateBody } from './endpoint/shipments';

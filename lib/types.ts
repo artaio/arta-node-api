@@ -4788,3 +4788,47 @@ export type AddressVerification = {
     is_residential: boolean | null;
   };
 };
+export type SelfShipCollection = {
+  updated_at: Date;
+  created_at: Date;
+  id: string;
+  address_line_1: string;
+  carrier: 'fedex';
+  city: string;
+  contact_email: string;
+  contact_name: string;
+  contact_phone: string;
+  country: string;
+  country_relationships: 'domestic' | 'international';
+  customer_close_time: string;
+  package_location: 'front' | 'none' | 'rear' | 'side';
+  postal_code: string;
+  ready_at: string;
+  region: string;
+  service_level: 'express' | 'ground';
+  status: 'scheduled' | 'closed' | 'cancelled' | 'incomplete';
+};
+export type SelfShipCollectionStatus =
+  | 'scheduled'
+  | 'closed'
+  | 'cancelled'
+  | 'incomplete';
+export type SelfShipCollectionCarrier = 'fedex';
+export type SelfShipCollectionServiceLevel = 'express' | 'ground';
+export type SelfShipCollectionCountryRelationships =
+  | 'domestic'
+  | 'international';
+export type SelfShipCollectionPackageLocation =
+  | 'front'
+  | 'none'
+  | 'rear'
+  | 'side';
+export type PickupAvailability = {
+  available: boolean;
+  carrier: 'fedex';
+  close_time: string;
+  collection_date: string;
+  country_relationships: 'domestic' | 'international';
+  ready_time: string;
+  service_level: 'express' | 'ground';
+};

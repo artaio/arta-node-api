@@ -1085,3 +1085,58 @@ export const addressVerificationSchema = datedSchema.extend({
   input: addressVerificationInputSchema,
   recommendation: addressVerificationRecommendationSchema,
 });
+
+export const selfShipCollectionStatusSchema = z.enum([
+  'scheduled',
+  'closed',
+  'cancelled',
+  'incomplete',
+]);
+
+export const selfShipCollectionCarrierSchema = z.enum(['fedex']);
+
+export const selfShipCollectionServiceLevelSchema = z.enum([
+  'express',
+  'ground',
+]);
+
+export const selfShipCollectionCountryRelationshipsSchema = z.enum([
+  'domestic',
+  'international',
+]);
+
+export const selfShipCollectionPackageLocationSchema = z.enum([
+  'front',
+  'none',
+  'rear',
+  'side',
+]);
+
+export const selfShipCollectionSchema = datedSchema.extend({
+  id: z.string().uuid(),
+  address_line_1: z.string(),
+  carrier: selfShipCollectionCarrierSchema,
+  city: z.string(),
+  contact_email: z.string(),
+  contact_name: z.string(),
+  contact_phone: z.string(),
+  country: z.string(),
+  country_relationships: selfShipCollectionCountryRelationshipsSchema,
+  customer_close_time: z.string(),
+  package_location: selfShipCollectionPackageLocationSchema,
+  postal_code: z.string(),
+  ready_at: z.string(),
+  region: z.string(),
+  service_level: selfShipCollectionServiceLevelSchema,
+  status: selfShipCollectionStatusSchema,
+});
+
+export const pickupAvailabilitySchema = z.object({
+  available: z.boolean(),
+  carrier: selfShipCollectionCarrierSchema,
+  close_time: z.string(),
+  collection_date: z.string(),
+  country_relationships: selfShipCollectionCountryRelationshipsSchema,
+  ready_time: z.string(),
+  service_level: selfShipCollectionServiceLevelSchema,
+});

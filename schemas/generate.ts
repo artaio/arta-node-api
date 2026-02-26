@@ -50,6 +50,13 @@ import {
   uploadSchema,
   webhookDeliverySchema,
   webhookSchema,
+  selfShipCollectionSchema,
+  selfShipCollectionStatusSchema,
+  selfShipCollectionCarrierSchema,
+  selfShipCollectionServiceLevelSchema,
+  selfShipCollectionCountryRelationshipsSchema,
+  selfShipCollectionPackageLocationSchema,
+  pickupAvailabilitySchema,
 } from '.';
 import type { Schema } from 'zod';
 
@@ -111,3 +118,19 @@ generate(objectComponentsSchema, 'ArtaComponentType');
 generate(inboundHostedSessionSchema, 'InboundHostedSession');
 generate(inboundObject, 'ArtaInboundObject');
 generate(addressVerificationSchema, 'AddressVerification');
+generate(selfShipCollectionSchema, 'SelfShipCollection');
+generate(selfShipCollectionStatusSchema, 'SelfShipCollectionStatus');
+generate(selfShipCollectionCarrierSchema, 'SelfShipCollectionCarrier');
+generate(
+  selfShipCollectionServiceLevelSchema,
+  'SelfShipCollectionServiceLevel',
+);
+generate(
+  selfShipCollectionCountryRelationshipsSchema,
+  'SelfShipCollectionCountryRelationships',
+);
+generate(
+  selfShipCollectionPackageLocationSchema,
+  'SelfShipCollectionPackageLocation',
+);
+generate(pickupAvailabilitySchema, 'PickupAvailability');

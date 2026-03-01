@@ -80,7 +80,9 @@ export class FetchHttpClient implements HttpClient {
 
       return new FetchHttpClientResponse(response);
     } finally {
-      setTimeoutId != null && clearTimeout(setTimeoutId);
+      if (setTimeoutId != null) {
+        clearTimeout(setTimeoutId);
+      }
     }
   }
 }

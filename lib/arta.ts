@@ -21,6 +21,8 @@ import { WebhookDeliveriesEndpoint } from './endpoint/webhookDeliveries';
 import { WebhooksEndpoint } from './endpoint/webhooks';
 import { TrackingsEndpoint } from './endpoint/trackings';
 import { QuoteRequestsEndpoint } from './endpoint/requests';
+import { SelfShipCollectionAvailabilityChecksEndpoint } from './endpoint/selfShipCollectionAvailabilityChecks';
+import { SelfShipCollectionsEndpoint } from './endpoint/selfShipCollections';
 import { ShipmentsEndpoint } from './endpoint/shipments';
 import { TagsEndpoint } from './endpoint/tags';
 
@@ -53,6 +55,8 @@ export class Arta {
   public organizations: OrganizationsEndpoint;
   public payments: PaymentsEndpoint;
   public requests: QuoteRequestsEndpoint;
+  public self_ship_collection_availability_checks: SelfShipCollectionAvailabilityChecksEndpoint;
+  public self_ship_collections: SelfShipCollectionsEndpoint;
   public shipments: ShipmentsEndpoint;
   public tags: TagsEndpoint;
   public trackings: TrackingsEndpoint;
@@ -85,6 +89,11 @@ export class Arta {
     this.organizations = new OrganizationsEndpoint(this.artaClient);
     this.payments = new PaymentsEndpoint(this.artaClient);
     this.requests = new QuoteRequestsEndpoint(this.artaClient);
+    this.self_ship_collection_availability_checks =
+      new SelfShipCollectionAvailabilityChecksEndpoint(this.artaClient);
+    this.self_ship_collections = new SelfShipCollectionsEndpoint(
+      this.artaClient,
+    );
     this.shipments = new ShipmentsEndpoint(this.artaClient);
     this.tags = new TagsEndpoint(this.artaClient);
     this.trackings = new TrackingsEndpoint(this.artaClient);

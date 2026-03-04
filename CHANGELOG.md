@@ -1,3 +1,12 @@
+# [1.8.0](https://github.com/artaio/arta-node-api/compare/v1.7.0...v1.8.0) (2026-03-04)
+
+
+### Features
+
+* adds self ship collection endpoints ([d517629](https://github.com/artaio/arta-node-api/commit/d517629cefd0c5231dcfc75abf3a4e2fd805ef15))
+
+
+
 # [1.7.0](https://github.com/artaio/arta-node-api/compare/v1.6.0...v1.7.0) (2026-02-24)
 
 

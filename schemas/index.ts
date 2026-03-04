@@ -1085,3 +1085,87 @@ export const addressVerificationSchema = datedSchema.extend({
   input: addressVerificationInputSchema,
   recommendation: addressVerificationRecommendationSchema,
 });
+
+export const selfShipCollectionStatusSchema = z.enum([
+  'scheduled',
+  'closed',
+  'cancelled',
+  'incomplete',
+]);
+
+export const selfShipCollectionPackageLocationSchema = z.enum([
+  'front',
+  'none',
+  'rear',
+  'side',
+]);
+
+export const selfShipCollectionCarrierSchema = z.enum(['fedex']);
+
+export const selfShipCollectionServiceCodeSchema = z.enum([
+  'express',
+  'ground',
+]);
+
+export const selfShipCollectionRouteSchema = z.enum([
+  'domestic',
+  'international',
+]);
+
+export const selfShipCollectionContactSchema = z.object({
+  name: z.string(),
+  phone_number: z.string(),
+  email_address: z.string(),
+});
+
+export const selfShipCollectionLocationSchema = z.object({
+  address_line_1: z.string(),
+  address_line_2: z.string().nullable(),
+  city: z.string(),
+  region: z.string(),
+  postal_code: z.string(),
+  country: z.string(),
+  close_time: z.string(),
+  package_location: selfShipCollectionPackageLocationSchema,
+  contact: selfShipCollectionContactSchema,
+});
+
+export const selfShipCollectionServiceSchema = z.object({
+  carrier: selfShipCollectionCarrierSchema,
+  code: selfShipCollectionServiceCodeSchema,
+  route: selfShipCollectionRouteSchema,
+});
+
+export const selfShipCollectionSchema = datedSchema.extend({
+  id: z.string().uuid(),
+  status: selfShipCollectionStatusSchema,
+  shortcode: z.string(),
+  closed_at: z.string().nullable(),
+  collection_date: z.string(),
+  collection_time: z.string(),
+  location: selfShipCollectionLocationSchema,
+  service: selfShipCollectionServiceSchema,
+});
+
+export const selfShipCollectionAvailabilitySchema = z.object({
+  collection_date: z.string(),
+  collection_times: z.array(z.string()),
+  residential_available: z.boolean(),
+});
+
+export const selfShipCollectionAvailabilityCheckLocationSchema = z.object({
+  address_line_1: z.string(),
+  address_line_2: z.string().nullable(),
+  city: z.string(),
+  region: z.string(),
+  postal_code: z.string(),
+  country: z.string(),
+  close_time: z.string(),
+});
+
+export const selfShipCollectionAvailabilityCheckSchema = z.object({
+  location: selfShipCollectionAvailabilityCheckLocationSchema,
+  service: selfShipCollectionServiceSchema,
+  collection_date: z.string(),
+  availabilities: z.array(selfShipCollectionAvailabilitySchema),
+});

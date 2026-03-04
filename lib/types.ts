@@ -4788,3 +4788,55 @@ export type AddressVerification = {
     is_residential: boolean | null;
   };
 };
+export type SelfShipCollection = {
+  updated_at: Date;
+  created_at: Date;
+  id: string;
+  status: 'scheduled' | 'closed' | 'cancelled' | 'incomplete';
+  shortcode: string;
+  closed_at: string | null;
+  collection_date: string;
+  collection_time: string;
+  location: {
+    address_line_1: string;
+    address_line_2: string | null;
+    city: string;
+    region: string;
+    postal_code: string;
+    country: string;
+    close_time: string;
+    package_location: 'front' | 'none' | 'rear' | 'side';
+    contact: {
+      name: string;
+      phone_number: string;
+      email_address: string;
+    };
+  };
+  service: {
+    carrier: 'fedex';
+    code: 'express' | 'ground';
+    route: 'domestic' | 'international';
+  };
+};
+export type SelfShipCollectionAvailabilityCheck = {
+  location: {
+    address_line_1: string;
+    address_line_2: string | null;
+    city: string;
+    region: string;
+    postal_code: string;
+    country: string;
+    close_time: string;
+  };
+  service: {
+    carrier: 'fedex';
+    code: 'express' | 'ground';
+    route: 'domestic' | 'international';
+  };
+  collection_date: string;
+  availabilities: {
+    collection_date: string;
+    collection_times: string[];
+    residential_available: boolean;
+  }[];
+};

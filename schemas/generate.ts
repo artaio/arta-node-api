@@ -1,6 +1,8 @@
 import { createTypeAlias, printNode, zodToTs } from 'zod-to-ts';
 import {
   addressVerificationSchema,
+  selfShipCollectionSchema,
+  selfShipCollectionAvailabilityCheckSchema,
   additionalServiceSchema,
   artaLocationSchema,
   artaObjectSchema,
@@ -111,3 +113,8 @@ generate(objectComponentsSchema, 'ArtaComponentType');
 generate(inboundHostedSessionSchema, 'InboundHostedSession');
 generate(inboundObject, 'ArtaInboundObject');
 generate(addressVerificationSchema, 'AddressVerification');
+generate(selfShipCollectionSchema, 'SelfShipCollection');
+generate(
+  selfShipCollectionAvailabilityCheckSchema,
+  'SelfShipCollectionAvailabilityCheck',
+);

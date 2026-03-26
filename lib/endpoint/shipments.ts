@@ -8,6 +8,7 @@ import type { Shipment } from '../types';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
 export interface ShipmentCreateBody {
+  exceptions?: Array<{ type: 'label_hold' }>;
   internal_reference?: NullableString;
   public_reference?: NullableString;
   quote_id: number;
@@ -100,7 +101,7 @@ export class ShipmentsEndpoint {
   ): Promise<Shipment> {
     return this.defaultEndpoint.update(
       id,
-      { shipment: payload } as Partial<ShipmentCreateBody>,
+      { shipment: payload } as Partial<ShipmentCreate>,
       auth,
     );
   }

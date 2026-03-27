@@ -712,6 +712,7 @@ export const shipmentExceptionTypeIdSchema = z.enum([
   'held_at_customs',
   'inaccurate_object_details',
   'incorrect_address',
+  'label_hold',
   'lost_in_transit',
   'not_ready_for_delivery',
   'not_ready_for_release',

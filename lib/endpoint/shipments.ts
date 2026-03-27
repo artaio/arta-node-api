@@ -101,7 +101,7 @@ export class ShipmentsEndpoint {
   ): Promise<Shipment> {
     return this.defaultEndpoint.update(
       id,
-      { shipment: payload } as Partial<ShipmentCreate>,
+      { shipment: payload } as ShipmentCreate,
       auth,
     );
   }

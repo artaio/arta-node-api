@@ -1,3 +1,12 @@
+# [1.9.0](https://github.com/artaio/arta-node-api/compare/v1.8.0...v1.9.0) (2026-03-27)
+
+
+### Features
+
+* support label_hold exceptions on shipment booking ([#90](https://github.com/artaio/arta-node-api/issues/90)) ([1606bde](https://github.com/artaio/arta-node-api/commit/1606bdeafa935966331df51ff0821fd657bdf2f4))
+
+
+
 # [1.8.0](https://github.com/artaio/arta-node-api/compare/v1.7.0...v1.8.0) (2026-03-04)
 
 

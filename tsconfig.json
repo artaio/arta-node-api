@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2018",
     "module": "commonjs",
     "outDir": "dist",
     "esModuleInterop": true,
@@ -9,7 +9,8 @@
     "strict": true,
     "skipDefaultLibCheck": false,
     "skipLibCheck": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["jest"]
   },
   "include": ["lib/**/*", "test/**/*", "test-integration/**/*", "schemas/**/*"]
 }

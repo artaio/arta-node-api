@@ -81,18 +81,15 @@ export type PaymentProcessTypeMetadata = BaseMetadata<PaymentProcessType>;
 export type QuotesMetadata = BaseMetadata<QuoteType>;
 export type RequestStatusesMetadata = BaseMetadata<QuoteRequestStatus>;
 
-export interface ServiceSubSubTypeMetadata
-  extends BaseMetadata<ArtaTrackingServiceSubSubType> {
+export interface ServiceSubSubTypeMetadata extends BaseMetadata<ArtaTrackingServiceSubSubType> {
   is_requestable: boolean;
 }
 
-export interface ServicesSubTypeMetadata
-  extends BaseMetadata<ArtaTrackingServiceSubType> {
+export interface ServicesSubTypeMetadata extends BaseMetadata<ArtaTrackingServiceSubType> {
   sub_subtypes: ServiceSubSubTypeMetadata[];
 }
 
-export interface ServicesMetadata
-  extends BaseMetadata<ArtaTrackingServiceType> {
+export interface ServicesMetadata extends BaseMetadata<ArtaTrackingServiceType> {
   subtypes: ServicesSubTypeMetadata[];
 }
 

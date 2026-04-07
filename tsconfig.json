@@ -10,7 +10,7 @@
     "skipDefaultLibCheck": false,
     "skipLibCheck": false,
     "resolveJsonModule": true,
-    "types": ["jest"]
+    "types": ["jest", "node"]
   },
   "include": ["lib/**/*", "test/**/*", "test-integration/**/*", "schemas/**/*"]
 }

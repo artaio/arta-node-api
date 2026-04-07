@@ -15,10 +15,16 @@ describe('tests logs Arta endpoint', () => {
 
   it('should have metadata methods', async () => {
     await endpoint.apiVersions();
-    expect(clientMock.get).toHaveBeenLastCalledWith(`/${path}/api_versions`, undefined);
+    expect(clientMock.get).toHaveBeenLastCalledWith(
+      `/${path}/api_versions`,
+      undefined,
+    );
 
     await endpoint.currencies();
-    expect(clientMock.get).toHaveBeenLastCalledWith(`/${path}/currencies`, undefined);
+    expect(clientMock.get).toHaveBeenLastCalledWith(
+      `/${path}/currencies`,
+      undefined,
+    );
 
     await endpoint.emailNotifications();
     expect(clientMock.get).toHaveBeenLastCalledWith(
@@ -27,7 +33,10 @@ describe('tests logs Arta endpoint', () => {
     );
 
     await endpoint.insurances();
-    expect(clientMock.get).toHaveBeenLastCalledWith(`/${path}/insurances`, undefined);
+    expect(clientMock.get).toHaveBeenLastCalledWith(
+      `/${path}/insurances`,
+      undefined,
+    );
 
     await endpoint.locationAccessRestrictions();
     expect(clientMock.get).toHaveBeenLastCalledWith(
@@ -42,7 +51,10 @@ describe('tests logs Arta endpoint', () => {
     );
 
     await endpoint.objects();
-    expect(clientMock.get).toHaveBeenLastCalledWith(`/${path}/objects`, undefined);
+    expect(clientMock.get).toHaveBeenLastCalledWith(
+      `/${path}/objects`,
+      undefined,
+    );
 
     await endpoint.packageStatuses();
     expect(clientMock.get).toHaveBeenLastCalledWith(
@@ -51,7 +63,10 @@ describe('tests logs Arta endpoint', () => {
     );
 
     await endpoint.packings();
-    expect(clientMock.get).toHaveBeenLastCalledWith(`/${path}/packings`, undefined);
+    expect(clientMock.get).toHaveBeenLastCalledWith(
+      `/${path}/packings`,
+      undefined,
+    );
 
     await endpoint.parcelTransportServices();
     expect(clientMock.get).toHaveBeenLastCalledWith(
@@ -66,7 +81,10 @@ describe('tests logs Arta endpoint', () => {
     );
 
     await endpoint.quotes();
-    expect(clientMock.get).toHaveBeenLastCalledWith(`/${path}/quotes`, undefined);
+    expect(clientMock.get).toHaveBeenLastCalledWith(
+      `/${path}/quotes`,
+      undefined,
+    );
 
     await endpoint.quotingStrategies();
     expect(clientMock.get).toHaveBeenLastCalledWith(
@@ -87,7 +105,10 @@ describe('tests logs Arta endpoint', () => {
     );
 
     await endpoint.services();
-    expect(clientMock.get).toHaveBeenLastCalledWith(`/${path}/services`, undefined);
+    expect(clientMock.get).toHaveBeenLastCalledWith(
+      `/${path}/services`,
+      undefined,
+    );
 
     await endpoint.shipmentExceptionTypes();
     expect(clientMock.get).toHaveBeenLastCalledWith(

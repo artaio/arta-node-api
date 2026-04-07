@@ -111,8 +111,6 @@ export async function testListWithSearch(
   );
 }
 
-testListWithSearch;
-
 export async function testListAll(payload: any, testConfig: RequestTestConfig) {
   testConfig.clientMock.get = jest
     .fn()

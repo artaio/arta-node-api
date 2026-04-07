@@ -7,6 +7,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:n/recommended",
     "prettier"
   ],
   "overrides": [],
@@ -24,6 +25,9 @@
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/consistent-type-imports": "error"
+    "@typescript-eslint/consistent-type-imports": "error",
+    "n/no-missing-import": "off",
+    "n/no-unpublished-import": "off",
+    "n/no-unsupported-features/node-builtins": ["error", { "allowExperimental": true }]
   }
 }

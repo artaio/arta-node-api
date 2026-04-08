@@ -1,3 +1,12 @@
+# [1.10.0](https://github.com/artaio/arta-node-api/compare/v1.9.1...v1.10.0) (2026-04-08)
+
+
+### Features
+
+* add import_cost_estimates endpoint ([#69](https://github.com/artaio/arta-node-api/issues/69)) ([e095617](https://github.com/artaio/arta-node-api/commit/e095617eed5d16e0d41a6540b5989af6b6773f58))
+
+
+
 ## [1.9.1](https://github.com/artaio/arta-node-api/compare/v1.9.0...v1.9.1) (2026-04-08)
 
 

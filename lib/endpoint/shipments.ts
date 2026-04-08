@@ -8,6 +8,7 @@ import type { Shipment } from '../types';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
 export interface ShipmentCreateBody {
+  customs_process?: Shipment['customs_process'];
   exceptions?: Array<{ type: 'label_hold' }>;
   internal_reference?: NullableString;
   public_reference?: NullableString;

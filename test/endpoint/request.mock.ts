@@ -102,6 +102,7 @@ export const responseMock = {
     region: null,
     title: null,
   },
+  customs_process: 'ddu',
   payment_process: 'checkout',
   preferred_quote_types: [],
   preferred_parcel_transport_services: [],

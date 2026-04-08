@@ -11,6 +11,11 @@ export {
 export { EmailRuleCreateBody } from './endpoint/emailRules';
 export { EmailSubscriptionCreateBody } from './endpoint/emailSubscriptions';
 export { HostedSessionCreateBody } from './endpoint/hostedSessions';
+export {
+  ImportCostEstimateCreateBody,
+  ImportCostEstimateCreateBodyDirect,
+  ImportCostEstimateCreateBodyFromQuote,
+} from './endpoint/importCostEstimates';
 export { KeyCreateBody } from './endpoint/keys';
 export * from './MetadataTypes';
 export { UploadCreateBody } from './endpoint/uploads';

@@ -42,7 +42,7 @@ export async function testUpdateSingle(
   testConfig: RequestTestConfig,
 ) {
   const result = await testConfig.endpoint.update(payload);
-  expect(testConfig.clientMock.patch).toBeCalledWith(
+  expect(testConfig.clientMock.patch).toHaveBeenCalledWith(
     `/${testConfig.path}`,
     { [insertKey]: payload },
     testConfig.forwadedAuth,
@@ -60,7 +60,7 @@ export async function testUpdate(
     payload,
     testConfig.forwadedAuth,
   );
-  expect(testConfig.clientMock.patch).toBeCalledWith(
+  expect(testConfig.clientMock.patch).toHaveBeenCalledWith(
     `/${testConfig.path}/123`,
     { [insertKey]: payload },
     testConfig.forwadedAuth,
@@ -111,8 +111,6 @@ export async function testListWithSearch(
   );
 }
 
-testListWithSearch;
-
 export async function testListAll(payload: any, testConfig: RequestTestConfig) {
   testConfig.clientMock.get = jest
     .fn()
@@ -154,7 +152,7 @@ export async function testGetSingle(
   testConfig: RequestTestConfig,
 ) {
   const single = await testConfig.endpoint.get();
-  expect(testConfig.clientMock.get).toBeCalledWith(
+  expect(testConfig.clientMock.get).toHaveBeenCalledWith(
     `/${testConfig.path}`,
     testConfig.forwadedAuth,
   );

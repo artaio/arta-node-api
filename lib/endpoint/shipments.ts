@@ -65,7 +65,7 @@ export class ShipmentsEndpoint {
       });
     }
 
-    s.services && s.services.forEach(parseService);
+    s.services?.forEach(parseService);
     return s;
   }
 

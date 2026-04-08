@@ -19,9 +19,10 @@ export interface Endpoint<T, U> {
   remove: (id: ArtaID, auth?: string) => Promise<void>;
 }
 
-export class DefaultEndpoint<T extends DatedInterface, U>
-  implements Endpoint<T, U>
-{
+export class DefaultEndpoint<T extends DatedInterface, U> implements Endpoint<
+  T,
+  U
+> {
   private readonly path: string;
   constructor(
     path: string,

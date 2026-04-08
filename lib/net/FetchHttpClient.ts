@@ -67,7 +67,7 @@ export class FetchHttpClient implements HttpClient {
     });
 
     let setTimeoutId: ReturnType<typeof setTimeout> | null = null;
-    const rejectTimeout = new Promise((_, reject) => {
+    const rejectTimeout = new Promise((_resolve, reject) => {
       setTimeoutId = setTimeout(() => {
         reject(new Error(`Request timed out to ${host}:${port}`));
       }, timeout);
@@ -80,7 +80,7 @@ export class FetchHttpClient implements HttpClient {
 
       return new FetchHttpClientResponse(response);
     } finally {
-      setTimeoutId != null && clearTimeout(setTimeoutId);
+      if (setTimeoutId != null) clearTimeout(setTimeoutId);
     }
   }
 }

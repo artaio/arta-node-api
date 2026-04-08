@@ -25,9 +25,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    # Ensure npm 11.5.1 or later is installed
+    # Ensure npm >= 11.5.1 (use npx to avoid self-update corruption on hosted runners)
     - name: Update npm
-      run: npm install -g npm@latest
+      run: npx --yes npm@">=11.5.1" install -g npm@">=11.5.1"
     - run: npm install
     - run: npm run build --if-present
     - run: npm test

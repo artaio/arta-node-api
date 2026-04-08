@@ -6,8 +6,10 @@ import { createDateAsUTC } from '../utils';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
 
-export interface UnparsedInvoicePayment
-  extends Omit<InvoicePayment, 'paid_on' | 'amount'> {
+export interface UnparsedInvoicePayment extends Omit<
+  InvoicePayment,
+  'paid_on' | 'amount'
+> {
   paid_on: string;
   amount: string;
 }

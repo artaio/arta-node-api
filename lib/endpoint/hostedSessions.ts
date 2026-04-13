@@ -30,6 +30,7 @@ export type HostedSessionCreateBody =
   | {
       additional_services?: Nullable<AdditionalService[]>;
       cancel_url?: NullableString;
+      customs_end_use?: HostedSession['customs_end_use'];
       customs_process?: HostedSession['customs_process'];
       destination?: Nullable<ArtaLocation>;
       insurance?: Nullable<Insurance>;
@@ -54,6 +55,7 @@ export type HostedSessionCreateBody =
   | {
       additional_services?: Nullable<AdditionalService[]>;
       cancel_url?: NullableString;
+      customs_end_use?: HostedSession['customs_end_use'];
       customs_process?: HostedSession['customs_process'];
       destination: ArtaLocation;
       insurance?: Nullable<Insurance>;

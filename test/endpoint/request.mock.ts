@@ -102,6 +102,7 @@ export const responseMock = {
     region: null,
     title: null,
   },
+  customs_end_use: 'not_for_resale',
   customs_process: 'ddu',
   payment_process: 'checkout',
   preferred_quote_types: [],

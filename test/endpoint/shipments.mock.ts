@@ -105,6 +105,7 @@ export const responseMock = {
       width: '14.0',
     },
   ],
+  customs_end_use: 'not_for_resale',
   customs_process: 'ddu',
   payment_process: 'invoicing',
   public_reference: null,

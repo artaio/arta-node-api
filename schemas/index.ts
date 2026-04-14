@@ -314,6 +314,8 @@ export const paymentProcessSchema = z.enum([
   'checkout_direct',
   'invoicing',
 ]);
+export const customsProcessSchema = z.enum(['ddu', 'ddp', 'ddp_optional']);
+export const customsEndUseSchema = z.enum(['for_resale', 'not_for_resale']);
 export const quoteRequestStatusSchema = z.enum([
   'cancelled',
   'closed',
@@ -631,6 +633,8 @@ export const requestListItemSchema = datedSchema.extend({
     missing: z.array(z.string()),
     ready: z.boolean(),
   }),
+  customs_end_use: customsEndUseSchema,
+  customs_process: customsProcessSchema,
   destination: artaLocationSchema,
   hosted_session_id: z.number().nullable(),
   insurance: insuranceSchema.nullable(),
@@ -779,6 +783,8 @@ export const shipmentStatusSchema = z.enum([
 
 export const shipmentSchema = datedSchema.extend({
   id: z.string().uuid(),
+  customs_end_use: customsEndUseSchema.nullish(),
+  customs_process: customsProcessSchema.nullish(),
   destination: artaLocationSchema,
   eei_form_status: eeiFormStatusSchema.nullish(),
   eei_form_url: z.string().nullish(),
@@ -849,6 +855,8 @@ export const hostedSessionSchema = datedSchema.extend({
   id: numId,
   additional_services: z.array(additionalServiceSchema).nullish(),
   cancel_url: z.string().nullish(),
+  customs_end_use: customsEndUseSchema,
+  customs_process: customsProcessSchema,
   destination: artaLocationSchema.nullish(),
   insurance: insuranceSchema.nullish(),
   internal_reference: z.string().nullish(),

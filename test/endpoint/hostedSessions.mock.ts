@@ -51,6 +51,8 @@ export const responseMock = {
     region: 'NY',
     title: 'Warehouse',
   },
+  customs_end_use: 'not_for_resale',
+  customs_process: 'ddu',
   payment_process: 'invoicing',
   preferred_quote_types: [],
   preferred_parcel_transport_services: [],

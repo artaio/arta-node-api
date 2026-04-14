@@ -34,6 +34,8 @@ export type EnrichRequest<T> = T & {
 export interface QuoteRequestCreateBody {
   additional_services?: Nullable<AdditionalService[]>;
   currency?: Nullable<SupportedCurrency>;
+  customs_end_use?: QuoteRequest['customs_end_use'];
+  customs_process?: QuoteRequest['customs_process'];
   destination: ArtaLocation;
   insurance?: Nullable<Insurance>;
   internal_reference?: NullableString;

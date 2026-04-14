@@ -25,6 +25,8 @@ export type QuoteRequest = {
     missing: string[];
     ready: boolean;
   };
+  customs_end_use: 'for_resale' | 'not_for_resale';
+  customs_process: 'ddu' | 'ddp' | 'ddp_optional';
   destination: {
     access_restrictions?:
       | (
@@ -701,6 +703,8 @@ export type Shipment = {
   updated_at: Date;
   created_at: Date;
   id: string;
+  customs_end_use?: (('for_resale' | 'not_for_resale') | null) | undefined;
+  customs_process?: (('ddu' | 'ddp' | 'ddp_optional') | null) | undefined;
   destination: {
     access_restrictions?:
       | (
@@ -1485,6 +1489,8 @@ export type HostedSession = {
       )
     | undefined;
   cancel_url?: (string | null) | undefined;
+  customs_end_use: 'for_resale' | 'not_for_resale';
+  customs_process: 'ddu' | 'ddp' | 'ddp_optional';
   destination?:
     | ({
         access_restrictions?:
@@ -3449,6 +3455,8 @@ export type QuoteRequestListItem = {
     missing: string[];
     ready: boolean;
   };
+  customs_end_use: 'for_resale' | 'not_for_resale';
+  customs_process: 'ddu' | 'ddp' | 'ddp_optional';
   destination: {
     access_restrictions?:
       | (
@@ -3897,6 +3905,8 @@ export type InboundHostedSession = {
       )
     | undefined;
   cancel_url?: (string | null) | undefined;
+  customs_end_use: 'for_resale' | 'not_for_resale';
+  customs_process: 'ddu' | 'ddp' | 'ddp_optional';
   destination: {
     access_restrictions?:
       | (

@@ -27,4 +27,8 @@ export {
 } from './endpoint/requests';
 export { SelfShipCollectionAvailabilityCheckCreateBody } from './endpoint/selfShipCollectionAvailabilityChecks';
 export { SelfShipCollectionCreateBody } from './endpoint/selfShipCollections';
+export {
+  ShipmentExceptionCreateBody,
+  ShipmentExceptionUpdateBody,
+} from './endpoint/shipmentExceptions';
 export { ShipmentCreateBody } from './endpoint/shipments';

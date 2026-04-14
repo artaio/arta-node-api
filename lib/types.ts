@@ -170,6 +170,7 @@ export type QuoteRequest = {
       | 'under_weight';
   }[];
   objects: {
+    id?: (number | null) | undefined;
     internal_reference?: (string | null) | undefined;
     current_packing?:
       | (
@@ -181,6 +182,10 @@ export type QuoteRequest = {
               | 'cardboard_box'
               | 'chandelier_box'
               | 'chair_box'
+              | 'dinnerware_box'
+              | 'fedex_small_box'
+              | 'fedex_medium_box'
+              | 'fedex_large_box'
               | 'cbin_closed'
               | 'cbin_open'
               | 'ply_box'
@@ -196,7 +201,9 @@ export type QuoteRequest = {
               | 'foam_lined_box'
               | 'cavity_box'
               | 'strongbox'
+              | 'strongbox_airseapacking'
               | 'double_box'
+              | 'double_box_airseapacking'
               | 'travel_frame'
               | 'travel_frame_art'
               | 'travel_frame_other'
@@ -208,6 +215,7 @@ export type QuoteRequest = {
               | 'pallet'
               | 'international_pallet'
               | 'portfolio'
+              | 'flat_mailer'
               | 'rug_rolled'
               | 'shadow_box'
               | 'slipcase'
@@ -227,6 +235,14 @@ export type QuoteRequest = {
             )[]
           | null
         )
+      | undefined;
+    customs?:
+      | ({
+          country_of_origin?: (string | null) | undefined;
+          hs_code?: (string | null) | undefined;
+          medium?: (string | null) | undefined;
+          temporary_admission?: (boolean | null) | undefined;
+        } | null)
       | undefined;
     details?:
       | ({
@@ -407,6 +423,7 @@ export type QuoteRequest = {
       | 'work_on_paper_framed_glass'
       | 'work_on_paper_framed_plexi'
       | 'work_on_paper_unframed';
+    type?: (string | null) | undefined;
     unit_of_measurement?: (string | null) | undefined;
     weight_unit?: (string | null) | undefined;
     value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
@@ -755,9 +772,13 @@ export type Shipment = {
             updated_at: Date;
             created_at: Date;
             exception_type_label?: (string | null) | undefined;
+            hold_until?: (string | null) | undefined;
             id: string;
+            object_id?: (number | null) | undefined;
             package_id?: (number | null) | undefined;
             resolution?: (string | null) | undefined;
+            shipment_id?: (string | null) | undefined;
+            source: string;
             status: 'in_progress' | 'new' | 'resolved';
             type:
               | 'change_of_address_request'
@@ -776,6 +797,7 @@ export type Shipment = {
               | 'requested_hold_to_collect'
               | 'requested_hold_to_deliver'
               | 'wrong_item';
+            user_notes?: (string[] | null) | undefined;
           }[]
         | null
       )
@@ -842,6 +864,7 @@ export type Shipment = {
             id: number;
             is_sufficiently_packed: boolean;
             objects: {
+              id?: (number | null) | undefined;
               internal_reference?: (string | null) | undefined;
               current_packing?:
                 | (
@@ -853,6 +876,10 @@ export type Shipment = {
                         | 'cardboard_box'
                         | 'chandelier_box'
                         | 'chair_box'
+                        | 'dinnerware_box'
+                        | 'fedex_small_box'
+                        | 'fedex_medium_box'
+                        | 'fedex_large_box'
                         | 'cbin_closed'
                         | 'cbin_open'
                         | 'ply_box'
@@ -868,7 +895,9 @@ export type Shipment = {
                         | 'foam_lined_box'
                         | 'cavity_box'
                         | 'strongbox'
+                        | 'strongbox_airseapacking'
                         | 'double_box'
+                        | 'double_box_airseapacking'
                         | 'travel_frame'
                         | 'travel_frame_art'
                         | 'travel_frame_other'
@@ -880,6 +909,7 @@ export type Shipment = {
                         | 'pallet'
                         | 'international_pallet'
                         | 'portfolio'
+                        | 'flat_mailer'
                         | 'rug_rolled'
                         | 'shadow_box'
                         | 'slipcase'
@@ -899,6 +929,14 @@ export type Shipment = {
                       )[]
                     | null
                   )
+                | undefined;
+              customs?:
+                | ({
+                    country_of_origin?: (string | null) | undefined;
+                    hs_code?: (string | null) | undefined;
+                    medium?: (string | null) | undefined;
+                    temporary_admission?: (boolean | null) | undefined;
+                  } | null)
                 | undefined;
               details?:
                 | ({
@@ -1079,6 +1117,7 @@ export type Shipment = {
                 | 'work_on_paper_framed_glass'
                 | 'work_on_paper_framed_plexi'
                 | 'work_on_paper_unframed';
+              type?: (string | null) | undefined;
               unit_of_measurement?: (string | null) | undefined;
               weight_unit?: (string | null) | undefined;
               value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
@@ -1245,6 +1284,10 @@ export type Shipment = {
               | 'cardboard_box'
               | 'chandelier_box'
               | 'chair_box'
+              | 'dinnerware_box'
+              | 'fedex_small_box'
+              | 'fedex_medium_box'
+              | 'fedex_large_box'
               | 'cbin_closed'
               | 'cbin_open'
               | 'ply_box'
@@ -1260,7 +1303,9 @@ export type Shipment = {
               | 'foam_lined_box'
               | 'cavity_box'
               | 'strongbox'
+              | 'strongbox_airseapacking'
               | 'double_box'
+              | 'double_box_airseapacking'
               | 'travel_frame'
               | 'travel_frame_art'
               | 'travel_frame_other'
@@ -1272,6 +1317,7 @@ export type Shipment = {
               | 'pallet'
               | 'international_pallet'
               | 'portfolio'
+              | 'flat_mailer'
               | 'rug_rolled'
               | 'shadow_box'
               | 'slipcase'
@@ -1536,6 +1582,7 @@ export type HostedSession = {
     | undefined;
   internal_reference?: (string | null) | undefined;
   objects: {
+    id?: (number | null) | undefined;
     internal_reference?: (string | null) | undefined;
     current_packing?:
       | (
@@ -1547,6 +1594,10 @@ export type HostedSession = {
               | 'cardboard_box'
               | 'chandelier_box'
               | 'chair_box'
+              | 'dinnerware_box'
+              | 'fedex_small_box'
+              | 'fedex_medium_box'
+              | 'fedex_large_box'
               | 'cbin_closed'
               | 'cbin_open'
               | 'ply_box'
@@ -1562,7 +1613,9 @@ export type HostedSession = {
               | 'foam_lined_box'
               | 'cavity_box'
               | 'strongbox'
+              | 'strongbox_airseapacking'
               | 'double_box'
+              | 'double_box_airseapacking'
               | 'travel_frame'
               | 'travel_frame_art'
               | 'travel_frame_other'
@@ -1574,6 +1627,7 @@ export type HostedSession = {
               | 'pallet'
               | 'international_pallet'
               | 'portfolio'
+              | 'flat_mailer'
               | 'rug_rolled'
               | 'shadow_box'
               | 'slipcase'
@@ -1593,6 +1647,14 @@ export type HostedSession = {
             )[]
           | null
         )
+      | undefined;
+    customs?:
+      | ({
+          country_of_origin?: (string | null) | undefined;
+          hs_code?: (string | null) | undefined;
+          medium?: (string | null) | undefined;
+          temporary_admission?: (boolean | null) | undefined;
+        } | null)
       | undefined;
     details?:
       | ({
@@ -1773,6 +1835,7 @@ export type HostedSession = {
       | 'work_on_paper_framed_glass'
       | 'work_on_paper_framed_plexi'
       | 'work_on_paper_unframed';
+    type?: (string | null) | undefined;
     unit_of_measurement?: (string | null) | undefined;
     weight_unit?: (string | null) | undefined;
     value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
@@ -2384,6 +2447,7 @@ export type ArtaLocation = {
 };
 export type Insurance = 'arta_transit_insurance' | 'no_arta_insurance';
 export type ArtaObject = {
+  id?: (number | null) | undefined;
   internal_reference?: (string | null) | undefined;
   current_packing?:
     | (
@@ -2395,6 +2459,10 @@ export type ArtaObject = {
             | 'cardboard_box'
             | 'chandelier_box'
             | 'chair_box'
+            | 'dinnerware_box'
+            | 'fedex_small_box'
+            | 'fedex_medium_box'
+            | 'fedex_large_box'
             | 'cbin_closed'
             | 'cbin_open'
             | 'ply_box'
@@ -2410,7 +2478,9 @@ export type ArtaObject = {
             | 'foam_lined_box'
             | 'cavity_box'
             | 'strongbox'
+            | 'strongbox_airseapacking'
             | 'double_box'
+            | 'double_box_airseapacking'
             | 'travel_frame'
             | 'travel_frame_art'
             | 'travel_frame_other'
@@ -2422,6 +2492,7 @@ export type ArtaObject = {
             | 'pallet'
             | 'international_pallet'
             | 'portfolio'
+            | 'flat_mailer'
             | 'rug_rolled'
             | 'shadow_box'
             | 'slipcase'
@@ -2441,6 +2512,14 @@ export type ArtaObject = {
           )[]
         | null
       )
+    | undefined;
+  customs?:
+    | ({
+        country_of_origin?: (string | null) | undefined;
+        hs_code?: (string | null) | undefined;
+        medium?: (string | null) | undefined;
+        temporary_admission?: (boolean | null) | undefined;
+      } | null)
     | undefined;
   details?:
     | ({
@@ -2621,6 +2700,7 @@ export type ArtaObject = {
     | 'work_on_paper_framed_glass'
     | 'work_on_paper_framed_plexi'
     | 'work_on_paper_unframed';
+  type?: (string | null) | undefined;
   unit_of_measurement?: (string | null) | undefined;
   weight_unit?: (string | null) | undefined;
   value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
@@ -2799,6 +2879,7 @@ export type Package = {
   id: number;
   is_sufficiently_packed: boolean;
   objects: {
+    id?: (number | null) | undefined;
     internal_reference?: (string | null) | undefined;
     current_packing?:
       | (
@@ -2810,6 +2891,10 @@ export type Package = {
               | 'cardboard_box'
               | 'chandelier_box'
               | 'chair_box'
+              | 'dinnerware_box'
+              | 'fedex_small_box'
+              | 'fedex_medium_box'
+              | 'fedex_large_box'
               | 'cbin_closed'
               | 'cbin_open'
               | 'ply_box'
@@ -2825,7 +2910,9 @@ export type Package = {
               | 'foam_lined_box'
               | 'cavity_box'
               | 'strongbox'
+              | 'strongbox_airseapacking'
               | 'double_box'
+              | 'double_box_airseapacking'
               | 'travel_frame'
               | 'travel_frame_art'
               | 'travel_frame_other'
@@ -2837,6 +2924,7 @@ export type Package = {
               | 'pallet'
               | 'international_pallet'
               | 'portfolio'
+              | 'flat_mailer'
               | 'rug_rolled'
               | 'shadow_box'
               | 'slipcase'
@@ -2856,6 +2944,14 @@ export type Package = {
             )[]
           | null
         )
+      | undefined;
+    customs?:
+      | ({
+          country_of_origin?: (string | null) | undefined;
+          hs_code?: (string | null) | undefined;
+          medium?: (string | null) | undefined;
+          temporary_admission?: (boolean | null) | undefined;
+        } | null)
       | undefined;
     details?:
       | ({
@@ -3036,6 +3132,7 @@ export type Package = {
       | 'work_on_paper_framed_glass'
       | 'work_on_paper_framed_plexi'
       | 'work_on_paper_unframed';
+    type?: (string | null) | undefined;
     unit_of_measurement?: (string | null) | undefined;
     weight_unit?: (string | null) | undefined;
     value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
@@ -3197,6 +3294,10 @@ export type Package = {
     | 'cardboard_box'
     | 'chandelier_box'
     | 'chair_box'
+    | 'dinnerware_box'
+    | 'fedex_small_box'
+    | 'fedex_medium_box'
+    | 'fedex_large_box'
     | 'cbin_closed'
     | 'cbin_open'
     | 'ply_box'
@@ -3212,7 +3313,9 @@ export type Package = {
     | 'foam_lined_box'
     | 'cavity_box'
     | 'strongbox'
+    | 'strongbox_airseapacking'
     | 'double_box'
+    | 'double_box_airseapacking'
     | 'travel_frame'
     | 'travel_frame_art'
     | 'travel_frame_other'
@@ -3224,6 +3327,7 @@ export type Package = {
     | 'pallet'
     | 'international_pallet'
     | 'portfolio'
+    | 'flat_mailer'
     | 'rug_rolled'
     | 'shadow_box'
     | 'slipcase'
@@ -3283,9 +3387,13 @@ export type ShipmentException = {
   updated_at: Date;
   created_at: Date;
   exception_type_label?: (string | null) | undefined;
+  hold_until?: (string | null) | undefined;
   id: string;
+  object_id?: (number | null) | undefined;
   package_id?: (number | null) | undefined;
   resolution?: (string | null) | undefined;
+  shipment_id?: (string | null) | undefined;
+  source: string;
   status: 'in_progress' | 'new' | 'resolved';
   type:
     | 'change_of_address_request'
@@ -3304,6 +3412,7 @@ export type ShipmentException = {
     | 'requested_hold_to_collect'
     | 'requested_hold_to_deliver'
     | 'wrong_item';
+  user_notes?: (string[] | null) | undefined;
 };
 export type ShipmentSchedule = {
   delivery_end?: (Date | null) | undefined;
@@ -3950,6 +4059,7 @@ export type InboundHostedSession = {
     | undefined;
   internal_reference?: (string | null) | undefined;
   objects: {
+    id?: (number | null) | undefined;
     internal_reference?: (string | null) | undefined;
     current_packing?:
       | (
@@ -3961,6 +4071,10 @@ export type InboundHostedSession = {
               | 'cardboard_box'
               | 'chandelier_box'
               | 'chair_box'
+              | 'dinnerware_box'
+              | 'fedex_small_box'
+              | 'fedex_medium_box'
+              | 'fedex_large_box'
               | 'cbin_closed'
               | 'cbin_open'
               | 'ply_box'
@@ -3976,7 +4090,9 @@ export type InboundHostedSession = {
               | 'foam_lined_box'
               | 'cavity_box'
               | 'strongbox'
+              | 'strongbox_airseapacking'
               | 'double_box'
+              | 'double_box_airseapacking'
               | 'travel_frame'
               | 'travel_frame_art'
               | 'travel_frame_other'
@@ -3988,6 +4104,7 @@ export type InboundHostedSession = {
               | 'pallet'
               | 'international_pallet'
               | 'portfolio'
+              | 'flat_mailer'
               | 'rug_rolled'
               | 'shadow_box'
               | 'slipcase'
@@ -4007,6 +4124,14 @@ export type InboundHostedSession = {
             )[]
           | null
         )
+      | undefined;
+    customs?:
+      | ({
+          country_of_origin?: (string | null) | undefined;
+          hs_code?: (string | null) | undefined;
+          medium?: (string | null) | undefined;
+          temporary_admission?: (boolean | null) | undefined;
+        } | null)
       | undefined;
     details?:
       | ({
@@ -4187,6 +4312,7 @@ export type InboundHostedSession = {
       | 'work_on_paper_framed_glass'
       | 'work_on_paper_framed_plexi'
       | 'work_on_paper_unframed';
+    type?: (string | null) | undefined;
     unit_of_measurement?: (string | null) | undefined;
     weight_unit?: (string | null) | undefined;
     value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';
@@ -4424,6 +4550,7 @@ export type InboundHostedSession = {
   quoting_strategy: 'all_rates' | 'best_rate' | 'compare_carriers';
 };
 export type ArtaInboundObject = {
+  id?: (number | null) | undefined;
   internal_reference?: (string | null) | undefined;
   current_packing?:
     | (
@@ -4435,6 +4562,10 @@ export type ArtaInboundObject = {
             | 'cardboard_box'
             | 'chandelier_box'
             | 'chair_box'
+            | 'dinnerware_box'
+            | 'fedex_small_box'
+            | 'fedex_medium_box'
+            | 'fedex_large_box'
             | 'cbin_closed'
             | 'cbin_open'
             | 'ply_box'
@@ -4450,7 +4581,9 @@ export type ArtaInboundObject = {
             | 'foam_lined_box'
             | 'cavity_box'
             | 'strongbox'
+            | 'strongbox_airseapacking'
             | 'double_box'
+            | 'double_box_airseapacking'
             | 'travel_frame'
             | 'travel_frame_art'
             | 'travel_frame_other'
@@ -4462,6 +4595,7 @@ export type ArtaInboundObject = {
             | 'pallet'
             | 'international_pallet'
             | 'portfolio'
+            | 'flat_mailer'
             | 'rug_rolled'
             | 'shadow_box'
             | 'slipcase'
@@ -4481,6 +4615,14 @@ export type ArtaInboundObject = {
           )[]
         | null
       )
+    | undefined;
+  customs?:
+    | ({
+        country_of_origin?: (string | null) | undefined;
+        hs_code?: (string | null) | undefined;
+        medium?: (string | null) | undefined;
+        temporary_admission?: (boolean | null) | undefined;
+      } | null)
     | undefined;
   details?:
     | ({
@@ -4661,6 +4803,7 @@ export type ArtaInboundObject = {
     | 'work_on_paper_framed_glass'
     | 'work_on_paper_framed_plexi'
     | 'work_on_paper_unframed';
+  type?: (string | null) | undefined;
   unit_of_measurement?: (string | null) | undefined;
   weight_unit?: (string | null) | undefined;
   value_currency: 'CAD' | 'CHF' | 'EUR' | 'GBP' | 'HKD' | 'USD';

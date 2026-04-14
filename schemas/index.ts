@@ -73,6 +73,10 @@ const packingSubTypeSchema = z.enum([
   'cardboard_box',
   'chandelier_box',
   'chair_box',
+  'dinnerware_box',
+  'fedex_small_box',
+  'fedex_medium_box',
+  'fedex_large_box',
   'cbin_closed',
   'cbin_open',
   'ply_box',
@@ -88,7 +92,9 @@ const packingSubTypeSchema = z.enum([
   'foam_lined_box',
   'cavity_box',
   'strongbox',
+  'strongbox_airseapacking',
   'double_box',
+  'double_box_airseapacking',
   'travel_frame',
   'travel_frame_art',
   'travel_frame_other',
@@ -100,6 +106,7 @@ const packingSubTypeSchema = z.enum([
   'pallet',
   'international_pallet',
   'portfolio',
+  'flat_mailer',
   'rug_rolled',
   'shadow_box',
   'slipcase',
@@ -501,8 +508,17 @@ export const componentSchema = z.object({
 });
 
 export const artaObjectSchema = z.object({
+  id: numId.nullish(),
   internal_reference: z.string().nullish(),
   current_packing: z.array(packingSubTypeSchema).nullish(),
+  customs: z
+    .object({
+      country_of_origin: z.string().nullish(),
+      hs_code: z.string().nullish(),
+      medium: z.string().nullish(),
+      temporary_admission: z.boolean().nullish(),
+    })
+    .nullish(),
   details: detailsSchema.nullish(),
   height: zodNumberOrString,
   width: zodNumberOrString,
@@ -512,6 +528,7 @@ export const artaObjectSchema = z.object({
   images: z.array(z.string()).nullish(),
   public_reference: z.string().nullish(),
   subtype: objectSubTypeSchema,
+  type: z.string().nullish(),
   unit_of_measurement: z.string().nullish(),
   weight_unit: z.string().nullish(),
   value_currency: supportedCurrencySchema,
@@ -729,11 +746,16 @@ export const shipmentExceptionTypeIdSchema = z.enum([
 
 export const shipmentExceptionSchema = datedSchema.extend({
   exception_type_label: z.string().nullish(),
+  hold_until: z.string().nullish(),
   id: z.string().uuid(),
+  object_id: z.number().nullish(),
   package_id: z.number().nullish(),
   resolution: z.string().nullish(),
+  shipment_id: z.string().uuid().nullish(),
+  source: z.string(),
   status: shipmentExceptionStatusSchema,
   type: shipmentExceptionTypeIdSchema,
+  user_notes: z.array(z.string()).nullish(),
 });
 
 export const shipmentScheduleSchema = z.object({

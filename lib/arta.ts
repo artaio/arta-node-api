@@ -23,6 +23,7 @@ import { TrackingsEndpoint } from './endpoint/trackings';
 import { QuoteRequestsEndpoint } from './endpoint/requests';
 import { SelfShipCollectionAvailabilityChecksEndpoint } from './endpoint/selfShipCollectionAvailabilityChecks';
 import { SelfShipCollectionsEndpoint } from './endpoint/selfShipCollections';
+import { ShipmentExceptionsEndpoint } from './endpoint/shipmentExceptions';
 import { ShipmentsEndpoint } from './endpoint/shipments';
 import { TagsEndpoint } from './endpoint/tags';
 import { ImportCostEstimatesEndpoint } from './endpoint/importCostEstimates';
@@ -59,6 +60,7 @@ export class Arta {
   public requests: QuoteRequestsEndpoint;
   public self_ship_collection_availability_checks: SelfShipCollectionAvailabilityChecksEndpoint;
   public self_ship_collections: SelfShipCollectionsEndpoint;
+  public shipment_exceptions: ShipmentExceptionsEndpoint;
   public shipments: ShipmentsEndpoint;
   public tags: TagsEndpoint;
   public trackings: TrackingsEndpoint;
@@ -99,6 +101,7 @@ export class Arta {
     this.self_ship_collections = new SelfShipCollectionsEndpoint(
       this.artaClient,
     );
+    this.shipment_exceptions = new ShipmentExceptionsEndpoint(this.artaClient);
     this.shipments = new ShipmentsEndpoint(this.artaClient);
     this.tags = new TagsEndpoint(this.artaClient);
     this.trackings = new TrackingsEndpoint(this.artaClient);

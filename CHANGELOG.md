@@ -1,3 +1,12 @@
+# [1.11.0](https://github.com/artaio/arta-node-api/compare/v1.10.0...v1.11.0) (2026-04-14)
+
+
+### Features
+
+* support cusoms_process on requeste, shipments and hosted_sessions ([#92](https://github.com/artaio/arta-node-api/issues/92)) ([86c09aa](https://github.com/artaio/arta-node-api/commit/86c09aaf1f43ad538c34897d43c2c3a5cfd498f6))
+
+
+
 # [1.10.0](https://github.com/artaio/arta-node-api/compare/v1.9.1...v1.10.0) (2026-04-08)
 
 

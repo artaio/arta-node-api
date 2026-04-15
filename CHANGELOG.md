@@ -1,3 +1,12 @@
+# [1.12.0](https://github.com/artaio/arta-node-api/compare/v1.11.0...v1.12.0) (2026-04-15)
+
+
+### Features
+
+* add shipment_exceptions endpoint and update schemas ([#93](https://github.com/artaio/arta-node-api/issues/93)) ([9dc0e21](https://github.com/artaio/arta-node-api/commit/9dc0e2195f4e89708ef881a5fe3c2b66561a65af))
+
+
+
 # [1.11.0](https://github.com/artaio/arta-node-api/compare/v1.10.0...v1.11.0) (2026-04-14)
 
 

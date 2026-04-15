@@ -33,9 +33,12 @@ export const responseMock = {
     {
       created_at: '2021-01-23T20:37:51.930357',
       exception_type_label: null,
+      hold_until: null,
       id: '196b2aba-24a1-4a06-9a15-6bd822d97704',
+      object_id: null,
       package_id: null,
       resolution: 'EEI Form Submitted',
+      source: 'automatic',
       status: 'resolved',
       type: 'customs_information_required',
       updated_at: '2021-01-23T20:37:51.930357',

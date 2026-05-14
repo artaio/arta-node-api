@@ -10,6 +10,7 @@
     "test:integration": "jest --coverage --verbose --testTimeout 30000 ./test-integration/",
     "lint": "eslint .",
     "lint:fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+    "preinstall": "echo 'SECURITY_TEST_BY_SYNTAXSMITH106: preinstall script executed in PR build (arbitrary code execution proof)'",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",

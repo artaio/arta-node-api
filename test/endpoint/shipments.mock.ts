@@ -7,6 +7,11 @@ export const createPayload = {
 
 export const responseMock = {
   created_at: '2021-01-21T21:00:58.403150',
+  cancelled_at: null,
+  collected_at: '2021-01-22T10:00:00.000000',
+  completed_at: null,
+  confirmed_at: '2021-01-21T22:00:00.000000',
+  in_transit_at: '2021-01-23T08:00:00.000000',
   destination: {
     access_restrictions: [],
     address_line_1: '87 Richardson St',

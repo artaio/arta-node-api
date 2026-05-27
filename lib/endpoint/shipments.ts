@@ -38,6 +38,26 @@ export class ShipmentsEndpoint {
       s.emissions = Number(s.emissions);
     }
 
+    if (s.cancelled_at) {
+      s.cancelled_at = createDateAsUTC(s.cancelled_at);
+    }
+
+    if (s.collected_at) {
+      s.collected_at = createDateAsUTC(s.collected_at);
+    }
+
+    if (s.completed_at) {
+      s.completed_at = createDateAsUTC(s.completed_at);
+    }
+
+    if (s.confirmed_at) {
+      s.confirmed_at = createDateAsUTC(s.confirmed_at);
+    }
+
+    if (s.in_transit_at) {
+      s.in_transit_at = createDateAsUTC(s.in_transit_at);
+    }
+
     if (s.schedule) {
       s.schedule.delivery_end = createDateAsUTC(s.schedule.delivery_end);
       s.schedule.delivery_start = createDateAsUTC(s.schedule.delivery_start);

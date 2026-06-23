@@ -805,6 +805,10 @@ export const shipmentStatusSchema = z.enum([
 
 export const shipmentSchema = datedSchema.extend({
   id: z.string().uuid(),
+  cancelled_at: z.date().nullish(),
+  collected_at: z.date().nullish(),
+  completed_at: z.date().nullish(),
+  confirmed_at: z.date().nullish(),
   customs_end_use: customsEndUseSchema.nullish(),
   customs_process: customsProcessSchema.nullish(),
   destination: artaLocationSchema,
@@ -814,6 +818,7 @@ export const shipmentSchema = datedSchema.extend({
   emissions_unit: z.string().nullish(),
   exceptions: z.array(shipmentExceptionSchema).nullish(),
   hosted_session_id: z.number().nullish(),
+  in_transit_at: z.date().nullish(),
   insurance_policy: insurancePolicySchema.nullish(),
   internal_reference: z.string().nullish(),
   log_request_id: z.string().nullish(),

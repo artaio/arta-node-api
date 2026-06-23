@@ -43,5 +43,11 @@ describe('tests shipments Arta endpoint', () => {
     ]);
 
     expect(result.total).toBe(4);
+
+    expect(result.cancelled_at).toBeNull();
+    expect(result.completed_at).toBeNull();
+    expect(result.collected_at).toEqual(new Date('2021-01-22T10:00:00.000Z'));
+    expect(result.confirmed_at).toEqual(new Date('2021-01-21T22:00:00.000Z'));
+    expect(result.in_transit_at).toEqual(new Date('2021-01-23T08:00:00.000Z'));
   });
 });

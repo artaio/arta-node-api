@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "postinstall": "husky install",
-    "prepublishOnly": "pinst --disable",
+    "prepublishOnly": "pinst --disable && npm run build",
     "postpublish": "pinst --enable",
     "prepare": "node -e \"try { (await import('husky')).default() } catch (e) { if (e.code !== 'ERR_MODULE_NOT_FOUND') throw e }\" --input-type module"
   },
@@ -21,6 +21,9 @@
   "files": [
     "dist/"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/artaio/arta-node-api",
   "repository": {
     "type": "git",
@@ -38,6 +41,8 @@
     "@commitlint/cli": "^20.0.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/js": "^9.0.0",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^18.19.130",
     "eslint": "^9.0.0",
@@ -50,6 +55,7 @@
     "nock": "^14.0.12",
     "pinst": "^3.0.0",
     "prettier": "3.8.1",
+    "semantic-release": "^25.0.0",
     "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.0",

@@ -69,7 +69,7 @@ export class Arta {
   public webhooks: WebhooksEndpoint;
 
   constructor(apiKey: string, config?: Partial<ArtaConfig>) {
-    this.config = Object.assign(defaultConfig, config);
+    this.config = { ...defaultConfig, ...config };
 
     initLogger(this.config.logger, this.config.verbosity);
 

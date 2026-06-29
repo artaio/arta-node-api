@@ -1,3 +1,10 @@
+## [1.12.2](https://github.com/artaio/arta-node-api/compare/v1.12.1...v1.12.2) (2026-06-29)
+
+
+### Bug Fixes
+
+* avoid mutating shared default config across Arta instances ([#98](https://github.com/artaio/arta-node-api/issues/98)) ([f17713c](https://github.com/artaio/arta-node-api/commit/f17713cc783af4929c1cf2554d1f9f247d8f0e36))
+
 ## [1.12.1](https://github.com/artaio/arta-node-api/compare/v1.12.0...v1.12.1) (2026-05-29)
 
 
@@ -524,6 +531,3 @@
 ### Features
 
 * project setup ([648605f](https://github.com/artaio/arta-node-api/commit/648605ff8456af0cdf31b118783fc1516795a073))
-
-
-

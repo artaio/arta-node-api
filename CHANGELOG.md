@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/artaio/arta-node-api/compare/v1.12.2...v1.13.0) (2026-10-16)
+
+
+### Features
+
+* add EU product identifier customs fields ([#100](https://github.com/artaio/arta-node-api/issues/100)) ([e31c93b](https://github.com/artaio/arta-node-api/commit/e31c93b0aeac5d5edeb1b23450b4dc26957d01a4))
+
 ## [1.12.2](https://github.com/artaio/arta-node-api/compare/v1.12.1...v1.12.2) (2026-06-29)
 
 

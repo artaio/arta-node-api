@@ -1,3 +1,4 @@
+import type { QuoteRequestCreateBody } from '../../lib/endpoint/requests';
 import { QuoteRequestsEndpoint } from '../../lib/endpoint/requests';
 import type { RestClient } from '../../lib/net/RestClient';
 import * as helper from './helper';
@@ -31,6 +32,46 @@ describe('tests quote requests Arta endpoint', () => {
       result.quotes[0].optional_services[0].included_services[0]
         .included_services[0].amount,
     ).toBe(12.0);
+  });
+
+  it('should send EU product identifiers on objects and components', async () => {
+    const euCustoms = {
+      merchant_product_id: 'SKU-123/A',
+      manufacturer_product_id: '0012345678905',
+      manufacturer_product_id_standardized: true,
+      eu_exempt_category: false,
+    };
+    // Typed, so the test fails to compile if the fields drop out of the generated types.
+    const payload: QuoteRequestCreateBody = {
+      origin: { country: 'US', postal_code: '11249' },
+      destination: { country: 'FR', postal_code: '75001' },
+      objects: [
+        {
+          subtype: 'painting_unframed',
+          width: 36,
+          height: 24,
+          value: 100,
+          value_currency: 'USD',
+          customs: { ...euCustoms, eu_exempt_category: true },
+        },
+        {
+          subtype: 'prepacked_box',
+          width: 12,
+          height: 12,
+          value: 100,
+          value_currency: 'USD',
+          components: [
+            { type: 'trading_card', value: 100, customs: euCustoms },
+          ],
+        },
+      ],
+    };
+
+    await helper.testCreate(payload, 'request', {
+      path,
+      clientMock,
+      endpoint,
+    });
   });
 
   it('should have a custom methods', async () => {

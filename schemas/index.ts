@@ -519,15 +519,19 @@ export const detailsSchema = z.object({
 
 const zodNumberOrString = z.union([z.number(), z.string()]);
 
+const customsSchema = z.object({
+  country_of_origin: z.string().nullish(),
+  hs_code: z.string().nullish(),
+  medium: z.string().nullish(),
+  temporary_admission: z.boolean().nullish(),
+  merchant_product_id: z.string().nullish(),
+  manufacturer_product_id: z.string().nullish(),
+  manufacturer_product_id_standardized: z.boolean().nullish(),
+  eu_exempt_category: z.boolean().nullish(),
+});
+
 export const componentSchema = z.object({
-  customs: z
-    .object({
-      country_of_origin: z.string().nullish(),
-      hs_code: z.string().nullish(),
-      medium: z.string().nullish(),
-      temporary_admission: z.boolean().nullish(),
-    })
-    .nullish(),
+  customs: customsSchema.nullish(),
   details: z
     .object({
       creation_date: z.string().nullish(),
@@ -547,14 +551,7 @@ export const artaObjectSchema = z.object({
   id: numId.nullish(),
   internal_reference: z.string().nullish(),
   current_packing: z.array(packingSubTypeSchema).nullish(),
-  customs: z
-    .object({
-      country_of_origin: z.string().nullish(),
-      hs_code: z.string().nullish(),
-      medium: z.string().nullish(),
-      temporary_admission: z.boolean().nullish(),
-    })
-    .nullish(),
+  customs: customsSchema.nullish(),
   details: detailsSchema.nullish(),
   height: zodNumberOrString,
   width: zodNumberOrString,

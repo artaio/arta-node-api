@@ -242,6 +242,10 @@ export type QuoteRequest = {
           hs_code?: (string | null) | undefined;
           medium?: (string | null) | undefined;
           temporary_admission?: (boolean | null) | undefined;
+          merchant_product_id?: (string | null) | undefined;
+          manufacturer_product_id?: (string | null) | undefined;
+          manufacturer_product_id_standardized?: (boolean | null) | undefined;
+          eu_exempt_category?: (boolean | null) | undefined;
         } | null)
       | undefined;
     details?:
@@ -454,6 +458,12 @@ export type QuoteRequest = {
                     hs_code?: (string | null) | undefined;
                     medium?: (string | null) | undefined;
                     temporary_admission?: (boolean | null) | undefined;
+                    merchant_product_id?: (string | null) | undefined;
+                    manufacturer_product_id?: (string | null) | undefined;
+                    manufacturer_product_id_standardized?:
+                      | (boolean | null)
+                      | undefined;
+                    eu_exempt_category?: (boolean | null) | undefined;
                   } | null)
                 | undefined;
               details?:
@@ -972,6 +982,12 @@ export type Shipment = {
                     hs_code?: (string | null) | undefined;
                     medium?: (string | null) | undefined;
                     temporary_admission?: (boolean | null) | undefined;
+                    merchant_product_id?: (string | null) | undefined;
+                    manufacturer_product_id?: (string | null) | undefined;
+                    manufacturer_product_id_standardized?:
+                      | (boolean | null)
+                      | undefined;
+                    eu_exempt_category?: (boolean | null) | undefined;
                   } | null)
                 | undefined;
               details?:
@@ -1186,6 +1202,14 @@ export type Shipment = {
                               temporary_admission?:
                                 | (boolean | null)
                                 | undefined;
+                              merchant_product_id?: (string | null) | undefined;
+                              manufacturer_product_id?:
+                                | (string | null)
+                                | undefined;
+                              manufacturer_product_id_standardized?:
+                                | (boolean | null)
+                                | undefined;
+                              eu_exempt_category?: (boolean | null) | undefined;
                             } | null)
                           | undefined;
                         details?:
@@ -1726,6 +1750,10 @@ export type HostedSession = {
           hs_code?: (string | null) | undefined;
           medium?: (string | null) | undefined;
           temporary_admission?: (boolean | null) | undefined;
+          merchant_product_id?: (string | null) | undefined;
+          manufacturer_product_id?: (string | null) | undefined;
+          manufacturer_product_id_standardized?: (boolean | null) | undefined;
+          eu_exempt_category?: (boolean | null) | undefined;
         } | null)
       | undefined;
     details?:
@@ -1938,6 +1966,12 @@ export type HostedSession = {
                     hs_code?: (string | null) | undefined;
                     medium?: (string | null) | undefined;
                     temporary_admission?: (boolean | null) | undefined;
+                    merchant_product_id?: (string | null) | undefined;
+                    manufacturer_product_id?: (string | null) | undefined;
+                    manufacturer_product_id_standardized?:
+                      | (boolean | null)
+                      | undefined;
+                    eu_exempt_category?: (boolean | null) | undefined;
                   } | null)
                 | undefined;
               details?:
@@ -2627,6 +2661,10 @@ export type ArtaObject = {
         hs_code?: (string | null) | undefined;
         medium?: (string | null) | undefined;
         temporary_admission?: (boolean | null) | undefined;
+        merchant_product_id?: (string | null) | undefined;
+        manufacturer_product_id?: (string | null) | undefined;
+        manufacturer_product_id_standardized?: (boolean | null) | undefined;
+        eu_exempt_category?: (boolean | null) | undefined;
       } | null)
     | undefined;
   details?:
@@ -2839,6 +2877,12 @@ export type ArtaObject = {
                   hs_code?: (string | null) | undefined;
                   medium?: (string | null) | undefined;
                   temporary_admission?: (boolean | null) | undefined;
+                  merchant_product_id?: (string | null) | undefined;
+                  manufacturer_product_id?: (string | null) | undefined;
+                  manufacturer_product_id_standardized?:
+                    | (boolean | null)
+                    | undefined;
+                  eu_exempt_category?: (boolean | null) | undefined;
                 } | null)
               | undefined;
             details?:
@@ -3095,6 +3139,10 @@ export type Package = {
           hs_code?: (string | null) | undefined;
           medium?: (string | null) | undefined;
           temporary_admission?: (boolean | null) | undefined;
+          merchant_product_id?: (string | null) | undefined;
+          manufacturer_product_id?: (string | null) | undefined;
+          manufacturer_product_id_standardized?: (boolean | null) | undefined;
+          eu_exempt_category?: (boolean | null) | undefined;
         } | null)
       | undefined;
     details?:
@@ -3307,6 +3355,12 @@ export type Package = {
                     hs_code?: (string | null) | undefined;
                     medium?: (string | null) | undefined;
                     temporary_admission?: (boolean | null) | undefined;
+                    merchant_product_id?: (string | null) | undefined;
+                    manufacturer_product_id?: (string | null) | undefined;
+                    manufacturer_product_id_standardized?:
+                      | (boolean | null)
+                      | undefined;
+                    eu_exempt_category?: (boolean | null) | undefined;
                   } | null)
                 | undefined;
               details?:
@@ -3909,6 +3963,10 @@ export type ArtaComponent = {
         hs_code?: (string | null) | undefined;
         medium?: (string | null) | undefined;
         temporary_admission?: (boolean | null) | undefined;
+        merchant_product_id?: (string | null) | undefined;
+        manufacturer_product_id?: (string | null) | undefined;
+        manufacturer_product_id_standardized?: (boolean | null) | undefined;
+        eu_exempt_category?: (boolean | null) | undefined;
       } | null)
     | undefined;
   details?:
@@ -4347,6 +4405,10 @@ export type InboundHostedSession = {
           hs_code?: (string | null) | undefined;
           medium?: (string | null) | undefined;
           temporary_admission?: (boolean | null) | undefined;
+          merchant_product_id?: (string | null) | undefined;
+          manufacturer_product_id?: (string | null) | undefined;
+          manufacturer_product_id_standardized?: (boolean | null) | undefined;
+          eu_exempt_category?: (boolean | null) | undefined;
         } | null)
       | undefined;
     details?:
@@ -4559,6 +4621,12 @@ export type InboundHostedSession = {
                     hs_code?: (string | null) | undefined;
                     medium?: (string | null) | undefined;
                     temporary_admission?: (boolean | null) | undefined;
+                    merchant_product_id?: (string | null) | undefined;
+                    manufacturer_product_id?: (string | null) | undefined;
+                    manufacturer_product_id_standardized?:
+                      | (boolean | null)
+                      | undefined;
+                    eu_exempt_category?: (boolean | null) | undefined;
                   } | null)
                 | undefined;
               details?:
@@ -4874,6 +4942,10 @@ export type ArtaInboundObject = {
         hs_code?: (string | null) | undefined;
         medium?: (string | null) | undefined;
         temporary_admission?: (boolean | null) | undefined;
+        merchant_product_id?: (string | null) | undefined;
+        manufacturer_product_id?: (string | null) | undefined;
+        manufacturer_product_id_standardized?: (boolean | null) | undefined;
+        eu_exempt_category?: (boolean | null) | undefined;
       } | null)
     | undefined;
   details?:
@@ -5086,6 +5158,12 @@ export type ArtaInboundObject = {
                   hs_code?: (string | null) | undefined;
                   medium?: (string | null) | undefined;
                   temporary_admission?: (boolean | null) | undefined;
+                  merchant_product_id?: (string | null) | undefined;
+                  manufacturer_product_id?: (string | null) | undefined;
+                  manufacturer_product_id_standardized?:
+                    | (boolean | null)
+                    | undefined;
+                  eu_exempt_category?: (boolean | null) | undefined;
                 } | null)
               | undefined;
             details?:

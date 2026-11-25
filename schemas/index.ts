@@ -834,6 +834,7 @@ export const shipmentStatusSchema = z.enum([
   'collected',
   'in_transit',
   'completed',
+  'cancelled',
 ]);
 
 export const shipmentSchema = datedSchema.extend({

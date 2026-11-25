@@ -54,6 +54,8 @@ describe('tests shipments Arta endpoint', () => {
     );
 
     // The cancelled shipment is parsed like getById's.
+    expect(result.created_at).toBeInstanceOf(Date);
+    expect(result.updated_at).toBeInstanceOf(Date);
     expect(result.total).toBe(4);
     expect(result.emissions).toBe(19.35);
     expect(result.packages?.[0].depth).toBe(6);

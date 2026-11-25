@@ -1525,7 +1525,13 @@ export type Shipment = {
     | undefined;
   shipping_notes?: (string | null) | undefined;
   shortcode: string;
-  status: 'pending' | 'confirmed' | 'collected' | 'in_transit' | 'completed';
+  status:
+    | 'pending'
+    | 'confirmed'
+    | 'collected'
+    | 'in_transit'
+    | 'completed'
+    | 'cancelled';
   total: number;
   tags: {
     updated_at: Date;

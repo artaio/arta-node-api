@@ -490,7 +490,8 @@ export type ShipmentStatus =
   | 'confirmed'
   | 'collected'
   | 'in_transit'
-  | 'completed';
+  | 'completed'
+  | 'cancelled';
 
 export type PaymentContext = 'hosted_checkout' | 'invoiced';
 

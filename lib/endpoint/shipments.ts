@@ -2,8 +2,8 @@ import type { ArtaID } from '../ArtaClient';
 import type { RestClient } from '../net/RestClient';
 import type { Page } from '../pagination';
 import type { ShipmentsSearch } from '../search';
-import type { NullableString } from '../utils';
-import { createDateAsUTC, parseService } from '../utils';
+import type { NotDateParsed, NullableString } from '../utils';
+import { convertDatesToUtc, createDateAsUTC, parseService } from '../utils';
 import type { Shipment } from '../types';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
@@ -124,11 +124,10 @@ export class ShipmentsEndpoint {
     id: ArtaID,
     auth?: string,
   ): Promise<EnrichShipment<Shipment>> {
-    const shipment = await this.artaClient.patch<undefined, Shipment>(
-      `${this.path}/${id}/cancel`,
+    const shipment = await this.artaClient.patch<
       undefined,
-      auth,
-    );
-    return this.enrichFields(shipment);
+      NotDateParsed<Shipment>
+    >(`${this.path}/${id}/cancel`, undefined, auth);
+    return this.enrichFields(convertDatesToUtc(shipment));
   }
 }

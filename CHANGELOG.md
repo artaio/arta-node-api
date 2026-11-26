@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/artaio/arta-node-api/compare/v1.13.0...v1.14.0) (2026-11-26)
+
+
+### Features
+
+* add shipments.cancel() for the Self Ship cancel endpoint ([#101](https://github.com/artaio/arta-node-api/issues/101)) ([ec8be3f](https://github.com/artaio/arta-node-api/commit/ec8be3f9566a1df067e20dede0b47e1bed2ca778))
+
 # [1.13.0](https://github.com/artaio/arta-node-api/compare/v1.12.2...v1.13.0) (2026-10-16)
 
 

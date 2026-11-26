@@ -67,4 +67,32 @@ describe('tests shipments Arta endpoint', () => {
 
     expect(parsedShipmentItem.id).toBe(parsedShipment.id);
   });
+
+  it('should be able to cancel a Self Ship shipment', async () => {
+    // Needs an integration org with Self Ship quoting and the
+    // self_ship_cancellations_api feature. Skips when the org can't quote it.
+    const selfShipRequest = await arta.requests.create({
+      destination: request.destination,
+      objects: request.objects,
+      origin: request.origin,
+      preferred_quote_types: ['self_ship'],
+    });
+    const selfShipQuote = selfShipRequest.quotes.find(
+      (q) => q.quote_type === 'self_ship',
+    );
+    if (!selfShipQuote) {
+      console.warn('No Self Ship quote for the integration org; skipping');
+      return;
+    }
+
+    const shipment = await arta.shipments.create({
+      quote_id: selfShipQuote.id,
+    });
+    expect(shipment.status).toBe('pending');
+
+    const cancelled = await shipment.cancel();
+    const parsedCancelled = shipmentSchema.parse(cancelled) satisfies Shipment;
+    expect(parsedCancelled.id).toBe(shipment.id);
+    expect(parsedCancelled.status).toBe('cancelled');
+  });
 });

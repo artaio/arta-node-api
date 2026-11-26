@@ -2,11 +2,16 @@ import type { ArtaID } from '../ArtaClient';
 import type { RestClient } from '../net/RestClient';
 import type { Page } from '../pagination';
 import type { ShipmentsSearch } from '../search';
-import type { NullableString } from '../utils';
-import { createDateAsUTC, parseService } from '../utils';
+import type { NotDateParsed, NullableString } from '../utils';
+import { convertDatesToUtc, createDateAsUTC, parseService } from '../utils';
 import type { Shipment } from '../types';
 import type { Endpoint } from './endpoint';
 import { DefaultEndpoint } from './endpoint';
+
+export type EnrichShipment<T> = T & {
+  cancel: (auth?: string) => Promise<EnrichShipment<T>>;
+};
+
 export interface ShipmentCreateBody {
   customs_process?: Shipment['customs_process'];
   exceptions?: Array<{ type: 'label_hold' }>;
@@ -21,17 +26,19 @@ export interface ShipmentCreate {
 }
 
 export class ShipmentsEndpoint {
-  private readonly defaultEndpoint: Endpoint<Shipment, ShipmentCreate>;
+  private readonly defaultEndpoint: Endpoint<
+    EnrichShipment<Shipment>,
+    ShipmentCreate
+  >;
   private readonly path = '/shipments';
   constructor(private readonly artaClient: RestClient) {
-    this.defaultEndpoint = new DefaultEndpoint<Shipment, ShipmentCreate>(
-      this.path,
-      this.artaClient,
-      this.enrichFields.bind(this),
-    );
+    this.defaultEndpoint = new DefaultEndpoint<
+      EnrichShipment<Shipment>,
+      ShipmentCreate
+    >(this.path, this.artaClient, this.enrichFields.bind(this));
   }
 
-  private enrichFields(s: any): Shipment {
+  private enrichFields(s: any): EnrichShipment<Shipment> {
     s.total = Number(s.total);
 
     if (s.emissions) {
@@ -67,10 +74,13 @@ export class ShipmentsEndpoint {
     }
 
     s.services?.forEach(parseService);
-    return s;
+
+    const cancel = (auth?: string) => this.cancel(s.id, auth);
+
+    return { ...s, cancel };
   }
 
-  public getById(id: ArtaID, auth?: string): Promise<Shipment> {
+  public getById(id: ArtaID, auth?: string): Promise<EnrichShipment<Shipment>> {
     return this.defaultEndpoint.getById(id, auth);
   }
 
@@ -79,14 +89,17 @@ export class ShipmentsEndpoint {
     page = 1,
     pageSize = 20,
     auth?: string,
-  ): Promise<Page<Shipment>> {
+  ): Promise<Page<EnrichShipment<Shipment>>> {
     return this.defaultEndpoint.list(
       { page, page_size: pageSize, search },
       auth,
     );
   }
 
-  public create(payload: ShipmentCreateBody, auth?: string): Promise<Shipment> {
+  public create(
+    payload: ShipmentCreateBody,
+    auth?: string,
+  ): Promise<EnrichShipment<Shipment>> {
     return this.defaultEndpoint.create({ shipment: payload }, auth);
   }
 
@@ -99,11 +112,22 @@ export class ShipmentsEndpoint {
       > & { tags: Array<string> }
     >,
     auth?: string,
-  ): Promise<Shipment> {
+  ): Promise<EnrichShipment<Shipment>> {
     return this.defaultEndpoint.update(
       id,
       { shipment: payload } as ShipmentCreate,
       auth,
     );
+  }
+
+  public async cancel(
+    id: ArtaID,
+    auth?: string,
+  ): Promise<EnrichShipment<Shipment>> {
+    const shipment = await this.artaClient.patch<
+      undefined,
+      NotDateParsed<Shipment>
+    >(`${this.path}/${id}/cancel`, undefined, auth);
+    return this.enrichFields(convertDatesToUtc(shipment));
   }
 }

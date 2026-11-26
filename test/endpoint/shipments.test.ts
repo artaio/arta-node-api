@@ -44,4 +44,38 @@ describe('tests shipments Arta endpoint', () => {
 
     expect(result.total).toBe(4);
   });
+
+  it('should have a cancel method', async () => {
+    const result = await endpoint.cancel('123');
+    expect(clientMock.patch).toHaveBeenCalledWith(
+      `/${path}/123/cancel`,
+      undefined,
+      undefined,
+    );
+
+    // The cancelled shipment is parsed like getById's.
+    expect(result.created_at).toBeInstanceOf(Date);
+    expect(result.updated_at).toBeInstanceOf(Date);
+    expect(result.total).toBe(4);
+    expect(result.emissions).toBe(19.35);
+    expect(result.packages?.[0].depth).toBe(6);
+
+    await endpoint.cancel('123', 'forwarded-auth');
+    expect(clientMock.patch).toHaveBeenCalledWith(
+      `/${path}/123/cancel`,
+      undefined,
+      'forwarded-auth',
+    );
+  });
+
+  it('cancel should be callable from instance', async () => {
+    const cancel = jest.spyOn(endpoint, 'cancel');
+
+    const shipment = await endpoint.getById('4');
+    await shipment.cancel();
+    expect(cancel).toHaveBeenCalledWith(shipment.id, undefined);
+
+    await shipment.cancel('forwarded-auth');
+    expect(cancel).toHaveBeenCalledWith(shipment.id, 'forwarded-auth');
+  });
 });
